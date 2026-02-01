@@ -1,0 +1,823 @@
+// EviDive - Prisma Schema
+// Plateforme de réservation de plongées
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+// ============================================
+// 1. PROFILES (Utilisateurs)
+// ============================================
+model Profile {
+  id           String  @id @default(cuid())
+  email        String  @unique
+  passwordHash String?
+  firstName    String?
+  lastName     String?
+  displayName  String?
+  avatarUrl    String?
+  bannerUrl    String?
+  bio          String?
+  phone        String?
+  address      String?
+  city         String?
+  zip          String?
+  country      String?
+
+  // Type compte
+  userType UserType @default(DIVER)
+
+  // Plongeur spécifique
+  certificationLevel String?
+  certificationOrg   String?
+  totalDives         Int     @default(0)
+
+  // Préférences
+  preferredLanguage       String  @default("fr")
+  emailNotifications      Boolean @default(true)
+  smsNotifications        Boolean @default(false)
+  profileVisibleToCenters Boolean @default(true)
+  timezone                String  @default("Europe/Paris")
+
+  // Statut
+  emailVerified   Boolean   @default(false)
+  emailVerifiedAt DateTime?
+  phoneVerified   Boolean   @default(false)
+  isActive        Boolean   @default(true)
+  isBlacklisted   Boolean   @default(false)
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  diveCenters       DiveCenter[]
+  bookings          Booking[]
+  reviews           Review[]
+  notifications     Notification[]
+  moderatedReviews  Review[]       @relation("ModeratedBy")
+  confirmedBookings Booking[]      @relation("ConfirmedBy")
+  createdCoupons    Coupon[]
+
+  @@map("profiles")
+}
+
+enum UserType {
+  DIVER
+  SELLER
+  CENTER_OWNER
+  ADMIN
+}
+
+// ============================================
+// 2. DIVE CENTERS (Centres de plongée)
+// ============================================
+model DiveCenter {
+  id      String @id @default(cuid())
+  ownerId String
+  slug    String @unique
+
+  // Contenu multilingue (JSONB)
+  name             Json // {fr: "", en: "", es: "", it: ""}
+  description      Json
+  shortDescription Json?
+
+  // Localisation
+  address   String
+  street2   String?
+  city      String
+  region    String?
+  country   String
+  zip       String?
+  latitude  Decimal
+  longitude Decimal
+
+  // Contact
+  email     String
+  phone     String
+  website   String?
+  facebook  String?
+  instagram String?
+  whatsapp  String?
+
+  // Plongée
+  certifications  String[] @default([])
+  languagesSpoken String[] @default([])
+  equipmentRental Boolean  @default(false)
+  ecoCommitment   String?
+
+  // Médias
+  logoUrl       String?
+  featuredImage String?
+  photos        String[] @default([])
+
+  // Paiement
+  stripeAccountId String?
+  paymentTypes    String[] @default([])
+  iban            String?
+
+  // Horaires (JSONB)
+  openingHours Json?
+
+  // Commission
+  commissionRate Decimal @default(80)
+
+  // Notifications (centre)
+  emailOnNewBooking    Boolean @default(true)
+  emailOnCancellation  Boolean @default(true)
+  emailOnNewReview     Boolean @default(true)
+  smsOnNewBooking      Boolean @default(false)
+  dailyBookingReminder Boolean @default(false)
+
+  // Politique d'annulation
+  cancellationPolicy     CancellationPolicy @default(MODERATE)
+  cancellationHours      Int                @default(48)
+  partialRefundPercent   Int                @default(50)
+
+  // Statut
+  status   CenterStatus @default(PENDING)
+  featured Boolean      @default(false)
+  verified Boolean      @default(false)
+
+  // Stats
+  rating       Decimal @default(0)
+  reviewCount  Int     @default(0)
+  bookingCount Int     @default(0)
+  viewCount    Int     @default(0)
+
+  // SEO
+  seoTitle       Json?
+  seoDescription Json?
+
+  // Dates
+  approvedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  // Relations
+  owner        Profile             @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  services     DiveService[]
+  workers      CenterWorker[]
+  bookings     Booking[]
+  reviews      Review[]
+  blockedDates CenterBlockedDate[]
+  commissions  Commission[]
+  waitingList  WaitingListEntry[]
+  coupons      Coupon[]
+  emailLogs    EmailLog[]
+  smsLogs      SmsLog[]
+
+  @@map("dive_centers")
+}
+
+enum CenterStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum CancellationPolicy {
+  FLEXIBLE
+  MODERATE
+  STRICT
+}
+
+// ============================================
+// 3. DIVE CATEGORIES (Catégories de plongée)
+// ============================================
+model DiveCategory {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        Json // {fr: "", en: "", es: "", it: ""}
+  description Json?
+  icon        String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  // Relations
+  services DiveService[]
+
+  @@map("dive_categories")
+}
+
+// ============================================
+// 4. DIVE SERVICES (Services/plongées)
+// ============================================
+model DiveService {
+  id         String  @id @default(cuid())
+  centerId   String
+  categoryId String?
+
+  // Contenu multilingue
+  name        Json
+  description Json?
+
+  // Prix
+  price          Decimal
+  currency       String  @default("EUR")
+  pricePerPerson Boolean @default(true)
+
+  // Durée & Capacité
+  durationMinutes Int
+  minParticipants Int @default(1)
+  maxParticipants Int @default(10)
+
+  // Prérequis
+  minCertification String?
+  minAge           Int     @default(10)
+  maxDepth         Int?
+
+  // Inclus
+  equipmentIncluded Boolean  @default(false)
+  equipmentDetails  String?
+  includes          String[] @default([])
+
+  // Médias
+  photos String[] @default([])
+
+  // Disponibilité
+  availableDays String[] @default(["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"])
+  startTimes    String[] @default([])
+
+  // Statut
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  center      DiveCenter         @relation(fields: [centerId], references: [id], onDelete: Cascade)
+  category    DiveCategory?      @relation(fields: [categoryId], references: [id])
+  extras      ServiceExtra[]
+  bookings    Booking[]
+  waitingList WaitingListEntry[]
+
+  @@map("dive_services")
+}
+
+// ============================================
+// 5. SERVICE EXTRAS (Options supplémentaires)
+// ============================================
+model ServiceExtra {
+  id        String @id @default(cuid())
+  serviceId String
+
+  name          Json
+  description   Json?
+  price         Decimal
+  multiplyByPax Boolean @default(false)
+  isRequired    Boolean @default(false)
+  isActive      Boolean @default(true)
+
+  createdAt DateTime @default(now())
+
+  // Relations
+  service       DiveService    @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  bookingExtras BookingExtra[]
+
+  @@map("service_extras")
+}
+
+// ============================================
+// 6. CENTER WORKERS (Équipe du centre)
+// ============================================
+model CenterWorker {
+  id       String  @id @default(cuid())
+  centerId String
+  userId   String?
+
+  name           String
+  email          String?
+  phone          String?
+  photoUrl       String?
+  bio            String?
+  certifications String[] @default([])
+  languages      String[] @default([])
+
+  // Horaires propres (JSONB)
+  workingHours Json?
+
+  isDefault Boolean @default(false)
+  isActive  Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  center   DiveCenter @relation(fields: [centerId], references: [id], onDelete: Cascade)
+  bookings Booking[]
+
+  @@map("center_workers")
+}
+
+// ============================================
+// 7. BOOKINGS (Réservations)
+// ============================================
+model Booking {
+  id        String @id @default(cuid())
+  reference String @unique
+
+  // Relations
+  centerId  String
+  serviceId String
+  workerId  String?
+  userId    String?
+
+  // Date & Heure
+  diveDate        DateTime  @db.Date
+  diveTime        DateTime  @db.Time()
+  endTime         DateTime? @db.Time()
+  durationMinutes Int?
+
+  // Participants
+  participants       Int   @default(1)
+  participantDetails Json?
+
+  // Client (si non connecté)
+  guestFirstName String?
+  guestLastName  String?
+  guestEmail     String
+  guestPhone     String?
+  guestAddress   String?
+
+  // Demandes
+  specialRequests    String?
+  certificationLevel String?
+
+  // Prix
+  unitPrice      Decimal
+  extrasPrice    Decimal @default(0)
+  discountAmount Decimal @default(0)
+  couponCode     String?
+  totalPrice     Decimal
+  currency       String  @default("EUR")
+  depositAmount  Decimal @default(0)
+
+  // Paiement
+  paymentStatus           PaymentStatus @default(UNPAID)
+  stripePaymentIntentId   String?
+  stripeCheckoutSessionId String?
+  paidAt                  DateTime?
+  refundedAt              DateTime?
+  refundAmount            Decimal?
+
+  // Statut
+  status             BookingStatus @default(PENDING)
+  cancelledBy        CancelledBy?
+  cancellationReason String?
+
+  // Timestamps actions
+  confirmedById String?
+  confirmedAt   DateTime?
+  cancelledAt   DateTime?
+  completedAt   DateTime?
+
+  // Tracking
+  source    String  @default("website")
+  ipAddress String?
+  userAgent String?
+
+  // Google Calendar
+  gcalEventId String?
+  gcalSynced  Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  center        DiveCenter     @relation(fields: [centerId], references: [id])
+  service       DiveService    @relation(fields: [serviceId], references: [id])
+  worker        CenterWorker?  @relation(fields: [workerId], references: [id])
+  user          Profile?       @relation(fields: [userId], references: [id])
+  confirmedBy   Profile?       @relation("ConfirmedBy", fields: [confirmedById], references: [id])
+  extras        BookingExtra[]
+  commission    Commission?
+  couponUses    CouponUse[]
+  emailLogs     EmailLog[]
+  smsLogs       SmsLog[]
+  notifications Notification[]
+  review        Review?
+
+  @@map("bookings")
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  PAID
+  RUNNING
+  COMPLETED
+  CANCELLED
+  NOSHOW
+  REMOVED
+}
+
+enum PaymentStatus {
+  UNPAID
+  DEPOSIT_PAID
+  PAID
+  REFUNDED
+  PARTIAL_REFUND
+}
+
+enum CancelledBy {
+  CLIENT
+  CENTER
+  ADMIN
+}
+
+// ============================================
+// 8. BOOKING EXTRAS (Extras réservés)
+// ============================================
+model BookingExtra {
+  id        String @id @default(cuid())
+  bookingId String
+  extraId   String
+
+  quantity   Int     @default(1)
+  unitPrice  Decimal
+  totalPrice Decimal
+
+  createdAt DateTime @default(now())
+
+  // Relations
+  booking Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  extra   ServiceExtra @relation(fields: [extraId], references: [id])
+
+  @@map("booking_extras")
+}
+
+// ============================================
+// 9. WAITING LIST (Liste d'attente)
+// ============================================
+model WaitingListEntry {
+  id        String  @id @default(cuid())
+  centerId  String
+  serviceId String
+  userId    String?
+
+  // Créneau souhaité
+  desiredDate  DateTime @db.Date
+  desiredTime  DateTime @db.Time()
+  participants Int      @default(1)
+
+  // Contact
+  guestEmail String
+  guestPhone String?
+  guestName  String?
+
+  // Statut
+  status     WaitingListStatus @default(WAITING)
+  notifiedAt DateTime?
+  claimedAt  DateTime?
+  expiresAt  DateTime?
+
+  createdAt DateTime @default(now())
+
+  // Relations
+  center  DiveCenter  @relation(fields: [centerId], references: [id])
+  service DiveService @relation(fields: [serviceId], references: [id])
+
+  @@map("waiting_list")
+}
+
+enum WaitingListStatus {
+  WAITING
+  NOTIFIED
+  CLAIMED
+  EXPIRED
+  CANCELLED
+}
+
+// ============================================
+// 10. REVIEWS (Avis)
+// ============================================
+model Review {
+  id        String  @id @default(cuid())
+  centerId  String
+  userId    String
+  bookingId String? @unique
+
+  // Contenu
+  rating  Int
+  title   String?
+  comment String
+
+  // Contexte
+  diveDate    DateTime? @db.Date
+  serviceUsed String?
+
+  // Photos
+  photos String[] @default([])
+
+  // Modération
+  status         ReviewStatus @default(PENDING)
+  moderatedById  String?
+  moderatedAt    DateTime?
+  moderationNote String?
+
+  // Réponse centre
+  centerResponse   String?
+  centerResponseAt DateTime?
+
+  // Stats
+  helpfulCount Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  center      DiveCenter @relation(fields: [centerId], references: [id], onDelete: Cascade)
+  user        Profile    @relation(fields: [userId], references: [id])
+  booking     Booking?   @relation(fields: [bookingId], references: [id])
+  moderatedBy Profile?   @relation("ModeratedBy", fields: [moderatedById], references: [id])
+
+  @@map("reviews")
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SPAM
+}
+
+// ============================================
+// 11. COUPONS (Codes promo)
+// ============================================
+model Coupon {
+  id          String  @id @default(cuid())
+  code        String  @unique
+  description String?
+
+  // Type
+  discountType  DiscountType
+  discountValue Decimal
+
+  // Restrictions
+  centerId    String?
+  serviceId   String?
+  minAmount   Decimal?
+  maxDiscount Decimal?
+
+  // Validité
+  validFrom      DateTime?
+  validUntil     DateTime?
+  maxUses        Int?
+  usesCount      Int       @default(0)
+  maxUsesPerUser Int       @default(1)
+
+  // Options
+  applyToExtras    Boolean @default(false)
+  firstBookingOnly Boolean @default(false)
+
+  isActive    Boolean  @default(true)
+  createdById String?
+  createdAt   DateTime @default(now())
+
+  // Relations
+  center    DiveCenter? @relation(fields: [centerId], references: [id])
+  createdBy Profile?    @relation(fields: [createdById], references: [id])
+  uses      CouponUse[]
+
+  @@map("coupons")
+}
+
+enum DiscountType {
+  PERCENT
+  FIXED
+}
+
+// ============================================
+// 12. COUPON USES (Utilisations coupons)
+// ============================================
+model CouponUse {
+  id              String   @id @default(cuid())
+  couponId        String
+  bookingId       String
+  userId          String?
+  discountApplied Decimal
+  createdAt       DateTime @default(now())
+
+  // Relations
+  coupon  Coupon  @relation(fields: [couponId], references: [id])
+  booking Booking @relation(fields: [bookingId], references: [id])
+
+  @@map("coupon_uses")
+}
+
+// ============================================
+// 13. EMAIL LOGS (Historique emails)
+// ============================================
+model EmailLog {
+  id      String  @id @default(cuid())
+  toEmail String
+  toName  String?
+
+  template String
+  subject  String
+
+  bookingId String?
+  userId    String?
+  centerId  String?
+
+  status       EmailStatus @default(SENT)
+  errorMessage String?
+
+  metadata Json?
+
+  sentAt DateTime @default(now())
+
+  // Relations
+  booking Booking?    @relation(fields: [bookingId], references: [id])
+  center  DiveCenter? @relation(fields: [centerId], references: [id])
+
+  @@map("email_logs")
+}
+
+enum EmailStatus {
+  SENT
+  DELIVERED
+  FAILED
+  BOUNCED
+}
+
+// ============================================
+// 14. SMS LOGS (Historique SMS)
+// ============================================
+model SmsLog {
+  id      String @id @default(cuid())
+  toPhone String
+
+  template String
+  message  String
+
+  bookingId String?
+  userId    String?
+  centerId  String?
+
+  status       SmsStatus @default(SENT)
+  errorMessage String?
+  twilioSid    String?
+
+  sentAt DateTime @default(now())
+
+  // Relations
+  booking Booking?    @relation(fields: [bookingId], references: [id])
+  center  DiveCenter? @relation(fields: [centerId], references: [id])
+
+  @@map("sms_logs")
+}
+
+enum SmsStatus {
+  SENT
+  DELIVERED
+  FAILED
+}
+
+// ============================================
+// 15. NOTIFICATIONS (In-app)
+// ============================================
+model Notification {
+  id     String @id @default(cuid())
+  userId String
+
+  type    String
+  title   String
+  message String
+
+  // Lien
+  linkUrl  String?
+  linkText String?
+
+  // Relations
+  bookingId String?
+  centerId  String?
+  reviewId  String?
+
+  isRead Boolean   @default(false)
+  readAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  // Relations
+  user    Profile  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  booking Booking? @relation(fields: [bookingId], references: [id])
+
+  @@map("notifications")
+}
+
+// ============================================
+// 16. COMMISSIONS (Suivi commissions)
+// ============================================
+model Commission {
+  id        String @id @default(cuid())
+  bookingId String @unique
+  centerId  String
+
+  bookingAmount    Decimal
+  commissionRate   Decimal
+  commissionAmount Decimal
+  centerAmount     Decimal
+
+  // Frais Stripe
+  stripeFee  Decimal    @default(0)
+  feesPaidBy FeesPaidBy @default(WEBSITE)
+
+  status CommissionStatus @default(PENDING)
+  paidAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  // Relations
+  booking Booking    @relation(fields: [bookingId], references: [id])
+  center  DiveCenter @relation(fields: [centerId], references: [id])
+
+  @@map("commissions")
+}
+
+enum FeesPaidBy {
+  WEBSITE
+  CENTER
+}
+
+enum CommissionStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+// ============================================
+// 17. CENTER BLOCKED DATES (Dates bloquées)
+// ============================================
+model CenterBlockedDate {
+  id       String @id @default(cuid())
+  centerId String
+
+  blockedDate DateTime @db.Date
+  reason      String?
+
+  // Peut bloquer juste certains créneaux
+  allDay       Boolean  @default(true)
+  blockedTimes String[] @default([])
+
+  createdAt DateTime @default(now())
+
+  // Relations
+  center DiveCenter @relation(fields: [centerId], references: [id], onDelete: Cascade)
+
+  @@unique([centerId, blockedDate])
+  @@map("center_blocked_dates")
+}
+
+// ============================================
+// 18. PASSWORD RESET TOKENS
+// ============================================
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  email     String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([email])
+  @@index([token])
+  @@map("password_reset_tokens")
+}
+
+// ============================================
+// 19. EMAIL VERIFICATION TOKENS
+// ============================================
+model EmailVerificationToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  email     String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([email])
+  @@index([token])
+  @@map("email_verification_tokens")
+}
+
+// ============================================
+// 20. SETTINGS (Configuration globale)
+// ============================================
+model Setting {
+  key         String   @id
+  value       Json
+  description String?
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  @@map("settings")
+}

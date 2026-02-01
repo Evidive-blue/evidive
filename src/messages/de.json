@@ -1,0 +1,2316 @@
+{
+  "centerBookings": {
+    "meta": {
+      "title": "Buchungsverwaltung - EviDive",
+      "description": "Verwalten Sie die Buchungen Ihres Tauchzentrums."
+    },
+    "title": "Buchungsverwaltung",
+    "subtitle": "Buchungen für {centerName} verwalten",
+    "backToCenter": "Zurück zum Zentrum",
+    "results": "{count, plural, =0 {Keine Buchungen} one {# Buchung} other {# Buchungen}}",
+    "page": "Seite {current} von {total}",
+    "empty": {
+      "title": "Keine Buchungen",
+      "description": "Keine Buchungen entsprechen Ihren Suchkriterien."
+    },
+    "filters": {
+      "search": "Suchen",
+      "searchPlaceholder": "Name, E-Mail oder Referenz...",
+      "status": "Status",
+      "all": "Alle",
+      "pending": "Ausstehend",
+      "confirmed": "Bestätigt",
+      "paid": "Bezahlt",
+      "running": "Läuft",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert",
+      "noshow": "No-show",
+      "dateRange": "Zeitraum",
+      "from": "Von",
+      "to": "Bis",
+      "service": "Service",
+      "allServices": "Alle Services",
+      "clearFilters": "Filter löschen",
+      "exportCsv": "CSV exportieren",
+      "exporting": "Exportiere..."
+    },
+    "status": {
+      "PENDING": "Ausstehend",
+      "CONFIRMED": "Bestätigt",
+      "PAID": "Bezahlt",
+      "RUNNING": "Läuft",
+      "COMPLETED": "Abgeschlossen",
+      "CANCELLED": "Storniert",
+      "NOSHOW": "No-show",
+      "REMOVED": "Entfernt"
+    },
+    "sources": {
+      "website": "Website",
+      "manual": "Manuell",
+      "api": "API"
+    },
+    "card": {
+      "viewDetails": "Details anzeigen",
+      "confirm": "Bestätigen",
+      "cancel": "Stornieren",
+      "markCompleted": "Als abgeschlossen markieren",
+      "markNoShow": "No-show",
+      "contactClient": "Kontaktieren",
+      "participants": "Teilnehmer",
+      "extras": "Extras",
+      "source": "Quelle",
+      "specialRequests": "Besondere Wünsche",
+      "actions": "Aktionen",
+      "confirmSuccess": "Buchung erfolgreich bestätigt",
+      "cancelSuccess": "Buchung erfolgreich storniert",
+      "completeSuccess": "Buchung als abgeschlossen markiert",
+      "error": "Ein Fehler ist aufgetreten"
+    },
+    "manualBooking": {
+      "title": "Neue manuelle Buchung",
+      "description": "Erstellen Sie eine Buchung für einen Kunden, der telefonisch oder persönlich bucht.",
+      "triggerButton": "Buchung hinzufügen",
+      "service": "Service",
+      "selectService": "Service auswählen",
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "selectTime": "Uhrzeit auswählen",
+      "participants": "Teilnehmer",
+      "clientInfo": "Kundeninformationen",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "optional": "optional",
+      "specialRequests": "Besondere Wünsche",
+      "certification": "Zertifizierung",
+      "extras": "Zusätzliche Optionen",
+      "noExtras": "Keine Optionen verfügbar",
+      "totalPrice": "Gesamtpreis",
+      "submit": "Buchung erstellen",
+      "submitting": "Wird erstellt...",
+      "cancel": "Abbrechen",
+      "success": "Buchung erstellt!",
+      "successMessage": "Die Buchung wurde erfolgreich erstellt und bestätigt.",
+      "error": "Beim Erstellen ist ein Fehler aufgetreten",
+      "noServices": "Keine aktiven Services. Erstellen Sie zuerst einen Service.",
+      "createAnother": "Weitere erstellen",
+      "close": "Schließen"
+    },
+    "pagination": {
+      "previous": "Zurück",
+      "next": "Weiter"
+    },
+    "cancelModal": {
+      "title": "Buchung stornieren",
+      "description": "Sind Sie sicher, dass Sie die Buchung {reference} stornieren möchten?",
+      "reasonLabel": "Stornierungsgrund",
+      "reasonPlaceholder": "Erklären Sie, warum Sie diese Buchung stornieren...",
+      "reasonRequired": "Der Stornierungsgrund ist erforderlich",
+      "cancel": "Zurück",
+      "confirm": "Buchung stornieren",
+      "confirming": "Storniere...",
+      "warning": "Diese Aktion kann nicht rückgängig gemacht werden. Der Kunde wird per E-Mail benachrichtigt.",
+      "success": "Buchung erfolgreich storniert",
+      "error": "Beim Stornieren ist ein Fehler aufgetreten"
+    }
+  },
+  "centerBookingDetails": {
+    "meta": {
+      "title": "Buchungsdetails - EviDive",
+      "description": "Buchungsdetails anzeigen."
+    },
+    "backToBookings": "Zurück zu Buchungen",
+    "title": "Buchung {reference}",
+    "createdAt": "Erstellt am {date}",
+    "registeredUser": "Registrierter Benutzer",
+    "sections": {
+      "service": "Gebuchter Service",
+      "client": "Kunde",
+      "payment": "Zahlung",
+      "commission": "Provision & Einnahmen",
+      "additional": "Zusätzliche Informationen",
+      "review": "Kundenbewertung"
+    },
+    "status": {
+      "PENDING": "Ausstehend",
+      "CONFIRMED": "Bestätigt",
+      "PAID": "Bezahlt",
+      "RUNNING": "Läuft",
+      "COMPLETED": "Abgeschlossen",
+      "CANCELLED": "Storniert",
+      "NOSHOW": "No-show",
+      "REMOVED": "Entfernt"
+    },
+    "paymentStatus": {
+      "UNPAID": "Unbezahlt",
+      "DEPOSIT_PAID": "Anzahlung geleistet",
+      "PAID": "Bezahlt",
+      "REFUNDED": "Erstattet",
+      "PARTIAL_REFUND": "Teilweise erstattet"
+    },
+    "labels": {
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "participants": "Teilnehmer",
+      "unitPrice": "Einzelpreis",
+      "extras": "Extras",
+      "discount": "Rabatt",
+      "total": "Gesamt",
+      "paymentStatus": "Zahlungsstatus",
+      "selectedExtras": "Ausgewählte Extras",
+      "specialRequests": "Besondere Wünsche",
+      "source": "Quelle",
+      "couponUsed": "Gutschein verwendet",
+      "confirmedBy": "Bestätigt von",
+      "cancellationReason": "Stornierungsgrund",
+      "bookingAmount": "Buchungsbetrag",
+      "commissionRate": "Provisionssatz",
+      "platformCommission": "Plattform-Provision",
+      "stripeFee": "Stripe-Gebühr",
+      "yourEarnings": "Ihre Einnahmen",
+      "commissionStatus": "Provisionsstatus"
+    },
+    "duration": "{minutes} Minuten",
+    "minCertification": "Mindestzertifizierung: {level}",
+    "clientCertification": "Zertifizierung: {level}",
+    "totalDives": "{count} Tauchgänge absolviert",
+    "paidAt": "Bezahlt am {date}",
+    "cancelledAt": "Storniert am {date}",
+    "sources": {
+      "website": "Website",
+      "manual": "Manuell",
+      "api": "API"
+    },
+    "commissionStatus": {
+      "PENDING": "Ausstehend",
+      "PAID": "Bezahlt",
+      "CANCELLED": "Storniert"
+    },
+    "commissionPaidAt": "Provision bezahlt am {date}",
+    "actions": {
+      "confirm": "Bestätigen",
+      "cancel": "Stornieren",
+      "markCompleted": "Als abgeschlossen markieren",
+      "markNoShow": "No-show",
+      "contactClient": "Kunden kontaktieren",
+      "printDetails": "Drucken"
+    },
+    "viewFullReview": "Vollständige Bewertung anzeigen"
+  },
+  "centerCalendar": {
+    "meta": {
+      "title": "Kalender & Verfügbarkeit - EviDive",
+      "description": "Verwalten Sie Ihren Tauchkalender und Verfügbarkeit."
+    },
+    "title": "Kalender & Verfügbarkeit",
+    "subtitle": "Verwalten Sie Ihre Zeitfenster und Buchungen",
+    "backToDashboard": "Zurück zum Dashboard",
+    "noCenters": "Kein Zentrum verfügbar",
+    "noCentersDesc": "Sie benötigen mindestens ein genehmigtes Zentrum, um auf den Kalender zuzugreifen.",
+    "selectCenter": "Zentrum auswählen",
+    "monthView": "Monatsansicht",
+    "weekView": "Wochenansicht",
+    "dayView": "Tagesansicht",
+    "today": "Heute",
+    "previousMonth": "Vorheriger Monat",
+    "nextMonth": "Nächster Monat",
+    "previousWeek": "Vorherige Woche",
+    "nextWeek": "Nächste Woche",
+    "previousDay": "Vorheriger Tag",
+    "nextDay": "Nächster Tag",
+    "noBookings": "Keine Buchungen",
+    "blockedDates": "Gesperrtes Datum",
+    "addBlockedDate": "Datum sperren",
+    "removeBlockedDate": "Entsperren",
+    "blockDateTitle": "Dieses Datum sperren",
+    "blockDateReason": "Grund (optional)",
+    "blockDateReasonPlaceholder": "z.B.: Außergewöhnliche Schließung, Wartung...",
+    "blockAllDay": "Ganztägig",
+    "blockSpecificTimes": "Bestimmte Zeiten",
+    "blockType": "Sperrtyp",
+    "slotsToBlock": "Zu sperrende Zeitfenster",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "slotDetails": "Zeitfenster-Details",
+    "service": "Service",
+    "dateTime": "Datum und Uhrzeit",
+    "participants": "Teilnehmer",
+    "placesRemaining": "Verbleibende Plätze",
+    "registeredParticipants": "Registrierte Teilnehmer",
+    "noParticipants": "Keine registrierten Teilnehmer",
+    "addManualBooking": "Manuell hinzufügen",
+    "closeSlot": "Zeitfenster schließen",
+    "status": {
+      "PENDING": "Ausstehend",
+      "CONFIRMED": "Bestätigt",
+      "PAID": "Bezahlt",
+      "RUNNING": "Läuft",
+      "COMPLETED": "Abgeschlossen",
+      "CANCELLED": "Storniert"
+    },
+    "days": {
+      "monday": "Montag",
+      "tuesday": "Dienstag",
+      "wednesday": "Mittwoch",
+      "thursday": "Donnerstag",
+      "friday": "Freitag",
+      "saturday": "Samstag",
+      "sunday": "Sonntag"
+    },
+    "daysShort": {
+      "monday": "Mo",
+      "tuesday": "Di",
+      "wednesday": "Mi",
+      "thursday": "Do",
+      "friday": "Fr",
+      "saturday": "Sa",
+      "sunday": "So"
+    },
+    "months": {
+      "january": "Januar",
+      "february": "Februar",
+      "march": "März",
+      "april": "April",
+      "may": "Mai",
+      "june": "Juni",
+      "july": "Juli",
+      "august": "August",
+      "september": "September",
+      "october": "Oktober",
+      "november": "November",
+      "december": "Dezember"
+    },
+    "blockedDatesList": {
+      "title": "Gesperrte Daten",
+      "empty": "Keine gesperrten Daten",
+      "allDay": "Ganztägig",
+      "specificTimes": "Bestimmte Zeiten",
+      "noReason": "Kein Grund angegeben",
+      "delete": "Löschen",
+      "confirmDelete": "Löschen bestätigen?"
+    },
+    "fillRate": {
+      "low": "Verfügbar",
+      "medium": "Teilweise",
+      "high": "Voll"
+    },
+    "responsive": {
+      "showCalendar": "Kalender",
+      "showList": "Liste"
+    },
+    "manualBookingForm": {
+      "title": "Manuelle Buchung hinzufügen",
+      "serviceLabel": "Service",
+      "selectService": "Service auswählen",
+      "dateLabel": "Datum",
+      "timeLabel": "Uhrzeit",
+      "participantsLabel": "Teilnehmer",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "optional": "optional",
+      "submit": "Buchung erstellen",
+      "submitting": "Erstellen...",
+      "success": "Buchung erstellt!",
+      "error": "Ein Fehler ist aufgetreten",
+      "back": "Zurück"
+    }
+  },
+  "centerDashboard": {
+    "meta": {
+      "title": "Dashboard - Mein Zentrum",
+      "description": "Verwalten Sie Ihr Tauchzentrum, Buchungen und Bewertungen."
+    },
+    "subtitle": "Verwalten Sie Ihre Buchungen und Aktivitäten",
+    "verified": "Verifiziertes Zentrum",
+    "pendingApproval": {
+      "title": "Zentrum wartet auf Genehmigung",
+      "description": "Ihr Zentrum wird derzeit von unserem Team geprüft. Sie erhalten eine E-Mail, sobald es genehmigt wurde.",
+      "backToDashboard": "Zurück zum Dashboard"
+    },
+    "stats": {
+      "todayBookings": "Buchungen heute",
+      "weekBookings": "Diese Woche",
+      "monthRevenue": "Monatsumsatz",
+      "rating": "Durchschnittsbewertung"
+    },
+    "pendingBookings": {
+      "title": "Ausstehende Buchungen",
+      "emptyTitle": "Keine ausstehenden Buchungen",
+      "emptyDescription": "Neue Buchungsanfragen erscheinen hier.",
+      "confirm": "Bestätigen",
+      "reject": "Ablehnen",
+      "participants": "Teilnehmer",
+      "viewAll": "Alle anzeigen"
+    },
+    "calendar": {
+      "title": "Diese Woche",
+      "participants": "Teilnehmer",
+      "noBookings": "Keine Tauchgänge diese Woche",
+      "viewCalendar": "Kalender"
+    },
+    "reviews": {
+      "title": "Neueste Bewertungen",
+      "emptyTitle": "Keine Bewertungen",
+      "emptyDescription": "Kundenbewertungen erscheinen hier.",
+      "respond": "Antworten",
+      "responded": "Antwort veröffentlicht",
+      "viewAll": "Alle Bewertungen"
+    },
+    "quickActions": {
+      "title": "Schnellaktionen",
+      "createOffer": "Angebot erstellen",
+      "createOfferDesc": "Neuen Service hinzufügen",
+      "viewCalendar": "Kalender anzeigen",
+      "viewCalendarDesc": "Tauchplan",
+      "manageBookings": "Buchungen verwalten",
+      "manageBookingsDesc": "Alle Reservierungen",
+      "viewStats": "Statistiken",
+      "viewStatsDesc": "Leistung analysieren",
+      "manageTeam": "Team verwalten",
+      "manageTeamDesc": "Teammitglieder",
+      "editCenter": "Zentrum bearbeiten",
+      "editCenterDesc": "Zentrumseinstellungen"
+    }
+  },
+  "auth": {
+    "login_title": "Anmeldung",
+    "register_title": "Registrierung",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "full_name": "Vollständiger Name",
+    "first_name": "Vorname",
+    "last_name": "Nachname",
+    "submit_login": "Anmelden",
+    "submit_register": "Registrieren",
+    "no_account": "Noch kein Konto?",
+    "has_account": "Bereits ein Konto?",
+    "forgot_password": "Passwort vergessen?",
+    "sign_up_link": "Konto erstellen",
+    "sign_in_link": "Anmelden",
+    "continue_with_google": "Mit Google fortfahren",
+    "or": "oder",
+    "confirm_password": "Passwort bestätigen",
+    "country": "Land",
+    "password_mismatch": "Die Passwörter stimmen nicht überein",
+    "password_match": "Passwörter stimmen überein",
+    "generic_error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "register_success": "Konto erfolgreich erstellt! Weiterleitung…",
+    "accept_terms": "Ich akzeptiere die",
+    "terms_link": "Allgemeinen Geschäftsbedingungen",
+    "and": "und die",
+    "privacy_link": "Datenschutzrichtlinie",
+    "back": "Zurück",
+    "send_link": "Link senden",
+    "email_sent": "E-Mail gesendet!",
+    "email_sent_desc": "Wenn ein Konto mit dieser Adresse existiert, erhalten Sie einen Zurücksetzungslink.",
+    "reset_email_desc": "Geben Sie Ihre E-Mail ein, um einen Zurücksetzungslink zu erhalten",
+    "remember_password": "Sie erinnern sich an Ihr Passwort?",
+    "remember_me": "Angemeldet bleiben",
+    "verify_email_title": "Überprüfen Sie Ihre E-Mail",
+    "verify_email_sent": "Wir haben einen Bestätigungslink gesendet an",
+    "verify_email_inbox": "Überprüfen Sie Ihren Posteingang",
+    "verify_email_spam": "Schauen Sie auch in den Spam",
+    "verify_email_expires": "Der Link läuft in 24 Stunden ab",
+    "resend_email": "E-Mail erneut senden",
+    "resending": "Wird gesendet...",
+    "wrong_email": "Falsche Adresse?",
+    "modify": "Ändern",
+    "back_to_login": "Zurück zur Anmeldung",
+    "your_email": "Ihre E-Mail-Adresse",
+    "checking_email": "E-Mail wird überprüft...",
+    "password_strength": {
+      "label": "Passwortstärke",
+      "none": "Keine",
+      "weak": "Schwach",
+      "fair": "Ausreichend",
+      "good": "Gut",
+      "strong": "Stark",
+      "criteria": {
+        "min_length": "Mindestens 8 Zeichen",
+        "uppercase": "Mindestens ein Großbuchstabe",
+        "lowercase": "Mindestens ein Kleinbuchstabe",
+        "number": "Mindestens eine Zahl"
+      }
+    },
+    "password_requirements": {
+      "title": "Passwortanforderungen",
+      "min_length": "Mindestens 8 Zeichen",
+      "uppercase": "Mindestens ein Großbuchstabe",
+      "number": "Mindestens eine Zahl"
+    },
+    "errors": {
+      "invalid_credentials": "Ungültige E-Mail oder Passwort",
+      "too_many_attempts": "Zu viele Anmeldeversuche",
+      "retry_after": "Versuchen Sie es in {time} erneut",
+      "firstName_required": "Vorname ist erforderlich",
+      "firstName_too_long": "Vorname muss weniger als 50 Zeichen haben",
+      "lastName_required": "Nachname ist erforderlich",
+      "lastName_too_long": "Nachname muss weniger als 50 Zeichen haben",
+      "email_required": "E-Mail ist erforderlich",
+      "email_invalid": "Ungültiges E-Mail-Format",
+      "email_exists": "Ein Konto mit dieser E-Mail existiert bereits",
+      "password_min_length": "Passwort muss mindestens 8 Zeichen haben",
+      "password_uppercase": "Passwort muss mindestens einen Großbuchstaben enthalten",
+      "password_number": "Passwort muss mindestens eine Zahl enthalten",
+      "rate_limit": "Zu viele Versuche. Bitte versuchen Sie es später erneut.",
+      "blacklisted": "Diese E-Mail kann nicht für die Registrierung verwendet werden"
+    }
+  },
+  "contact": {
+    "meta": {
+      "title": "Kontakt",
+      "description": "Kontaktieren Sie das EviDive-Team. Unser Team ist da, um Ihre Fragen zu beantworten."
+    },
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Eine Frage? Unser Team ist da, um Ihnen zu helfen.",
+    "name": "Ihr Name",
+    "email": "Ihre E-Mail",
+    "subject": "Betreff",
+    "message": "Nachricht",
+    "send": "Senden",
+    "success": "Nachricht erfolgreich gesendet!",
+    "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "info_title": "Informationen",
+    "info_email": "info@evidive.blue",
+    "info_address": "Genf, Schweiz"
+  },
+  "explorer": {
+    "meta": {
+      "title": "Entdecker",
+      "description": "Erkunden Sie die besten Tauchplätze der Welt mit unserer interaktiven Karte."
+    },
+    "title": "Entdecker",
+    "subtitle": "Navigieren Sie, um Tauchplätze zu entdecken",
+    "controls_title": "Verwenden Sie die Pfeiltasten zur Navigation",
+    "controls_hint": "Nähern Sie sich Markern und drücken Sie LEERTASTE",
+    "explore_location": "Diesen Ort erkunden",
+    "coming_soon": "Interaktive Karte bald verfügbar",
+    "coming_soon_desc": "Wir arbeiten an einem immersiven Erlebnis, um die besten Tauchplätze der Welt zu entdecken.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "legal": {
+    "terms": {
+      "title": "Allgemeine Geschäftsbedingungen",
+      "intro_title": "1. Einführung",
+      "intro_text": "Willkommen bei EviDive. Durch den Zugriff auf unsere Website erklären Sie sich mit diesen Allgemeinen Geschäftsbedingungen einverstanden. Bitte lesen Sie diese sorgfältig.",
+      "services_title": "2. Dienstleistungen",
+      "services_text": "EviDive bietet eine Plattform zur Buchung von Taucherlebnissen und Schulungen. Wir fungieren als Vermittler zwischen Tauchern und Tauchzentren.",
+      "bookings_title": "3. Buchungen und Stornierungen",
+      "bookings_text": "Buchungen unterliegen der Verfügbarkeit und Bestätigung durch das Tauchzentrum. Die Stornierungsbedingungen variieren je nach Zentrum und Angebotsart. Bitte prüfen Sie die spezifischen Bedingungen bei der Buchung.",
+      "liability_title": "4. Haftung",
+      "liability_text": "Tauchen birgt inhärente Risiken. Sie müssen zertifiziert und medizinisch tauchtauglich sein. EviDive haftet nicht für Unfälle oder Vorfälle bei Aktivitäten, die über unsere Plattform gebucht wurden."
+    },
+    "privacy": {
+      "title": "Datenschutzrichtlinie",
+      "collection_title": "1. Datenerhebung",
+      "collection_text": "Wir erheben die für Ihre Buchungen erforderlichen persönlichen Daten, einschließlich Name, E-Mail und Zertifizierungsstufe. Wir können auch Nutzungsdaten zur Verbesserung unserer Dienste erheben.",
+      "usage_title": "2. Datennutzung",
+      "usage_text": "Ihre Daten werden zur Bearbeitung von Buchungen, zur Kommunikation mit Ihnen und zur Personalisierung Ihrer Erfahrung verwendet. Wir teilen die erforderlichen Details mit Tauchzentren für Ihre Buchungen.",
+      "protection_title": "3. Datenschutz",
+      "protection_text": "Wir implementieren Sicherheitsmaßnahmen zum Schutz Ihrer persönlichen Daten. Wir verkaufen Ihre Daten nicht an Dritte.",
+      "cookies_title": "4. Cookies",
+      "cookies_text": "Wir verwenden Cookies zur Verbesserung der Navigation und zum Speichern Ihrer Präferenzen (wie Spracheinstellungen). Sie können Cookie-Einstellungen in Ihrem Browser steuern."
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "Über uns",
+      "description": "Entdecken Sie die Geschichte von EviDive, unsere Mission und Werte. Ein leidenschaftliches Team von Tauch- und Technologie-Enthusiasten mit Sitz in der Schweiz."
+    },
+    "hero": {
+      "title": "Über EviDive",
+      "subtitle": "Taucher mit den besten Unterwassererlebnissen verbinden"
+    },
+    "story": {
+      "title": "Unsere Geschichte",
+      "subtitle": "Unsere Reise zur Revolutionierung des Tauchens",
+      "timeline": {
+        "idea": "Die Idee entstand aus der Frustration, Tauchgänge im Ausland zu buchen",
+        "launch": "Start der ersten Version der Plattform",
+        "expansion": "Internationale Expansion mit über 100 Partnerzentren",
+        "partners": "Strategische Partnerschaften und neue Funktionen"
+      }
+    },
+    "mission": {
+      "title": "Unsere Mission",
+      "description": "EviDive wurde aus einer gemeinsamen Leidenschaft für Tauchen und Technologie geboren. Unsere Mission ist es, Taucher weltweit mit den besten Unterwassererlebnissen zu verbinden und gleichzeitig das Leben der Tauchzentren zu vereinfachen."
+    },
+    "values": {
+      "title": "Unsere Werte",
+      "subtitle": "Die Prinzipien, die jede unserer Entscheidungen leiten",
+      "items": {
+        "trust": {
+          "title": "Vertrauen",
+          "description": "Verifizierte Zentren und authentische Bewertungen für eine sorgenfreie Buchung."
+        },
+        "safety": {
+          "title": "Sicherheit",
+          "description": "Strenge Standards und klare Voraussetzungen für jeden Tauchgang."
+        },
+        "experience": {
+          "title": "Erlebnis",
+          "description": "Ein immersives Design und reibungslose Buchung für ein Premium-Erlebnis."
+        },
+        "community": {
+          "title": "Gemeinschaft",
+          "description": "Eine Gemeinschaft von Enthusiasten, die ihre Entdeckungen teilen."
+        }
+      }
+    },
+    "team": {
+      "title": "Unser Team",
+      "description": "Ein Team von Tauch- und Technologie-Enthusiasten mit Sitz in der Schweiz."
+    }
+  },
+  "depth": {
+    "surface": "Oberfläche",
+    "shallow": "Flach",
+    "medium": "Mittel",
+    "deep": "Tief",
+    "abyss": "Abgrund"
+  },
+  "common": {
+    "search": "Suchen",
+    "login": "Anmeldung",
+    "register": "Registrierung",
+    "logout": "Abmelden",
+    "dashboard": "Dashboard",
+    "explore": "Entdecken",
+    "contact": "Kontakt",
+    "learnMore": "Mehr erfahren"
+  },
+  "hero": {
+    "tagline": "Tauchen Sie ins Abenteuer",
+    "title": "Erkunden Sie die Tiefen",
+    "subtitle": "Buchen Sie Ihre Tauchgänge an den schönsten Orten der Welt. Einzigartige Erlebnisse, zertifizierte Zentren, unvergessliche Erinnerungen.",
+    "discover": "Entdecken",
+    "cta": "Destinationen erkunden",
+    "depth": "{depth}m tief",
+    "scroll": "Scrollen"
+  },
+  "worldExplorer": {
+    "title": "Erkunden Sie die Tiefen der Welt",
+    "subtitle": "Klicken Sie auf ein Ziel, um die besten Tauchplätze zu entdecken"
+  },
+  "socialFeed": {
+    "title": "Folgen Sie unseren Abenteuern",
+    "subtitle": "Die neuesten Nachrichten aus unserer Community",
+    "all": "Alle",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "refresh": "Feed aktualisieren"
+  },
+  "search": {
+    "where": "Wo möchten Sie tauchen?",
+    "when": "Wann?",
+    "guests": "Taucher",
+    "searchButton": "Suchen"
+  },
+  "features": {
+    "explore": {
+      "title": "Erkunden Sie die Tiefen",
+      "description": "Durchstöbern Sie unsere interaktive Karte und entdecken Sie die schönsten Tauchplätze der Welt."
+    },
+    "book": {
+      "title": "Mit einem Klick buchen",
+      "description": "Prüfen Sie die Verfügbarkeit in Echtzeit und buchen Sie Ihren Tauchgang mit Leichtigkeit."
+    },
+    "dive": {
+      "title": "Sorglos tauchen",
+      "description": "Erhalten Sie sofort Ihre Bestätigung mit allen Details für ein unvergessliches Erlebnis."
+    }
+  },
+  "destinations": {
+    "title": "Beliebte Reiseziele",
+    "subtitle": "Die Lieblingsorte unserer Community",
+    "reviews": "Bewertungen",
+    "maldives": {
+      "name": "Malediven",
+      "region": "Indischer Ozean",
+      "description": "Kristallklares Wasser und außergewöhnliches Meeresleben"
+    },
+    "bali": {
+      "name": "Bali",
+      "region": "Indonesien",
+      "description": "Korallenriffe und Mantarochen"
+    },
+    "redSea": {
+      "name": "Rotes Meer",
+      "region": "Ägypten",
+      "description": "Legendäre Wracks und bunte Korallen"
+    },
+    "greatBarrier": {
+      "name": "Great Barrier Reef",
+      "region": "Australien",
+      "description": "Das größte Korallenriff der Welt"
+    }
+  },
+  "centers": {
+    "title": "Tauchzentren",
+    "subtitle": "Zertifizierte Profis erwarten Sie",
+    "viewAll": "Alle Zentren anzeigen",
+    "joinUs": "Treten Sie unserem Netzwerk bei",
+    "joinDescription": "Sie sind ein Tauchzentrum? Erhöhen Sie Ihre Sichtbarkeit und verwalten Sie Ihre Buchungen einfach.",
+    "joinButton": "EviDive beitreten",
+    "directory": {
+      "meta": {
+        "title": "Zentren - EviDive",
+        "description": "Entdecken Sie die auf EviDive zugelassenen Tauchzentren und erkunden Sie sie auf dem Globus."
+      },
+      "title": "Zentren",
+      "subtitle": "Drehen Sie den Globus und entdecken Sie die zugelassenen Tauchzentren.",
+      "listTitle": "Registrierte Zentren",
+      "emptyTitle": "Derzeit keine Zentren verfügbar",
+      "emptyDescription": "Zentren werden hier angezeigt, sobald sie von einem Administrator genehmigt wurden.",
+      "verified": "Verifiziert",
+      "viewCenter": "Zentrum anzeigen",
+      "backToCenters": "Zurück zu Zentren",
+      "rating": "{rating} ★ ({count} Bewertungen)",
+      "globeHint": "Tipp: Rechtsklick auf einen Punkt, um das Zentrum zu öffnen."
+    },
+    "benefits": {
+      "visibility": "Internationale Sichtbarkeit",
+      "booking": "Vereinfachte Buchungsverwaltung",
+      "payments": "Sichere Zahlungen"
+    },
+    "stats": {
+      "centers": "Partnerzentren",
+      "divers": "Aktive Taucher",
+      "destinations": "Reiseziele",
+      "rating": "Durchschnittsbewertung"
+    }
+  },
+  "footer": {
+    "description": "Die Referenzplattform für die Buchung Ihrer Tauchgänge in den besten Zentren der Welt.",
+    "discover": "Entdecken",
+    "destinations": "Reiseziele",
+    "offers": "Sonderangebote",
+    "company": "Unternehmen",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "careers": "Karriere",
+    "legal": "Rechtliches",
+    "terms": "AGB",
+    "privacy": "Datenschutz",
+    "sitemap": "Sitemap",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "nav": {
+    "home": "Startseite",
+    "explorer": "Entdecker",
+    "about": "Über uns",
+    "centers": "Zentren",
+    "dashboard": "Dashboard",
+    "myCenter": "Mein Zentrum",
+    "sellerView": "Verkäuferansicht",
+    "becomeSeller": "Verkäufer werden",
+    "createCenter": "Zentrum erstellen",
+    "adminCenters": "Admin — Zentren",
+    "adminUsers": "Admin — Benutzer",
+    "myBookings": "Meine Buchungen",
+    "myProfile": "Mein Profil",
+    "settings": "Einstellungen",
+    "logout": "Abmelden"
+  },
+  "userTypes": {
+    "diver": "Taucher",
+    "seller": "Verkäufer",
+    "center": "Zentrum",
+    "admin": "Admin"
+  },
+  "images": {
+    "avatar": "Avatar",
+    "evidiveLogo": "EviDive Logo",
+    "heroImage": "Hauptbild",
+    "close": "Schließen",
+    "socialPost": "Social-Media-Beitrag"
+  },
+  "dashboard": {
+    "welcome": "Willkommen, {name}",
+    "subtitle": "Verwalten Sie Ihre Tauchgänge und Buchungen von Ihrem Dashboard aus.",
+    "defaultName": "Taucher",
+    "stats": {
+      "totalDives": "Gesamte Tauchgänge",
+      "upcomingBookings": "Kommende Buchungen",
+      "unreadNotifications": "Ungelesene Benachrichtigungen",
+      "favorites": "Favoriten",
+      "reviews": "Veröffentlichte Bewertungen"
+    },
+    "actions": {
+      "explore": "Entdecken",
+      "exploreDesc": "Tauchplätze entdecken",
+      "findCenter": "Zentrum finden",
+      "findCenterDesc": "Verifizierte Zentren durchsuchen",
+      "profile": "Mein Profil",
+      "profileDesc": "Meine Informationen verwalten",
+      "settings": "Einstellungen",
+      "settingsDesc": "Mein Konto konfigurieren"
+    },
+    "bookings": {
+      "title": "Meine Buchungen",
+      "viewAll": "Alle anzeigen",
+      "emptyTitle": "Keine Buchungen",
+      "emptyDesc": "Sie haben noch keine Buchung. Erkunden Sie Tauchplätze und buchen Sie Ihr nächstes Abenteuer!",
+      "exploreButton": "Reiseziele erkunden"
+    },
+    "quickActions": {
+      "title": "Schnellaktionen",
+      "searchDive": "Tauchgang suchen",
+      "searchDiveDesc": "Finden Sie Ihr nächstes Abenteuer",
+      "myBookings": "Meine Buchungen",
+      "myBookingsDesc": "Verwalten Sie Ihre Reservierungen",
+      "myReviews": "Meine Bewertungen",
+      "myReviewsDesc": "Ihre veröffentlichten Bewertungen anzeigen"
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "empty": "Keine Benachrichtigungen",
+      "open": "Öffnen"
+    },
+    "certification": {
+      "label": "Zertifizierung",
+      "notSet": "Nicht angegeben",
+      "update": "Aktualisieren"
+    },
+    "seller": {
+      "title": "Verkäufer-Dashboard",
+      "subtitle": "Verwalten Sie Ihre Dienstleistungen und Verkäufe",
+      "description": "Dasselbe Konto und dieselben Rechte wie ein Taucher, mit einer anderen Ansicht.",
+      "sellerView": "Verkäuferansicht",
+      "profile": "Profil",
+      "sellerCenter": "Verkäuferzentrum",
+      "status": "Status",
+      "services": "Dienstleistungen (Vorschau)",
+      "noServices": "Keine Dienstleistungen vorhanden.",
+      "service": "Dienstleistung",
+      "minutes": "Minuten",
+      "noSellerCenter": "Kein \"Verkäuferzentrum\" erkannt. Wenn Sie den Verkäufer-Onboarding nutzen möchten, gehen Sie durch",
+      "sellerOnboarding": "Verkäufer-Onboarding",
+      "goBack": "Zurück zum Dashboard"
+    },
+    "center": {
+      "title": "Mein Zentrum",
+      "titleAdmin": "Zentren (Admin)",
+      "subtitle": "Verfolgen Sie den Status Ihrer Anfrage und verwalten Sie Ihr Zentrumsprofil.",
+      "subtitleAdmin": "Schnellliste der ausstehenden Anfragen.",
+      "createCenter": "Ein weiteres Zentrum erstellen",
+      "validateRequests": "Anfragen validieren",
+      "manageUsers": "Benutzer verwalten",
+      "noCenters": "Keine Zentren gefunden",
+      "noCentersDesc": "Wenn Sie gerade das Onboarding abgeschlossen haben, aktualisieren Sie diese Seite. Andernfalls können Sie mit der Erstellung eines Zentrums beginnen.",
+      "createNewCenter": "Ein Zentrum erstellen",
+      "pendingRequests": "Derzeit keine ausstehenden Anfragen.",
+      "viewCenters": "Zentren anzeigen",
+      "statusVerified": "Verifiziert",
+      "pendingDesc": "Ihr Zentrum wartet auf Validierung durch einen Administrator."
+    },
+    "admin": {
+      "users": {
+        "title": "Admin — Benutzer",
+        "subtitle": "Berechtigungen ändern, aktivieren/deaktivieren, auf die schwarze Liste setzen und Konten löschen.",
+        "validateCenters": "Zentren validieren",
+        "dashboard": "Dashboard",
+        "userType": "Typ",
+        "active": "Aktiv",
+        "inactive": "Inaktiv",
+        "blacklist": "Schwarze Liste",
+        "ok": "OK",
+        "verified": "E-Mail verifiziert",
+        "unverified": "E-Mail nicht verifiziert",
+        "apply": "Anwenden",
+        "deactivate": "Deaktivieren",
+        "activate": "Aktivieren",
+        "removeBlacklist": "Von schwarzer Liste entfernen",
+        "addBlacklist": "Auf schwarze Liste setzen",
+        "delete": "Löschen",
+        "noUsers": "Keine Benutzer."
+      }
+    }
+  },
+  "profile": {
+    "backToDashboard": "Zurück zum Dashboard",
+    "defaultName": "Benutzer",
+    "emailVerified": "E-Mail verifiziert",
+    "editProfile": "Profil bearbeiten",
+    "saveChanges": "Speichern",
+    "saving": "Wird gespeichert...",
+    "sections": {
+      "personal": "Persönliche Informationen",
+      "diving": "Tauchinformationen",
+      "account": "Konto"
+    },
+    "fields": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "phone": "Telefon",
+      "location": "Standort",
+      "bio": "Biografie",
+      "certificationLevel": "Zertifizierungsstufe",
+      "certificationOrg": "Organisation",
+      "totalDives": "Anzahl der Tauchgänge"
+    },
+    "placeholders": {
+      "firstName": "Ihr Vorname",
+      "lastName": "Ihr Nachname",
+      "phone": "+49 171 123 4567",
+      "city": "Stadt",
+      "country": "Land",
+      "bio": "Erzählen Sie uns von sich und Ihrer Leidenschaft für das Tauchen..."
+    },
+    "divingStats": {
+      "title": "Statistiken",
+      "bookings": "Buchungen",
+      "reviews": "Bewertungen"
+    },
+    "account": {
+      "email": "E-Mail",
+      "type": "Kontotyp",
+      "status": "Status",
+      "active": "Aktiv"
+    }
+  },
+  "settings": {
+    "backToDashboard": "Zurück zum Dashboard",
+    "title": "Einstellungen",
+    "subtitle": "Verwalten Sie Ihre Präferenzen und Kontoeinstellungen.",
+    "saved": "Einstellungen gespeichert",
+    "sections": {
+      "notifications": "Benachrichtigungen",
+      "privacy": "Datenschutz",
+      "language": "Sprache und Region",
+      "security": "Sicherheit",
+      "account": "Konto"
+    },
+    "notifications": {
+      "email": {
+        "label": "E-Mail-Benachrichtigungen",
+        "description": "Buchungsbestätigungen per E-Mail erhalten"
+      },
+      "sms": {
+        "label": "SMS-Erinnerungen",
+        "description": "Tauch-Erinnerungen per SMS erhalten"
+      },
+      "reminders": {
+        "label": "Buchungserinnerungen",
+        "description": "Erinnerungen vor Ihren Tauchgängen"
+      },
+      "marketing": {
+        "label": "Marketing-E-Mails",
+        "description": "Sonderangebote und Neuigkeiten"
+      }
+    },
+    "privacy": {
+      "profileVisible": {
+        "label": "Profil für Zentren sichtbar",
+        "description": "Tauchzentren erlauben, Ihr Profil zu sehen"
+      },
+      "diveHistory": {
+        "label": "Sichtbarer Verlauf",
+        "description": "Ihre Tauchhistorie anzeigen"
+      }
+    },
+    "language": {
+      "select": "Wählen Sie Ihre Sprache"
+    },
+    "security": {
+      "changePassword": {
+        "label": "Passwort ändern",
+        "description": "Ihr Passwort aktualisieren"
+      },
+      "emailVerified": {
+        "label": "E-Mail verifiziert"
+      },
+      "verified": "Verifiziert"
+    },
+    "account": {
+      "export": {
+        "label": "Meine Daten exportieren",
+        "description": "Alle Ihre Daten herunterladen (DSGVO)",
+        "success": "Daten erfolgreich exportiert"
+      },
+      "signOut": {
+        "label": "Abmelden",
+        "description": "Sich von Ihrem Konto abmelden"
+      },
+      "delete": {
+        "label": "Konto löschen",
+        "description": "Ihr Konto und alle Ihre Daten dauerhaft löschen"
+      }
+    },
+    "deleteModal": {
+      "title": "Ihr Konto löschen?",
+      "description": "Diese Aktion ist unwiderruflich. Alle Ihre Daten, Buchungen und Bewertungen werden dauerhaft gelöscht.",
+      "cancel": "Abbrechen",
+      "confirm": "Löschen"
+    },
+    "errors": {
+      "unauthorized": "Sie müssen angemeldet sein",
+      "server_error": "Ein Fehler ist aufgetreten",
+      "unknown_error": "Ein unbekannter Fehler ist aufgetreten"
+    }
+  },
+  "careers": {
+    "badge": "Wir stellen ein",
+    "title": "Treten Sie dem EviDive-Team bei",
+    "subtitle": "Helfen Sie mit, die Art und Weise zu revolutionieren, wie Taucher ihre Unterwasserabenteuer entdecken und buchen.",
+    "valuesTitle": "Unsere Werte",
+    "values": {
+      "passion": {
+        "title": "Leidenschaft",
+        "description": "Die Liebe zum Tauchen leitet jede unserer Entscheidungen."
+      },
+      "team": {
+        "title": "Team",
+        "description": "Wir glauben an die Kraft des Kollektivs."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Immer die Grenzen des Möglichen verschieben."
+      },
+      "impact": {
+        "title": "Wirkung",
+        "description": "Positive Veränderungen für den Ozean schaffen."
+      }
+    },
+    "benefitsTitle": "Unsere Vorteile",
+    "benefits": {
+      "diving": "Kostenlose Tauchgänge",
+      "remote": "Remote-Arbeit",
+      "flexibility": "Flexible Arbeitszeiten",
+      "health": "Vollständige Krankenversicherung"
+    },
+    "positionsTitle": "Offene Stellen",
+    "positions": {
+      "fullstack": {
+        "title": "Full-Stack-Entwickler",
+        "department": "Technologie",
+        "location": "Genf / Remote",
+        "type": "Vollzeit"
+      },
+      "marketing": {
+        "title": "Digital Marketing Manager",
+        "department": "Marketing",
+        "location": "Genf",
+        "type": "Vollzeit"
+      },
+      "support": {
+        "title": "Zweisprachiger Kundensupport",
+        "department": "Support",
+        "location": "Remote",
+        "type": "Vollzeit"
+      }
+    },
+    "applyButton": "Bewerben",
+    "cta": {
+      "title": "Finden Sie Ihre Stelle nicht?",
+      "description": "Senden Sie uns eine Initiativbewerbung. Wir sind immer auf der Suche nach leidenschaftlichen Talenten.",
+      "button": "Kontaktieren Sie uns"
+    }
+  },
+  "sitemap": {
+    "title": "Sitemap",
+    "subtitle": "Finden Sie alle Seiten von EviDive",
+    "sections": {
+      "main": "Hauptseiten",
+      "explore": "Entdecken",
+      "account": "Mein Konto",
+      "business": "Unternehmen",
+      "legal": "Rechtliches"
+    },
+    "links": {
+      "home": "Startseite",
+      "about": "Über uns",
+      "contact": "Kontakt",
+      "explorer": "Entdecker",
+      "centers": "Tauchzentren",
+      "login": "Anmeldung",
+      "register": "Registrierung",
+      "dashboard": "Dashboard",
+      "profile": "Mein Profil",
+      "settings": "Einstellungen",
+      "onboard": "Partner werden",
+      "careers": "Karriere",
+      "terms": "Allgemeine Geschäftsbedingungen",
+      "privacy": "Datenschutzrichtlinie"
+    },
+    "descriptions": {
+      "home": "EviDive Startseite",
+      "about": "Unsere Geschichte und Mission",
+      "contact": "Kontaktieren Sie uns",
+      "explorer": "Interaktive Karte der Tauchplätze",
+      "centers": "Verzeichnis der verifizierten Zentren",
+      "login": "Zugriff auf Ihr Konto",
+      "register": "Konto erstellen",
+      "dashboard": "Ihre Buchungen verwalten",
+      "profile": "Ihre Informationen bearbeiten",
+      "settings": "Ihr Konto konfigurieren",
+      "onboard": "Unserem Netzwerk beitreten",
+      "careers": "Jobmöglichkeiten",
+      "terms": "Unsere Nutzungsbedingungen",
+      "privacy": "Schutz Ihrer Daten"
+    },
+    "lastUpdated": "Zuletzt aktualisiert"
+  },
+  "metadata": {
+    "home": {
+      "title": "EviDive - Erforschen Sie die Tiefen des Ozeans mit verifizierten Zentren",
+      "description": "Entdecken Sie die besten Tauchplätze mit EviDive. Buchen Sie bei PADI-zertifizierten Zentren und erkunden Sie Unterwasserwunder sicher."
+    },
+    "careers": {
+      "title": "Karriere - Treten Sie dem EviDive-Team bei",
+      "description": "Stellenangebote bei EviDive. Treten Sie unserem leidenschaftlichen Team bei, um das Taucherlebnis zu revolutionieren."
+    },
+    "contact": {
+      "title": "Kontakt - EviDive",
+      "description": "Kontaktieren Sie das EviDive-Team. Unser Team ist da, um Ihre Fragen zum Tauchen und unseren Dienstleistungen zu beantworten."
+    },
+    "explorer": {
+      "title": "Entdecker - Interaktive Karte der Tauchplätze",
+      "description": "Entdecken Sie die besten Tauchplätze mit unserer interaktiven Karte. Erforschen Sie die Ozeantiefen in Ihrer Nähe."
+    },
+    "login": {
+      "title": "Anmeldung - EviDive",
+      "description": "Melden Sie sich in Ihrem EviDive-Konto an, um Ihre Buchungen zu verwalten und auf Ihr Dashboard zuzugreifen."
+    },
+    "register": {
+      "title": "Registrierung - EviDive",
+      "description": "Erstellen Sie Ihr EviDive-Konto und beginnen Sie, Unterwasserwunder mit zertifizierten Zentren zu erkunden."
+    },
+    "resetPassword": {
+      "title": "Passwort zurücksetzen - EviDive",
+      "description": "Setzen Sie Ihr EviDive-Passwort zurück, um wieder Zugriff auf Ihr Konto zu erhalten."
+    },
+    "verifyEmail": {
+      "title": "E-Mail-Verifizierung - EviDive",
+      "description": "Verifizieren Sie Ihre E-Mail-Adresse, um Ihr EviDive-Konto zu aktivieren und auf alle Funktionen zuzugreifen."
+    }
+  },
+  "adminCenters": {
+    "title": "Admin · Zentren",
+    "subtitle": "Validierung der Zentrumsanmeldungen (PENDING → APPROVED/REJECTED).",
+    "backToCenters": "Zurück zu Zentren",
+    "tokenMissingTitle": "ADMIN_TOKEN fehlt",
+    "tokenMissingDesc": "Konfigurieren Sie `ADMIN_TOKEN` (env), um die Admin-Validierung zu aktivieren.",
+    "accessDeniedTitle": "Zugriff verweigert",
+    "accessDeniedDesc": "Fügen Sie `?token=...` mit dem richtigen Token hinzu, um auf diese Seite zuzugreifen.",
+    "pendingTitle": "Ausstehende Anmeldungen",
+    "nonePending": "Keine Zentren ausstehend.",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "approve": "Genehmigen",
+    "reject": "Ablehnen",
+    "pending": "Ausstehend",
+    "approved": "Genehmigt",
+    "rejected": "Abgelehnt",
+    "noPending": "Keine ausstehenden Anmeldungen.",
+    "viewCenter": "Zentrum anzeigen",
+    "centerDetails": "Zentrumsdetails",
+    "owner": "Eigentümer",
+    "location": "Standort",
+    "status": "Status",
+    "created": "Erstellt",
+    "actions": "Aktionen"
+  },
+  "onboard": {
+    "meta": {
+      "title": "Registrierung - EviDive",
+      "description": "Treten Sie EviDive als Käufer, Verkäufer oder Tauchzentrum bei."
+    },
+    "title": "Treten Sie EviDive bei",
+    "subtitle": "Wählen Sie Ihren Kontotyp",
+    "diver": {
+      "title": "Ich bin Käufer",
+      "description": "Finden und buchen Sie Ihre Tauchgänge in den besten Zentren der Welt.",
+      "feature1": "Zugang zu allen verifizierten Zentren",
+      "feature2": "Sofortige Buchung",
+      "feature3": "Tauchhistorie",
+      "steps": {
+        "account": "Konto",
+        "preferences": "Präferenzen",
+        "review": "Überprüfung"
+      },
+      "account": {
+        "description": "Erstellen Sie Ihr Taucherkonto.",
+        "fullName": "Vollständiger Name",
+        "phone": "Telefon",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "confirmPassword": "Passwort bestätigen",
+        "submit": "Mein Konto erstellen"
+      },
+      "preferences": {
+        "description": "Personalisieren Sie Ihre Erfahrung.",
+        "certificationLevel": "Zertifizierungsstufe",
+        "certificationOrg": "Organisation",
+        "totalDives": "Anzahl der Tauchgänge",
+        "preferredLanguage": "Bevorzugte Sprache"
+      },
+      "review": {
+        "description": "Überprüfen Sie Ihre Informationen.",
+        "passwordConfirmTitle": "Bestätigung erforderlich",
+        "passwordConfirmDescription": "Aus Sicherheitsgründen geben Sie bitte Ihr Passwort ein, um die Registrierung abzuschließen.",
+        "passwordRequired": "Bitte geben Sie Ihr Passwort ein, um fortzufahren.",
+        "errors": {
+          "generic": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+        },
+        "termsAccept": "Ich akzeptiere die Allgemeinen Geschäftsbedingungen und Datenschutzrichtlinie von EviDive.",
+        "submitButton": "Registrierung abschließen",
+        "successTitle": "Willkommen!",
+        "successDescription": "Ihr Konto wurde erstellt. Sie können jetzt Ihre Tauchgänge erkunden und buchen.",
+        "exploreButton": "Entdecken",
+        "summary": "Zusammenfassung",
+        "name": "Name",
+        "emailLabel": "E-Mail",
+        "phoneLabel": "Telefon",
+        "certification": "Zertifizierung",
+        "dives": "Tauchgänge",
+        "complete": "Abgeschlossen"
+      },
+      "dashboard": {
+        "seller": {
+          "title": "Dashboard — Verkäufer",
+          "subtitle": "Gleiches Konto und gleiche Rechte wie ein Taucher, mit einer anderen Ansicht.",
+          "description": "Gleiches Konto und gleiche Rechte wie ein Taucher, mit einer anderen Ansicht.",
+          "diverView": "Taucheransicht",
+          "profile": "Profil",
+          "sellerView": "Verkäuferansicht",
+          "sellerCenter": "Verkäuferzentrum",
+          "status": "Status",
+          "adminValidateCenters": "Admin — Zentren validieren",
+          "kpis": {
+            "services": "Dienstleistungen",
+            "upcomingBookings": "Kommende Buchungen",
+            "pendingPayout": "Ausstehende Auszahlungen"
+          },
+          "services": "Dienstleistungen (Vorschau)",
+          "noServices": "Noch keine Dienstleistungen.",
+          "service": "Dienstleistung",
+          "noSellerCenter": "Kein \"Verkäuferzentrum\" erkannt. Wenn Sie den Verkäufer-Onboarding nutzen möchten, gehen Sie durch",
+          "sellerOnboarding": "Verkäufer-Onboarding",
+          "goBack": "Zurück zum Dashboard"
+        },
+        "center": {
+          "title": "Mein Zentrum",
+          "titleAdmin": "Zentren (Admin)",
+          "subtitle": "Verfolgen Sie den Status Ihrer Anfrage und verwalten Sie Ihr Zentrumsprofil.",
+          "subtitleAdmin": "Schnellliste der ausstehenden Anfragen.",
+          "kpis": {
+            "centers": "Zentren",
+            "upcomingBookings": "Kommende Buchungen",
+            "pendingBookings": "Ausstehende Buchungen",
+            "unpaidBookings": "Unbezahlte Buchungen",
+            "pendingCenters": "Ausstehende Zentren"
+          },
+          "statuses": {
+            "PENDING": "Ausstehend",
+            "APPROVED": "Genehmigt",
+            "REJECTED": "Abgelehnt",
+            "SUSPENDED": "Gesperrt"
+          },
+          "labels": {
+            "services": "Dienstleistungen",
+            "bookings": "Buchungen",
+            "reviews": "Bewertungen",
+            "stripeConnected": "Stripe verbunden",
+            "stripeMissing": "Stripe nicht konfiguriert"
+          },
+          "createCenter": "Ein weiteres Zentrum erstellen",
+          "validateRequests": "Anfragen validieren",
+          "manageUsers": "Benutzer verwalten",
+          "noCenters": "Keine Zentren gefunden",
+          "noCentersDesc": "Wenn Sie gerade das Onboarding abgeschlossen haben, aktualisieren Sie diese Seite. Andernfalls können Sie mit der Erstellung eines Zentrums beginnen.",
+          "createNewCenter": "Ein Zentrum erstellen",
+          "pendingRequests": "Derzeit keine ausstehenden Anfragen.",
+          "viewCenters": "Zentren anzeigen",
+          "viewPublicCenter": "Öffentliche Seite anzeigen",
+          "statusVerified": "Verifiziert",
+          "pendingDesc": "Ihr Zentrum wartet auf Validierung durch einen Administrator."
+        },
+        "admin": {
+          "users": {
+            "title": "Admin — Benutzer",
+            "subtitle": "Berechtigungen ändern, aktivieren/deaktivieren, auf die schwarze Liste setzen und Konten löschen.",
+            "validateCenters": "Zentren validieren",
+            "dashboard": "Dashboard",
+            "userType": "Typ",
+            "active": "Aktiv",
+            "inactive": "Deaktiviert",
+            "blacklist": "Schwarze Liste",
+            "ok": "OK",
+            "verified": "E-Mail verifiziert",
+            "unverified": "E-Mail nicht verifiziert",
+            "apply": "Anwenden",
+            "deactivate": "Deaktivieren",
+            "activate": "Aktivieren",
+            "removeBlacklist": "Von schwarzer Liste entfernen",
+            "addBlacklist": "Auf schwarze Liste setzen",
+            "delete": "Löschen",
+            "noUsers": "Keine Benutzer."
+          }
+        },
+        "common": {
+          "diverView": "Taucheransicht",
+          "profile": "Profil"
+        }
+      }
+    },
+    "seller": {
+      "title": "Ich bin Verkäufer",
+      "description": "Verkaufen Sie Ihre Tauchdienstleistungen ohne ein physisches Zentrum.",
+      "feature1": "Erstellen Sie Ihre Angebote",
+      "feature2": "Verwalten Sie Ihre Buchungen",
+      "feature3": "Erhalten Sie Ihre Zahlungen",
+      "steps": {
+        "account": "Konto",
+        "profile": "Profil",
+        "services": "Dienstleistungen",
+        "payments": "Zahlungen",
+        "review": "Überprüfung"
+      },
+      "account": {
+        "description": "Erstellen Sie Ihr Verkäuferkonto.",
+        "fullName": "Vollständiger Name",
+        "phone": "Telefon",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "confirmPassword": "Passwort bestätigen",
+        "submit": "Mein Konto erstellen"
+      },
+      "profile": {
+        "description": "Stellen Sie sich den Kunden vor.",
+        "bio": "Biografie",
+        "bioPlaceholder": "Beschreiben Sie Ihre Erfahrung, Ihre Spezialitäten...",
+        "certifications": "Zertifizierungen",
+        "addCertification": "Zertifizierung hinzufügen",
+        "languages": "Gesprochene Sprachen",
+        "photo": "Profilfoto",
+        "submit": "Weiter"
+      },
+      "services": {
+        "description": "Definieren Sie Ihre Dienstleistungen.",
+        "addService": "Dienstleistung hinzufügen",
+        "serviceName": "Name der Dienstleistung",
+        "serviceDescription": "Beschreibung",
+        "price": "Preis",
+        "duration": "Dauer"
+      },
+      "payments": {
+        "description": "Konfigurieren Sie Ihre Zahlungen.",
+        "commissionTitle": "EviDive-Provision",
+        "commissionDescription": "Wir erheben eine Provision auf jede bestätigte Buchung.",
+        "perBooking": "pro Buchung",
+        "stripeConnect": "Stripe Connect",
+        "stripeDescription": "Verbinden Sie Ihr Bankkonto, um Ihre Zahlungen zu erhalten.",
+        "connectButton": "Mein Konto verbinden",
+        "connected": "Konto verbunden",
+        "benefits": {
+          "secure": {
+            "title": "Sicher",
+            "description": "Zahlungen durch Stripe geschützt"
+          },
+          "fast": {
+            "title": "Schnell",
+            "description": "Überweisungen in 2-3 Tagen"
+          },
+          "global": {
+            "title": "International",
+            "description": "Akzeptieren Sie 135+ Währungen"
+          }
+        }
+      },
+      "review": {
+        "description": "Überprüfen Sie Ihre Informationen vor dem Absenden.",
+        "passwordConfirmTitle": "Bestätigung erforderlich",
+        "passwordConfirmDescription": "Aus Sicherheitsgründen geben Sie bitte Ihr Passwort ein, um die Registrierung abzuschließen.",
+        "passwordRequired": "Bitte geben Sie Ihr Passwort ein, um fortzufahren.",
+        "errors": {
+          "generic": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+        },
+        "termsAccept": "Ich akzeptiere die Allgemeinen Geschäftsbedingungen und Datenschutzrichtlinie von EviDive.",
+        "submitButton": "Mein Profil einreichen",
+        "successTitle": "Profil eingereicht!",
+        "successDescription": "Ihre Anfrage wurde gesendet. Unser Team wird Ihre Informationen überprüfen und sich innerhalb von 48 Stunden bei Ihnen melden.",
+        "homeButton": "Zurück zur Startseite",
+        "summary": "Zusammenfassung",
+        "name": "Name",
+        "emailLabel": "E-Mail",
+        "certifications": "Zertifizierungen",
+        "servicesCount": "Dienstleistungen",
+        "complete": "Abgeschlossen",
+        "incomplete": "Unvollständig"
+      }
+    },
+    "center": {
+      "title": "Ich bin ein Zentrum",
+      "description": "Verwalten Sie Ihre Buchungen und erhöhen Sie Ihre internationale Sichtbarkeit.",
+      "feature1": "Weltweite Sichtbarkeit",
+      "feature2": "Buchungsverwaltung",
+      "feature3": "Sichere Zahlungen",
+      "steps": {
+        "account": "Konto",
+        "info": "Informationen",
+        "location": "Standort",
+        "documents": "Dokumente",
+        "payments": "Zahlungen",
+        "review": "Überprüfung"
+      },
+      "invalidStep": "Ungültiger Schritt",
+      "back": "Zurück",
+      "next": "Weiter",
+      "account": {
+        "description": "Erstellen Sie Ihr Zentrumsinhaber-Konto.",
+        "fullName": "Vollständiger Name",
+        "phone": "Telefon",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "confirmPassword": "Passwort bestätigen",
+        "submit": "Mein Konto erstellen"
+      },
+      "info": {
+        "description": "Präsentieren Sie Ihr Tauchzentrum.",
+        "centerName": "Name des Zentrums",
+        "aboutCenter": "Beschreibung des Zentrums",
+        "aboutPlaceholder": "Beschreiben Sie Ihr Zentrum, Ihre Spezialitäten, Ihr Team...",
+        "website": "Website",
+        "facebook": "Facebook-Seite",
+        "instagram": "Instagram-Konto",
+        "submit": "Weiter",
+        "errors": {
+          "centerName": "Der Zentrumsname muss mindestens 2 Zeichen enthalten.",
+          "description": "Die Beschreibung muss mindestens 20 Zeichen enthalten.",
+          "website": "Ungültige URL."
+        }
+      },
+      "location": {
+        "description": "Geben Sie den Standort Ihres Zentrums an.",
+        "address": "Adresse",
+        "city": "Stadt",
+        "postalCode": "Postleitzahl",
+        "country": "Land",
+        "mapPlaceholder": "Interaktive Karte (demnächst)",
+        "latitude": "Breitengrad",
+        "longitude": "Längengrad",
+        "submit": "Weiter",
+        "errors": {
+          "address": "Adresse ist erforderlich.",
+          "city": "Stadt ist erforderlich.",
+          "country": "Land ist erforderlich.",
+          "latitude": "Ungültiger Breitengrad.",
+          "longitude": "Ungültiger Längengrad."
+        }
+      },
+      "documents": {
+        "description": "Laden Sie die erforderlichen Dokumente zur Verifizierung hoch.",
+        "required": "Erforderlich",
+        "back": "Zurück",
+        "continue": "Weiter",
+        "types": {
+          "license": "Gewerbeschein",
+          "insurance": "Versicherungsnachweis",
+          "certification": "Zertifizierungen"
+        },
+        "upload": "Hochladen",
+        "acceptedFormats": "Akzeptierte Formate: PDF, JPG, PNG (max 5 MB)"
+      },
+      "payments": {
+        "description": "Konfigurieren Sie Ihre Zahlungen, um Buchungen zu erhalten.",
+        "back": "Zurück",
+        "continue": "Weiter",
+        "comingSoon": "Stripe-Verbindung bald verfügbar. Sie können diesen Schritt nach der Zentrumsvalidierung abschließen.",
+        "commissionTitle": "EviDive-Provision",
+        "commissionDescription": "Wir erheben eine Provision auf jede bestätigte Buchung.",
+        "perBooking": "pro Buchung",
+        "stripeConnect": "Stripe Connect",
+        "stripeDescription": "Verbinden Sie Ihr Bankkonto, um Ihre Zahlungen zu erhalten.",
+        "connectButton": "Mein Konto verbinden",
+        "connected": "Konto verbunden",
+        "benefits": {
+          "secure": {
+            "title": "Sicher",
+            "description": "Zahlungen durch Stripe geschützt"
+          },
+          "fast": {
+            "title": "Schnell",
+            "description": "Überweisungen in 2-3 Tagen"
+          },
+          "global": {
+            "title": "International",
+            "description": "Akzeptieren Sie 135+ Währungen"
+          }
+        }
+      },
+      "review": {
+        "description": "Überprüfen Sie Ihre Informationen vor dem Absenden Ihrer Registrierung.",
+        "errors": {
+          "generic": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+          "validationFailed": "Ungültige Informationen. Überprüfen Sie Ihre Felder und versuchen Sie es erneut.",
+          "emailAlreadyRegistered": "Diese E-Mail wird bereits verwendet."
+        },
+        "dashboardButton": "Zugang zu meinem Zentrumsbereich",
+        "passwordLabel": "Passwort",
+        "sections": {
+          "account": "Inhaber-Konto",
+          "accountStatus": "Abgeschlossen",
+          "info": "Zentrumsinformationen",
+          "infoStatus": "Abgeschlossen",
+          "location": "Standort",
+          "locationStatus": "Abgeschlossen",
+          "documents": "Dokumente",
+          "documentsStatus": "Bald verfügbar",
+          "payments": "Zahlungen",
+          "paymentsStatus": "Bald verfügbar"
+        },
+        "termsAccept": "Ich akzeptiere die Allgemeinen Geschäftsbedingungen und Datenschutzrichtlinie von EviDive.",
+        "submitButton": "Meine Registrierung einreichen",
+        "successTitle": "Registrierung eingereicht!",
+        "successDescription": "Ihre Anfrage wurde gesendet. Unser Team wird Ihre Informationen überprüfen und sich innerhalb von 48 Stunden bei Ihnen melden.",
+        "homeButton": "Zurück zur Startseite",
+        "summary": "Zusammenfassung",
+        "name": "Name",
+        "emailLabel": "E-Mail",
+        "centerName": "Zentrum",
+        "locationLabel": "Standort",
+        "incomplete": "Unvollständig"
+      }
+    }
+  },
+  "reviews": {
+    "meta": {
+      "title": "Meine Bewertungen - EviDive",
+      "description": "Sehen und verwalten Sie die Bewertungen, die Sie für Ihre Tauchgänge abgegeben haben."
+    },
+    "title": "Meine Bewertungen",
+    "subtitle": "Sehen und verwalten Sie Ihre Bewertungen für Tauchzentren.",
+    "backToDashboard": "Zurück zum Dashboard",
+    "myReviews": "Meine veröffentlichten Bewertungen",
+    "noReviews": "Sie haben noch keine Bewertungen abgegeben.",
+    "noReviewsDesc": "Nach einem Tauchgang teilen Sie Ihre Erfahrung, um anderen Tauchern zu helfen!",
+    "pendingReviews": "Tauchgänge warten auf Bewertung",
+    "noPendingReviews": "Alle Ihre Tauchgänge wurden bewertet.",
+    "leaveReview": "Bewertung abgeben",
+    "editReview": "Bearbeiten",
+    "deleteReview": "Löschen",
+    "viewCenter": "Zentrum ansehen",
+    "status": {
+      "PENDING": "Ausstehende Moderation",
+      "APPROVED": "Genehmigt",
+      "REJECTED": "Abgelehnt",
+      "SPAM": "Spam"
+    },
+    "form": {
+      "title": "Bewertung abgeben",
+      "editTitle": "Bewertung bearbeiten",
+      "rating": "Bewertung",
+      "ratingRequired": "Bitte wählen Sie eine Bewertung",
+      "comment": "Ihre Bewertung",
+      "commentPlaceholder": "Beschreiben Sie Ihre Erfahrung, was Ihnen gefallen hat, Verbesserungsvorschläge...",
+      "commentMin": "Die Bewertung muss mindestens 20 Zeichen lang sein.",
+      "photos": "Fotos (optional)",
+      "photosHint": "Maximal 3 Fotos (JPG, PNG, max 5 MB)",
+      "addPhoto": "Foto hinzufügen",
+      "removePhoto": "Entfernen",
+      "submit": "Bewertung abschicken",
+      "update": "Aktualisieren",
+      "cancel": "Abbrechen",
+      "submitting": "Wird gesendet...",
+      "success": "Bewertung erfolgreich eingereicht! Sie wird nach der Moderation sichtbar.",
+      "updateSuccess": "Bewertung erfolgreich aktualisiert!",
+      "deleteSuccess": "Bewertung erfolgreich gelöscht.",
+      "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "alreadyReviewed": "Sie haben bereits eine Bewertung für diese Buchung abgegeben."
+    },
+    "deleteModal": {
+      "title": "Diese Bewertung löschen?",
+      "description": "Diese Aktion kann nicht rückgängig gemacht werden. Ihre Bewertung wird dauerhaft gelöscht.",
+      "cancel": "Abbrechen",
+      "confirm": "Löschen"
+    },
+    "card": {
+      "diveOn": "Tauchgang am",
+      "postedOn": "Veröffentlicht am",
+      "modifiable": "Bearbeitbar, solange die Bewertung auf Moderation wartet."
+    },
+    "stars": {
+      "1": "Sehr schlecht",
+      "2": "Schlecht",
+      "3": "Durchschnittlich",
+      "4": "Gut",
+      "5": "Ausgezeichnet"
+    }
+  },
+  "centerRegistration": {
+    "meta": {
+      "title": "Tauchzentrum registrieren - EviDive",
+      "description": "Registrieren Sie Ihr Tauchzentrum bei EviDive und treten Sie unserem internationalen Netzwerk bei."
+    },
+    "title": "Registrieren Sie Ihr Tauchzentrum",
+    "subtitle": "Treten Sie EviDive bei und erhöhen Sie Ihre internationale Sichtbarkeit",
+    "alreadyAccount": "Haben Sie bereits ein Konto?",
+    "loginLink": "Anmelden",
+    "steps": {
+      "personal": "Persönliche Infos",
+      "center": "Ihr Zentrum",
+      "legal": "Rechtliche Infos",
+      "confirmation": "Bestätigung"
+    },
+    "step1": {
+      "title": "Persönliche Informationen",
+      "description": "Geben Sie Ihre Informationen als gesetzlicher Vertreter des Zentrums ein.",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "Geschäftliche E-Mail",
+      "phone": "Telefon",
+      "password": "Passwort",
+      "confirmPassword": "Passwort bestätigen",
+      "next": "Weiter",
+      "checkingEmail": "E-Mail wird überprüft...",
+      "emailAvailable": "E-Mail verfügbar",
+      "errors": {
+        "emailExists": "Ein Konto mit dieser E-Mail existiert bereits"
+      }
+    },
+    "step2": {
+      "title": "Zentrumsinformationen",
+      "description": "Präsentieren Sie Ihr Tauchzentrum zukünftigen Kunden.",
+      "centerNameSection": "Zentrumsname (mehrsprachig)",
+      "centerNameFr": "Name auf Französisch",
+      "centerNameEn": "Name auf Englisch",
+      "addressSection": "Zentrumsadresse",
+      "street": "Straße",
+      "city": "Stadt",
+      "postalCode": "Postleitzahl",
+      "country": "Land",
+      "latitude": "Breitengrad",
+      "longitude": "Längengrad",
+      "coordsHint": "Sie können Koordinaten auf Google Maps finden (Rechtsklick auf den Ort).",
+      "website": "Website (optional)",
+      "descriptionSection": "Kurze Beschreibung (mehrsprachig)",
+      "descriptionFr": "Beschreibung auf Französisch",
+      "descriptionEn": "Beschreibung auf Englisch",
+      "descriptionPlaceholder": "Beschreiben Sie Ihr Zentrum, Spezialitäten, Team...",
+      "descriptionPlaceholderEn": "Describe your center, specialties, team...",
+      "back": "Zurück",
+      "next": "Weiter"
+    },
+    "step3": {
+      "title": "Rechtliche Informationen",
+      "description": "Diese Informationen sind optional, werden aber zur Verifizierung empfohlen.",
+      "companySection": "Unternehmen",
+      "optional": "optional",
+      "companyName": "Firmenname",
+      "companyNamePlaceholder": "Mein Tauchzentrum GmbH",
+      "siretOrVat": "SIRET oder USt-IdNr.",
+      "siretOrVatPlaceholder": "DE123456789",
+      "siretOrVatHint": "SIRET (Frankreich), EU-USt-IdNr. oder lokales Äquivalent.",
+      "certificationsSection": "Zentrumszertifizierungen",
+      "certificationsHint": "Wählen Sie alle Zertifizierungen, die Ihr Zentrum ausstellen kann.",
+      "selectedCount": "{count} Zertifizierung(en) ausgewählt",
+      "note": "Diese Informationen können später in Ihrem Zentrum-Dashboard geändert werden.",
+      "back": "Zurück",
+      "next": "Weiter"
+    },
+    "step4": {
+      "title": "Bestätigung",
+      "description": "Überprüfen Sie Ihre Informationen bevor Sie Ihre Registrierungsanfrage absenden.",
+      "sections": {
+        "personal": "Persönliche Informationen",
+        "center": "Zentrumsinformationen",
+        "location": "Standort",
+        "legal": "Rechtliche Informationen",
+        "certifications": "Zertifizierungen"
+      },
+      "labels": {
+        "name": "Vollständiger Name",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "centerName": "Zentrumsname",
+        "website": "Website",
+        "address": "Adresse",
+        "country": "Land",
+        "coordinates": "Koordinaten",
+        "company": "Unternehmen",
+        "siretVat": "SIRET/USt-IdNr."
+      },
+      "passwordConfirmTitle": "Bestätigung erforderlich",
+      "passwordConfirmDescription": "Aus Sicherheitsgründen geben Sie bitte Ihr Passwort ein, um die Registrierung abzuschließen.",
+      "passwordLabel": "Passwort",
+      "termsText": "Ich akzeptiere die",
+      "termsLink": "Allgemeinen Geschäftsbedingungen",
+      "and": "und die",
+      "privacyLink": "Datenschutzrichtlinie",
+      "back": "Zurück",
+      "submit": "Antrag einreichen",
+      "errors": {
+        "termsRequired": "Sie müssen die Allgemeinen Geschäftsbedingungen akzeptieren.",
+        "passwordRequired": "Bitte geben Sie Ihr Passwort ein.",
+        "emailExists": "Ein Konto mit dieser E-Mail existiert bereits.",
+        "rateLimit": "Zu viele Versuche. Bitte versuchen Sie es später erneut.",
+        "validation": "Einige Informationen sind ungültig. Bitte überprüfen Sie Ihre Daten.",
+        "generic": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+      }
+    },
+    "success": {
+      "meta": {
+        "title": "Antrag gesendet - EviDive",
+        "description": "Ihr Registrierungsantrag wurde erfolgreich gesendet."
+      },
+      "title": "Antrag gesendet!",
+      "subtitle": "Ihr Registrierungsantrag wurde erhalten.",
+      "emailSent": {
+        "title": "Bestätigungs-E-Mail gesendet",
+        "description": "Eine Bestätigungs-E-Mail wurde an Ihre E-Mail-Adresse gesendet."
+      },
+      "review": {
+        "title": "Wird überprüft",
+        "description": "Unser Team wird Ihren Antrag überprüfen und sich innerhalb von 48-72 Stunden bei Ihnen melden."
+      },
+      "whatsNext": {
+        "title": "Nächste Schritte",
+        "step1": "Überprüfen Sie Ihre E-Mail auf die Eingangsbestätigung.",
+        "step2": "Unser Team überprüft Ihren Antrag (48-72h).",
+        "step3": "Nach der Genehmigung haben Sie Zugang zu Ihrem Zentrum-Dashboard."
+      },
+      "dashboardButton": "Zu meinem Dashboard",
+      "homeButton": "Zurück zur Startseite"
+    }
+  },
+  "bookings": {
+    "meta": {
+      "title": "Meine Buchungen - EviDive",
+      "description": "Sehen und verwalten Sie Ihre Tauchbuchungen auf EviDive."
+    },
+    "title": "Meine Buchungen",
+    "subtitle": "Sehen und verwalten Sie alle Ihre Tauchbuchungen.",
+    "newBooking": "Neue Buchung",
+    "viewDetails": "Details ansehen",
+    "participants": "Teilnehmer",
+    "filters": {
+      "all": "Alle",
+      "upcoming": "Bevorstehend",
+      "past": "Vergangen",
+      "cancelled": "Storniert"
+    },
+    "status": {
+      "PENDING": "Ausstehend",
+      "CONFIRMED": "Bestätigt",
+      "PAID": "Bezahlt",
+      "RUNNING": "Läuft",
+      "COMPLETED": "Abgeschlossen",
+      "CANCELLED": "Storniert",
+      "NOSHOW": "Nicht erschienen",
+      "REMOVED": "Entfernt"
+    },
+    "empty": {
+      "title": "Keine Buchungen",
+      "description": "Sie haben noch keine Buchungen. Entdecken Sie unsere Partnerzentren und buchen Sie Ihren nächsten Tauchgang!",
+      "filtered": "Keine Buchungen entsprechen diesem Filter.",
+      "cta": "Destinationen erkunden"
+    },
+    "details": {
+      "meta": {
+        "title": "Buchungsdetails - EviDive",
+        "description": "Sehen Sie Ihre Tauchbuchungsdetails."
+      },
+      "backToBookings": "Zurück zu Buchungen",
+      "reference": "Referenz",
+      "dateTime": "Datum & Uhrzeit",
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "participants": "Teilnehmer",
+      "duration": "Dauer",
+      "payment": "Zahlung",
+      "unitPrice": "Stückpreis",
+      "extras": "Extras",
+      "discount": "Rabatt",
+      "total": "Gesamt",
+      "paidOn": "Bezahlt am {date}",
+      "center": "Tauchzentrum",
+      "viewCenter": "Zentrum ansehen",
+      "additionalInfo": "Zusätzliche Informationen",
+      "selectedExtras": "Ausgewählte Extras",
+      "specialRequests": "Besondere Wünsche",
+      "noAdditionalInfo": "Keine zusätzlichen Informationen.",
+      "addToCalendar": "Zu Google Kalender hinzufügen",
+      "contactCenter": "Zentrum kontaktieren",
+      "leaveReview": "Bewertung abgeben",
+      "cancel": "Buchung stornieren",
+      "emailSubject": "Frage zu meiner Buchung",
+      "emailBody": "Hallo,\n\nIch kontaktiere Sie bezüglich meiner Buchung {reference} geplant für {date}.\n\n",
+      "cancellation": {
+        "title": "Stornierung",
+        "warning": "Eine Stornierung ist bis 48 Stunden vor dem Tauchdatum möglich. Gebühren können gemäß der Zentrumsrichtlinie anfallen.",
+        "contactCenter": "Kontaktieren Sie das Zentrum für weitere Informationen",
+        "reasons": {
+          "status_not_cancellable": "Diese Buchung kann nicht mehr storniert werden, da sie bereits abgeschlossen oder storniert ist.",
+          "date_passed": "Diese Buchung kann nicht mehr storniert werden, da das Datum vergangen ist.",
+          "too_close_to_date": "Stornierung nicht möglich - weniger als 48 Stunden vor dem Tauchgang. Kontaktieren Sie das Zentrum direkt."
+        }
+      }
+    }
+  },
+  "centerReviews": {
+    "meta": {
+      "title": "Erhaltene Bewertungen - Mein Zentrum",
+      "description": "Sehen und beantworten Sie Kundenbewertungen."
+    },
+    "title": "Erhaltene Bewertungen",
+    "subtitle": "Kundenbewertungen für {centerName}",
+    "backToDashboard": "Zurück zum Dashboard",
+    "listTitle": "Alle Bewertungen",
+    "showingResults": "{count} Bewertungen",
+    "pendingApproval": {
+      "title": "Zentrum wartet auf Genehmigung",
+      "description": "Ihr Zentrum wird überprüft. Sie können die Bewertungen nach der Genehmigung einsehen.",
+      "backToDashboard": "Zurück zum Dashboard"
+    },
+    "stats": {
+      "averageRating": "Durchschnittliche Bewertung",
+      "totalReviews": "Gesamtbewertungen",
+      "outOf5": "/ 5",
+      "reviews": "Bewertungen"
+    },
+    "distribution": {
+      "title": "Bewertungsverteilung",
+      "stars": "Sterne"
+    },
+    "filters": {
+      "sortBy": "Sortieren nach",
+      "sortNewest": "Neueste zuerst",
+      "sortOldest": "Älteste zuerst",
+      "sortHighest": "Beste Bewertung",
+      "sortLowest": "Schlechteste Bewertung",
+      "filterByRating": "Nach Bewertung filtern",
+      "allRatings": "Alle Bewertungen",
+      "starsFilter": "Sterne",
+      "clearFilters": "Löschen"
+    },
+    "empty": {
+      "title": "Noch keine Bewertungen",
+      "filtered": "Keine Bewertungen entsprechen diesem Filter"
+    },
+    "card": {
+      "respond": "Antworten",
+      "responded": "Antwort veröffentlicht",
+      "service": "Service",
+      "yourResponse": "Ihre Antwort",
+      "respondedOn": "Beantwortet am",
+      "showPhotos": "Fotos anzeigen",
+      "hidePhotos": "Fotos ausblenden"
+    },
+    "modal": {
+      "title": "Auf Bewertung antworten",
+      "description": "Ihre Antwort wird öffentlich sichtbar sein. Sie können sie nach der Veröffentlichung nicht mehr bearbeiten.",
+      "responseLabel": "Ihre Antwort",
+      "responsePlaceholder": "Bedanken Sie sich beim Kunden für sein Feedback und gehen Sie auf seine Kommentare ein...",
+      "cancel": "Abbrechen",
+      "submit": "Antwort veröffentlichen",
+      "submitting": "Wird veröffentlicht...",
+      "success": "Antwort erfolgreich veröffentlicht!",
+      "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "minLength": "Mindestens 10 Zeichen",
+      "maxLength": "Maximal 1000 Zeichen",
+      "alreadyResponded": "Sie haben bereits auf diese Bewertung geantwortet"
+    }
+  },
+  "centerProfile": {
+    "meta": {
+      "title": "Zentrumsprofil - EviDive",
+      "description": "Bearbeiten Sie die Informationen Ihres Tauchzentrums."
+    },
+    "title": "Zentrumsprofil",
+    "subtitle": "Bearbeiten Sie die öffentlichen Informationen Ihres Zentrums",
+    "backToDashboard": "Zurück zum Dashboard",
+    "previewLink": "Öffentliche Seite ansehen",
+    "saveSuccess": "Änderungen gespeichert",
+    "saveError": "Fehler beim Speichern",
+    "saving": "Speichern...",
+    "save": "Speichern",
+    "pendingApproval": {
+      "title": "Zentrum wartet auf Genehmigung",
+      "description": "Ihr Zentrum wird überprüft. Sie können Ihr Profil bearbeiten, sobald es genehmigt ist.",
+      "backToDashboard": "Zurück zum Dashboard"
+    },
+    "sections": {
+      "identity": {
+        "title": "Identität",
+        "description": "Name, Logo und Bilder Ihres Zentrums"
+      },
+      "description": {
+        "title": "Beschreibung",
+        "description": "Präsentieren Sie Ihr Zentrum den Besuchern"
+      },
+      "contact": {
+        "title": "Kontaktdaten",
+        "description": "Adresse und Kontaktinformationen"
+      },
+      "practical": {
+        "title": "Praktische Informationen",
+        "description": "Öffnungszeiten, Sprachen und Zertifizierungen"
+      },
+      "engagement": {
+        "title": "Umweltengagement",
+        "description": "Ihre Maßnahmen zum Schutz der Ozeane"
+      },
+      "payments": {
+        "title": "Zahlungen",
+        "description": "Zahlungsmethoden und Stripe-Konfiguration"
+      },
+      "location": {
+        "title": "Standort",
+        "description": "Position auf der Karte"
+      }
+    },
+    "fields": {
+      "name": "Zentrumsname",
+      "logo": "Logo",
+      "coverImage": "Titelbild",
+      "gallery": "Fotogalerie",
+      "shortDescription": "Kurzbeschreibung",
+      "fullDescription": "Vollständige Beschreibung",
+      "address": "Adresse",
+      "street2": "Adresszusatz",
+      "city": "Stadt",
+      "region": "Region",
+      "country": "Land",
+      "zip": "Postleitzahl",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "website": "Webseite",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "whatsapp": "WhatsApp",
+      "openingHours": "Öffnungszeiten",
+      "languages": "Gesprochene Sprachen",
+      "certifications": "Angebotene Zertifizierungen",
+      "equipmentRental": "Ausrüstungsverleih",
+      "ecoCommitment": "Umweltengagement",
+      "paymentTypes": "Akzeptierte Zahlungsmethoden",
+      "stripeAccount": "Stripe Connect Konto",
+      "stripeConnected": "Konto verbunden",
+      "stripeNotConnected": "Stripe nicht konfiguriert - Richten Sie Ihr Konto ein, um Zahlungen zu erhalten",
+      "stripeOnboarding": "Stripe einrichten",
+      "latitude": "Breitengrad",
+      "longitude": "Längengrad"
+    },
+    "days": {
+      "monday": "Montag",
+      "tuesday": "Dienstag",
+      "wednesday": "Mittwoch",
+      "thursday": "Donnerstag",
+      "friday": "Freitag",
+      "saturday": "Samstag",
+      "sunday": "Sonntag"
+    },
+    "open": "Geöffnet",
+    "closed": "Geschlossen",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "centerServices": {
+    "meta": {
+      "title": "Serviceverwaltung - Mein Zentrum",
+      "description": "Verwalten Sie die Tauch-Services und Angebote Ihres Zentrums."
+    },
+    "title": "Meine Services",
+    "subtitle": "Verwalten Sie Ihre Tauchangebote",
+    "newService": "Neuer Service",
+    "editService": "Service bearbeiten",
+    "duplicateService": "Duplizieren",
+    "archiveService": "Archivieren",
+    "activateService": "Aktivieren",
+    "deleteService": "Löschen",
+    "backToServices": "Zurück zu Services",
+    "filters": {
+      "all": "Alle",
+      "active": "Aktiv",
+      "archived": "Archiviert"
+    },
+    "empty": {
+      "title": "Keine Services",
+      "description": "Sie haben noch keine Services erstellt. Beginnen Sie mit der Erstellung Ihres ersten Tauchangebots.",
+      "cta": "Service erstellen"
+    },
+    "card": {
+      "category": "Kategorie",
+      "price": "Preis",
+      "duration": "Dauer",
+      "participants": "Teilnehmer",
+      "minParticipants": "min",
+      "maxParticipants": "max",
+      "certification": "Erforderliche Zertifizierung",
+      "extras": "Option(en)",
+      "active": "Aktiv",
+      "archived": "Archiviert",
+      "equipmentIncluded": "Ausrüstung inklusive"
+    },
+    "form": {
+      "title": "Service-Informationen",
+      "basicInfo": "Grundinformationen",
+      "pricing": "Preise",
+      "capacity": "Kapazität & Anforderungen",
+      "schedule": "Verfügbarkeit",
+      "media": "Medien",
+      "extras": "Zusatzoptionen",
+      "name": "Service-Name",
+      "nameFr": "Name (Französisch)",
+      "nameEn": "Name (Englisch)",
+      "namePlaceholder": "z.B.: Schnuppertauchen",
+      "description": "Beschreibung",
+      "descriptionFr": "Beschreibung (Französisch)",
+      "descriptionEn": "Beschreibung (Englisch)",
+      "descriptionPlaceholder": "Beschreiben Sie diesen Service im Detail...",
+      "category": "Kategorie",
+      "selectCategory": "Kategorie auswählen",
+      "price": "Preis",
+      "currency": "Währung",
+      "pricePerPerson": "Preis pro Person",
+      "duration": "Dauer (Minuten)",
+      "minParticipants": "Minimale Teilnehmer",
+      "maxParticipants": "Maximale Teilnehmer",
+      "minCertification": "Mindest-Zertifizierung erforderlich",
+      "noCertification": "Keine (Anfänger)",
+      "minAge": "Mindestalter",
+      "maxDepth": "Maximale Tiefe (m)",
+      "equipmentIncluded": "Ausrüstung inklusive",
+      "equipmentDetails": "Ausrüstungsdetails",
+      "equipmentDetailsPlaceholder": "Maske, Flossen, Anzug...",
+      "includes": "Im Service enthalten",
+      "includesPlaceholder": "Element eingeben und Enter drücken",
+      "availableDays": "Verfügbare Tage",
+      "startTimes": "Startzeiten",
+      "addTime": "Zeit hinzufügen",
+      "photos": "Service-Fotos",
+      "addPhoto": "Foto hinzufügen",
+      "submit": "Service speichern",
+      "creating": "Wird erstellt...",
+      "updating": "Wird aktualisiert...",
+      "success": "Service erfolgreich gespeichert!",
+      "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    },
+    "extras": {
+      "title": "Zusatzoptionen",
+      "subtitle": "Fügen Sie Extras hinzu, die Kunden zu ihrer Buchung hinzufügen können.",
+      "add": "Option hinzufügen",
+      "name": "Optionsname",
+      "nameFr": "Name (Französisch)",
+      "nameEn": "Name (Englisch)",
+      "namePlaceholder": "z.B.: Kameraverleih",
+      "description": "Beschreibung",
+      "price": "Preis",
+      "multiplyByPax": "Mit Teilnehmerzahl multiplizieren",
+      "isRequired": "Pflichthoption",
+      "isActive": "Aktiv",
+      "remove": "Entfernen",
+      "empty": "Keine Optionen hinzugefügt"
+    },
+    "days": {
+      "monday": "Montag",
+      "tuesday": "Dienstag",
+      "wednesday": "Mittwoch",
+      "thursday": "Donnerstag",
+      "friday": "Freitag",
+      "saturday": "Samstag",
+      "sunday": "Sonntag"
+    },
+    "certifications": {
+      "none": "Keine (Anfänger)",
+      "ow": "Open Water",
+      "aow": "Advanced Open Water",
+      "rescue": "Rescue Diver",
+      "dm": "Divemaster",
+      "instructor": "Instruktor"
+    },
+    "categories": {
+      "discovery": "Schnuppertauchen",
+      "fun_dive": "Freizeittauchen",
+      "training": "Ausbildung",
+      "night_dive": "Nachttauchen",
+      "deep_dive": "Tieftauchen",
+      "wreck": "Wracktauchen",
+      "drift": "Strömungstauchen",
+      "nitrox": "Nitrox",
+      "tech": "Technisch",
+      "snorkeling": "Schnorcheln",
+      "other": "Andere"
+    },
+    "confirmDelete": {
+      "title": "Diesen Service löschen?",
+      "description": "Diese Aktion kann nicht rückgängig gemacht werden. Der Service wird dauerhaft gelöscht.",
+      "cancel": "Abbrechen",
+      "confirm": "Löschen"
+    },
+    "confirmArchive": {
+      "title": "Diesen Service archivieren?",
+      "description": "Der Service wird für Kunden nicht mehr sichtbar sein, kann aber später reaktiviert werden.",
+      "cancel": "Abbrechen",
+      "confirm": "Archivieren"
+    },
+    "errors": {
+      "name_required": "Name ist erforderlich",
+      "price_required": "Preis ist erforderlich",
+      "price_positive": "Preis muss größer als 0 sein",
+      "duration_required": "Dauer ist erforderlich",
+      "duration_positive": "Dauer muss größer als 0 sein",
+      "participants_invalid": "Minimum muss kleiner oder gleich Maximum sein",
+      "unauthorized": "Nicht autorisiert",
+      "not_found": "Service nicht gefunden",
+      "server_error": "Serverfehler"
+    }
+  },
+  "centerSettings": {
+    "meta": {
+      "title": "Center-Einstellungen - EviDive",
+      "description": "Konfigurieren Sie die Einstellungen Ihres Tauchcenters."
+    },
+    "title": "Einstellungen",
+    "subtitle": "Einstellungen für {centerName} konfigurieren",
+    "backToDashboard": "Zurück zum Dashboard",
+    "save": "Speichern",
+    "saving": "Speichern...",
+    "saved": "Einstellungen gespeichert",
+    "error": "Ein Fehler ist aufgetreten",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "confirming": "Bestätigung...",
+    "pendingApproval": {
+      "title": "Center wartet auf Genehmigung",
+      "description": "Ihr Center wird überprüft. Sie können auf die Einstellungen zugreifen, sobald es genehmigt wurde."
+    },
+    "suspendedWarning": {
+      "title": "Center deaktiviert",
+      "description": "Ihr Center ist derzeit deaktiviert und erscheint nicht in den Suchergebnissen. Sie können es im Gefahrenbereich reaktivieren."
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "emailOnNewBooking": "E-Mail bei neuer Buchung",
+      "emailOnNewBookingDesc": "Erhalten Sie eine E-Mail für jede neue Buchungsanfrage.",
+      "emailOnCancellation": "E-Mail bei Stornierung",
+      "emailOnCancellationDesc": "Erhalten Sie eine E-Mail, wenn ein Kunde seine Buchung storniert.",
+      "emailOnNewReview": "E-Mail bei neuer Bewertung",
+      "emailOnNewReviewDesc": "Erhalten Sie eine E-Mail, wenn ein Kunde eine Bewertung für Ihr Center hinterlässt.",
+      "smsOnNewBooking": "SMS bei neuer Buchung",
+      "smsOnNewBookingDesc": "Erhalten Sie eine SMS für jede neue Buchung (erfordert verifizierte Telefonnummer).",
+      "smsRequiresPhone": "Fügen Sie Ihrem Center eine Telefonnummer hinzu, um SMS-Benachrichtigungen zu aktivieren.",
+      "dailyBookingReminder": "Tägliche Erinnerung",
+      "dailyBookingReminderDesc": "Erhalten Sie eine tägliche Zusammenfassung der Buchungen des Tages."
+    },
+    "cancellation": {
+      "title": "Stornierungsrichtlinie",
+      "policyLabel": "Richtlinientyp",
+      "flexible": "Flexibel",
+      "flexibleDesc": "Kostenlose Stornierung bis 24h vorher. Vollständige Rückerstattung.",
+      "moderate": "Moderat",
+      "moderateDesc": "Kostenlose Stornierung bis 48h vorher. Teilrückerstattung danach.",
+      "strict": "Streng",
+      "strictDesc": "Kostenlose Stornierung bis 72h vorher. Keine Rückerstattung danach.",
+      "hoursLabel": "Frist für kostenlose Stornierung (Stunden)",
+      "hoursDesc": "Anzahl der Stunden vor dem Tauchgang, in denen eine kostenlose Stornierung möglich ist.",
+      "refundLabel": "Rückerstattung nach Frist (%)",
+      "refundDesc": "Prozentsatz, der erstattet wird, wenn die Stornierung nach der kostenlosen Frist erfolgt.",
+      "invalidHours": "Die Frist muss zwischen 0 und 168 Stunden liegen.",
+      "invalidRefund": "Der Prozentsatz muss zwischen 0 und 100 liegen."
+    },
+    "payment": {
+      "title": "Zahlung",
+      "stripeConnected": "Stripe Connect aktiviert",
+      "stripeNotConnected": "Stripe nicht konfiguriert",
+      "stripeConnectedDesc": "Ihr Stripe-Konto ist verbunden. Sie können Zahlungen empfangen.",
+      "stripeNotConnectedDesc": "Konfigurieren Sie Stripe Connect, um Kundenzahlungen zu empfangen.",
+      "connectStripe": "Stripe konfigurieren",
+      "manageStripe": "Stripe verwalten",
+      "comingSoon": "Die Stripe-Integration wird bald verfügbar sein.",
+      "ibanTitle": "Bankdaten",
+      "ibanLabel": "IBAN (optional)",
+      "ibanDesc": "Bankdaten für manuelle Überweisungen (nur informativ).",
+      "ibanPlaceholder": "DE89 3704 0044 0532 0130 00",
+      "invalidIban": "Ungültiges IBAN-Format.",
+      "commissionTitle": "Provisionssatz",
+      "commissionDesc": "jeder Buchung gehört Ihnen",
+      "commissionReadOnly": "Dieser Satz wird vom EviDive-Administrator festgelegt und kann nicht geändert werden."
+    },
+    "team": {
+      "title": "Team",
+      "description": "Verwalten Sie Ihre Teammitglieder und deren Zugriffsrechte.",
+      "manage": "Team verwalten"
+    },
+    "danger": {
+      "title": "Gefahrenbereich",
+      "description": "Diese Aktionen sind irreversibel oder haben erhebliche Konsequenzen.",
+      "deactivate": {
+        "title": "Center deaktivieren",
+        "description": "Ihr Center wird nicht mehr in den Suchergebnissen angezeigt und kann keine neuen Buchungen mehr erhalten. Bestehende Buchungen bleiben erhalten.",
+        "button": "Center deaktivieren",
+        "success": "Center erfolgreich deaktiviert"
+      },
+      "reactivate": {
+        "title": "Center reaktivieren",
+        "description": "Ihr Center wird wieder in den Suchergebnissen angezeigt und kann neue Buchungen erhalten.",
+        "button": "Center reaktivieren",
+        "success": "Center erfolgreich reaktiviert"
+      },
+      "delete": {
+        "title": "Center dauerhaft löschen",
+        "description": "Diese Aktion ist irreversibel. Alle Daten zu Ihrem Center werden dauerhaft gelöscht.",
+        "warningTitle": "Diese Aktion wird löschen:",
+        "warning1": "Alle Center-Informationen",
+        "warning2": "Alle Dienstleistungen und Preise",
+        "warning3": "Den gesamten Buchungsverlauf",
+        "confirmLabel": "Bestätigung",
+        "confirmPlaceholder": "Geben Sie den Center-Slug ein",
+        "confirmHint": "Geben Sie ein",
+        "button": "Center löschen",
+        "confirmButton": "Dauerhaft löschen",
+        "deleting": "Löschen...",
+        "success": "Center erfolgreich gelöscht",
+        "mismatch": "Bestätigungstext stimmt nicht überein.",
+        "hasActiveBookings": "Löschen nicht möglich: Sie haben aktive bevorstehende Buchungen."
+      }
+    }
+  },
+  "centerTeam": {
+    "meta": {
+      "title": "Teamverwaltung - Mein Center",
+      "description": "Verwalten Sie die Teammitglieder Ihres Tauchcenters."
+    },
+    "title": "Teamverwaltung",
+    "subtitle": "Verwalten Sie Ihre Teammitglieder",
+    "addMember": "Mitglied hinzufügen",
+    "backToCenter": "Zurück zum Dashboard",
+    "empty": {
+      "title": "Keine Teammitglieder",
+      "description": "Fügen Sie Ihre Teammitglieder hinzu, um die Buchungszuweisung zu erleichtern.",
+      "cta": "Mitglied hinzufügen"
+    },
+    "card": {
+      "edit": "Bearbeiten",
+      "deactivate": "Deaktivieren",
+      "reactivate": "Reaktivieren",
+      "delete": "Löschen",
+      "owner": "Eigentümer",
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "noCertifications": "Keine Zertifizierungen",
+      "noLanguages": "Keine Sprachen",
+      "confirmDeactivateTitle": "Dieses Mitglied deaktivieren?",
+      "confirmDeactivateDescription": "Dieses Mitglied kann nicht mehr neuen Buchungen zugewiesen werden.",
+      "confirmDeleteTitle": "Dieses Mitglied löschen?",
+      "confirmDeleteDescription": "Diese Aktion kann nicht rückgängig gemacht werden. Das Mitglied wird dauerhaft gelöscht.",
+      "cannotDeleteWithBookings": "Dieses Mitglied kann nicht gelöscht werden, da es zugehörige Buchungen hat. Sie können es nur deaktivieren.",
+      "cancel": "Abbrechen"
+    },
+    "form": {
+      "createTitle": "Mitglied hinzufügen",
+      "editTitle": "Mitglied bearbeiten",
+      "createDescription": "Fügen Sie ein neues Mitglied zu Ihrem Team hinzu.",
+      "editDescription": "Bearbeiten Sie die Informationen dieses Mitglieds.",
+      "name": "Name",
+      "namePlaceholder": "Vollständiger Name",
+      "email": "E-Mail",
+      "emailPlaceholder": "email@beispiel.de",
+      "phone": "Telefon",
+      "phonePlaceholder": "+49 171 234 5678",
+      "photo": "Foto",
+      "photoHint": "JPG, PNG oder WebP. Max 5 MB.",
+      "bio": "Biografie",
+      "bioPlaceholder": "Beschreiben Sie die Erfahrung und Spezialisierungen dieses Mitglieds...",
+      "certifications": "Zertifizierungen",
+      "languages": "Gesprochene Sprachen",
+      "cancel": "Abbrechen",
+      "save": "Speichern",
+      "saving": "Wird gespeichert...",
+      "create": "Hinzufügen",
+      "creating": "Wird hinzugefügt...",
+      "optional": "optional",
+      "errors": {
+        "nameRequired": "Name ist erforderlich",
+        "emailInvalid": "Ungültige E-Mail",
+        "generic": "Ein Fehler ist aufgetreten"
+      }
+    },
+    "certifications": {
+      "ow": "Open Water",
+      "aow": "Advanced Open Water",
+      "rescue": "Rescue Diver",
+      "dm": "Divemaster",
+      "instructor": "Instruktor",
+      "nitrox": "Nitrox",
+      "deep": "Deep Diver",
+      "wreck": "Wreck Diver",
+      "night": "Night Diver",
+      "efr": "EFR / Erste Hilfe"
+    },
+    "languages": {
+      "fr": "Französisch",
+      "en": "Englisch",
+      "es": "Spanisch",
+      "it": "Italienisch",
+      "de": "Deutsch",
+      "pt": "Portugiesisch",
+      "nl": "Niederländisch",
+      "ru": "Russisch",
+      "zh": "Chinesisch",
+      "ja": "Japanisch"
+    }
+  },
+  "centerStats": {
+    "meta": {
+      "title": "Statistiken - Mein Zentrum",
+      "description": "Analysieren Sie die Leistung Ihres Tauchzentrums."
+    },
+    "title": "Statistiken",
+    "subtitle": "Analysieren Sie die Leistung von {centerName}",
+    "backToDashboard": "Zurück zum Dashboard",
+    "pendingApproval": {
+      "title": "Zentrum wartet auf Genehmigung",
+      "description": "Ihr Zentrum wird überprüft. Statistiken werden nach der Genehmigung verfügbar sein.",
+      "backToDashboard": "Zurück zum Dashboard"
+    },
+    "error": {
+      "title": "Fehler",
+      "description": "Statistiken konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
+      "generic": "Ein Fehler ist aufgetreten"
+    },
+    "loading": "Wird geladen...",
+    "periods": {
+      "30d": "30 Tage",
+      "90d": "90 Tage",
+      "12m": "12 Monate",
+      "all": "Alle Zeit"
+    },
+    "cards": {
+      "totalRevenue": "Bruttoumsatz",
+      "netRevenue": "Nettoumsatz",
+      "totalBookings": "Buchungen",
+      "confirmationRate": "Bestätigungsrate",
+      "cancellationRate": "Stornierungsrate",
+      "totalClients": "Einzigartige Kunden",
+      "newClients": "Neue Kunden",
+      "returnRate": "Rückkehrrate",
+      "totalReviews": "Erhaltene Bewertungen",
+      "avgRating": "Durchschnittsbewertung",
+      "vsPreviousPeriod": "vs Vorperiode"
+    },
+    "charts": {
+      "revenueTitle": "Umsatzentwicklung",
+      "grossRevenue": "Bruttoumsatz",
+      "netRevenue": "Nettoumsatz",
+      "commission": "EviDive Provision",
+      "bookingsTitle": "Buchungen pro Monat",
+      "bookings": "Buchungen",
+      "reviewsTitle": "Bewertungen und Durchschnitt",
+      "reviews": "Anzahl der Bewertungen",
+      "avgRating": "Durchschnittsbewertung",
+      "noData": "Keine Daten für diesen Zeitraum"
+    },
+    "tables": {
+      "topServicesTitle": "Meistgebuchte Services",
+      "service": "Service",
+      "bookingsCount": "Buchungen",
+      "revenue": "Umsatz",
+      "noData": "Keine Services gebucht"
+    }
+  }
+}

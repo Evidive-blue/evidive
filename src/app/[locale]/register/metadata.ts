@@ -1,0 +1,49 @@
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+
+export async function generateMetadata({
+ params,
+}: {
+ params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+ const { locale } = await params;
+ const t = await getTranslations({ locale, namespace: "metadata.register" });
+
+ return {
+  title: t("title"),
+  description: t("description"),
+  metadataBase: new URL(baseUrl!),
+  openGraph: {
+   title: t("title"),
+   description: t("description"),
+   type: "website",
+   locale: locale === "fr" ? "fr_FR" : locale === "de" ? "de_DE" : "en_US",
+   url: `${baseUrl}/${locale}/register`,
+   siteName: "EviDive",
+  },
+  twitter: {
+   card: "summary_large_image",
+   title: t("title"),
+   description: t("description"),
+   images: [`${baseUrl}/og-register.png`],
+  },
+  alternates: {
+   canonical: `${baseUrl}/${locale}/register`,
+   languages: {
+    fr: `${baseUrl}/fr/register`,
+    en: `${baseUrl}/en/register`,
+    de: `${baseUrl}/de/register`,
+   },
+  },
+  robots: {
+   index: false,
+   follow: false,
+   googleBot: {
+    index: false,
+    follow: false,
+   },
+  },
+ };
+}

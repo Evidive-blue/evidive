@@ -1,0 +1,350 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   EVIDIVE OCEAN THEME - Immersive Design
+   ============================================ */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  /* Ocean Colors */
+  --color-ocean-surface: var(--ocean-surface);
+  --color-ocean-shallow: var(--ocean-shallow);
+  --color-ocean-medium: var(--ocean-medium);
+  --color-ocean-deep: var(--ocean-deep);
+  --color-ocean-abyss: var(--ocean-abyss);
+  --color-ocean-glow: var(--ocean-glow);
+  
+  /* Shadcn theme colors */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+:root {
+  --radius: 0.625rem;
+  
+  /* Ocean Depth Palette */
+  --ocean-surface: #0ea5e9;
+  --ocean-shallow: #0284c7;
+  --ocean-medium: #0369a1;
+  --ocean-deep: #075985;
+  --ocean-abyss: #0c4a6e;
+  --ocean-glow: #22d3ee;
+  
+  /* Light theme with ocean accent */
+  --background: oklch(0.98 0.005 230);
+  --foreground: oklch(0.15 0.02 230);
+  --card: oklch(0.99 0.003 230);
+  --card-foreground: oklch(0.15 0.02 230);
+  --popover: oklch(0.99 0.003 230);
+  --popover-foreground: oklch(0.15 0.02 230);
+  --primary: oklch(0.55 0.2 230);
+  --primary-foreground: oklch(0.98 0.005 230);
+  --secondary: oklch(0.95 0.01 230);
+  --secondary-foreground: oklch(0.25 0.02 230);
+  --muted: oklch(0.95 0.01 230);
+  --muted-foreground: oklch(0.5 0.02 230);
+  --accent: oklch(0.65 0.18 190);
+  --accent-foreground: oklch(0.15 0.02 230);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0.01 230);
+  --input: oklch(0.92 0.01 230);
+  --ring: oklch(0.55 0.2 230);
+  --chart-1: oklch(0.55 0.2 230);
+  --chart-2: oklch(0.65 0.18 190);
+  --chart-3: oklch(0.5 0.15 250);
+  --chart-4: oklch(0.7 0.15 170);
+  --chart-5: oklch(0.6 0.2 210);
+  --sidebar: oklch(0.12 0.03 230);
+  --sidebar-foreground: oklch(0.95 0.01 230);
+  --sidebar-primary: oklch(0.65 0.18 190);
+  --sidebar-primary-foreground: oklch(0.98 0.005 230);
+  --sidebar-accent: oklch(0.2 0.03 230);
+  --sidebar-accent-foreground: oklch(0.95 0.01 230);
+  --sidebar-border: oklch(0.25 0.02 230);
+  --sidebar-ring: oklch(0.55 0.2 230);
+}
+
+.dark {
+  /* Dark Ocean Theme - Immersive */
+  --background: oklch(0.08 0.03 230);
+  --foreground: oklch(0.95 0.01 230);
+  --card: oklch(0.12 0.03 230 / 80%);
+  --card-foreground: oklch(0.95 0.01 230);
+  --popover: oklch(0.12 0.03 230);
+  --popover-foreground: oklch(0.95 0.01 230);
+  --primary: oklch(0.65 0.18 190);
+  --primary-foreground: oklch(0.08 0.03 230);
+  --secondary: oklch(0.2 0.03 230);
+  --secondary-foreground: oklch(0.95 0.01 230);
+  --muted: oklch(0.2 0.03 230);
+  --muted-foreground: oklch(0.6 0.02 230);
+  --accent: oklch(0.55 0.2 230);
+  --accent-foreground: oklch(0.95 0.01 230);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(0.25 0.02 230 / 50%);
+  --input: oklch(0.2 0.02 230 / 50%);
+  --ring: oklch(0.65 0.18 190);
+  --chart-1: oklch(0.65 0.18 190);
+  --chart-2: oklch(0.55 0.2 230);
+  --chart-3: oklch(0.7 0.15 170);
+  --chart-4: oklch(0.6 0.2 210);
+  --chart-5: oklch(0.5 0.15 250);
+  --sidebar: oklch(0.1 0.03 230);
+  --sidebar-foreground: oklch(0.95 0.01 230);
+  --sidebar-primary: oklch(0.65 0.18 190);
+  --sidebar-primary-foreground: oklch(0.08 0.03 230);
+  --sidebar-accent: oklch(0.2 0.03 230);
+  --sidebar-accent-foreground: oklch(0.95 0.01 230);
+  --sidebar-border: oklch(0.25 0.02 230);
+  --sidebar-ring: oklch(0.65 0.18 190);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ============================================
+   IMMERSIVE ANIMATIONS
+   ============================================ */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes light-ray {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-20px) scaleY(1.1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(5px) translateY(-5px);
+  }
+  50% {
+    transform: translateX(0) translateY(-10px);
+  }
+  75% {
+    transform: translateX(-5px) translateY(-5px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--ocean-glow), 0 0 40px var(--ocean-glow);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--ocean-glow), 0 0 80px var(--ocean-glow);
+  }
+}
+
+@keyframes depth-indicator {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Utility classes for animations */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-bubble {
+  animation: bubble-rise 8s ease-in-out infinite;
+}
+
+.animate-light-ray {
+  animation: light-ray 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background-size: 200% 100%;
+}
+
+.animate-wave {
+  animation: wave 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: oklch(1 0 0 / 10%);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(1 0 0 / 20%);
+}
+
+.dark .glass {
+  background: oklch(0 0 0 / 20%);
+  border: 1px solid oklch(1 0 0 / 10%);
+}
+
+/* Ocean gradient backgrounds */
+.ocean-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--ocean-surface) 0%,
+    var(--ocean-shallow) 25%,
+    var(--ocean-medium) 50%,
+    var(--ocean-deep) 75%,
+    var(--ocean-abyss) 100%
+  );
+}
+
+.ocean-gradient-dark {
+  background: linear-gradient(
+    180deg,
+    oklch(0.25 0.08 230) 0%,
+    oklch(0.18 0.06 230) 25%,
+    oklch(0.12 0.04 230) 50%,
+    oklch(0.08 0.03 230) 75%,
+    oklch(0.05 0.02 230) 100%
+  );
+}
+
+/* Light rays overlay */
+.light-rays {
+  background: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 15%) 0%,
+    oklch(1 0 0 / 5%) 30%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Depth meter styling */
+.depth-meter {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Selection color */
+::selection {
+  background: oklch(0.65 0.18 190 / 30%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0 0 0 / 10%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ocean-medium);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ocean-shallow);
+}
+
+/* Hide scrollbar utility - keeps scroll functionality */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
