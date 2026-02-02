@@ -995,5 +995,109 @@
     "instagram": "Instagram",
     "facebook": "Facebook",
     "refresh": "Обновить ленту"
+  },
+  "centerTeam": {
+    "meta": {
+      "title": "Управление командой - Мой центр",
+      "description": "Управляйте членами команды вашего дайв-центра."
+    },
+    "title": "Управление командой",
+    "subtitle": "Управление членами команды",
+    "addMember": "Добавить члена",
+    "backToCenter": "Вернуться к панели",
+    "empty": {
+      "title": "Нет членов команды",
+      "description": "Добавьте членов команды для управления назначениями на бронирования.",
+      "cta": "Добавить члена"
+    },
+    "card": {
+      "edit": "Редактировать",
+      "deactivate": "Деактивировать",
+      "reactivate": "Активировать",
+      "delete": "Удалить",
+      "owner": "Владелец",
+      "active": "Активен",
+      "inactive": "Неактивен",
+      "noCertifications": "Нет сертификатов",
+      "noLanguages": "Нет языков",
+      "confirmDeactivateTitle": "Деактивировать этого члена?",
+      "confirmDeactivateDescription": "Этот член больше не сможет быть назначен на новые бронирования.",
+      "confirmDeleteTitle": "Удалить этого члена?",
+      "confirmDeleteDescription": "Это действие нельзя отменить. Член будет удалён навсегда.",
+      "cannotDeleteWithBookings": "Этого члена нельзя удалить, так как у него есть связанные бронирования. Вы можете только деактивировать его.",
+      "cancel": "Отмена"
+    },
+    "form": {
+      "createTitle": "Добавить члена",
+      "editTitle": "Редактировать члена",
+      "createDescription": "Добавьте нового члена в вашу команду.",
+      "editDescription": "Редактировать информацию об этом члене.",
+      "name": "Имя",
+      "namePlaceholder": "Полное имя",
+      "email": "Email",
+      "emailPlaceholder": "email@example.com",
+      "phone": "Телефон",
+      "phonePlaceholder": "+7 999 123 4567",
+      "photo": "Фото",
+      "photoHint": "JPG, PNG или WebP. Макс. 5 МБ.",
+      "bio": "Биография",
+      "bioPlaceholder": "Опишите опыт и специализацию этого члена...",
+      "certifications": "Сертификаты",
+      "languages": "Языки",
+      "cancel": "Отмена",
+      "save": "Сохранить",
+      "saving": "Сохранение...",
+      "create": "Добавить",
+      "creating": "Добавление...",
+      "optional": "опционально",
+      "errors": {
+        "nameRequired": "Имя обязательно",
+        "emailInvalid": "Неверный email",
+        "generic": "Произошла ошибка"
+      }
+    },
+    "certifications": {
+      "ow": "Open Water",
+      "aow": "Advanced Open Water",
+      "rescue": "Rescue Diver",
+      "dm": "Divemaster",
+      "assistant": "Assistant Instructor",
+      "owsi": "Open Water Scuba Instructor",
+      "msdt": "Master Scuba Diver Trainer",
+      "idcs": "IDC Staff Instructor",
+      "mi": "Master Instructor",
+      "cd": "Course Director",
+      "technical": "Технический дайвинг",
+      "nitrox": "Nitrox",
+      "trimix": "Trimix",
+      "ccr": "Rebreather",
+      "cave": "Пещерный",
+      "wreck": "Wreck",
+      "deep": "Глубоководный",
+      "sidemount": "Sidemount",
+      "freediving": "Фридайвинг"
+    },
+    "languages": {
+      "en": "Английский",
+      "fr": "Французский",
+      "es": "Испанский",
+      "de": "Немецкий",
+      "it": "Итальянский",
+      "pt": "Португальский",
+      "nl": "Голландский",
+      "ru": "Русский",
+      "pl": "Польский",
+      "el": "Греческий",
+      "sv": "Шведский",
+      "other": "Другой"
+    },
+    "toast": {
+      "createSuccess": "Член добавлен успешно",
+      "updateSuccess": "Член обновлён успешно",
+      "deactivateSuccess": "Член деактивирован",
+      "reactivateSuccess": "Член активирован",
+      "deleteSuccess": "Член удалён",
+      "error": "Произошла ошибка"
+    }
   }
 }

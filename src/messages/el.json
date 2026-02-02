@@ -821,7 +821,86 @@
       "description": "Πουλήστε τις υπηρεσίες κατάδυσής σας χωρίς φυσικό κέντρο.",
       "feature1": "Δημιουργήστε τις προσφορές σας",
       "feature2": "Διαχειριστείτε τις κρατήσεις σας",
-      "feature3": "Λάβετε πληρωμές"
+      "feature3": "Λάβετε πληρωμές",
+      "steps": {
+        "account": "Λογαριασμός",
+        "profile": "Προφίλ",
+        "services": "Υπηρεσίες",
+        "payments": "Πληρωμές",
+        "review": "Επικύρωση"
+      },
+      "account": {
+        "description": "Δημιουργήστε τον λογαριασμό πωλητή σας.",
+        "fullName": "Πλήρες όνομα",
+        "phone": "Τηλέφωνο",
+        "email": "Email",
+        "password": "Κωδικός πρόσβασης",
+        "confirmPassword": "Επιβεβαίωση κωδικού",
+        "submit": "Δημιουργία λογαριασμού"
+      },
+      "profile": {
+        "description": "Παρουσιάστε τον εαυτό σας στους πελάτες.",
+        "bio": "Βιογραφικό",
+        "bioPlaceholder": "Περιγράψτε την εμπειρία σας, τις ειδικότητές σας...",
+        "certifications": "Πιστοποιήσεις",
+        "addCertification": "Προσθήκη πιστοποίησης",
+        "languages": "Γλώσσες που μιλάτε",
+        "photo": "Φωτογραφία προφίλ",
+        "submit": "Συνέχεια"
+      },
+      "services": {
+        "description": "Ορίστε τις υπηρεσίες σας.",
+        "addService": "Προσθήκη υπηρεσίας",
+        "serviceName": "Όνομα υπηρεσίας",
+        "serviceDescription": "Περιγραφή",
+        "price": "Τιμή",
+        "duration": "Διάρκεια"
+      },
+      "payments": {
+        "description": "Διαμορφώστε τις πληρωμές σας.",
+        "commissionTitle": "Προμήθεια EviDive",
+        "commissionDescription": "Χρεώνουμε προμήθεια για κάθε επιβεβαιωμένη κράτηση.",
+        "perBooking": "ανά κράτηση",
+        "stripeConnect": "Stripe Connect",
+        "stripeDescription": "Συνδέστε τον τραπεζικό σας λογαριασμό για να λαμβάνετε πληρωμές.",
+        "connectButton": "Σύνδεση λογαριασμού",
+        "connected": "Συνδεδεμένος λογαριασμός",
+        "benefits": {
+          "secure": {
+            "title": "Ασφαλές",
+            "description": "Πληρωμές προστατευμένες από Stripe"
+          },
+          "fast": {
+            "title": "Γρήγορο",
+            "description": "Μεταφορές σε 2-3 ημέρες"
+          },
+          "global": {
+            "title": "Διεθνές",
+            "description": "Αποδοχή 135+ νομισμάτων"
+          }
+        }
+      },
+      "review": {
+        "description": "Ελέγξτε τις πληροφορίες σας πριν υποβάλετε.",
+        "passwordConfirmTitle": "Απαιτείται επιβεβαίωση",
+        "passwordConfirmDescription": "Για λόγους ασφαλείας, εισάγετε τον κωδικό σας για να ολοκληρώσετε την εγγραφή.",
+        "passwordRequired": "Εισάγετε τον κωδικό σας για να συνεχίσετε.",
+        "errors": {
+          "generic": "Παρουσιάστηκε σφάλμα. Δοκιμάστε ξανά."
+        },
+        "termsAccept": "Αποδέχομαι τους Γενικούς Όρους και την Πολιτική Απορρήτου του EviDive.",
+        "submitButton": "Υποβολή προφίλ",
+        "successTitle": "Το προφίλ υποβλήθηκε!",
+        "successDescription": "Η αίτησή σας εστάλη. Η ομάδα μας θα ελέγξει τις πληροφορίες και θα επικοινωνήσει εντός 48 ωρών.",
+        "homeButton": "Επιστροφή στην αρχική",
+        "summary": "Περίληψη",
+        "name": "Όνομα",
+        "emailLabel": "Email",
+        "certifications": "Πιστοποιήσεις",
+        "servicesCount": "Υπηρεσίες",
+        "complete": "Ολοκληρώθηκε",
+        "incomplete": "Ημιτελές"
+      }
     },
     "center": {
       "title": "Είμαι κέντρο",
