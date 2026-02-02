@@ -810,6 +810,18 @@
     "editProfile": "Modifier le profil",
     "saveChanges": "Enregistrer",
     "saving": "Enregistrement...",
+    "success": {
+      "title": "Profil mis à jour",
+      "description": "Vos informations ont été enregistrées avec succès."
+    },
+    "error": {
+      "title": "Erreur",
+      "description": "Une erreur est survenue lors de la mise à jour.",
+      "generic": "Impossible de sauvegarder les modifications.",
+      "unauthorized": "Vous devez être connecté.",
+      "validation_error": "Veuillez vérifier les informations saisies.",
+      "server_error": "Erreur serveur. Veuillez réessayer."
+    },
     "sections": {
       "personal": "Informations personnelles",
       "diving": "Informations de plongée",

@@ -21,6 +21,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { updateProfile, getProfileData } from "@/actions/profile";
+import { toast } from "sonner";
 
 const certificationLevels = [
   { value: "none", label: "Non certifié" },
@@ -56,6 +58,7 @@ export default function ProfilePage() {
   const locale = params.locale as string;
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -71,6 +74,33 @@ export default function ProfilePage() {
     totalDives: 0,
   });
 
+  // Load profile data
+  useEffect(() => {
+    const loadProfile = async () => {
+      if (status === "authenticated") {
+        setIsLoading(true);
+        const profile = await getProfileData();
+        if (profile) {
+          setFormData({
+            firstName: profile.firstName || "",
+            lastName: profile.lastName || "",
+            phone: profile.phone || "",
+            address: profile.address || "",
+            city: profile.city || "",
+            country: profile.country || "",
+            bio: profile.bio || "",
+            certificationLevel: profile.certificationLevel || "none",
+            certificationOrg: profile.certificationOrg || "padi",
+            totalDives: profile.totalDives || 0,
+          });
+        }
+        setIsLoading(false);
+      }
+    };
+
+    loadProfile();
+  }, [status]);
+
   // Redirect if not authenticated
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -78,7 +108,7 @@ export default function ProfilePage() {
     }
   }, [status, router, locale]);
 
-  if (status === "unauthenticated" || status === "loading") {
+  if (status === "unauthenticated" || status === "loading" || isLoading) {
     return (
       <div className="min-h-screen pt-24 pb-16">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -95,10 +125,27 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     setIsSaving(true);
-    // TODO: Implement API call to update profile
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSaving(false);
-    setIsEditing(false);
+    try {
+      const result = await updateProfile(formData);
+      
+      if (result.ok) {
+        toast.success(t("success.title"), {
+          description: t("success.description"),
+        });
+        setIsEditing(false);
+      } else {
+        toast.error(t("error.title"), {
+          description: t(`error.${result.error}`) || t("error.generic"),
+        });
+      }
+    } catch (error) {
+      console.error("Profile update error:", error);
+      toast.error(t("error.title"), {
+        description: t("error.generic"),
+      });
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const initials = user?.name
