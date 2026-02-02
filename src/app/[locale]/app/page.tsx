@@ -209,6 +209,7 @@ export default async function DiverDashboardPage({
     emptyTitle: t("history.emptyTitle"),
     emptyDesc: t("history.emptyDesc"),
     leaveReview: t("history.leaveReview"),
+    rating: t("history.rating", { rating: "{rating}" }),
   };
 
   const quickActionsTranslations = {
@@ -255,16 +256,16 @@ export default async function DiverDashboardPage({
           {/* Left Column - Main Widgets (2 cols) */}
           <div className="lg:col-span-2 space-y-6">
             {/* Upcoming Dives */}
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <UpcomingDivesWidget
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               bookings={upcomingBookings as any}
               locale={locale}
               translations={upcomingTranslations}
             />
 
             {/* Recent History */}
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <RecentHistoryWidget
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               bookings={pastBookings as any}
               locale={locale}
               translations={historyTranslations}

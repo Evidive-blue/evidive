@@ -3,9 +3,10 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, Star, MessageSquare } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import type { Prisma } from "@prisma/client";
 import { ReviewsListClient } from "./reviews-list-client";
 
 type LocalizedJson = Record<string, unknown>;
@@ -55,6 +56,14 @@ export default async function ReviewsPage({
     redirect(`/${locale}/login`);
   }
 
+  // Type for review with relations
+  type ReviewWithRelations = Prisma.ReviewGetPayload<{
+    include: {
+      center: { select: { id: true; slug: true; name: true; logoUrl: true } };
+      booking: { select: { id: true; reference: true } };
+    };
+  }>;
+
   // Fetch user's reviews
   const reviews = await prisma.review.findMany({
     where: { userId: session.user.id },
@@ -75,7 +84,15 @@ export default async function ReviewsPage({
       },
     },
     orderBy: { createdAt: "desc" },
-  });
+  }) as ReviewWithRelations[];
+
+  // Type for booking with relations
+  type BookingWithRelations = Prisma.BookingGetPayload<{
+    include: {
+      center: { select: { id: true; slug: true; name: true; logoUrl: true; city: true; country: true } };
+      service: { select: { id: true; name: true } };
+    };
+  }>;
 
   // Fetch completed bookings without reviews
   const bookingsWithoutReview = await prisma.booking.findMany({
@@ -103,7 +120,7 @@ export default async function ReviewsPage({
       },
     },
     orderBy: { diveDate: "desc" },
-  });
+  }) as BookingWithRelations[];
 
   // Transform reviews for client component
   const reviewsData = reviews.map((review) => ({
@@ -131,14 +148,14 @@ export default async function ReviewsPage({
     center: {
       id: booking.center.id,
       slug: booking.center.slug,
-      name: booking.center.name,
+      name: getLocalizedText(booking.center.name, locale),
       logoUrl: booking.center.logoUrl,
-      city: booking.center.city,
-      country: booking.center.country,
+      city: booking.center.city ?? "",
+      country: booking.center.country ?? "",
     },
     service: {
       id: booking.service.id,
-      name: booking.service.name,
+      name: getLocalizedText(booking.service.name, locale),
     },
   }));
 

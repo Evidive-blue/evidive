@@ -76,7 +76,7 @@ export function DestinationsSection() {
           >
             <MapPin className="h-4 w-4 text-cyan-400" />
             <span className="text-sm font-medium text-cyan-300">
-              Destinations populaires
+              {t("badge")}
             </span>
           </motion.div>
           <h2 className="mb-4 text-4xl font-bold text-white sm:text-5xl">

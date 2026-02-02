@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL;
 
 export async function generateMetadata({
   params,
@@ -132,7 +132,7 @@ export default async function CareersPage({
             {t("valuesTitle")}
           </h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {values.map((value, _index) => (
+            {values.map((value) => (
               <Card
                 key={value.title}
                 className="border-white/10 bg-white/5 backdrop-blur-xl"

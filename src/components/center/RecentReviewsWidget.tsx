@@ -23,6 +23,7 @@ interface Review {
 
 interface RecentReviewsWidgetProps {
   reviews: Review[];
+  centerSlug?: string;
   translations: {
     title: string;
     emptyTitle: string;
@@ -84,14 +85,17 @@ function truncateText(text: string, maxLength: number): string {
 
 export function RecentReviewsWidget({
   reviews,
+  centerSlug,
   translations: t,
 }: RecentReviewsWidgetProps) {
+  const basePath = centerSlug ? `/center/manage/${centerSlug}` : "/center";
+
   return (
     <Card className="border-white/10 bg-white/5 backdrop-blur-xl">
       <CardHeader className="flex flex-row items-center justify-between border-b border-white/10">
         <CardTitle className="text-lg text-white">{t.title}</CardTitle>
         <Link
-          href="/center/reviews"
+          href={`${basePath}/reviews`}
           className="flex items-center gap-1 text-sm text-cyan-400 transition hover:text-cyan-300"
         >
           {t.viewAll}
@@ -117,6 +121,7 @@ export function RecentReviewsWidget({
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     {review.user.avatarUrl ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         src={review.user.avatarUrl}
                         alt={getUserName(review.user)}
@@ -149,7 +154,7 @@ export function RecentReviewsWidget({
                     {t.responded}
                   </div>
                 ) : (
-                  <Link href={`/center/reviews/${review.id}/respond`}>
+                  <Link href={`${basePath}/reviews/${review.id}/respond`}>
                     <Button
                       size="sm"
                       variant="outline"

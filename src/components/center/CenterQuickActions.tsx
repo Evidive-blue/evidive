@@ -15,6 +15,7 @@ interface QuickAction {
 }
 
 interface CenterQuickActionsProps {
+  centerSlug?: string;
   translations: {
     title: string;
     createOffer: string;
@@ -32,12 +33,15 @@ interface CenterQuickActionsProps {
   };
 }
 
-export function CenterQuickActions({ translations: t }: CenterQuickActionsProps) {
+export function CenterQuickActions({ centerSlug, translations: t }: CenterQuickActionsProps) {
+  // Use new multi-center routes if centerSlug is provided
+  const basePath = centerSlug ? `/center/manage/${centerSlug}` : "/center";
+
   const actions: QuickAction[] = [
     {
       label: t.createOffer,
       description: t.createOfferDesc,
-      href: "/center/services/new",
+      href: `${basePath}/services/new`,
       icon: Plus,
       iconColor: "text-emerald-400",
       iconBg: "bg-emerald-500/10",
@@ -45,7 +49,7 @@ export function CenterQuickActions({ translations: t }: CenterQuickActionsProps)
     {
       label: t.viewCalendar,
       description: t.viewCalendarDesc,
-      href: "/center/calendar",
+      href: `${basePath}/calendar`,
       icon: Calendar,
       iconColor: "text-cyan-400",
       iconBg: "bg-cyan-500/10",
@@ -53,7 +57,7 @@ export function CenterQuickActions({ translations: t }: CenterQuickActionsProps)
     {
       label: t.manageBookings,
       description: t.manageBookingsDesc,
-      href: "/center/bookings",
+      href: `${basePath}/bookings`,
       icon: ClipboardList,
       iconColor: "text-amber-400",
       iconBg: "bg-amber-500/10",
@@ -61,7 +65,7 @@ export function CenterQuickActions({ translations: t }: CenterQuickActionsProps)
     {
       label: t.viewStats,
       description: t.viewStatsDesc,
-      href: "/center/stats",
+      href: `${basePath}/stats`,
       icon: BarChart3,
       iconColor: "text-pink-400",
       iconBg: "bg-pink-500/10",
@@ -69,7 +73,7 @@ export function CenterQuickActions({ translations: t }: CenterQuickActionsProps)
     {
       label: t.manageTeam,
       description: t.manageTeamDesc,
-      href: "/center/team",
+      href: `${basePath}/team`,
       icon: Users,
       iconColor: "text-blue-400",
       iconBg: "bg-blue-500/10",
@@ -77,7 +81,7 @@ export function CenterQuickActions({ translations: t }: CenterQuickActionsProps)
     {
       label: t.editCenter,
       description: t.editCenterDesc,
-      href: "/center/profile",
+      href: `${basePath}/profile`,
       icon: Settings,
       iconColor: "text-purple-400",
       iconBg: "bg-purple-500/10",

@@ -421,6 +421,20 @@
     "back_to_login": "Retour à la connexion",
     "your_email": "votre adresse email",
     "checking_email": "Vérification de l'email...",
+    "verifying_email": "Vérification en cours...",
+    "please_wait": "Veuillez patienter pendant que nous vérifions votre email.",
+    "email_verified_title": "Email vérifié !",
+    "email_verified_desc": "Votre adresse email a été vérifiée avec succès. Vous pouvez maintenant vous connecter.",
+    "go_to_login": "Aller à la connexion",
+    "verification_failed": "Échec de la vérification",
+    "verification_error_token_missing": "Le lien de vérification est invalide.",
+    "verification_error_token_invalid": "Le lien de vérification est invalide ou a expiré.",
+    "verification_error_token_already_used": "Ce lien a déjà été utilisé.",
+    "verification_error_token_expired": "Le lien de vérification a expiré. Veuillez en demander un nouveau.",
+    "verification_error_user_not_found": "Aucun compte trouvé avec cette adresse email.",
+    "verification_error_unknown": "Une erreur est survenue. Veuillez réessayer.",
+    "try_again": "Réessayer",
+    "email_resent": "Un nouvel email de vérification a été envoyé !",
     "password_strength": {
       "label": "Force du mot de passe",
       "none": "Aucune",
@@ -583,15 +597,18 @@
     "learnMore": "En savoir plus"
   },
   "hero": {
+    "badge": "Découvrez les profondeurs",
     "tagline": "Plongez dans l'aventure",
     "title": "Explorez les Profondeurs",
     "subtitle": "Réservez vos plongées dans les plus beaux sites du monde. Des expériences uniques, des centres certifiés, des souvenirs inoubliables.",
     "discover": "Découvrir",
     "cta": "Explorer les destinations",
     "depth": "{depth}m de profondeur",
+    "depthLabel": "Profondeur",
     "scroll": "Faire défiler"
   },
   "worldExplorer": {
+    "badge": "Globe interactif",
     "title": "Explorez les profondeurs du monde",
     "subtitle": "Cliquez sur une destination pour découvrir les meilleurs spots de plongée"
   },
@@ -610,6 +627,8 @@
     "searchButton": "Rechercher"
   },
   "features": {
+    "badge": "Comment ça marche",
+    "sectionTitle": "Simple comme bonjour",
     "explore": {
       "title": "Explorez les profondeurs",
       "description": "Parcourez notre carte interactive et découvrez les plus beaux sites de plongée du monde."
@@ -624,6 +643,7 @@
     }
   },
   "destinations": {
+    "badge": "Destinations populaires",
     "title": "Destinations populaires",
     "subtitle": "Les spots préférés de notre communauté",
     "reviews": "avis",
@@ -649,6 +669,7 @@
     }
   },
   "centers": {
+    "badge": "Pour les professionnels",
     "title": "Centres de plongée",
     "subtitle": "Des professionnels certifiés vous attendent",
     "viewAll": "Voir tous les centres",
@@ -669,7 +690,10 @@
       "viewCenter": "Voir le centre",
       "backToCenters": "Retour aux centres",
       "rating": "{rating} ★ ({count} avis)",
-      "globeHint": "Astuce: clic droit sur un point pour ouvrir le centre."
+      "globeHint": "Astuce: clic droit sur un point pour ouvrir le centre.",
+      "services": "Services",
+      "minutes": "min",
+      "maxParticipants": "Max {count} participants"
     },
     "benefits": {
       "visibility": "Visibilité internationale",
@@ -801,6 +825,97 @@
       "label": "Certification",
       "notSet": "Non renseignée",
       "update": "Mettre à jour"
+    },
+    "seller": {
+      "title": "Tableau de bord — Vendeur",
+      "subtitle": "Même compte et mêmes droits qu'un plongeur, avec une vue différente.",
+      "description": "Même compte et mêmes droits qu'un plongeur, avec une vue différente.",
+      "diverView": "Vue plongeur",
+      "profile": "Profil",
+      "sellerView": "Vue vendeur",
+      "sellerCenter": "Centre vendeur",
+      "status": "Statut",
+      "adminValidateCenters": "Admin — Valider centres",
+      "kpis": {
+        "services": "Services",
+        "upcomingBookings": "Réservations à venir",
+        "pendingPayout": "Paiements à recevoir"
+      },
+      "services": "Services (aperçu)",
+      "noServices": "Aucun service pour le moment.",
+      "service": "Service",
+      "noSellerCenter": "Aucun \"centre vendeur\" détecté. Si tu veux utiliser le parcours vendeur, passe par",
+      "sellerOnboarding": "l'onboarding vendeur",
+      "goBack": "Retour au tableau de bord"
+    },
+    "center": {
+      "title": "Mon centre",
+      "titleAdmin": "Centres (admin)",
+      "subtitle": "Suivez l'état de votre demande et gérez votre fiche centre.",
+      "subtitleAdmin": "Liste rapide des demandes en attente.",
+      "kpis": {
+        "centers": "Centres",
+        "upcomingBookings": "Réservations à venir",
+        "pendingBookings": "Réservations en attente",
+        "unpaidBookings": "Paiements non réglés",
+        "pendingCenters": "Centres en attente"
+      },
+      "statuses": {
+        "PENDING": "En attente",
+        "APPROVED": "Approuvé",
+        "REJECTED": "Rejeté",
+        "SUSPENDED": "Suspendu"
+      },
+      "labels": {
+        "services": "Services",
+        "bookings": "Réservations",
+        "reviews": "Avis",
+        "stripeConnected": "Stripe connecté",
+        "stripeMissing": "Stripe non configuré"
+      },
+      "createCenter": "Créer un autre centre",
+      "validateRequests": "Valider les demandes",
+      "manageUsers": "Gérer les utilisateurs",
+      "noCenters": "Aucun centre trouvé",
+      "noCentersDesc": "Si vous venez de terminer l'onboarding, rafraîchissez cette page. Sinon, vous pouvez lancer la création d'un centre.",
+      "createNewCenter": "Créer un centre",
+      "pendingRequests": "Aucune demande en attente pour le moment.",
+      "viewCenters": "Voir les centres",
+      "viewPublicCenter": "Voir la page publique",
+      "statusVerified": "Vérifié",
+      "pendingDesc": "Votre centre est en attente de validation par un administrateur."
+    },
+    "admin": {
+      "users": {
+        "title": "Admin — Utilisateurs",
+        "subtitle": "Modifier les droits, activer/désactiver, blacklister et supprimer des comptes.",
+        "validateCenters": "Valider les centres",
+        "dashboard": "Tableau de bord",
+        "userType": "Type",
+        "active": "Actif",
+        "inactive": "Désactivé",
+        "blacklist": "Blacklist",
+        "ok": "OK",
+        "verified": "Email vérifié",
+        "unverified": "Email non vérifié",
+        "apply": "Appliquer",
+        "deactivate": "Désactiver",
+        "activate": "Activer",
+        "removeBlacklist": "Retirer blacklist",
+        "addBlacklist": "Blacklist",
+        "delete": "Supprimer",
+        "noUsers": "Aucun utilisateur.",
+        "userTypes": {
+          "diver": "Plongeur",
+          "seller": "Vendeur",
+          "center": "Centre",
+          "admin": "Admin"
+        }
+      }
+    },
+    "common": {
+      "diverView": "Vue plongeur",
+      "profile": "Profil"
     }
   },
   "profile": {
@@ -810,18 +925,6 @@
     "editProfile": "Modifier le profil",
     "saveChanges": "Enregistrer",
     "saving": "Enregistrement...",
-    "success": {
-      "title": "Profil mis à jour",
-      "description": "Vos informations ont été enregistrées avec succès."
-    },
-    "error": {
-      "title": "Erreur",
-      "description": "Une erreur est survenue lors de la mise à jour.",
-      "generic": "Impossible de sauvegarder les modifications.",
-      "unauthorized": "Vous devez être connecté.",
-      "validation_error": "Veuillez vérifier les informations saisies.",
-      "server_error": "Erreur serveur. Veuillez réessayer."
-    },
     "sections": {
       "personal": "Informations personnelles",
       "diving": "Informations de plongée",
@@ -1077,6 +1180,51 @@
       "description": "Vérifiez votre adresse email pour activer votre compte EviDive et accéder à toutes les fonctionnalités."
     }
   },
+  "adminDashboard": {
+    "meta": {
+      "title": "Dashboard Admin - EviDive",
+      "description": "Administration de la plateforme et aperçu des statistiques."
+    },
+    "title": "Dashboard Admin",
+    "subtitle": "Vue d'ensemble et statistiques de la plateforme",
+    "backToDashboard": "Retour au dashboard",
+    "stats": {
+      "totalUsers": "Total utilisateurs",
+      "totalCenters": "Total centres",
+      "totalBookings": "Total réservations",
+      "platformRevenue": "Revenus plateforme",
+      "thisMonth": "ce mois",
+      "pending": "en attente",
+      "approved": "approuvés"
+    },
+    "quickActions": {
+      "title": "Actions rapides",
+      "users": "Utilisateurs",
+      "centers": "Centres",
+      "bookings": "Réservations",
+      "reviews": "Avis",
+      "commissions": "Commissions",
+      "explorer": "Explorateur"
+    },
+    "recentUsers": {
+      "title": "Utilisateurs récents",
+      "empty": "Aucun utilisateur."
+    },
+    "recentCenters": {
+      "title": "Centres récents",
+      "empty": "Aucun centre."
+    },
+    "viewAll": "Voir tout",
+    "alerts": {
+      "title": "Requiert votre attention",
+      "pendingCenters": "centres en attente",
+      "pendingBookings": "réservations en attente",
+      "pendingReviews": "avis en attente",
+      "needsValidation": "À valider",
+      "awaitingConfirmation": "En attente de confirmation",
+      "needsModeration": "À modérer"
+    }
+  },
   "adminCenters": {
     "title": "Admin · Centres",
     "subtitle": "Validation des inscriptions centres (PENDING → APPROVED/REJECTED).",
@@ -1091,6 +1239,91 @@
     "phone": "Téléphone",
     "approve": "Approuver",
     "reject": "Rejeter"
+  },
+  "adminBookings": {
+    "meta": {
+      "title": "Admin · Réservations - EviDive",
+      "description": "Voir et gérer toutes les réservations de la plateforme."
+    },
+    "title": "Admin · Réservations",
+    "subtitle": "Voir toutes les réservations de tous les centres",
+    "backToAdmin": "Retour admin",
+    "results": "{count, plural, =0 {Aucune réservation} one {# réservation} other {# réservations}}",
+    "status": {
+      "ALL": "Toutes",
+      "PENDING": "En attente",
+      "CONFIRMED": "Confirmées",
+      "PAID": "Payées",
+      "RUNNING": "En cours",
+      "COMPLETED": "Terminées",
+      "CANCELLED": "Annulées",
+      "NOSHOW": "No-show"
+    },
+    "client": "Client",
+    "center": "Centre",
+    "service": "Service",
+    "participants": "participants",
+    "noBookings": "Aucune réservation trouvée.",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "pageInfo": "Page {current} sur {total}"
+  },
+  "adminReviews": {
+    "meta": {
+      "title": "Admin · Avis - EviDive",
+      "description": "Modérer les avis de la plateforme."
+    },
+    "title": "Admin · Avis",
+    "subtitle": "Modérer et gérer les avis utilisateurs",
+    "backToAdmin": "Retour admin",
+    "results": "{count, plural, =0 {Aucun avis} one {# avis} other {# avis}}",
+    "status": {
+      "ALL": "Tous",
+      "PENDING": "En attente",
+      "APPROVED": "Approuvés",
+      "REJECTED": "Rejetés"
+    },
+    "center": "Centre",
+    "user": "Utilisateur",
+    "rating": "Note",
+    "comment": "Commentaire",
+    "noReviews": "Aucun avis trouvé.",
+    "approve": "Approuver",
+    "reject": "Rejeter",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "pageInfo": "Page {current} sur {total}"
+  },
+  "adminCommissions": {
+    "meta": {
+      "title": "Admin · Commissions - EviDive",
+      "description": "Vue financière de la plateforme."
+    },
+    "title": "Admin · Commissions",
+    "subtitle": "Vue financière et suivi des commissions",
+    "backToAdmin": "Retour admin",
+    "stats": {
+      "totalRevenue": "Revenus plateforme total",
+      "pendingPayouts": "Paiements en attente",
+      "paidOut": "Payé aux centres",
+      "thisMonth": "Ce mois"
+    },
+    "results": "{count, plural, =0 {Aucune commission} one {# commission} other {# commissions}}",
+    "status": {
+      "ALL": "Toutes",
+      "PENDING": "En attente",
+      "PAID": "Payées",
+      "CANCELLED": "Annulées"
+    },
+    "booking": "Réservation",
+    "center": "Centre",
+    "amount": "Montant",
+    "platformFee": "Commission plateforme",
+    "centerAmount": "Montant centre",
+    "noCommissions": "Aucune commission trouvée.",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "pageInfo": "Page {current} sur {total}"
   },
   "onboard": {
     "meta": {
@@ -1143,98 +1376,11 @@
         "name": "Nom",
         "emailLabel": "Email",
         "phoneLabel": "Téléphone",
-    "certification": "Certification",
-    "dives": "Plongées",
-    "complete": "Complété"
-  },
-  "dashboard": {
-    "seller": {
-      "title": "Tableau de bord — Vendeur",
-      "subtitle": "Même compte et mêmes droits qu'un plongeur, avec une vue différente.",
-      "description": "Même compte et mêmes droits qu'un plongeur, avec une vue différente.",
-      "diverView": "Vue plongeur",
-      "profile": "Profil",
-      "sellerView": "Vue vendeur",
-      "sellerCenter": "Centre vendeur",
-      "status": "Statut",
-      "adminValidateCenters": "Admin — Valider centres",
-      "kpis": {
-        "services": "Services",
-        "upcomingBookings": "Réservations à venir",
-        "pendingPayout": "Paiements à recevoir"
-      },
-      "services": "Services (aperçu)",
-      "noServices": "Aucun service pour le moment.",
-      "service": "Service",
-      "noSellerCenter": "Aucun \"centre vendeur\" détecté. Si tu veux utiliser le parcours vendeur, passe par",
-      "sellerOnboarding": "l'onboarding vendeur",
-      "goBack": "Retour au tableau de bord"
-    },
-    "center": {
-      "title": "Mon centre",
-      "titleAdmin": "Centres (admin)",
-      "subtitle": "Suivez l'état de votre demande et gérez votre fiche centre.",
-      "subtitleAdmin": "Liste rapide des demandes en attente.",
-      "kpis": {
-        "centers": "Centres",
-        "upcomingBookings": "Réservations à venir",
-        "pendingBookings": "Réservations en attente",
-        "unpaidBookings": "Paiements non réglés",
-        "pendingCenters": "Centres en attente"
-      },
-      "statuses": {
-        "PENDING": "En attente",
-        "APPROVED": "Approuvé",
-        "REJECTED": "Rejeté",
-        "SUSPENDED": "Suspendu"
-      },
-      "labels": {
-        "services": "Services",
-        "bookings": "Réservations",
-        "reviews": "Avis",
-        "stripeConnected": "Stripe connecté",
-        "stripeMissing": "Stripe non configuré"
-      },
-      "createCenter": "Créer un autre centre",
-      "validateRequests": "Valider les demandes",
-      "manageUsers": "Gérer les utilisateurs",
-      "noCenters": "Aucun centre trouvé",
-      "noCentersDesc": "Si vous venez de terminer l'onboarding, rafraîchissez cette page. Sinon, vous pouvez lancer la création d'un centre.",
-      "createNewCenter": "Créer un centre",
-      "pendingRequests": "Aucune demande en attente pour le moment.",
-      "viewCenters": "Voir les centres",
-      "viewPublicCenter": "Voir la page publique",
-      "statusVerified": "Vérifié",
-      "pendingDesc": "Votre centre est en attente de validation par un administrateur."
-    },
-    "admin": {
-      "users": {
-        "title": "Admin — Utilisateurs",
-        "subtitle": "Modifier les droits, activer/désactiver, blacklister et supprimer des comptes.",
-        "validateCenters": "Valider les centres",
-        "dashboard": "Tableau de bord",
-        "userType": "Type",
-        "active": "Actif",
-        "inactive": "Désactivé",
-        "blacklist": "Blacklist",
-        "ok": "OK",
-        "verified": "Email vérifié",
-        "unverified": "Email non vérifié",
-        "apply": "Appliquer",
-        "deactivate": "Désactiver",
-        "activate": "Activer",
-        "removeBlacklist": "Retirer blacklist",
-        "addBlacklist": "Blacklist",
-        "delete": "Supprimer",
-        "noUsers": "Aucun utilisateur."
+        "certification": "Certification",
+        "dives": "Plongées",
+        "complete": "Complété"
       }
     },
-    "common": {
-      "diverView": "Vue plongeur",
-      "profile": "Profil"
-    }
-  }
-},
     "seller": {
       "title": "Je suis vendeur",
       "description": "Vendez vos services de plongée sans avoir de centre physique.",
@@ -2290,5 +2436,29 @@
       "revenue": "Revenus",
       "noData": "Aucun service réservé"
     }
+  },
+  "centerManage": {
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "bookings": "Réservations",
+      "services": "Services",
+      "calendar": "Calendrier",
+      "reviews": "Avis",
+      "team": "Équipe",
+      "stats": "Statistiques",
+      "profile": "Profil",
+      "settings": "Paramètres"
+    },
+    "verified": "Centre vérifié",
+    "backToDashboard": "Retour au dashboard",
+    "addCenter": "Ajouter un centre",
+    "status": {
+      "pending": "En attente",
+      "approved": "Approuvé",
+      "rejected": "Rejeté"
+    },
+    "switchCenter": "Changer de centre",
+    "noCenters": "Vous n'avez pas encore de centre",
+    "createFirst": "Créer mon premier centre"
   }
 }

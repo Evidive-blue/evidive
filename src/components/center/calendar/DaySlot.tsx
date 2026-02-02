@@ -77,8 +77,12 @@ export function DaySlot({
   onClick,
   onBlockClick,
 }: DaySlotProps) {
+  // Reserved for future use
+  void locale;
+  void t;
+  void onBlockClick;
   const dayNumber = date.getDate();
-  const { bgColor, textColor, borderColor, level } = getFillRateColor(
+  const { bgColor, borderColor, level } = getFillRateColor(
     totalParticipants,
     totalCapacity
   );

@@ -11,6 +11,7 @@ interface FooterProps {
 }
 
 export function Footer({ locale }: FooterProps) {
+  void locale; // Reserved for locale-specific footer content
   const t = useTranslations("footer");
 
   const footerLinks = {

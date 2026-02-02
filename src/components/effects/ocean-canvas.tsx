@@ -1,8 +1,13 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import { useEffect, useState, useCallback, useRef, useMemo, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
+
+// Hydration-safe mounting check using useSyncExternalStore
+const emptySubscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 /**
  * Ocean Background - Enhanced Marine Life Edition
@@ -40,11 +45,6 @@ function getPageIndex(pathname: string): number {
 function seededRandom(seed: number): number {
   const x = Math.sin(seed * 9999) * 10000;
   return x - Math.floor(x);
-}
-
-// Helper pour arrondir les valeurs et éviter les problèmes d'hydratation
-function round(value: number, decimals: number = 2): number {
-  return Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
 }
 
 // ===========================================
@@ -327,11 +327,11 @@ function generateSeaAnemones(count: number): SeaAnemoneData[] {
 
 function TropicalFishSVG({ color, finColor, direction }: { color: string; finColor: string; direction: number }) {
   return (
-    <svg 
-      viewBox="0 0 50 30" 
-      fill="none" 
+    <svg
+      viewBox="0 0 50 30"
+      fill="none"
       className="h-full w-full"
-      style={{ transform: direction === -1 ? "scaleX(-1)" : "none" }}
+      style={{ transform: direction === 1 ? "scaleX(-1)" : "none" }}
     >
       {/* Body */}
       <ellipse cx="22" cy="15" rx="16" ry="10" fill={color} />
@@ -552,13 +552,9 @@ export function OceanCanvas() {
   const prefersReducedMotion = useReducedMotion();
   const pathname = usePathname();
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isMounted, setIsMounted] = useState(false);
+  // Prevent hydration mismatch - only render on client
+  const isMounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
   const previousPageIndex = useRef<number>(0);
-
-  // Prevent hydration mismatch by delaying scroll-based updates
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const handleScroll = useCallback(() => {
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -622,11 +618,11 @@ export function OceanCanvas() {
   
   const depth = Math.round(effectiveScrollProgress * 40);
 
-  // Reduced motion fallback
-  if (prefersReducedMotion) {
+  // Reduced motion fallback or not yet mounted (prevent hydration mismatch)
+  if (prefersReducedMotion || !isMounted) {
     return (
       <div className="pointer-events-none fixed inset-0 -z-50" aria-hidden="true">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             background: "linear-gradient(180deg, #0b3a4a 0%, #075985 35%, #0b2a3c 65%, #020617 100%)",
@@ -712,12 +708,12 @@ export function OceanCanvas() {
             key={`bubble-${b.id}`}
             className="absolute rounded-full"
             style={{
-              left: `${round(b.x, 2)}%`,
-              width: `${round(b.size, 2)}px`,
-              height: `${round(b.size, 2)}px`,
+              left: `${b.x}%`,
+              width: b.size,
+              height: b.size,
               background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.2))",
               border: "1px solid rgba(255,255,255,0.3)",
-              opacity: `${round(surfaceVisibility * 0.6, 2)}`,
+              opacity: surfaceVisibility * 0.6,
             }}
             animate={{
               y: ["100vh", "-10vh"],
@@ -739,10 +735,10 @@ export function OceanCanvas() {
               key={`tropical-${tf.id}`}
               className="absolute"
               style={{
-                top: `${round(tf.y, 2)}%`,
-                width: `${round(tf.size, 2)}px`,
-                height: `${round(tf.size * 0.6, 2)}px`,
-                opacity: `${round(surfaceVisibility * 0.9, 2)}`,
+                top: `${tf.y}%`,
+                width: tf.size,
+                height: tf.size * 0.6,
+                opacity: surfaceVisibility * 0.9,
               }}
               animate={{
                 x: tf.direction === 1 ? ["-10vw", "110vw"] : ["110vw", "-10vw"],
@@ -772,13 +768,13 @@ export function OceanCanvas() {
               key={`particle-${p.id}`}
               className="absolute rounded-full"
               style={{
-                left: `${round(p.x, 2)}%`,
-                top: `${round(parallaxY, 2)}%`,
-                width: `${round(p.size, 2)}px`,
-                height: `${round(p.size, 2)}px`,
+                left: `${p.x}%`,
+                top: `${parallaxY}%`,
+                width: p.size,
+                height: p.size,
                 backgroundColor: p.color,
-                boxShadow: `0 0 ${round(p.size * 2, 2)}px ${round(p.size, 2)}px ${p.color}50`,
-                opacity: `${round(visibility, 2)}`,
+                boxShadow: `0 0 ${p.size * 2}px ${p.size}px ${p.color}50`,
+                opacity: visibility,
               }}
               animate={{
                 opacity: [visibility, visibility * 0.3, visibility],
@@ -806,11 +802,11 @@ export function OceanCanvas() {
               key={`jelly-${jelly.id}`}
               className="absolute"
               style={{
-                left: `${round(jelly.x, 2)}%`,
-                top: `${round(parallaxY, 2)}%`,
-                width: `${round(jelly.size, 2)}px`,
-                height: `${round(jelly.size * 1.5, 2)}px`,
-                opacity: `${round(jellyOpacity, 2)}`,
+                left: `${jelly.x}%`,
+                top: `${parallaxY}%`,
+                width: jelly.size,
+                height: jelly.size * 1.5,
+                opacity: jellyOpacity,
               }}
               animate={{
                 y: [0, -20, 0],
@@ -878,10 +874,10 @@ export function OceanCanvas() {
               key={`turtle-${turtle.id}`}
               className="absolute"
               style={{
-                top: `${round(turtle.y, 2)}%`,
-                width: `${round(turtle.size, 2)}px`,
-                height: `${round(turtle.size * 0.625, 2)}px`,
-                opacity: `${round(middleVisibility * 0.85, 2)}`,
+                top: `${turtle.y}%`,
+                width: turtle.size,
+                height: turtle.size * 0.625,
+                opacity: middleVisibility * 0.85,
               }}
               animate={{
                 x: turtle.direction === 1 ? ["-15vw", "115vw"] : ["115vw", "-15vw"],
@@ -908,10 +904,10 @@ export function OceanCanvas() {
               key={`manta-${manta.id}`}
               className="absolute"
               style={{
-                top: `${round(manta.y, 2)}%`,
-                width: `${round(manta.size, 2)}px`,
-                height: `${round(manta.size * 0.5, 2)}px`,
-                opacity: `${round(middleVisibility * 0.7, 2)}`,
+                top: `${manta.y}%`,
+                width: manta.size,
+                height: manta.size * 0.5,
+                opacity: middleVisibility * 0.7,
               }}
               animate={{
                 x: manta.direction === 1 ? ["-20vw", "120vw"] : ["120vw", "-20vw"],
@@ -942,10 +938,10 @@ export function OceanCanvas() {
               key={`snow-${snow.id}`}
               className="absolute rounded-full bg-white"
               style={{
-                left: `${round(snow.x, 2)}%`,
-                width: `${round(snow.size, 2)}px`,
-                height: `${round(snow.size, 2)}px`,
-                opacity: `${round(deepVisibility * 0.4, 2)}`,
+                left: `${snow.x}%`,
+                width: snow.size,
+                height: snow.size,
+                opacity: deepVisibility * 0.4,
               }}
               animate={{
                 y: ["-10vh", "110vh"],
@@ -970,10 +966,10 @@ export function OceanCanvas() {
               key={`fish-${f.id}`}
               className="absolute"
               style={{
-                top: `${round(f.y, 2)}%`,
-                width: `${round(f.size, 2)}px`,
-                height: `${round(f.size * 0.5, 2)}px`,
-                opacity: `${round(fishOpacity, 2)}`,
+                top: `${f.y}%`,
+                width: f.size,
+                height: f.size * 0.5,
+                opacity: fishOpacity,
               }}
               animate={{
                 x: f.direction === 1 ? ["-10vw", "110vw"] : ["110vw", "-10vw"],
@@ -985,11 +981,11 @@ export function OceanCanvas() {
                 delay: seededRandom(f.id) * f.speed,
               }}
             >
-              <svg 
-                viewBox="0 0 40 20" 
-                fill="none" 
+              <svg
+                viewBox="0 0 40 20"
+                fill="none"
                 className="h-full w-full"
-                style={{ transform: f.direction === -1 ? "scaleX(-1)" : "none" }}
+                style={{ transform: f.direction === 1 ? "scaleX(-1)" : "none" }}
               >
                 <ellipse cx="18" cy="10" rx="14" ry="8" fill={f.color} fillOpacity="0.7" />
                 <polygon points="32,10 40,2 40,18" fill={f.color} fillOpacity="0.6" />
@@ -1008,10 +1004,10 @@ export function OceanCanvas() {
               key={`shark-${shark.id}`}
               className="absolute"
               style={{
-                top: `${round(shark.y, 2)}%`,
-                width: `${round(shark.size, 2)}px`,
-                height: `${round(shark.size * 0.4, 2)}px`,
-                opacity: `${round(deepVisibility * 0.6, 2)}`,
+                top: `${shark.y}%`,
+                width: shark.size,
+                height: shark.size * 0.4,
+                opacity: deepVisibility * 0.6,
               }}
               animate={{
                 x: shark.direction === 1 ? ["-20vw", "120vw"] : ["120vw", "-20vw"],
@@ -1038,12 +1034,12 @@ export function OceanCanvas() {
               key={`abyssal-${af.id}`}
               className="absolute"
               style={{
-                left: `${round(af.x, 2)}%`,
-                top: `${round(parallaxY, 2)}%`,
-                width: `${round(af.size, 2)}px`,
-                height: `${round(af.size * 0.66, 2)}px`,
-                opacity: `${round(deepVisibility * 0.8, 2)}`,
-                filter: `drop-shadow(0 0 ${round(af.size, 2)}px ${af.glowColor})`,
+                left: `${af.x}%`,
+                top: `${parallaxY}%`,
+                width: af.size,
+                height: af.size * 0.66,
+                opacity: deepVisibility * 0.8,
+                filter: `drop-shadow(0 0 ${af.size}px ${af.glowColor})`,
               }}
               animate={{
                 x: [0, 20, -20, 0],
@@ -1071,11 +1067,11 @@ export function OceanCanvas() {
               key={`anemone-${anemone.id}`}
               className="absolute"
               style={{
-                left: `${round(anemone.x, 2)}%`,
-                top: `${round(anemone.y, 2)}%`,
-                width: `${round(anemone.size, 2)}px`,
-                height: `${round(anemone.size, 2)}px`,
-                opacity: `${round(deepVisibility * 0.7, 2)}`,
+                left: `${anemone.x}%`,
+                top: `${anemone.y}%`,
+                width: anemone.size,
+                height: anemone.size,
+                opacity: deepVisibility * 0.7,
               }}
               animate={{
                 scale: [1, 1.05, 1],

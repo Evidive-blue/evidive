@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { format } from "date-fns";
+import { format, type Locale } from "date-fns";
 import { fr, enUS, es, it, de } from "date-fns/locale";
-import { Pencil, Trash2, ExternalLink, AlertCircle, ImageIcon } from "lucide-react";
+import { Pencil, Trash2, ExternalLink, AlertCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

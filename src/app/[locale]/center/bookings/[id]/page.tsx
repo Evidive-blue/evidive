@@ -1,11 +1,11 @@
 import { redirect, notFound } from "next/navigation";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { Link } from "@/i18n/navigation";
 import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { BookingStatusBadge } from "@/components/bookings/BookingStatusBadge";
 import {
   ArrowLeft,
@@ -14,14 +14,12 @@ import {
   Users,
   Mail,
   Phone,
-  MapPin,
   CreditCard,
   FileText,
   Tag,
   User,
   MessageSquare,
   ExternalLink,
-  Wallet,
   TrendingUp,
 } from "lucide-react";
 import { BookingDetailsActions } from "./booking-details-actions";
@@ -317,9 +315,11 @@ export default async function CenterBookingDetailsPage({
             <CardContent className="pt-4 space-y-4">
               <div className="flex items-center gap-4">
                 {booking.user?.avatarUrl ? (
-                  <img
+                  <Image
                     src={booking.user.avatarUrl}
                     alt={clientName}
+                    width={56}
+                    height={56}
                     className="h-14 w-14 rounded-full object-cover"
                   />
                 ) : (

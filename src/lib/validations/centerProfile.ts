@@ -1,15 +1,9 @@
 import { z } from "zod";
 
-// Multilingual text schema (5 languages)
-export const multilingualSchema = z.object({
-  fr: z.string().optional().default(""),
-  en: z.string().optional().default(""),
-  de: z.string().optional().default(""),
-  es: z.string().optional().default(""),
-  it: z.string().optional().default(""),
-});
+// Multilingual text schema (flexible, accepts any language keys)
+export const multilingualSchema = z.record(z.string(), z.string().optional().default(""));
 
-export type MultilingualText = z.infer<typeof multilingualSchema>;
+export type MultilingualText = Record<string, string>;
 
 // URL validation helper
 const urlSchema = z.string().url("URL invalide").optional().or(z.literal(""));

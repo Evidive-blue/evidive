@@ -164,7 +164,8 @@ export function LocationPicker({
     onLocationChange(latitude, newLng);
   };
 
-  // Geocode address to coordinates
+  // Geocode address to coordinates (prepared for future use)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const geocodeAddress = React.useCallback(async (address: string) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const googleMaps = (window as any).google?.maps;

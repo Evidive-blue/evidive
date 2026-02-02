@@ -15,6 +15,7 @@ interface WeekDay {
 interface WeekCalendarPreviewProps {
   weekDays: WeekDay[];
   locale: string;
+  centerSlug?: string;
   translations: {
     title: string;
     participants: string;
@@ -36,9 +37,11 @@ function getDayNumber(date: Date): number {
 export function WeekCalendarPreview({
   weekDays,
   locale,
+  centerSlug,
   translations: t,
 }: WeekCalendarPreviewProps) {
   const totalParticipants = weekDays.reduce((sum, day) => sum + day.participants, 0);
+  const calendarHref = centerSlug ? `/center/manage/${centerSlug}/calendar` : "/center/calendar";
 
   return (
     <Card className="border-white/10 bg-white/5 backdrop-blur-xl">
@@ -53,7 +56,7 @@ export function WeekCalendarPreview({
           )}
         </div>
         <Link
-          href="/center/calendar"
+          href={calendarHref}
           className="flex items-center gap-1 text-sm text-cyan-400 transition hover:text-cyan-300"
         >
           {t.viewCalendar}

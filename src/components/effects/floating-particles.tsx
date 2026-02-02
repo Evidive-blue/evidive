@@ -1,7 +1,12 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+
+// Hydration-safe mounting check using useSyncExternalStore
+const emptySubscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 interface Particle {
   id: number;
@@ -19,6 +24,12 @@ interface FloatingParticlesProps {
   variant?: "bubbles" | "glow" | "mixed";
 }
 
+// Seeded random for deterministic values based on index
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed * 9999) * 10000;
+  return x - Math.floor(x);
+}
+
 function generateParticles(count: number, variant: string): Particle[] {
   return Array.from({ length: count }, (_, i) => {
     const types: Particle["type"][] =
@@ -27,15 +38,15 @@ function generateParticles(count: number, variant: string): Particle[] {
         : variant === "glow"
           ? ["glow"]
           : ["bubble", "glow", "dust"];
-    
+
     return {
       id: i,
-      x: Math.random() * 100,
-      size: Math.random() * 8 + 2,
-      duration: Math.random() * 15 + 10,
-      delay: Math.random() * 5,
-      opacity: Math.random() * 0.5 + 0.1,
-      type: types[Math.floor(Math.random() * types.length)],
+      x: seededRandom(i * 1.1) * 100,
+      size: seededRandom(i * 2.2) * 8 + 2,
+      duration: seededRandom(i * 3.3) * 15 + 10,
+      delay: seededRandom(i * 4.4) * 5,
+      opacity: seededRandom(i * 5.5) * 0.5 + 0.1,
+      type: types[Math.floor(seededRandom(i * 6.6) * types.length)],
     };
   });
 }
@@ -46,18 +57,15 @@ export function FloatingParticles({
   variant = "mixed",
 }: FloatingParticlesProps) {
   const prefersReducedMotion = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  
+  const isMounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
+
   const particles = useMemo(
-    () => mounted ? generateParticles(count, variant) : [],
-    [count, variant, mounted]
+    () => generateParticles(count, variant),
+    [count, variant]
   );
 
-  if (prefersReducedMotion || !mounted) {
+  // Don't render on server to avoid hydration mismatch
+  if (!isMounted || prefersReducedMotion) {
     return null;
   }
 
@@ -66,7 +74,6 @@ export function FloatingParticles({
       className={`pointer-events-none fixed inset-0 overflow-hidden ${className}`}
       style={{ zIndex: 1 }}
       aria-hidden="true"
-      suppressHydrationWarning
     >
       {particles.map((particle) => (
         <motion.div
@@ -74,8 +81,8 @@ export function FloatingParticles({
           className="absolute rounded-full"
           style={{
             left: `${particle.x}%`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
+            width: particle.size,
+            height: particle.size,
             background:
               particle.type === "bubble"
                 ? "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.05))"
@@ -139,10 +146,10 @@ export function SectionBubbles({ className = "" }: { className?: string }) {
           key={bubble.id}
           className="absolute rounded-full border border-white/10 bg-gradient-to-br from-white/5 to-transparent"
           style={{
-            width: `${bubble.size}px`,
-            height: `${bubble.size}px`,
+            width: bubble.size,
+            height: bubble.size,
             left: `${bubble.left}%`,
-            bottom: `-${bubble.size}px`,
+            bottom: -bubble.size,
           }}
           animate={{
             y: [0, "-120vh"],

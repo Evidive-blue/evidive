@@ -249,7 +249,7 @@ export async function createDiverAccount(
 
     // Create profile
     const displayName = `${firstName} ${lastName}`.trim();
-    const profile = await prisma.profile.create({
+    await prisma.profile.create({
       data: {
         email: normalizedEmail,
         passwordHash,

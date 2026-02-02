@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { format } from "date-fns";
+import { format, type Locale } from "date-fns";
 import { fr, enUS, es, it, de } from "date-fns/locale";
-import { MessageSquarePlus, Calendar, MapPin, Clock } from "lucide-react";
+import { MessageSquarePlus, Calendar, MapPin } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ReviewForm } from "./ReviewForm";

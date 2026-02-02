@@ -421,6 +421,20 @@
     "back_to_login": "Zurück zur Anmeldung",
     "your_email": "Ihre E-Mail-Adresse",
     "checking_email": "E-Mail wird überprüft...",
+    "verifying_email": "Überprüfung läuft...",
+    "please_wait": "Bitte warten Sie, während wir Ihre E-Mail verifizieren.",
+    "email_verified_title": "E-Mail verifiziert!",
+    "email_verified_desc": "Ihre E-Mail wurde erfolgreich verifiziert. Sie können sich jetzt anmelden.",
+    "go_to_login": "Zur Anmeldung",
+    "verification_failed": "Verifizierung fehlgeschlagen",
+    "verification_error_token_missing": "Der Verifizierungslink ist ungültig.",
+    "verification_error_token_invalid": "Der Verifizierungslink ist ungültig oder abgelaufen.",
+    "verification_error_token_already_used": "Dieser Link wurde bereits verwendet.",
+    "verification_error_token_expired": "Der Verifizierungslink ist abgelaufen. Bitte fordern Sie einen neuen an.",
+    "verification_error_user_not_found": "Kein Konto mit dieser E-Mail-Adresse gefunden.",
+    "verification_error_unknown": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "try_again": "Erneut versuchen",
+    "email_resent": "Eine neue Verifizierungs-E-Mail wurde gesendet!",
     "password_strength": {
       "label": "Passwortstärke",
       "none": "Keine",
@@ -610,6 +624,8 @@
     "searchButton": "Suchen"
   },
   "features": {
+    "badge": "So funktioniert's",
+    "sectionTitle": "Einfach wie nie",
     "explore": {
       "title": "Erkunden Sie die Tiefen",
       "description": "Durchstöbern Sie unsere interaktive Karte und entdecken Sie die schönsten Tauchplätze der Welt."
@@ -1082,6 +1098,10 @@
     "resetPassword": {
       "title": "Passwort zurücksetzen - EviDive",
       "description": "Setzen Sie Ihr EviDive-Passwort zurück, um wieder Zugriff auf Ihr Konto zu erhalten."
+    },
+    "forgotPassword": {
+      "title": "Passwort vergessen - EviDive",
+      "description": "Fordern Sie einen Link zum Zurücksetzen des Passworts für Ihr EviDive-Konto an."
     },
     "verifyEmail": {
       "title": "E-Mail-Verifizierung - EviDive",

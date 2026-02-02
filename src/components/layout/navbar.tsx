@@ -139,7 +139,9 @@ export function Navbar({ locale }: NavbarProps) {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {isAuthenticated ? (
+              {status === "loading" ? (
+                <div className="h-9 w-20 animate-pulse rounded-xl bg-white/10" />
+              ) : isAuthenticated ? (
                 <UserMenu session={session} locale={locale} />
               ) : (
                 <>
@@ -234,7 +236,11 @@ export function Navbar({ locale }: NavbarProps) {
 
               <div className="my-2 h-px bg-white/15" />
 
-              {isAuthenticated ? (
+              {status === "loading" ? (
+                <div className="flex flex-col gap-2 pt-2">
+                  <div className="h-16 animate-pulse rounded-xl bg-white/10" />
+                </div>
+              ) : isAuthenticated ? (
                 <div className="flex flex-col gap-2 pt-2">
                   {/* User Info */}
                   <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3">

@@ -1,2253 +1,2212 @@
 {
   "centerBookings": {
     "meta": {
-      "title": "Booking Management - EviDive",
-      "description": "Manage your dive center bookings."
+      "title": "Bokningshantering - EviDive",
+      "description": "Hantera bokningarna för ditt dykcenter."
     },
-    "title": "Booking Management",
-    "subtitle": "Manage bookings for {centerName}",
-    "backToCenter": "Back to center",
-    "results": "{count, plural, =0 {No bookings} one {# booking} other {# bookings}}",
-    "page": "Page {current} of {total}",
+    "title": "Bokningshantering",
+    "subtitle": "Hantera bokningar för {centerName}",
+    "backToCenter": "Tillbaka till center",
+    "results": "{count, plural, =0 {Inga bokningar} one {# bokning} other {# bokningar}}",
+    "page": "Sida {current} av {total}",
     "empty": {
-      "title": "No bookings",
-      "description": "No bookings match your search criteria."
+      "title": "Inga bokningar",
+      "description": "Inga bokningar matchar dina sökkriterier."
     },
     "filters": {
-      "search": "Search",
-      "searchPlaceholder": "Name, email or reference...",
+      "search": "Sök",
+      "searchPlaceholder": "Namn, e-post eller referens...",
       "status": "Status",
-      "all": "All",
-      "pending": "Pending",
-      "confirmed": "Confirmed",
-      "paid": "Paid",
-      "running": "In progress",
-      "completed": "Completed",
-      "cancelled": "Cancelled",
-      "noshow": "No-show",
-      "dateRange": "Date range",
-      "from": "From",
-      "to": "To",
-      "service": "Service",
-      "allServices": "All services",
-      "clearFilters": "Clear filters",
-      "exportCsv": "Export CSV",
-      "exporting": "Exporting..."
+      "all": "Alla",
+      "pending": "Väntande",
+      "confirmed": "Bekräftad",
+      "paid": "Betald",
+      "running": "Pågående",
+      "completed": "Slutförd",
+      "cancelled": "Avbokad",
+      "noshow": "Utebliven",
+      "dateRange": "Period",
+      "from": "Från",
+      "to": "Till",
+      "service": "Tjänst",
+      "allServices": "Alla tjänster",
+      "clearFilters": "Rensa filter",
+      "exportCsv": "Exportera CSV",
+      "exporting": "Exporterar..."
     },
     "status": {
-      "PENDING": "Pending",
-      "CONFIRMED": "Confirmed",
-      "PAID": "Paid",
-      "RUNNING": "In progress",
-      "COMPLETED": "Completed",
-      "CANCELLED": "Cancelled",
-      "NOSHOW": "No-show",
-      "REMOVED": "Removed"
+      "PENDING": "Väntande",
+      "CONFIRMED": "Bekräftad",
+      "PAID": "Betald",
+      "RUNNING": "Pågående",
+      "COMPLETED": "Slutförd",
+      "CANCELLED": "Avbokad",
+      "NOSHOW": "Utebliven",
+      "REMOVED": "Borttagen"
     },
     "sources": {
-      "website": "Website",
-      "manual": "Manual",
+      "website": "Webbplats",
+      "manual": "Manuell",
       "api": "API"
     },
     "card": {
-      "viewDetails": "View details",
-      "confirm": "Confirm",
-      "cancel": "Cancel",
-      "markCompleted": "Mark completed",
-      "markNoShow": "No-show",
-      "contactClient": "Contact",
-      "participants": "participant(s)",
-      "extras": "Extras",
-      "source": "Source",
-      "specialRequests": "Special requests",
-      "actions": "Actions",
-      "confirmSuccess": "Booking confirmed successfully",
-      "cancelSuccess": "Booking cancelled successfully",
-      "completeSuccess": "Booking marked as completed",
-      "error": "An error occurred"
+      "viewDetails": "Visa detaljer",
+      "confirm": "Bekräfta",
+      "cancel": "Avboka",
+      "markCompleted": "Markera som slutförd",
+      "markNoShow": "Utebliven",
+      "contactClient": "Kontakta",
+      "participants": "deltagare",
+      "extras": "Tillägg",
+      "source": "Källa",
+      "specialRequests": "Särskilda önskemål",
+      "actions": "Åtgärder",
+      "confirmSuccess": "Bokning bekräftad",
+      "cancelSuccess": "Bokning avbokad",
+      "completeSuccess": "Bokning markerad som slutförd",
+      "error": "Ett fel uppstod"
     },
     "manualBooking": {
-      "title": "New manual booking",
-      "description": "Create a booking for a client who books by phone or in person.",
-      "triggerButton": "Add booking",
-      "service": "Service",
-      "selectService": "Select a service",
-      "date": "Date",
-      "time": "Time",
-      "selectTime": "Select a time",
-      "participants": "Participants",
-      "clientInfo": "Client information",
-      "firstName": "First name",
-      "lastName": "Last name",
-      "email": "Email",
-      "phone": "Phone",
-      "optional": "optional",
-      "specialRequests": "Special requests",
-      "certification": "Certification",
-      "extras": "Additional options",
-      "noExtras": "No options available",
-      "totalPrice": "Total price",
-      "submit": "Create booking",
-      "submitting": "Creating...",
-      "cancel": "Cancel",
-      "success": "Booking created!",
-      "successMessage": "The booking has been created and confirmed successfully.",
-      "error": "An error occurred while creating",
-      "noServices": "No active services. Create a service first.",
-      "createAnother": "Create another",
-      "close": "Close"
+      "title": "Ny manuell bokning",
+      "description": "Skapa en bokning för en kund som bokar via telefon eller personligen.",
+      "triggerButton": "Lägg till bokning",
+      "service": "Tjänst",
+      "selectService": "Välj en tjänst",
+      "date": "Datum",
+      "time": "Tid",
+      "selectTime": "Välj en tid",
+      "participants": "Deltagare",
+      "clientInfo": "Kundinformation",
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "email": "E-post",
+      "phone": "Telefon",
+      "optional": "valfritt",
+      "specialRequests": "Särskilda önskemål",
+      "certification": "Certifiering",
+      "extras": "Tilläggsalternativ",
+      "noExtras": "Inga tillgängliga alternativ",
+      "totalPrice": "Totalpris",
+      "submit": "Skapa bokning",
+      "submitting": "Skapar...",
+      "cancel": "Avbryt",
+      "success": "Bokning skapad!",
+      "successMessage": "Bokningen har skapats och bekräftats.",
+      "error": "Ett fel uppstod vid skapandet",
+      "noServices": "Inga aktiva tjänster. Skapa en tjänst först.",
+      "createAnother": "Skapa ytterligare",
+      "close": "Stäng"
     },
     "pagination": {
-      "previous": "Previous",
-      "next": "Next"
+      "previous": "Föregående",
+      "next": "Nästa"
     },
     "cancelModal": {
-      "title": "Cancel booking",
-      "description": "Are you sure you want to cancel booking {reference}?",
-      "reasonLabel": "Cancellation reason",
-      "reasonPlaceholder": "Explain why you are cancelling this booking...",
-      "reasonRequired": "Cancellation reason is required",
-      "cancel": "Go back",
-      "confirm": "Cancel booking",
-      "confirming": "Cancelling...",
-      "warning": "This action cannot be undone. The customer will be notified by email.",
-      "success": "Booking cancelled successfully",
-      "error": "An error occurred while cancelling"
+      "title": "Avboka bokning",
+      "description": "Är du säker på att du vill avboka bokning {reference}?",
+      "reasonLabel": "Anledning till avbokning",
+      "reasonPlaceholder": "Förklara varför du avbokar denna bokning...",
+      "reasonRequired": "Anledning till avbokning krävs",
+      "cancel": "Tillbaka",
+      "confirm": "Avboka bokning",
+      "confirming": "Avbokar...",
+      "warning": "Denna åtgärd kan inte ångras. Kunden meddelas via e-post.",
+      "success": "Bokning avbokad",
+      "error": "Ett fel uppstod vid avbokning"
     }
   },
   "centerBookingDetails": {
     "meta": {
-      "title": "Booking Details - EviDive",
-      "description": "View booking details."
+      "title": "Bokningsdetaljer - EviDive",
+      "description": "Visa bokningsdetaljer."
     },
-    "backToBookings": "Back to bookings",
-    "title": "Booking {reference}",
-    "createdAt": "Created on {date}",
-    "registeredUser": "Registered user",
+    "backToBookings": "Tillbaka till bokningar",
+    "title": "Bokning {reference}",
+    "createdAt": "Skapad {date}",
+    "registeredUser": "Registrerad användare",
     "sections": {
-      "service": "Booked service",
-      "client": "Client",
-      "payment": "Payment",
-      "commission": "Commission & Earnings",
-      "additional": "Additional information",
-      "review": "Customer review"
+      "service": "Bokad tjänst",
+      "client": "Kund",
+      "payment": "Betalning",
+      "commission": "Provision och intäkter",
+      "additional": "Ytterligare information",
+      "review": "Kundrecension"
     },
     "status": {
-      "PENDING": "Pending",
-      "CONFIRMED": "Confirmed",
-      "PAID": "Paid",
-      "RUNNING": "In progress",
-      "COMPLETED": "Completed",
-      "CANCELLED": "Cancelled",
-      "NOSHOW": "No-show",
-      "REMOVED": "Removed"
+      "PENDING": "Väntande",
+      "CONFIRMED": "Bekräftad",
+      "PAID": "Betald",
+      "RUNNING": "Pågående",
+      "COMPLETED": "Slutförd",
+      "CANCELLED": "Avbokad",
+      "NOSHOW": "Utebliven",
+      "REMOVED": "Borttagen"
     },
     "paymentStatus": {
-      "UNPAID": "Unpaid",
-      "DEPOSIT_PAID": "Deposit paid",
-      "PAID": "Paid",
-      "REFUNDED": "Refunded",
-      "PARTIAL_REFUND": "Partial refund"
+      "UNPAID": "Obetald",
+      "DEPOSIT_PAID": "Handpenning betald",
+      "PAID": "Betald",
+      "REFUNDED": "Återbetald",
+      "PARTIAL_REFUND": "Delvis återbetald"
     },
     "labels": {
-      "date": "Date",
-      "time": "Time",
-      "participants": "Participants",
-      "unitPrice": "Unit price",
-      "extras": "Extras",
-      "discount": "Discount",
-      "total": "Total",
-      "paymentStatus": "Payment status",
-      "selectedExtras": "Selected extras",
-      "specialRequests": "Special requests",
-      "source": "Source",
-      "couponUsed": "Coupon used",
-      "confirmedBy": "Confirmed by",
-      "cancellationReason": "Cancellation reason",
-      "bookingAmount": "Booking amount",
-      "commissionRate": "Commission rate",
-      "platformCommission": "Platform commission",
-      "stripeFee": "Stripe fee",
-      "yourEarnings": "Your earnings",
-      "commissionStatus": "Commission status"
+      "date": "Datum",
+      "time": "Tid",
+      "participants": "Deltagare",
+      "unitPrice": "Enhetspris",
+      "extras": "Tillägg",
+      "discount": "Rabatt",
+      "total": "Totalt",
+      "paymentStatus": "Betalningsstatus",
+      "selectedExtras": "Valda tillägg",
+      "specialRequests": "Särskilda önskemål",
+      "source": "Källa",
+      "couponUsed": "Använd kupong",
+      "confirmedBy": "Bekräftad av",
+      "cancellationReason": "Anledning till avbokning",
+      "bookingAmount": "Bokningsbelopp",
+      "commissionRate": "Provisionssats",
+      "platformCommission": "Plattformsprovision",
+      "stripeFee": "Stripe-avgift",
+      "yourEarnings": "Din intäkt",
+      "commissionStatus": "Provisionsstatus"
     },
-    "duration": "{minutes} minutes",
-    "minCertification": "Minimum certification: {level}",
-    "clientCertification": "Certification: {level}",
-    "totalDives": "{count} dives completed",
-    "paidAt": "Paid on {date}",
-    "cancelledAt": "Cancelled on {date}",
+    "duration": "{minutes} minuter",
+    "minCertification": "Minimicertifiering: {level}",
+    "clientCertification": "Certifiering: {level}",
+    "totalDives": "{count} genomförda dyk",
+    "paidAt": "Betald {date}",
+    "cancelledAt": "Avbokad {date}",
     "sources": {
-      "website": "Website",
-      "manual": "Manual",
+      "website": "Webbplats",
+      "manual": "Manuell",
       "api": "API"
     },
     "commissionStatus": {
-      "PENDING": "Pending",
-      "PAID": "Paid",
-      "CANCELLED": "Cancelled"
+      "PENDING": "Väntande",
+      "PAID": "Utbetald",
+      "CANCELLED": "Avbokad"
     },
-    "commissionPaidAt": "Commission paid on {date}",
+    "commissionPaidAt": "Provision utbetald {date}",
     "actions": {
-      "confirm": "Confirm",
-      "cancel": "Cancel",
-      "markCompleted": "Mark completed",
-      "markNoShow": "No-show",
-      "contactClient": "Contact client",
-      "printDetails": "Print"
+      "confirm": "Bekräfta",
+      "cancel": "Avboka",
+      "markCompleted": "Markera som slutförd",
+      "markNoShow": "Utebliven",
+      "contactClient": "Kontakta kund",
+      "printDetails": "Skriv ut"
     },
-    "viewFullReview": "View full review"
+    "viewFullReview": "Visa fullständig recension"
   },
   "centerCalendar": {
     "meta": {
-      "title": "Calendar & Availability - EviDive",
-      "description": "Manage your dive calendar and availability."
+      "title": "Kalender och tillgänglighet - EviDive",
+      "description": "Hantera din dykkalender och tillgänglighet."
     },
-    "title": "Calendar & Availability",
-    "subtitle": "Manage your slots and bookings",
-    "backToDashboard": "Back to dashboard",
-    "noCenters": "No center available",
-    "noCentersDesc": "You need at least one approved center to access the calendar.",
-    "selectCenter": "Select a center",
-    "monthView": "Month view",
-    "weekView": "Week view",
-    "dayView": "Day view",
-    "today": "Today",
-    "previousMonth": "Previous month",
-    "nextMonth": "Next month",
-    "previousWeek": "Previous week",
-    "nextWeek": "Next week",
-    "previousDay": "Previous day",
-    "nextDay": "Next day",
-    "noBookings": "No bookings",
-    "blockedDates": "Blocked date",
-    "addBlockedDate": "Block a date",
-    "removeBlockedDate": "Unblock",
-    "blockDateTitle": "Block this date",
-    "blockDateReason": "Reason (optional)",
-    "blockDateReasonPlaceholder": "Ex: Exceptional closure, maintenance...",
-    "blockAllDay": "All day",
-    "blockSpecificTimes": "Specific times",
-    "blockType": "Block type",
-    "slotsToBlock": "Slots to block",
-    "cancel": "Cancel",
-    "confirm": "Confirm",
-    "slotDetails": "Slot details",
-    "service": "Service",
-    "dateTime": "Date and time",
-    "participants": "participants",
-    "placesRemaining": "Places remaining",
-    "registeredParticipants": "Registered participants",
-    "noParticipants": "No registered participants",
-    "addManualBooking": "Add manually",
-    "closeSlot": "Close this slot",
+    "title": "Kalender och tillgänglighet",
+    "subtitle": "Hantera dina tider och bokningar",
+    "backToDashboard": "Tillbaka till instrumentpanel",
+    "noCenters": "Inget center tillgängligt",
+    "noCentersDesc": "Du behöver minst ett godkänt center för att komma åt kalendern.",
+    "selectCenter": "Välj ett center",
+    "monthView": "Månadsvy",
+    "weekView": "Veckovy",
+    "dayView": "Dagsvy",
+    "today": "Idag",
+    "previousMonth": "Föregående månad",
+    "nextMonth": "Nästa månad",
+    "previousWeek": "Föregående vecka",
+    "nextWeek": "Nästa vecka",
+    "previousDay": "Föregående dag",
+    "nextDay": "Nästa dag",
+    "noBookings": "Inga bokningar",
+    "blockedDates": "Blockerat datum",
+    "addBlockedDate": "Blockera datum",
+    "removeBlockedDate": "Avblockera",
+    "blockDateTitle": "Blockera detta datum",
+    "blockDateReason": "Anledning (valfritt)",
+    "blockDateReasonPlaceholder": "T.ex.: Exceptionell stängning, underhåll...",
+    "blockAllDay": "Hela dagen",
+    "blockSpecificTimes": "Specifika tider",
+    "blockType": "Blockeringstyp",
+    "slotsToBlock": "Tider att blockera",
+    "cancel": "Avbryt",
+    "confirm": "Bekräfta",
+    "slotDetails": "Tidsinformation",
+    "service": "Tjänst",
+    "dateTime": "Datum och tid",
+    "participants": "deltagare",
+    "placesRemaining": "Platser tillgängliga",
+    "registeredParticipants": "Registrerade deltagare",
+    "noParticipants": "Inga registrerade deltagare",
+    "addManualBooking": "Lägg till manuellt",
+    "closeSlot": "Stäng denna tid",
     "status": {
-      "PENDING": "Pending",
-      "CONFIRMED": "Confirmed",
-      "PAID": "Paid",
-      "RUNNING": "In progress",
-      "COMPLETED": "Completed",
-      "CANCELLED": "Cancelled"
+      "PENDING": "Väntande",
+      "CONFIRMED": "Bekräftad",
+      "PAID": "Betald",
+      "RUNNING": "Pågående",
+      "COMPLETED": "Slutförd",
+      "CANCELLED": "Avbokad"
     },
     "days": {
-      "monday": "Monday",
-      "tuesday": "Tuesday",
-      "wednesday": "Wednesday",
-      "thursday": "Thursday",
-      "friday": "Friday",
-      "saturday": "Saturday",
-      "sunday": "Sunday"
+      "monday": "Måndag",
+      "tuesday": "Tisdag",
+      "wednesday": "Onsdag",
+      "thursday": "Torsdag",
+      "friday": "Fredag",
+      "saturday": "Lördag",
+      "sunday": "Söndag"
     },
     "daysShort": {
-      "monday": "Mon",
-      "tuesday": "Tue",
-      "wednesday": "Wed",
-      "thursday": "Thu",
-      "friday": "Fri",
-      "saturday": "Sat",
-      "sunday": "Sun"
+      "monday": "Mån",
+      "tuesday": "Tis",
+      "wednesday": "Ons",
+      "thursday": "Tor",
+      "friday": "Fre",
+      "saturday": "Lör",
+      "sunday": "Sön"
     },
     "months": {
-      "january": "January",
-      "february": "February",
-      "march": "March",
+      "january": "Januari",
+      "february": "Februari",
+      "march": "Mars",
       "april": "April",
-      "may": "May",
-      "june": "June",
-      "july": "July",
-      "august": "August",
+      "may": "Maj",
+      "june": "Juni",
+      "july": "Juli",
+      "august": "Augusti",
       "september": "September",
-      "october": "October",
+      "october": "Oktober",
       "november": "November",
       "december": "December"
     },
     "blockedDatesList": {
-      "title": "Blocked dates",
-      "empty": "No blocked dates",
-      "allDay": "All day",
-      "specificTimes": "Specific times",
-      "noReason": "No reason specified",
-      "delete": "Delete",
-      "confirmDelete": "Confirm deletion?"
+      "title": "Blockerade datum",
+      "empty": "Inga blockerade datum",
+      "allDay": "Hela dagen",
+      "specificTimes": "Specifika tider",
+      "noReason": "Ingen anledning angiven",
+      "delete": "Ta bort",
+      "confirmDelete": "Bekräfta borttagning?"
     },
     "fillRate": {
-      "low": "Available",
-      "medium": "Partial",
+      "low": "Tillgänglig",
+      "medium": "Delvis",
       "high": "Full"
     },
     "responsive": {
-      "showCalendar": "Calendar",
-      "showList": "List"
+      "showCalendar": "Kalender",
+      "showList": "Lista"
     },
     "manualBookingForm": {
-      "title": "Add manual booking",
-      "serviceLabel": "Service",
-      "selectService": "Select a service",
-      "dateLabel": "Date",
-      "timeLabel": "Time",
-      "participantsLabel": "Participants",
-      "firstName": "First name",
-      "lastName": "Last name",
-      "email": "Email",
-      "phone": "Phone",
-      "optional": "optional",
-      "submit": "Create booking",
-      "submitting": "Creating...",
-      "success": "Booking created!",
-      "error": "An error occurred",
-      "back": "Back"
+      "title": "Lägg till manuell bokning",
+      "serviceLabel": "Tjänst",
+      "selectService": "Välj en tjänst",
+      "dateLabel": "Datum",
+      "timeLabel": "Tid",
+      "participantsLabel": "Deltagare",
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "email": "E-post",
+      "phone": "Telefon",
+      "optional": "valfritt",
+      "submit": "Skapa bokning",
+      "submitting": "Skapar...",
+      "success": "Bokning skapad!",
+      "error": "Ett fel uppstod",
+      "back": "Tillbaka"
     }
   },
   "centerDashboard": {
     "meta": {
-      "title": "Dashboard - My Center",
-      "description": "Manage your dive center, bookings and reviews."
+      "title": "Instrumentpanel - Mitt Center",
+      "description": "Hantera ditt dykcenter, bokningar och recensioner."
     },
-    "subtitle": "Manage your bookings and activity",
-    "verified": "Verified center",
+    "subtitle": "Hantera dina bokningar och aktivitet",
+    "verified": "Verifierat center",
     "pendingApproval": {
-      "title": "Center pending approval",
-      "description": "Your center is currently being reviewed by our team. You will receive an email once it's approved.",
-      "backToDashboard": "Back to dashboard"
+      "title": "Center väntar på godkännande",
+      "description": "Ditt center granskas för närvarande av vårt team. Du får ett e-postmeddelande när det godkänns.",
+      "backToDashboard": "Tillbaka till instrumentpanel"
     },
     "stats": {
-      "todayBookings": "Today's bookings",
-      "weekBookings": "This week",
-      "monthRevenue": "Monthly revenue",
-      "rating": "Average rating"
+      "todayBookings": "Bokningar idag",
+      "weekBookings": "Denna vecka",
+      "monthRevenue": "Månadsinkomst",
+      "rating": "Genomsnittsbetyg"
     },
     "pendingBookings": {
-      "title": "Pending bookings",
-      "emptyTitle": "No pending bookings",
-      "emptyDescription": "New booking requests will appear here.",
-      "confirm": "Confirm",
-      "reject": "Reject",
-      "participants": "participant(s)",
-      "viewAll": "View all"
+      "title": "Väntande bokningar",
+      "emptyTitle": "Inga väntande bokningar",
+      "emptyDescription": "Nya bokningsförfrågningar visas här.",
+      "confirm": "Bekräfta",
+      "reject": "Avvisa",
+      "participants": "deltagare",
+      "viewAll": "Visa alla"
     },
     "calendar": {
-      "title": "This week",
-      "participants": "participants",
-      "noBookings": "No dives this week",
-      "viewCalendar": "Calendar"
+      "title": "Denna vecka",
+      "participants": "deltagare",
+      "noBookings": "Inga dyk denna vecka",
+      "viewCalendar": "Kalender"
     },
     "reviews": {
-      "title": "Recent reviews",
-      "emptyTitle": "No reviews",
-      "emptyDescription": "Customer reviews will appear here.",
-      "respond": "Respond",
-      "responded": "Response posted",
-      "viewAll": "All reviews"
+      "title": "Senaste recensioner",
+      "emptyTitle": "Inga recensioner",
+      "emptyDescription": "Kundrecensioner visas här.",
+      "respond": "Svara",
+      "responded": "Svar publicerat",
+      "viewAll": "Alla recensioner"
     },
     "quickActions": {
-      "title": "Quick actions",
-      "createOffer": "Create offer",
-      "createOfferDesc": "Add a new service",
-      "viewCalendar": "View calendar",
-      "viewCalendarDesc": "Dive schedule",
-      "manageBookings": "Manage bookings",
-      "manageBookingsDesc": "All reservations",
-      "viewStats": "Statistics",
-      "viewStatsDesc": "Analyze performance",
-      "manageTeam": "Manage team",
-      "manageTeamDesc": "Team members",
-      "editCenter": "Edit center",
-      "editCenterDesc": "Center settings"
+      "title": "Snabbåtgärder",
+      "createOffer": "Skapa erbjudande",
+      "createOfferDesc": "Lägg till ny tjänst",
+      "viewCalendar": "Visa kalender",
+      "viewCalendarDesc": "Dykplanering",
+      "manageBookings": "Hantera bokningar",
+      "manageBookingsDesc": "Alla reservationer",
+      "viewStats": "Statistik",
+      "viewStatsDesc": "Analysera prestanda",
+      "manageTeam": "Hantera team",
+      "manageTeamDesc": "Teammedlemmar",
+      "editCenter": "Redigera center",
+      "editCenterDesc": "Centerinställningar"
     }
   },
- "auth": {
-  "login_title": "Login",
-  "register_title": "Sign Up",
-  "email": "Email",
-  "password": "Password",
-  "full_name": "Full Name",
-  "first_name": "First Name",
-  "last_name": "Last Name",
-  "submit_login": "Sign In",
-  "submit_register": "Create Account",
-  "no_account": "No account yet?",
-  "has_account": "Already have an account?",
-  "forgot_password": "Forgot password?",
-  "sign_up_link": "Sign up",
-  "sign_in_link": "Sign in",
-  "continue_with_google": "Continue with Google",
-  "or": "or",
-  "confirm_password": "Confirm password",
-  "country": "Country",
-  "password_mismatch": "Passwords do not match",
-  "password_match": "Passwords match",
-  "generic_error": "Something went wrong. Please try again.",
-  "register_success": "Account created successfully! Redirecting…",
-  "accept_terms": "I accept the",
-  "terms_link": "Terms and Conditions",
-  "and": "and the",
-  "privacy_link": "Privacy Policy",
-  "back": "Back",
-  "send_link": "Send link",
-  "email_sent": "Email sent!",
-  "email_sent_desc": "If an account exists with this address, you will receive a reset link.",
-  "reset_email_desc": "Enter your email to receive a reset link",
-  "remember_password": "Remember your password?",
-  "remember_me": "Remember me",
-  "verify_email_title": "Verify your email",
-  "verify_email_sent": "We sent a verification link to",
-  "verify_email_inbox": "Check your inbox",
-  "verify_email_spam": "Also check your spam folder",
-  "verify_email_expires": "The link expires in 24 hours",
-  "resend_email": "Resend email",
-  "resending": "Sending...",
-  "wrong_email": "Wrong address?",
-  "modify": "Modify",
-  "back_to_login": "Back to login",
-  "your_email": "your email address",
-  "checking_email": "Checking email availability...",
-  "password_strength": {
-    "label": "Password strength",
-    "none": "None",
-    "weak": "Weak",
-    "fair": "Fair",
-    "good": "Good",
-    "strong": "Strong",
-    "criteria": {
-      "min_length": "At least 8 characters",
-      "uppercase": "At least one uppercase letter",
-      "lowercase": "At least one lowercase letter",
-      "number": "At least one number"
-    }
-  },
-  "password_requirements": {
-    "title": "Password requirements",
-    "min_length": "At least 8 characters",
-    "uppercase": "At least one uppercase letter",
-    "number": "At least one number"
-  },
-  "errors": {
-    "invalid_credentials": "Invalid email or password",
-    "too_many_attempts": "Too many login attempts",
-    "retry_after": "Try again in {time}",
-    "firstName_required": "First name is required",
-    "firstName_too_long": "First name must be less than 50 characters",
-    "lastName_required": "Last name is required",
-    "lastName_too_long": "Last name must be less than 50 characters",
-    "email_required": "Email is required",
-    "email_invalid": "Invalid email format",
-    "email_exists": "An account already exists with this email",
-    "password_min_length": "Password must be at least 8 characters",
-    "password_uppercase": "Password must contain at least one uppercase letter",
-    "password_number": "Password must contain at least one number",
-    "rate_limit": "Too many attempts. Please try again later.",
-    "blacklisted": "This email cannot be used for registration"
-  }
- },
- "contact": {
-  "meta": {
-   "title": "Contact",
-   "description": "Contact the EviDive team. Our team is here to answer your questions."
-  },
-  "title": "Contact Us",
-  "subtitle": "Have a question? Our team is here to help.",
-  "name": "Your name",
-  "email": "Your email",
-  "subject": "Subject",
-  "message": "Message",
-  "send": "Send",
-  "success": "Message sent successfully!",
-  "error": "Something went wrong. Please try again.",
-  "info_title": "Information",
-  "info_email": "info@evidive.blue",
-  "info_address": "Geneva, Switzerland"
- },
- "explorer": {
-  "meta": {
-   "title": "Explorer",
-   "description": "Explore the best diving sites in the world with our interactive map."
-  },
-  "title": "Explorer",
-  "subtitle": "Navigate to discover dive sites",
-  "controls_title": "Use arrow keys to move",
-  "controls_hint": "Approach markers and press SPACE",
-  "explore_location": "Explore this location",
-  "coming_soon": "Interactive map coming soon",
-  "coming_soon_desc": "We are working on an immersive experience to discover the best diving sites in the world.",
-  "backHome": "Back to home"
- },
- "legal": {
-  "terms": {
-   "title": "Terms and Conditions",
-   "intro_title": "1. Introduction",
-   "intro_text": "Welcome to EviDive. By accessing our website, you agree to be bound by these Terms and Conditions. Please read them carefully.",
-   "services_title": "2. Services",
-   "services_text": "EviDive provides a platform for booking diving experiences and courses. We act as an intermediary between divers and diving centers.",
-   "bookings_title": "3. Bookings & Cancellations",
-   "bookings_text": "Bookings are subject to availability and confirmation by the diving center. Cancellation policies vary by center and offer type. Please review specific terms during booking.",
-   "liability_title": "4. Liability",
-   "liability_text": "Diving involves inherent risks. You must be certified and medically fit to dive. EviDive is not liable for accidents or incidents occurring during activities booked through our platform."
-  },
-  "privacy": {
-   "title": "Privacy Policy",
-   "collection_title": "1. Data Collection",
-   "collection_text": "We collect personal information necessary for your bookings, including name, email, and certification level. We may also collect usage data to improve our services.",
-   "usage_title": "2. Data Usage",
-   "usage_text": "Your data is used to process bookings, communicate with you, and personalize your experience. We share necessary details with diving centers for your reservations.",
-   "protection_title": "3. Data Protection",
-   "protection_text": "We implement security measures to protect your personal information. We do not sell your data to third parties.",
-   "cookies_title": "4. Cookies",
-   "cookies_text": "We use cookies to enhance navigation and remember your preferences (like language settings). You can control cookie settings in your browser."
-  }
- },
- "about": {
-  "meta": {
-   "title": "About",
-   "description": "Discover the story of EviDive, our mission and values. A passionate team of diving and technology enthusiasts based in Switzerland."
-  },
-  "hero": {
-   "title": "About EviDive",
-   "subtitle": "Connecting divers to the best underwater experiences"
-  },
-  "story": {
-   "title": "Our story",
-   "subtitle": "Our journey to revolutionize scuba diving",
-   "timeline": {
-    "idea": "The idea was born from the frustration of booking dives abroad",
-    "launch": "Launch of the first version of the platform",
-    "expansion": "International expansion with 100+ partner centers",
-    "partners": "Strategic partnerships and new features"
-   }
-  },
-  "mission": {
-   "title": "Our mission",
-   "description": "EviDive was born from a shared passion for diving and technology. Our mission is to connect divers worldwide to the best underwater experiences while simplifying life for dive centers."
-  },
-  "values": {
-   "title": "Our values",
-   "subtitle": "The principles that guide every decision we make",
-   "items": {
-    "trust": {
-     "title": "Trust",
-     "description": "Verified centers and authentic reviews for peaceful booking."
+  "auth": {
+    "login_title": "Logga in",
+    "register_title": "Registrera",
+    "email": "E-post",
+    "password": "Lösenord",
+    "full_name": "Fullständigt namn",
+    "first_name": "Förnamn",
+    "last_name": "Efternamn",
+    "submit_login": "Logga in",
+    "submit_register": "Skapa konto",
+    "no_account": "Har du inget konto?",
+    "has_account": "Har du redan ett konto?",
+    "forgot_password": "Glömt lösenordet?",
+    "sign_up_link": "Registrera",
+    "sign_in_link": "Logga in",
+    "continue_with_google": "Fortsätt med Google",
+    "or": "eller",
+    "confirm_password": "Bekräfta lösenord",
+    "country": "Land",
+    "password_mismatch": "Lösenorden matchar inte",
+    "password_match": "Lösenorden matchar",
+    "generic_error": "Något gick fel. Försök igen.",
+    "register_success": "Konto skapat! Omdirigerar...",
+    "accept_terms": "Jag accepterar",
+    "terms_link": "Användarvillkoren",
+    "and": "och",
+    "privacy_link": "Integritetspolicyn",
+    "back": "Tillbaka",
+    "send_link": "Skicka länk",
+    "email_sent": "E-post skickat!",
+    "email_sent_desc": "Om ett konto finns med denna adress får du en återställningslänk.",
+    "reset_email_desc": "Ange din e-post för att få en återställningslänk",
+    "remember_password": "Kommer du ihåg ditt lösenord?",
+    "remember_me": "Kom ihåg mig",
+    "verify_email_title": "Verifiera din e-post",
+    "verify_email_sent": "Vi har skickat en verifieringslänk till",
+    "verify_email_inbox": "Kontrollera din inkorg",
+    "verify_email_spam": "Kontrollera även skräppostmappen",
+    "verify_email_expires": "Länken upphör om 24 timmar",
+    "resend_email": "Skicka igen",
+    "resending": "Skickar...",
+    "wrong_email": "Fel adress?",
+    "modify": "Ändra",
+    "back_to_login": "Tillbaka till inloggning",
+    "your_email": "din e-postadress",
+    "checking_email": "Kontrollerar e-post...",
+    "password_strength": {
+      "label": "Lösenordsstyrka",
+      "none": "Ingen",
+      "weak": "Svagt",
+      "fair": "Acceptabelt",
+      "good": "Bra",
+      "strong": "Starkt",
+      "criteria": {
+        "min_length": "Minst 8 tecken",
+        "uppercase": "Minst en stor bokstav",
+        "lowercase": "Minst en liten bokstav",
+        "number": "Minst en siffra"
+      }
     },
-    "safety": {
-     "title": "Safety",
-     "description": "Strict standards and clear prerequisites for every dive."
+    "password_requirements": {
+      "title": "Lösenordskrav",
+      "min_length": "Minst 8 tecken",
+      "uppercase": "Minst en stor bokstav",
+      "number": "Minst en siffra"
     },
-    "experience": {
-     "title": "Experience",
-     "description": "Immersive design and seamless booking for a premium experience."
-    },
-    "community": {
-     "title": "Community",
-     "description": "A community of enthusiasts sharing their discoveries."
+    "errors": {
+      "invalid_credentials": "Ogiltig e-post eller lösenord",
+      "too_many_attempts": "För många inloggningsförsök",
+      "retry_after": "Försök igen om {time}",
+      "firstName_required": "Förnamn krävs",
+      "firstName_too_long": "Förnamn måste vara under 50 tecken",
+      "lastName_required": "Efternamn krävs",
+      "lastName_too_long": "Efternamn måste vara under 50 tecken",
+      "email_required": "E-post krävs",
+      "email_invalid": "Ogiltigt e-postformat",
+      "email_exists": "Ett konto med denna e-post finns redan",
+      "password_min_length": "Lösenordet måste vara minst 8 tecken",
+      "password_uppercase": "Lösenordet måste innehålla minst en stor bokstav",
+      "password_number": "Lösenordet måste innehålla minst en siffra",
+      "rate_limit": "För många försök. Försök igen senare.",
+      "blacklisted": "Denna e-postadress kan inte användas för registrering"
     }
-   }
-  },
-  "team": {
-   "title": "Our team",
-   "description": "A team of diving and technology enthusiasts based in Switzerland."
-  }
- },
- "depth": {
-  "surface": "Surface",
-  "shallow": "Shallow",
-  "medium": "Medium",
-  "deep": "Deep",
-  "abyss": "Abyss"
- },
- "common": {
-  "search": "Search",
-  "login": "Login",
-  "register": "Sign up",
-  "logout": "Logout",
-  "dashboard": "Dashboard",
-  "explore": "Explore",
-  "contact": "Contact",
-  "learnMore": "Learn more"
- },
- "hero": {
-  "tagline": "Dive into Adventure",
-  "title": "Explore the Depths",
-  "subtitle": "Book your dives at the world's most beautiful sites. Unique experiences, certified centers, unforgettable memories.",
-  "discover": "Discover",
-  "cta": "Explore destinations",
-  "depth": "{depth}m deep",
-  "scroll": "Scroll down"
- },
- "worldExplorer": {
-  "title": "Explore the depths of the world",
-  "subtitle": "Click on a destination to discover the best diving spots"
- },
- "socialFeed": {
-  "title": "Follow Our Adventures",
-  "subtitle": "Latest news from our community",
-  "all": "All",
-  "instagram": "Instagram",
-  "facebook": "Facebook",
-  "refresh": "Refresh feed"
- },
- "search": {
-  "where": "Where do you want to dive?",
-  "when": "When?",
-  "guests": "Divers",
-  "searchButton": "Search"
- },
- "features": {
-  "explore": {
-   "title": "Explore the depths",
-   "description": "Browse our interactive map and discover the most beautiful diving sites in the world."
-  },
-  "book": {
-   "title": "Book in one click",
-   "description": "Check real-time availability and book your dive with ease."
-  },
-  "dive": {
-   "title": "Dive with peace of mind",
-   "description": "Receive your confirmation instantly with all the details for an unforgettable experience."
-  }
- },
- "destinations": {
-  "title": "Popular destinations",
-  "subtitle": "Our community's favorite spots",
-  "reviews": "reviews",
-  "maldives": {
-   "name": "Maldives",
-   "region": "Indian Ocean",
-   "description": "Crystal clear waters and exceptional marine life"
-  },
-  "bali": {
-   "name": "Bali",
-   "region": "Indonesia",
-   "description": "Coral reefs and manta rays"
-  },
-  "redSea": {
-   "name": "Red Sea",
-   "region": "Egypt",
-   "description": "Legendary wrecks and colorful corals"
-  },
-  "greatBarrier": {
-   "name": "Great Barrier",
-   "region": "Australia",
-   "description": "The world's largest coral reef"
-  }
- },
- "centers": {
-  "title": "Dive centers",
-  "subtitle": "Certified professionals are waiting for you",
-  "viewAll": "View all centers",
-  "joinUs": "Join our network",
-  "joinDescription": "Are you a dive center? Increase your visibility and manage your bookings easily.",
-  "joinButton": "Join EviDive",
-  "directory": {
-   "meta": {
-    "title": "Centers - EviDive",
-    "description": "Discover approved dive centers on EviDive and explore them on the globe."
-   },
-   "title": "Centers",
-   "subtitle": "Rotate the globe and discover approved dive centers.",
-   "listTitle": "Registered centers",
-   "emptyTitle": "No centers available yet",
-   "emptyDescription": "Centers will appear here as soon as they are approved by an administrator.",
-   "verified": "Verified",
-   "viewCenter": "View center",
-   "backToCenters": "Back to centers",
-   "rating": "{rating} ★ ({count} reviews)",
-   "globeHint": "Tip: right-click on a point to open the center."
-  },
-  "benefits": {
-   "visibility": "International visibility",
-   "booking": "Simplified booking management",
-   "payments": "Secure payments"
-  },
-  "stats": {
-   "centers": "Partner centers",
-   "divers": "Active divers",
-   "destinations": "Destinations",
-   "rating": "Average rating"
-  }
- },
- "footer": {
-  "description": "The reference platform for booking your dives at the best centers in the world.",
-  "discover": "Discover",
-  "destinations": "Destinations",
-  "offers": "Special offers",
-  "company": "Company",
-  "about": "About",
-  "contact": "Contact",
-  "careers": "Careers",
-  "legal": "Legal",
-  "terms": "Terms",
-  "privacy": "Privacy",
-  "sitemap": "Sitemap",
-  "rights": "All rights reserved."
- },
- "nav": {
-  "home": "Home",
-  "explorer": "Explore",
-  "about": "About",
-  "centers": "Centers",
-  "dashboard": "Dashboard",
-  "myCenter": "My center",
-  "sellerView": "Seller view",
- "becomeSeller": "Become a seller",
- "createCenter": "Create a center",
-  "adminCenters": "Admin — Centers",
-  "adminUsers": "Admin — Users",
-  "myBookings": "My bookings",
-  "myProfile": "My profile",
-  "settings": "Settings",
-  "logout": "Logout"
- },
- "userTypes": {
-  "diver": "Diver",
-  "seller": "Seller",
-  "center": "Center",
-  "admin": "Admin"
- },
- "images": {
-  "avatar": "Avatar",
-  "evidiveLogo": "EviDive logo",
-  "heroImage": "Hero image",
-  "close": "Close",
-  "socialPost": "Social media post"
- },
- "dashboard": {
-  "welcome": "Welcome, {name}",
-  "subtitle": "Manage your dives and bookings from your dashboard.",
-  "defaultName": "Diver",
-  "stats": {
-    "totalDives": "Total dives",
-    "completedDives": "Completed dives",
-    "upcomingBookings": "Upcoming bookings",
-    "unreadNotifications": "Unread notifications",
-    "favorites": "Favorites",
-    "reviews": "Published reviews",
-    "reviewsGiven": "Reviews given"
-  },
-  "actions": {
-    "explore": "Explore",
-    "exploreDesc": "Discover dive sites",
-    "findCenter": "Find a center",
-    "findCenterDesc": "Browse verified centers",
-    "profile": "My profile",
-    "profileDesc": "Manage my information",
-    "settings": "Settings",
-    "settingsDesc": "Configure my account"
-  },
-  "bookings": {
-    "title": "My bookings",
-    "viewAll": "View all",
-    "emptyTitle": "No bookings",
-    "emptyDesc": "You don't have any bookings yet. Explore dive sites and book your next adventure!",
-    "exploreButton": "Explore destinations"
-  },
-  "upcoming": {
-    "title": "Upcoming dives",
-    "viewDetails": "View details",
-    "emptyTitle": "No upcoming dives",
-    "emptyDesc": "You don't have any scheduled dives. Discover the best offers!",
-    "exploreOffers": "Explore offers",
-    "status": {
-      "PENDING": "Pending",
-      "CONFIRMED": "Confirmed",
-      "PAID": "Paid",
-      "RUNNING": "In progress",
-      "COMPLETED": "Completed",
-      "CANCELLED": "Cancelled",
-      "NOSHOW": "No show",
-      "REMOVED": "Removed"
-    }
-  },
-  "history": {
-    "title": "Recent history",
-    "viewAll": "View all",
-    "emptyTitle": "No completed dives",
-    "emptyDesc": "Your dive history will appear here after your first adventures.",
-    "leaveReview": "Leave a review",
-    "rating": "{rating}/5"
-  },
-  "quickActions": {
-    "title": "Quick actions",
-    "searchDive": "Search for a dive",
-    "searchDiveDesc": "Find your next adventure",
-    "myBookings": "My bookings",
-    "myBookingsDesc": "Manage your reservations",
-    "myReviews": "My reviews",
-    "myReviewsDesc": "View your published reviews"
-  },
-  "notifications": {
-    "title": "Notifications",
-    "empty": "No notifications",
-    "open": "Open"
-  },
-  "certification": {
-    "label": "Certification",
-    "notSet": "Not set",
-    "update": "Update"
-  },
-  "seller": {
-   "title": "Dashboard — Seller",
-   "subtitle": "Same account and rights as a diver, with a different view.",
-   "description": "Same account and rights as a diver, with a different view.",
-   "diverView": "Diver view",
-   "profile": "Profile",
-   "sellerView": "Seller view",
-   "sellerCenter": "Seller Center",
-   "status": "Status",
-   "adminValidateCenters": "Admin — Validate centers",
-   "kpis": {
-    "services": "Services",
-    "upcomingBookings": "Upcoming bookings",
-    "pendingPayout": "Pending payout"
-   },
-   "services": "Services (preview)",
-   "noServices": "No services at the moment.",
-   "service": "Service",
-   "noSellerCenter": "No \"seller center\" detected. If you want to use the seller path, go through",
-   "sellerOnboarding": "the seller onboarding",
-   "goBack": "Back to dashboard"
-  },
-  "center": {
-   "title": "My center",
-   "titleAdmin": "Centers (admin)",
-   "subtitle": "Follow the status of your request and manage your center profile.",
-   "subtitleAdmin": "Quick list of pending requests.",
-   "kpis": {
-    "centers": "Centers",
-    "upcomingBookings": "Upcoming bookings",
-    "pendingBookings": "Pending bookings",
-    "unpaidBookings": "Unpaid bookings",
-    "pendingCenters": "Pending centers"
-   },
-   "statuses": {
-    "PENDING": "Pending",
-    "APPROVED": "Approved",
-    "REJECTED": "Rejected",
-    "SUSPENDED": "Suspended"
-   },
-   "labels": {
-    "services": "Services",
-    "bookings": "Bookings",
-    "reviews": "Reviews",
-    "stripeConnected": "Stripe connected",
-    "stripeMissing": "Stripe not configured"
-   },
-   "createCenter": "Create another center",
-   "validateRequests": "Validate requests",
-   "manageUsers": "Manage users",
-   "noCenters": "No centers found",
-   "noCentersDesc": "If you just completed onboarding, refresh this page. Otherwise, you can start creating a center.",
-   "createNewCenter": "Create a center",
-   "pendingRequests": "No pending requests at the moment.",
-   "viewCenters": "View centers",
-   "viewPublicCenter": "View public page",
-   "statusVerified": "Verified",
-   "pendingDesc": "Your center is pending validation by an administrator."
-  },
-  "admin": {
-   "users": {
-    "title": "Admin — Users",
-    "subtitle": "Modify rights, activate/deactivate, blacklist and delete accounts.",
-    "validateCenters": "Validate centers",
-    "dashboard": "Dashboard",
-    "userType": "Type",
-    "active": "Active",
-    "inactive": "Inactive",
-    "blacklist": "Blacklist",
-    "ok": "OK",
-    "verified": "Email verified",
-    "unverified": "Email not verified",
-    "apply": "Apply",
-    "deactivate": "Deactivate",
-    "activate": "Activate",
-    "removeBlacklist": "Remove blacklist",
-    "addBlacklist": "Blacklist",
-    "delete": "Delete",
-    "noUsers": "No users."
-   }
-  }
- },
- "profile": {
-  "backToDashboard": "Back to dashboard",
-  "defaultName": "User",
-  "emailVerified": "Email verified",
-  "editProfile": "Edit profile",
-  "saveChanges": "Save",
-  "saving": "Saving...",
-  "sections": {
-   "personal": "Personal information",
-   "diving": "Diving information",
-   "account": "Account"
-  },
-  "fields": {
-   "firstName": "First name",
-   "lastName": "Last name",
-   "phone": "Phone",
-   "location": "Location",
-   "bio": "Bio",
-   "certificationLevel": "Certification level",
-   "certificationOrg": "Organization",
-   "totalDives": "Total dives"
-  },
-  "placeholders": {
-   "firstName": "Your first name",
-   "lastName": "Your last name",
-   "phone": "+1 234 567 8900",
-   "city": "City",
-   "country": "Country",
-   "bio": "Tell us about yourself and your passion for diving..."
-  },
-  "divingStats": {
-   "title": "Statistics",
-   "bookings": "Bookings",
-   "reviews": "Reviews"
-  },
-  "account": {
-   "email": "Email",
-   "type": "Account type",
-   "status": "Status",
-   "active": "Active"
-  }
- },
-  "settings": {
-  "backToDashboard": "Back to dashboard",
-  "title": "Settings",
-  "subtitle": "Manage your preferences and account settings.",
-  "saved": "Settings saved",
-  "sections": {
-   "notifications": "Notifications",
-   "privacy": "Privacy",
-   "language": "Language & region",
-   "security": "Security",
-   "account": "Account"
-  },
-  "notifications": {
-   "email": {
-    "label": "Email notifications",
-    "description": "Receive booking confirmations by email"
-   },
-   "sms": {
-    "label": "SMS reminders",
-    "description": "Receive dive reminders by SMS"
-   },
-   "reminders": {
-    "label": "Booking reminders",
-    "description": "Reminders before your dives"
-   },
-   "marketing": {
-    "label": "Marketing emails",
-    "description": "Special offers and news"
-   }
-  },
-  "privacy": {
-   "profileVisible": {
-    "label": "Profile visible to centers",
-    "description": "Allow dive centers to see your profile"
-   },
-   "diveHistory": {
-    "label": "Visible history",
-    "description": "Show your dive history"
-   }
-  },
-  "language": {
-   "select": "Select your language"
-  },
-  "security": {
-   "changePassword": {
-    "label": "Change password",
-    "description": "Update your password"
-   },
-   "emailVerified": {
-    "label": "Email verified"
-   },
-   "verified": "Verified"
-  },
-  "account": {
-   "export": {
-    "label": "Export my data",
-    "description": "Download all your data (GDPR)",
-    "success": "Data exported successfully"
-   },
-   "signOut": {
-    "label": "Sign out",
-    "description": "Sign out of your account"
-   },
-   "delete": {
-    "label": "Delete account",
-    "description": "Permanently delete your account and all data"
-   }
-  },
-  "errors": {
-   "unauthorized": "You must be logged in",
-   "server_error": "An error occurred",
-   "unknown_error": "An unknown error occurred"
-  },
-  "deleteModal": {
-   "title": "Delete your account?",
-   "description": "This action cannot be undone. All your data, bookings and reviews will be permanently deleted.",
-   "cancel": "Cancel",
-   "confirm": "Delete"
-  }
- },
- "careers": {
-  "badge": "We're hiring",
-  "title": "Join the EviDive team",
-  "subtitle": "Help revolutionize how divers discover and book their underwater adventures.",
-  "valuesTitle": "Our values",
-  "values": {
-   "passion": {
-    "title": "Passion",
-    "description": "Love of diving guides every decision we make."
-   },
-   "team": {
-    "title": "Team",
-    "description": "We believe in the power of the collective."
-   },
-   "innovation": {
-    "title": "Innovation",
-    "description": "Always pushing the boundaries of what's possible."
-   },
-   "impact": {
-    "title": "Impact",
-    "description": "Creating positive change for the ocean."
-   }
-  },
-  "benefitsTitle": "Our benefits",
-  "benefits": {
-   "diving": "Free dives",
-   "remote": "Remote work",
-   "flexibility": "Flexible hours",
-   "health": "Full health coverage"
-  },
-  "positionsTitle": "Open positions",
-  "positions": {
-   "fullstack": {
-    "title": "Full-Stack Developer",
-    "department": "Technology",
-    "location": "Geneva / Remote",
-    "type": "Full-time"
-   },
-   "marketing": {
-    "title": "Digital Marketing Manager",
-    "department": "Marketing",
-    "location": "Geneva",
-    "type": "Full-time"
-   },
-   "support": {
-    "title": "Bilingual Customer Support",
-    "department": "Support",
-    "location": "Remote",
-    "type": "Full-time"
-   }
-  },
-  "applyButton": "Apply",
-  "cta": {
-   "title": "Can't find your position?",
-   "description": "Send us a spontaneous application. We're always looking for passionate talent.",
-   "button": "Contact us"
-  }
- },
- "sitemap": {
-  "title": "Sitemap",
-  "subtitle": "Easily find all EviDive pages",
-  "sections": {
-   "main": "Main pages",
-   "explore": "Explore",
-   "account": "My account",
-   "business": "Business",
-   "legal": "Legal"
-  },
-  "links": {
-   "home": "Home",
-   "about": "About",
-   "contact": "Contact",
-   "explorer": "Explorer",
-   "centers": "Dive centers",
-   "login": "Login",
-   "register": "Sign up",
-   "dashboard": "Dashboard",
-   "profile": "My profile",
-   "settings": "Settings",
-   "onboard": "Become a partner",
-   "careers": "Careers",
-   "terms": "Terms and conditions",
-   "privacy": "Privacy policy"
-  },
-  "descriptions": {
-   "home": "EviDive homepage",
-   "about": "Our story and mission",
-   "contact": "Contact us",
-   "explorer": "Interactive site map",
-   "centers": "Directory of verified centers",
-   "login": "Access your account",
-   "register": "Create an account",
-   "dashboard": "Manage your bookings",
-   "profile": "Edit your information",
-   "settings": "Configure your account",
-   "onboard": "Join our network",
-   "careers": "Job opportunities",
-   "terms": "Our terms of use",
-   "privacy": "Data protection"
-  },
-  "lastUpdated": "Last updated"
- },
- "metadata": {
-  "home": {
-   "title": "EviDive - Explore the ocean depths with verified centers",
-   "description": "Discover the best diving spots with EviDive. Book with PADI-certified centers and explore underwater wonders safely."
-  },
-  "careers": {
-   "title": "Careers - Join the EviDive team",
-   "description": "Job opportunities at EviDive. Join our passionate team to revolutionize the underwater diving experience."
   },
   "contact": {
-   "title": "Contact - EviDive",
-   "description": "Contact the EviDive team. Our team is here to answer your questions about diving and our services."
+    "meta": {
+      "title": "Kontakt",
+      "description": "Kontakta EviDive-teamet. Vårt team är redo att svara på dina frågor."
+    },
+    "title": "Kontakta oss",
+    "subtitle": "Har du en fråga? Vårt team är redo att hjälpa dig.",
+    "name": "Ditt namn",
+    "email": "Din e-post",
+    "subject": "Ämne",
+    "message": "Meddelande",
+    "send": "Skicka",
+    "success": "Meddelande skickat!",
+    "error": "Något gick fel. Försök igen.",
+    "info_title": "Information",
+    "info_email": "info@evidive.blue",
+    "info_address": "Genève, Schweiz"
   },
   "explorer": {
-   "title": "Explorer - Interactive map of diving sites",
-   "description": "Discover the best diving sites with our interactive map. Explore the ocean depths near you."
+    "meta": {
+      "title": "Utforskare",
+      "description": "Upptäck de bästa dykplatserna i världen med vår interaktiva karta."
+    },
+    "title": "Utforskare",
+    "subtitle": "Navigera för att upptäcka dykplatser",
+    "controls_title": "Använd piltangenterna för att röra dig",
+    "controls_hint": "Närma dig markörer och tryck MELLANSLAG",
+    "explore_location": "Utforska denna plats",
+    "coming_soon": "Interaktiv karta kommer snart",
+    "coming_soon_desc": "Vi arbetar på en uppslukande upplevelse för att upptäcka världens bästa dykplatser.",
+    "backHome": "Tillbaka till startsidan"
   },
-  "login": {
-   "title": "Login - EviDive",
-   "description": "Log in to your EviDive account to manage your bookings and access your dashboard."
+  "legal": {
+    "terms": {
+      "title": "Användarvillkor",
+      "intro_title": "1. Introduktion",
+      "intro_text": "Välkommen till EviDive. Genom att använda vår webbplats accepterar du dessa Användarvillkor. Läs dem noggrant.",
+      "services_title": "2. Tjänster",
+      "services_text": "EviDive erbjuder en plattform för bokning av dykupplevelser och kurser. Vi agerar som mellanhand mellan dykare och dykcenter.",
+      "bookings_title": "3. Bokningar och avbokningar",
+      "bookings_text": "Bokningar är beroende av tillgänglighet och bekräftelse från dykcentret. Avbokningsregler varierar beroende på center och erbjudandetyp. Kontrollera de specifika villkoren vid bokning.",
+      "liability_title": "4. Ansvar",
+      "liability_text": "Dykning medför inneboende risker. Du måste ha lämplig certifiering och vara medicinskt lämplig för dykning. EviDive ansvarar inte för olyckor eller incidenter som inträffar under aktiviteter bokade via vår plattform."
+    },
+    "privacy": {
+      "title": "Integritetspolicy",
+      "collection_title": "1. Datainsamling",
+      "collection_text": "Vi samlar in personuppgifter som krävs för dina bokningar, inklusive namn, e-post och certifieringsnivå. Vi kan också samla in användningsdata för att förbättra våra tjänster.",
+      "usage_title": "2. Dataanvändning",
+      "usage_text": "Dina uppgifter används för att behandla bokningar, kommunicera med dig och anpassa din upplevelse. Vi delar nödvändiga uppgifter med dykcenter för dina reservationer.",
+      "protection_title": "3. Dataskydd",
+      "protection_text": "Vi implementerar säkerhetsåtgärder för att skydda din personliga information. Vi säljer inte dina uppgifter till tredje part.",
+      "cookies_title": "4. Cookies",
+      "cookies_text": "Vi använder cookies för att förbättra navigering och komma ihåg dina preferenser (som språkinställningar). Du kan hantera cookie-inställningar i din webbläsare."
+    }
   },
-  "register": {
-   "title": "Register - EviDive",
-   "description": "Create your EviDive account and start exploring underwater wonders with certified centers."
+  "about": {
+    "meta": {
+      "title": "Om oss",
+      "description": "Upptäck EviDives historia, vår mission och våra värderingar. Ett passionerat team av dyk- och teknikentusiaster baserat i Schweiz."
+    },
+    "hero": {
+      "title": "Om EviDive",
+      "subtitle": "Förenar dykare med de bästa undervattensupplevelserna"
+    },
+    "story": {
+      "title": "Vår historia",
+      "subtitle": "Vår resa för att revolutionera dykning",
+      "timeline": {
+        "idea": "Idén föddes ur frustrationen att boka dyk utomlands",
+        "launch": "Lansering av första versionen av plattformen",
+        "expansion": "Internationell expansion med 100+ partnercenter",
+        "partners": "Strategiska partnerskap och nya funktioner"
+      }
+    },
+    "mission": {
+      "title": "Vår mission",
+      "description": "EviDive föddes ur en delad passion för dykning och teknik. Vår mission är att förbinda dykare världen över med de bästa undervattensupplevelserna, samtidigt som vi förenklar livet för dykcenter."
+    },
+    "values": {
+      "title": "Våra värderingar",
+      "subtitle": "Principerna som vägleder varje beslut vi tar",
+      "items": {
+        "trust": {
+          "title": "Förtroende",
+          "description": "Verifierade center och autentiska recensioner för trygg bokning."
+        },
+        "safety": {
+          "title": "Säkerhet",
+          "description": "Strikta standarder och tydliga krav för varje dyk."
+        },
+        "experience": {
+          "title": "Upplevelse",
+          "description": "Uppslukande design och smidig bokning för en premiumupplevelse."
+        },
+        "community": {
+          "title": "Gemenskap",
+          "description": "En community av entusiaster som delar sina upptäckter."
+        }
+      }
+    },
+    "team": {
+      "title": "Vårt team",
+      "description": "Ett team av dyk- och teknikentusiaster baserat i Schweiz."
+    }
   },
-  "resetPassword": {
-   "title": "Reset password - EviDive",
-   "description": "Reset your EviDive password to regain access to your account."
+  "depth": {
+    "surface": "Yta",
+    "shallow": "Grunt",
+    "medium": "Medeldjupt",
+    "deep": "Djupt",
+    "abyss": "Djuphavet"
   },
-  "forgotPassword": {
-   "title": "Forgot password - EviDive",
-   "description": "Request a password reset link for your EviDive account."
+  "common": {
+    "search": "Sök",
+    "login": "Logga in",
+    "register": "Registrera",
+    "logout": "Logga ut",
+    "dashboard": "Instrumentpanel",
+    "explore": "Utforska",
+    "contact": "Kontakt",
+    "learnMore": "Läs mer"
   },
-  "verifyEmail": {
-   "title": "Email verification - EviDive",
-   "description": "Verify your email address to activate your EviDive account and access all features."
-  }
- },
- "adminCenters": {
-  "title": "Admin · Centers",
-  "subtitle": "Validate center signups (PENDING → APPROVED/REJECTED).",
-  "backToCenters": "Back to centers",
-  "tokenMissingTitle": "ADMIN_TOKEN missing",
-  "tokenMissingDesc": "Configure `ADMIN_TOKEN` (env) to enable admin validation.",
-  "accessDeniedTitle": "Access denied",
-  "accessDeniedDesc": "Add `?token=...` with the correct token to access this page.",
-  "pendingTitle": "Pending signups",
-  "nonePending": "No pending centers.",
-  "email": "Email",
-  "phone": "Phone",
-  "approve": "Approve",
-  "reject": "Reject"
- },
- "onboard": {
-  "meta": {
-   "title": "Sign Up - EviDive",
-   "description": "Join EviDive as a buyer, seller or dive center."
+  "hero": {
+    "tagline": "Dyk in i äventyret",
+    "title": "Utforska djupen",
+    "subtitle": "Boka dina dyk på världens vackraste platser. Unika upplevelser, certifierade center, oförglömliga minnen.",
+    "discover": "Upptäck",
+    "cta": "Utforska destinationer",
+    "depth": "{depth}m djup",
+    "scroll": "Scrolla ner"
   },
-  "title": "Join EviDive",
-  "subtitle": "Choose your account type",
-  "diver": {
-   "title": "I am a buyer",
-   "description": "Find and book your dives at the best centers worldwide.",
-   "feature1": "Access to all verified centers",
-   "feature2": "Instant booking",
-   "feature3": "Dive logbook",
-   "steps": {
-    "account": "Account",
-    "preferences": "Preferences",
-    "review": "Review"
-   },
-   "account": {
-    "description": "Create your diver account.",
-    "fullName": "Full name",
-    "phone": "Phone",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm password",
-    "submit": "Create my account"
-   },
-   "preferences": {
-    "description": "Customize your experience.",
-    "certificationLevel": "Certification level",
-    "certificationOrg": "Organization",
-    "totalDives": "Total dives",
-    "preferredLanguage": "Preferred language"
-   },
-   "review": {
-    "description": "Review your information.",
-    "passwordConfirmTitle": "Confirmation required",
-    "passwordConfirmDescription": "For security reasons, please enter your password to finalize your signup.",
-    "passwordRequired": "Please enter your password to continue.",
-   "errors": {
-    "generic": "Something went wrong. Please try again."
-   },
-    "termsAccept": "I accept EviDive's Terms and Conditions and Privacy Policy.",
-    "submitButton": "Complete registration",
-    "successTitle": "Welcome!",
-    "successDescription": "Your account has been created. You can now explore and book your dives.",
-    "exploreButton": "Explorer",
-    "summary": "Résumé",
-    "name": "Nom",
-    "emailLabel": "Email",
-    "phoneLabel": "Téléphone",
-    "certification": "Certification",
-    "dives": "Plongées",
-    "complete": "Complété"
-   },
-   "dashboard": {
+  "worldExplorer": {
+    "title": "Utforska världens djup",
+    "subtitle": "Klicka på en destination för att upptäcka de bästa dykplatserna"
+  },
+  "socialFeed": {
+    "title": "Följ våra äventyr",
+    "subtitle": "Senaste nytt från vår community",
+    "all": "Alla",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "refresh": "Uppdatera flöde"
+  },
+  "search": {
+    "where": "Var vill du dyka?",
+    "when": "När?",
+    "guests": "Dykare",
+    "searchButton": "Sök"
+  },
+  "features": {
+    "badge": "Så fungerar det",
+    "sectionTitle": "Enkelt som aldrig förr",
+    "explore": {
+      "title": "Utforska djupen",
+      "description": "Bläddra i vår interaktiva karta och upptäck världens vackraste dykplatser."
+    },
+    "book": {
+      "title": "Boka med ett klick",
+      "description": "Kontrollera tillgänglighet i realtid och boka ditt dyk enkelt."
+    },
+    "dive": {
+      "title": "Dyk utan bekymmer",
+      "description": "Få din bekräftelse direkt med alla detaljer för en oförglömlig upplevelse."
+    }
+  },
+  "destinations": {
+    "title": "Populära destinationer",
+    "subtitle": "Vår communitys favoritplatser",
+    "reviews": "recensioner",
+    "maldives": {
+      "name": "Maldiverna",
+      "region": "Indiska oceanen",
+      "description": "Kristallklart vatten och exceptionellt marint liv"
+    },
+    "bali": {
+      "name": "Bali",
+      "region": "Indonesien",
+      "description": "Korallrev och mantarockor"
+    },
+    "redSea": {
+      "name": "Röda havet",
+      "region": "Egypten",
+      "description": "Legendariska vrak och färgglada koraller"
+    },
+    "greatBarrier": {
+      "name": "Stora barriärrevet",
+      "region": "Australien",
+      "description": "Världens största korallrev"
+    }
+  },
+  "centers": {
+    "title": "Dykcenter",
+    "subtitle": "Certifierade proffs väntar på dig",
+    "viewAll": "Visa alla center",
+    "joinUs": "Gå med i vårt nätverk",
+    "joinDescription": "Är du ett dykcenter? Öka din synlighet och hantera dina bokningar enkelt.",
+    "joinButton": "Gå med i EviDive",
+    "directory": {
+      "meta": {
+        "title": "Center - EviDive",
+        "description": "Upptäck godkända dykcenter på EviDive och utforska dem på jordgloben."
+      },
+      "title": "Center",
+      "subtitle": "Rotera jordgloben och upptäck godkända dykcenter.",
+      "listTitle": "Registrerade center",
+      "emptyTitle": "Inga tillgängliga center",
+      "emptyDescription": "Center visas här när de godkänts av en administratör.",
+      "verified": "Verifierat",
+      "viewCenter": "Visa center",
+      "backToCenters": "Tillbaka till center",
+      "rating": "{rating} ★ ({count} recensioner)",
+      "globeHint": "Tips: högerklicka på en punkt för att öppna centret.",
+      "services": "Tjänster",
+      "minutes": "min",
+      "maxParticipants": "max {count} personer"
+    },
+    "benefits": {
+      "visibility": "Internationell synlighet",
+      "booking": "Förenklad bokningshantering",
+      "payments": "Säkra betalningar"
+    },
+    "stats": {
+      "centers": "Partnercenter",
+      "divers": "Aktiva dykare",
+      "destinations": "Destinationer",
+      "rating": "Genomsnittsbetyg"
+    }
+  },
+  "footer": {
+    "description": "Referensplattformen för att boka dina dyk hos världens bästa center.",
+    "discover": "Upptäck",
+    "destinations": "Destinationer",
+    "offers": "Specialerbjudanden",
+    "company": "Företag",
+    "about": "Om oss",
+    "contact": "Kontakt",
+    "careers": "Karriär",
+    "legal": "Juridiskt",
+    "terms": "Villkor",
+    "privacy": "Integritet",
+    "sitemap": "Webbplatskarta",
+    "rights": "Alla rättigheter förbehållna."
+  },
+  "nav": {
+    "home": "Hem",
+    "explorer": "Utforskare",
+    "about": "Om oss",
+    "centers": "Center",
+    "dashboard": "Instrumentpanel",
+    "myCenter": "Mitt center",
+    "sellerView": "Säljarvy",
+    "becomeSeller": "Bli säljare",
+    "createCenter": "Skapa center",
+    "adminCenters": "Admin — Center",
+    "adminUsers": "Admin — Användare",
+    "myBookings": "Mina bokningar",
+    "myProfile": "Min profil",
+    "settings": "Inställningar",
+    "logout": "Logga ut"
+  },
+  "userTypes": {
+    "diver": "Dykare",
+    "seller": "Säljare",
+    "center": "Center",
+    "admin": "Admin"
+  },
+  "images": {
+    "avatar": "Avatar",
+    "evidiveLogo": "EviDive-logotyp",
+    "heroImage": "Hjältebild",
+    "close": "Stäng",
+    "socialPost": "Socialt medieinlägg"
+  },
+  "dashboard": {
+    "welcome": "Välkommen, {name}",
+    "subtitle": "Hantera dina dyk och bokningar från din instrumentpanel.",
+    "defaultName": "Dykare",
+    "stats": {
+      "totalDives": "Totalt antal dyk",
+      "completedDives": "Genomförda dyk",
+      "upcomingBookings": "Kommande bokningar",
+      "unreadNotifications": "Olästa notiser",
+      "favorites": "Favoriter",
+      "reviews": "Publicerade recensioner",
+      "reviewsGiven": "Givna recensioner"
+    },
+    "actions": {
+      "explore": "Utforska",
+      "exploreDesc": "Upptäck dykplatser",
+      "findCenter": "Hitta center",
+      "findCenterDesc": "Bläddra bland verifierade center",
+      "profile": "Min profil",
+      "profileDesc": "Hantera mina uppgifter",
+      "settings": "Inställningar",
+      "settingsDesc": "Konfigurera mitt konto"
+    },
+    "bookings": {
+      "title": "Mina bokningar",
+      "viewAll": "Visa alla",
+      "emptyTitle": "Inga bokningar",
+      "emptyDesc": "Du har inga bokningar ännu. Utforska dykplatser och boka ditt nästa äventyr!",
+      "exploreButton": "Utforska destinationer"
+    },
+    "upcoming": {
+      "title": "Kommande dyk",
+      "viewDetails": "Visa detaljer",
+      "emptyTitle": "Inga kommande dyk",
+      "emptyDesc": "Du har inga planerade dyk. Upptäck de bästa erbjudandena!",
+      "exploreOffers": "Utforska erbjudanden",
+      "status": {
+        "PENDING": "Väntande",
+        "CONFIRMED": "Bekräftad",
+        "PAID": "Betald",
+        "RUNNING": "Pågående",
+        "COMPLETED": "Slutförd",
+        "CANCELLED": "Avbokad",
+        "NOSHOW": "Utebliven",
+        "REMOVED": "Borttagen"
+      }
+    },
+    "history": {
+      "title": "Senaste historik",
+      "viewAll": "Visa alla",
+      "emptyTitle": "Inga genomförda dyk",
+      "emptyDesc": "Din dykhistorik visas här efter dina första äventyr.",
+      "leaveReview": "Lämna recension",
+      "rating": "{rating}/5"
+    },
+    "quickActions": {
+      "title": "Snabbåtgärder",
+      "searchDive": "Sök dyk",
+      "searchDiveDesc": "Hitta ditt nästa äventyr",
+      "myBookings": "Mina bokningar",
+      "myBookingsDesc": "Hantera dina reservationer",
+      "myReviews": "Mina recensioner",
+      "myReviewsDesc": "Visa dina publicerade recensioner"
+    },
+    "notifications": {
+      "title": "Notiser",
+      "empty": "Inga notiser",
+      "open": "Öppna"
+    },
+    "certification": {
+      "label": "Certifiering",
+      "notSet": "Ej angiven",
+      "update": "Uppdatera"
+    },
     "seller": {
-     "title": "Tableau de bord — Vendeur",
-     "subtitle": "Même compte et mêmes droits qu'un plongeur, avec une vue différente.",
-     "description": "Même compte et mêmes droits qu'un plongeur, avec une vue différente.",
-     "diverView": "Vue plongeur",
-     "profile": "Profil",
-     "sellerView": "Vue vendeur",
-     "sellerCenter": "Centre vendeur",
-     "status": "Statut",
-     "services": "Services (aperçu)",
-     "noServices": "Aucun service pour le moment.",
-     "service": "Service",
-     "noSellerCenter": "Aucun \"centre vendeur\" détecté. Si tu veux utiliser le parcours vendeur, passe par",
-     "sellerOnboarding": "l'onboarding vendeur",
-     "goBack": "Retour au tableau de bord"
+      "title": "Instrumentpanel — Säljare",
+      "subtitle": "Samma konto och behörigheter som en dykare, med en annan vy.",
+      "description": "Samma konto och behörigheter som en dykare, med en annan vy.",
+      "diverView": "Dykarvy",
+      "profile": "Profil",
+      "sellerView": "Säljarvy",
+      "sellerCenter": "Säljarcenter",
+      "status": "Status",
+      "adminValidateCenters": "Admin — Validera center",
+      "kpis": {
+        "services": "Tjänster",
+        "upcomingBookings": "Kommande bokningar",
+        "pendingPayout": "Väntande utbetalning"
+      },
+      "services": "Tjänster (förhandsgranskning)",
+      "noServices": "Inga tjänster för tillfället.",
+      "service": "Tjänst",
+      "noSellerCenter": "Inget \"säljarcenter\" upptäckt. Om du vill använda säljarvägen, gå till",
+      "sellerOnboarding": "säljar-onboarding",
+      "goBack": "Tillbaka till instrumentpanel"
     },
     "center": {
-     "title": "Mon centre",
-     "titleAdmin": "Centres (admin)",
-     "subtitle": "Suivez l'état de votre demande et gérez votre fiche centre.",
-     "subtitleAdmin": "Liste rapide des demandes en attente.",
-     "createCenter": "Créer un autre centre",
-     "validateRequests": "Valider les demandes",
-     "manageUsers": "Gérer les utilisateurs",
-     "noCenters": "Aucun centre trouvé",
-     "noCentersDesc": "Si vous venez de terminer l'onboarding, rafraîchissez cette page. Sinon, vous pouvez lancer la création d'un centre.",
-     "createNewCenter": "Créer un centre",
-     "pendingRequests": "Aucune demande en attente pour le moment.",
-     "viewCenters": "Voir les centres",
-     "statusVerified": "Vérifié",
-     "pendingDesc": "Votre centre est en attente de validation par un administrateur."
+      "title": "Mitt center",
+      "titleAdmin": "Center (admin)",
+      "subtitle": "Följ statusen för din ansökan och hantera din centerprofil.",
+      "subtitleAdmin": "Snabb lista över väntande ansökningar.",
+      "kpis": {
+        "centers": "Center",
+        "upcomingBookings": "Kommande bokningar",
+        "pendingBookings": "Väntande bokningar",
+        "unpaidBookings": "Obetalda bokningar",
+        "pendingCenters": "Väntande center"
+      },
+      "statuses": {
+        "PENDING": "Väntande",
+        "APPROVED": "Godkänt",
+        "REJECTED": "Avvisat",
+        "SUSPENDED": "Avstängt"
+      },
+      "labels": {
+        "services": "Tjänster",
+        "bookings": "Bokningar",
+        "reviews": "Recensioner",
+        "stripeConnected": "Stripe ansluten",
+        "stripeMissing": "Stripe ej konfigurerad"
+      },
+      "createCenter": "Skapa ytterligare ett center",
+      "validateRequests": "Validera ansökningar",
+      "manageUsers": "Hantera användare",
+      "noCenters": "Inga center hittades",
+      "noCentersDesc": "Om du precis slutfört onboarding, uppdatera denna sida. Annars kan du börja med att skapa ett center.",
+      "createNewCenter": "Skapa center",
+      "pendingRequests": "Inga väntande ansökningar för tillfället.",
+      "viewCenters": "Visa center",
+      "viewPublicCenter": "Visa offentlig sida",
+      "statusVerified": "Verifierat",
+      "pendingDesc": "Ditt center väntar på validering av en administratör."
     },
     "admin": {
-     "users": {
-      "title": "Admin — Utilisateurs",
-      "subtitle": "Modifier les droits, activer/désactiver, blacklister et supprimer des comptes.",
-      "validateCenters": "Valider les centres",
-      "dashboard": "Tableau de bord",
-      "userType": "Type",
-      "active": "Actif",
-      "inactive": "Désactivé",
-      "blacklist": "Blacklist",
-      "ok": "OK",
-      "verified": "Email vérifié",
-      "unverified": "Email non vérifié",
-      "apply": "Appliquer",
-      "deactivate": "Désactiver",
-      "activate": "Activer",
-      "removeBlacklist": "Retirer blacklist",
-      "addBlacklist": "Blacklist",
-      "delete": "Supprimer",
-      "noUsers": "Aucun utilisateur."
-     }
-    },
-    "common": {
-     "diverView": "Vue plongeur",
-     "profile": "Profil"
+      "users": {
+        "title": "Admin — Användare",
+        "subtitle": "Ändra behörigheter, aktivera/inaktivera, svartlista och ta bort konton.",
+        "validateCenters": "Validera center",
+        "dashboard": "Instrumentpanel",
+        "userType": "Typ",
+        "active": "Aktiv",
+        "inactive": "Inaktiv",
+        "blacklist": "Svartlista",
+        "ok": "OK",
+        "verified": "E-post verifierad",
+        "unverified": "E-post ej verifierad",
+        "apply": "Tillämpa",
+        "deactivate": "Inaktivera",
+        "activate": "Aktivera",
+        "removeBlacklist": "Ta bort från svartlista",
+        "addBlacklist": "Lägg till i svartlista",
+        "delete": "Ta bort",
+        "noUsers": "Inga användare."
+      }
     }
-   }
   },
-  "seller": {
-   "title": "I am a seller",
-   "description": "Sell your diving services without having a physical center.",
-   "feature1": "Create your offers",
-   "feature2": "Manage your bookings",
-   "feature3": "Receive your payments",
-   "steps": {
-    "account": "Account",
-    "profile": "Profile",
-    "services": "Services",
-    "payments": "Payments",
-    "review": "Review"
-   },
-   "account": {
-    "description": "Create your seller account.",
-    "fullName": "Full name",
-    "phone": "Phone",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm password",
-    "submit": "Create my account"
-   },
-   "profile": {
-    "description": "Present yourself to customers.",
-    "bio": "Biography",
-    "bioPlaceholder": "Describe your experience, specialties...",
-    "certifications": "Certifications",
-    "languages": "Languages spoken",
-    "photo": "Profile photo",
-    "addCertification": "Ajouter une certification",
-    "submit": "Continuer"
-   },
-   "services": {
-    "description": "Define your services.",
-    "addService": "Add a service",
-    "serviceName": "Service name",
-    "serviceDescription": "Description",
-    "price": "Price",
-    "duration": "Duration"
-   },
-   "payments": {
-    "description": "Set up your payments.",
-    "commissionTitle": "EviDive Commission",
-    "commissionDescription": "We charge a commission on each confirmed booking.",
-    "perBooking": "per booking",
-    "stripeConnect": "Stripe Connect",
-    "stripeDescription": "Connect your bank account to receive payments.",
-    "connectButton": "Connect my account",
-    "connected": "Account connected",
-    "benefits": {
-     "secure": {
-      "title": "Sécurisé",
-      "description": "Paiements protégés par Stripe"
-     },
-     "fast": {
-      "title": "Rapide",
-      "description": "Virements sous 2-3 jours"
-     },
-     "global": {
-      "title": "International",
-      "description": "Acceptez 135+ devises"
-     }
-    }
-   },
-   "review": {
-    "description": "Review your information before submitting.",
-    "passwordConfirmTitle": "Confirmation required",
-    "passwordConfirmDescription": "For security reasons, please enter your password to finalize your signup.",
-    "passwordRequired": "Please enter your password to continue.",
-   "errors": {
-    "generic": "Something went wrong. Please try again."
-   },
-    "termsAccept": "I accept EviDive's Terms and Conditions and Privacy Policy.",
-    "submitButton": "Submit my profile",
-    "successTitle": "Profile submitted!",
-    "successDescription": "Your request has been sent. Our team will review your information and contact you within 48 hours.",
-    "homeButton": "Retour à l'accueil",
-    "summary": "Résumé",
-    "name": "Nom",
-    "emailLabel": "Email",
-    "certifications": "Certifications",
-    "servicesCount": "Services",
-    "complete": "Complété",
-    "incomplete": "Incomplet"
-   }
-  },
-  "center": {
-   "title": "I am a center",
-   "description": "Manage your bookings and increase your international visibility.",
-   "feature1": "Worldwide visibility",
-   "feature2": "Booking management",
-   "feature3": "Secure payments",
-   "steps": {
-    "account": "Account",
-    "info": "Information",
-    "location": "Location",
-    "documents": "Documents",
-    "payments": "Payments",
-    "review": "Review"
-   },
-   "invalidStep": "Invalid step",
-   "back": "Back",
-   "next": "Next",
-   "account": {
-    "description": "Create your center owner account.",
-    "fullName": "Full name",
-    "phone": "Phone",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm password",
-    "submit": "Create my account"
-   },
-   "info": {
-    "description": "Present your dive center.",
-    "centerName": "Center name",
-    "aboutCenter": "Center description",
-    "aboutPlaceholder": "Describe your center, specialties, team...",
-    "website": "Website",
-    "facebook": "Facebook page",
-    "instagram": "Instagram account",
-    "submit": "Continue",
-    "errors": {
-     "centerName": "Center name must be at least 2 characters.",
-     "description": "Description must be at least 20 characters.",
-     "website": "Invalid URL."
-    }
-   },
-   "location": {
-    "description": "Indicate your center location.",
-    "address": "Address",
-    "city": "City",
-    "postalCode": "Postal code",
-    "country": "Country",
-    "mapPlaceholder": "Interactive map (coming soon)",
-    "latitude": "Latitude",
-    "longitude": "Longitude",
-    "submit": "Continue",
-    "errors": {
-     "address": "Address is required.",
-     "city": "City is required.",
-     "country": "Country is required.",
-     "latitude": "Invalid latitude.",
-     "longitude": "Invalid longitude."
-    }
-   },
-   "documents": {
-    "description": "Upload the required documents for verification.",
-    "required": "Required",
-   "back": "Back",
-   "continue": "Continue",
-    "types": {
-     "license": "Professional license",
-     "insurance": "Insurance certificate",
-     "certification": "Certifications"
-    },
-    "upload": "Upload",
-    "acceptedFormats": "Accepted formats: PDF, JPG, PNG (max 5 MB)"
-   },
-   "payments": {
-    "description": "Set up your payments to receive bookings.",
-   "back": "Back",
-   "continue": "Continue",
-    "comingSoon": "Stripe connection coming soon. You will be able to complete this step after your center is approved.",
-    "commissionTitle": "EviDive Commission",
-    "commissionDescription": "We charge a commission on each confirmed booking.",
-    "perBooking": "per booking",
-    "stripeConnect": "Stripe Connect",
-    "stripeDescription": "Connect your bank account to receive payments.",
-    "connectButton": "Connect my account",
-    "connected": "Account connected",
-    "benefits": {
-     "secure": {
-      "title": "Secure",
-      "description": "Payments protected by Stripe"
-     },
-     "fast": {
-      "title": "Fast",
-      "description": "Transfers in 2-3 days"
-     },
-     "global": {
-      "title": "International",
-      "description": "Accept 135+ currencies"
-     }
-    }
-   },
-   "review": {
-    "description": "Review your information before submitting your signup.",
-    "errors": {
-      "generic": "Something went wrong. Please try again.",
-      "validationFailed": "Some information is invalid. Please check your fields and try again.",
-      "emailAlreadyRegistered": "This email is already in use."
-    },
-    "dashboardButton": "Go to my center dashboard",
-    "passwordLabel": "Password",
+  "profile": {
+    "backToDashboard": "Tillbaka till instrumentpanel",
+    "defaultName": "Användare",
+    "emailVerified": "E-post verifierad",
+    "editProfile": "Redigera profil",
+    "saveChanges": "Spara",
+    "saving": "Sparar...",
     "sections": {
-     "account": "Owner account",
-     "accountStatus": "Complete",
-     "info": "Center information",
-     "infoStatus": "Complete",
-     "location": "Location",
-     "locationStatus": "Complete",
-     "documents": "Documents",
-     "documentsStatus": "Coming soon",
-     "payments": "Payments",
-     "paymentsStatus": "Coming soon"
+      "personal": "Personlig information",
+      "diving": "Dykinformation",
+      "account": "Konto"
     },
-    "termsAccept": "I accept EviDive's Terms and Conditions and Privacy Policy.",
-    "submitButton": "Submit my signup",
-    "successTitle": "Signup submitted!",
-    "successDescription": "Your request has been sent. Our team will review your information and contact you within 48 hours.",
-    "homeButton": "Back to home",
-    "summary": "Summary",
-    "name": "Name",
-    "emailLabel": "Email",
-    "centerName": "Center",
-    "locationLabel": "Location",
-    "incomplete": "Incomplete"
-   }
-  }
+    "fields": {
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "phone": "Telefon",
+      "location": "Plats",
+      "bio": "Biografi",
+      "certificationLevel": "Certifieringsnivå",
+      "certificationOrg": "Organisation",
+      "totalDives": "Totalt antal dyk"
+    },
+    "placeholders": {
+      "firstName": "Ditt förnamn",
+      "lastName": "Ditt efternamn",
+      "phone": "+46 70 123 45 67",
+      "city": "Stad",
+      "country": "Land",
+      "bio": "Berätta om dig själv och din passion för dykning..."
+    },
+    "divingStats": {
+      "title": "Statistik",
+      "bookings": "Bokningar",
+      "reviews": "Recensioner"
+    },
+    "account": {
+      "email": "E-post",
+      "type": "Kontotyp",
+      "status": "Status",
+      "active": "Aktiv"
+    }
+  },
+  "settings": {
+    "backToDashboard": "Tillbaka till instrumentpanel",
+    "title": "Inställningar",
+    "subtitle": "Hantera dina preferenser och kontoinställningar.",
+    "saved": "Inställningar sparade",
+    "sections": {
+      "notifications": "Notiser",
+      "privacy": "Integritet",
+      "language": "Språk och region",
+      "security": "Säkerhet",
+      "account": "Konto"
+    },
+    "notifications": {
+      "email": {
+        "label": "E-postnotiser",
+        "description": "Få bokningsbekräftelser via e-post"
+      },
+      "sms": {
+        "label": "SMS-påminnelser",
+        "description": "Få dykpåminnelser via SMS"
+      },
+      "reminders": {
+        "label": "Bokningspåminnelser",
+        "description": "Påminnelser för dina dyk"
+      },
+      "marketing": {
+        "label": "Marknadsföringsmail",
+        "description": "Specialerbjudanden och nyheter"
+      }
+    },
+    "privacy": {
+      "profileVisible": {
+        "label": "Profil synlig för center",
+        "description": "Låt dykcenter se din profil"
+      },
+      "diveHistory": {
+        "label": "Synlig historik",
+        "description": "Visa din dykhistorik"
+      }
+    },
+    "language": {
+      "select": "Välj ditt språk"
+    },
+    "security": {
+      "changePassword": {
+        "label": "Ändra lösenord",
+        "description": "Uppdatera ditt lösenord"
+      },
+      "emailVerified": {
+        "label": "E-post verifierad"
+      },
+      "verified": "Verifierad"
+    },
+    "account": {
+      "export": {
+        "label": "Exportera mina data",
+        "description": "Ladda ner alla dina data (GDPR)",
+        "success": "Data exporterade framgångsrikt"
+      },
+      "signOut": {
+        "label": "Logga ut",
+        "description": "Logga ut från ditt konto"
+      },
+      "delete": {
+        "label": "Ta bort konto",
+        "description": "Ta bort ditt konto och all data permanent"
+      }
+    },
+    "errors": {
+      "unauthorized": "Du måste vara inloggad",
+      "server_error": "Ett fel uppstod",
+      "unknown_error": "Ett okänt fel uppstod"
+    },
+    "deleteModal": {
+      "title": "Ta bort ditt konto?",
+      "description": "Denna åtgärd kan inte ångras. All din data, bokningar och recensioner tas bort permanent.",
+      "cancel": "Avbryt",
+      "confirm": "Ta bort"
+    }
+  },
+  "careers": {
+    "badge": "Vi rekryterar",
+    "title": "Gå med i EviDive-teamet",
+    "subtitle": "Hjälp till att revolutionera hur dykare upptäcker och bokar sina undervattensäventyr.",
+    "valuesTitle": "Våra värderingar",
+    "values": {
+      "passion": {
+        "title": "Passion",
+        "description": "Kärlek till dykning vägleder varje beslut vi tar."
+      },
+      "team": {
+        "title": "Team",
+        "description": "Vi tror på kraften i kollektivet."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Alltid tänja på gränserna för vad som är möjligt."
+      },
+      "impact": {
+        "title": "Påverkan",
+        "description": "Skapa positiv förändring för havet."
+      }
+    },
+    "benefitsTitle": "Våra förmåner",
+    "benefits": {
+      "diving": "Gratis dykning",
+      "remote": "Distansarbete",
+      "flexibility": "Flexibla tider",
+      "health": "Full sjukförsäkring"
+    },
+    "positionsTitle": "Lediga tjänster",
+    "positions": {
+      "fullstack": {
+        "title": "Full-Stack-utvecklare",
+        "department": "Teknik",
+        "location": "Genève / Distans",
+        "type": "Heltid"
+      },
+      "marketing": {
+        "title": "Digital Marketing Manager",
+        "department": "Marknadsföring",
+        "location": "Genève",
+        "type": "Heltid"
+      },
+      "support": {
+        "title": "Tvåspråkig kundsupport",
+        "department": "Support",
+        "location": "Distans",
+        "type": "Heltid"
+      }
+    },
+    "applyButton": "Ansök",
+    "cta": {
+      "title": "Hittar du inte din tjänst?",
+      "description": "Skicka oss en spontanansökan. Vi letar alltid efter passionerade talanger.",
+      "button": "Kontakta oss"
+    }
+  },
+  "sitemap": {
+    "title": "Webbplatskarta",
+    "subtitle": "Hitta enkelt alla EviDive-sidor",
+    "sections": {
+      "main": "Huvudsidor",
+      "explore": "Utforska",
+      "account": "Mitt konto",
+      "business": "Företag",
+      "legal": "Juridiskt"
+    },
+    "links": {
+      "home": "Hem",
+      "about": "Om oss",
+      "contact": "Kontakt",
+      "explorer": "Utforskare",
+      "centers": "Dykcenter",
+      "login": "Logga in",
+      "register": "Registrera",
+      "dashboard": "Instrumentpanel",
+      "profile": "Min profil",
+      "settings": "Inställningar",
+      "onboard": "Bli partner",
+      "careers": "Karriär",
+      "terms": "Användarvillkor",
+      "privacy": "Integritetspolicy"
+    },
+    "descriptions": {
+      "home": "EviDives startsida",
+      "about": "Vår historia och mission",
+      "contact": "Kontakta oss",
+      "explorer": "Interaktiv karta över platser",
+      "centers": "Katalog över verifierade center",
+      "login": "Åtkomst till ditt konto",
+      "register": "Skapa ett konto",
+      "dashboard": "Hantera dina bokningar",
+      "profile": "Redigera dina uppgifter",
+      "settings": "Konfigurera ditt konto",
+      "onboard": "Gå med i vårt nätverk",
+      "careers": "Lediga tjänster",
+      "terms": "Våra användarvillkor",
+      "privacy": "Skydd av dina data"
+    },
+    "lastUpdated": "Senast uppdaterad"
+  },
+  "metadata": {
+    "home": {
+      "title": "EviDive - Utforska havets djup med verifierade center",
+      "description": "Upptäck de bästa dykplatserna med EviDive. Boka hos PADI-certifierade center och utforska undervattensundren säkert."
+    },
+    "careers": {
+      "title": "Karriär - Gå med i EviDive-teamet",
+      "description": "Lediga tjänster hos EviDive. Gå med i vårt passionerade team för att revolutionera dykupplevelsen."
+    },
+    "contact": {
+      "title": "Kontakt - EviDive",
+      "description": "Kontakta EviDive-teamet. Vårt team är redo att svara på dina frågor om dykning och våra tjänster."
+    },
+    "explorer": {
+      "title": "Utforskare - Interaktiv karta över dykplatser",
+      "description": "Upptäck de bästa dykplatserna med vår interaktiva karta. Utforska havets djup nära dig."
+    },
+    "login": {
+      "title": "Logga in - EviDive",
+      "description": "Logga in på ditt EviDive-konto för att hantera dina bokningar och komma åt din instrumentpanel."
+    },
+    "register": {
+      "title": "Registrera - EviDive",
+      "description": "Skapa ditt EviDive-konto och börja utforska undervattensunder med certifierade center."
+    },
+    "resetPassword": {
+      "title": "Återställ lösenord - EviDive",
+      "description": "Återställ ditt EviDive-lösenord för att få åtkomst till ditt konto igen."
+    },
+    "forgotPassword": {
+      "title": "Glömt lösenord - EviDive",
+      "description": "Begär en länk för att återställa lösenordet för ditt EviDive-konto."
+    },
+    "verifyEmail": {
+      "title": "E-postverifiering - EviDive",
+      "description": "Verifiera din e-postadress för att aktivera ditt EviDive-konto och få åtkomst till alla funktioner."
+    }
+  },
+  "adminCenters": {
+    "title": "Admin · Center",
+    "subtitle": "Validera centerregistreringar (VÄNTANDE → GODKÄND/AVVISAD).",
+    "backToCenters": "Tillbaka till center",
+    "tokenMissingTitle": "ADMIN_TOKEN saknas",
+    "tokenMissingDesc": "Konfigurera `ADMIN_TOKEN` (env) för att aktivera admin-validering.",
+    "accessDeniedTitle": "Åtkomst nekad",
+    "accessDeniedDesc": "Lägg till `?token=...` med korrekt token för att öppna denna sida.",
+    "pendingTitle": "Väntande registreringar",
+    "nonePending": "Inga väntande center.",
+    "email": "E-post",
+    "phone": "Telefon",
+    "approve": "Godkänn",
+    "reject": "Avvisa"
+  },
+  "onboard": {
+    "meta": {
+      "title": "Registrera - EviDive",
+      "description": "Gå med i EviDive som köpare, säljare eller dykcenter."
+    },
+    "title": "Gå med i EviDive",
+    "subtitle": "Välj din kontotyp",
+    "diver": {
+      "title": "Jag är köpare",
+      "description": "Hitta och boka dina dyk hos de bästa centren världen över.",
+      "feature1": "Tillgång till alla verifierade center",
+      "feature2": "Direktbokning",
+      "feature3": "Dykloggbok",
+      "steps": {
+        "account": "Konto",
+        "preferences": "Preferenser",
+        "review": "Granskning"
+      },
+      "account": {
+        "description": "Skapa ditt dykarkonto.",
+        "fullName": "Fullständigt namn",
+        "phone": "Telefon",
+        "email": "E-post",
+        "password": "Lösenord",
+        "confirmPassword": "Bekräfta lösenord",
+        "submit": "Skapa mitt konto"
+      },
+      "preferences": {
+        "description": "Anpassa din upplevelse.",
+        "certificationLevel": "Certifieringsnivå",
+        "certificationOrg": "Organisation",
+        "totalDives": "Totalt antal dyk",
+        "preferredLanguage": "Föredraget språk"
+      },
+      "review": {
+        "description": "Kontrollera dina uppgifter.",
+        "passwordConfirmTitle": "Bekräftelse krävs",
+        "passwordConfirmDescription": "Av säkerhetsskäl, ange ditt lösenord för att slutföra registreringen.",
+        "passwordRequired": "Ange ditt lösenord för att fortsätta.",
+        "errors": {
+          "generic": "Något gick fel. Försök igen."
+        },
+        "termsAccept": "Jag accepterar EviDives Användarvillkor och Integritetspolicy.",
+        "submitButton": "Slutför registrering",
+        "successTitle": "Välkommen!",
+        "successDescription": "Ditt konto har skapats. Du kan nu utforska och boka dyk.",
+        "exploreButton": "Utforskare",
+        "summary": "Sammanfattning",
+        "name": "Namn",
+        "emailLabel": "E-post",
+        "phoneLabel": "Telefon",
+        "certification": "Certifiering",
+        "dives": "Dyk",
+        "complete": "Komplett"
+      }
+    },
+    "seller": {
+      "title": "Jag är säljare",
+      "description": "Sälj dina dyktjänster utan ett fysiskt center.",
+      "feature1": "Skapa dina erbjudanden",
+      "feature2": "Hantera dina bokningar",
+      "feature3": "Ta emot betalningar",
+      "steps": {
+        "account": "Konto",
+        "profile": "Profil",
+        "services": "Tjänster",
+        "payments": "Betalningar",
+        "review": "Granskning"
+      },
+      "account": {
+        "description": "Skapa ditt säljarkonto.",
+        "fullName": "Fullständigt namn",
+        "phone": "Telefon",
+        "email": "E-post",
+        "password": "Lösenord",
+        "confirmPassword": "Bekräfta lösenord",
+        "submit": "Skapa mitt konto"
+      },
+      "profile": {
+        "description": "Presentera dig för kunder.",
+        "bio": "Biografi",
+        "bioPlaceholder": "Beskriv din erfarenhet, specialiteter...",
+        "certifications": "Certifieringar",
+        "languages": "Språk",
+        "photo": "Profilbild",
+        "addCertification": "Lägg till certifiering",
+        "submit": "Fortsätt"
+      },
+      "services": {
+        "description": "Definiera dina tjänster.",
+        "addService": "Lägg till tjänst",
+        "serviceName": "Tjänstnamn",
+        "serviceDescription": "Beskrivning",
+        "price": "Pris",
+        "duration": "Längd"
+      },
+      "payments": {
+        "description": "Konfigurera dina betalningar.",
+        "commissionTitle": "EviDive-provision",
+        "commissionDescription": "Vi tar en provision på varje bekräftad bokning.",
+        "perBooking": "per bokning",
+        "stripeConnect": "Stripe Connect",
+        "stripeDescription": "Anslut ditt bankkonto för att ta emot betalningar.",
+        "connectButton": "Anslut mitt konto",
+        "connected": "Konto anslutet",
+        "benefits": {
+          "secure": {
+            "title": "Säkert",
+            "description": "Betalningar skyddade av Stripe"
+          },
+          "fast": {
+            "title": "Snabbt",
+            "description": "Överföringar på 2-3 dagar"
+          },
+          "global": {
+            "title": "Internationellt",
+            "description": "Acceptera 135+ valutor"
+          }
+        }
+      },
+      "review": {
+        "description": "Kontrollera dina uppgifter innan du skickar.",
+        "passwordConfirmTitle": "Bekräftelse krävs",
+        "passwordConfirmDescription": "Av säkerhetsskäl, ange ditt lösenord för att slutföra registreringen.",
+        "passwordRequired": "Ange ditt lösenord för att fortsätta.",
+        "errors": {
+          "generic": "Något gick fel. Försök igen."
+        },
+        "termsAccept": "Jag accepterar EviDives Användarvillkor och Integritetspolicy.",
+        "submitButton": "Skicka min profil",
+        "successTitle": "Profil skickad!",
+        "successDescription": "Din ansökan har skickats. Vårt team granskar dina uppgifter och kontaktar dig inom 48 timmar.",
+        "homeButton": "Tillbaka till startsidan",
+        "summary": "Sammanfattning",
+        "name": "Namn",
+        "emailLabel": "E-post",
+        "certifications": "Certifieringar",
+        "servicesCount": "Tjänster",
+        "complete": "Komplett",
+        "incomplete": "Ofullständig"
+      }
+    },
+    "center": {
+      "title": "Jag är ett center",
+      "description": "Hantera dina bokningar och öka din internationella synlighet.",
+      "feature1": "Global synlighet",
+      "feature2": "Bokningshantering",
+      "feature3": "Säkra betalningar",
+      "steps": {
+        "account": "Konto",
+        "info": "Information",
+        "location": "Plats",
+        "documents": "Dokument",
+        "payments": "Betalningar",
+        "review": "Granskning"
+      },
+      "invalidStep": "Ogiltigt steg",
+      "back": "Tillbaka",
+      "next": "Nästa",
+      "account": {
+        "description": "Skapa ditt centerägarkonto.",
+        "fullName": "Fullständigt namn",
+        "phone": "Telefon",
+        "email": "E-post",
+        "password": "Lösenord",
+        "confirmPassword": "Bekräfta lösenord",
+        "submit": "Skapa mitt konto"
+      },
+      "info": {
+        "description": "Presentera ditt dykcenter.",
+        "centerName": "Centernamn",
+        "aboutCenter": "Centerbeskrivning",
+        "aboutPlaceholder": "Beskriv ditt center, specialiteter, team...",
+        "website": "Webbplats",
+        "facebook": "Facebook-sida",
+        "instagram": "Instagram-konto",
+        "submit": "Fortsätt",
+        "errors": {
+          "centerName": "Centernamn måste vara minst 2 tecken.",
+          "description": "Beskrivning måste vara minst 20 tecken.",
+          "website": "Ogiltig URL."
+        }
+      },
+      "location": {
+        "description": "Ange platsen för ditt center.",
+        "address": "Adress",
+        "city": "Stad",
+        "postalCode": "Postnummer",
+        "country": "Land",
+        "mapPlaceholder": "Interaktiv karta (kommer snart)",
+        "latitude": "Latitud",
+        "longitude": "Longitud",
+        "submit": "Fortsätt",
+        "errors": {
+          "address": "Adress krävs.",
+          "city": "Stad krävs.",
+          "country": "Land krävs.",
+          "latitude": "Ogiltig latitud.",
+          "longitude": "Ogiltig longitud."
+        }
+      },
+      "documents": {
+        "description": "Ladda upp erforderliga dokument för verifiering.",
+        "required": "Krävs",
+        "back": "Tillbaka",
+        "continue": "Fortsätt",
+        "types": {
+          "license": "Professionell licens",
+          "insurance": "Försäkringsintyg",
+          "certification": "Certifieringar"
+        },
+        "upload": "Ladda upp",
+        "acceptedFormats": "Accepterade format: PDF, JPG, PNG (max 5 MB)"
+      },
+      "payments": {
+        "description": "Konfigurera dina betalningar för att ta emot bokningar.",
+        "back": "Tillbaka",
+        "continue": "Fortsätt",
+        "comingSoon": "Stripe-anslutning kommer snart. Du kan slutföra detta steg efter att ditt center godkänts.",
+        "commissionTitle": "EviDive-provision",
+        "commissionDescription": "Vi tar en provision på varje bekräftad bokning.",
+        "perBooking": "per bokning",
+        "stripeConnect": "Stripe Connect",
+        "stripeDescription": "Anslut ditt bankkonto för att ta emot betalningar.",
+        "connectButton": "Anslut mitt konto",
+        "connected": "Konto anslutet",
+        "benefits": {
+          "secure": {
+            "title": "Säkert",
+            "description": "Betalningar skyddade av Stripe"
+          },
+          "fast": {
+            "title": "Snabbt",
+            "description": "Överföringar på 2-3 dagar"
+          },
+          "global": {
+            "title": "Internationellt",
+            "description": "Acceptera 135+ valutor"
+          }
+        }
+      },
+      "review": {
+        "description": "Kontrollera dina uppgifter innan du skickar din registrering.",
+        "errors": {
+          "generic": "Något gick fel. Försök igen.",
+          "validationFailed": "Viss information är ogiltig. Kontrollera dina uppgifter.",
+          "emailAlreadyRegistered": "Denna e-postadress används redan."
+        },
+        "dashboardButton": "Till mitt centerinstrumentpanel",
+        "passwordLabel": "Lösenord",
+        "sections": {
+          "account": "Ägarkonto",
+          "accountStatus": "Komplett",
+          "info": "Centerinformation",
+          "infoStatus": "Komplett",
+          "location": "Plats",
+          "locationStatus": "Komplett",
+          "documents": "Dokument",
+          "documentsStatus": "Kommer snart",
+          "payments": "Betalningar",
+          "paymentsStatus": "Kommer snart"
+        },
+        "termsAccept": "Jag accepterar EviDives Användarvillkor och Integritetspolicy.",
+        "submitButton": "Skicka min registrering",
+        "successTitle": "Registrering skickad!",
+        "successDescription": "Din ansökan har skickats. Vårt team granskar dina uppgifter och kontaktar dig inom 48 timmar.",
+        "homeButton": "Tillbaka till startsidan",
+        "summary": "Sammanfattning",
+        "name": "Namn",
+        "emailLabel": "E-post",
+        "centerName": "Center",
+        "locationLabel": "Plats",
+        "incomplete": "Ofullständig"
+      }
+    }
   },
   "reviews": {
     "meta": {
-      "title": "My Reviews - EviDive",
-      "description": "View and manage the reviews you've left on your dives."
+      "title": "Mina recensioner - EviDive",
+      "description": "Se och hantera recensionerna du lämnat för dina dyk."
     },
-    "title": "My Reviews",
-    "subtitle": "View and manage your reviews on dive centers.",
-    "backToDashboard": "Back to dashboard",
-    "myReviews": "My published reviews",
-    "noReviews": "You haven't left any reviews yet.",
-    "noReviewsDesc": "After a dive, share your experience to help other divers!",
-    "pendingReviews": "Dives waiting for review",
-    "noPendingReviews": "All your dives have been reviewed.",
-    "leaveReview": "Leave a review",
-    "editReview": "Edit",
-    "deleteReview": "Delete",
-    "viewCenter": "View center",
+    "title": "Mina recensioner",
+    "subtitle": "Se och hantera dina recensioner av dykcenter.",
+    "backToDashboard": "Tillbaka till instrumentpanel",
+    "myReviews": "Mina publicerade recensioner",
+    "noReviews": "Du har inte lämnat några recensioner ännu.",
+    "noReviewsDesc": "Efter ett dyk, dela din upplevelse för att hjälpa andra dykare!",
+    "pendingReviews": "Dyk som väntar på recension",
+    "noPendingReviews": "Alla dina dyk har recenserats.",
+    "leaveReview": "Lämna recension",
+    "editReview": "Redigera",
+    "deleteReview": "Ta bort",
+    "viewCenter": "Visa center",
     "status": {
-      "PENDING": "Pending moderation",
-      "APPROVED": "Approved",
-      "REJECTED": "Rejected",
+      "PENDING": "Väntar på moderering",
+      "APPROVED": "Godkänd",
+      "REJECTED": "Avvisad",
       "SPAM": "Spam"
     },
     "form": {
-      "title": "Leave a review",
-      "editTitle": "Edit your review",
-      "rating": "Rating",
-      "ratingRequired": "Please select a rating",
-      "comment": "Your review",
-      "commentPlaceholder": "Describe your experience, what you liked, areas for improvement...",
-      "commentMin": "Review must be at least 20 characters.",
-      "photos": "Photos (optional)",
-      "photosHint": "Maximum 3 photos (JPG, PNG, max 5 MB)",
-      "addPhoto": "Add photo",
-      "removePhoto": "Remove",
-      "submit": "Submit review",
-      "update": "Update",
-      "cancel": "Cancel",
-      "submitting": "Submitting...",
-      "success": "Review submitted successfully! It will be visible after moderation.",
-      "updateSuccess": "Review updated successfully!",
-      "deleteSuccess": "Review deleted successfully.",
-      "error": "An error occurred. Please try again.",
-      "alreadyReviewed": "You have already reviewed this booking."
+      "title": "Lämna recension",
+      "editTitle": "Redigera din recension",
+      "rating": "Betyg",
+      "ratingRequired": "Välj ett betyg",
+      "comment": "Din recension",
+      "commentPlaceholder": "Beskriv din upplevelse, vad du gillade, förbättringsområden...",
+      "commentMin": "Recension måste vara minst 20 tecken.",
+      "photos": "Bilder (valfritt)",
+      "photosHint": "Max 3 bilder (JPG, PNG, max 5 MB)",
+      "addPhoto": "Lägg till bild",
+      "removePhoto": "Ta bort",
+      "submit": "Skicka recension",
+      "update": "Uppdatera",
+      "cancel": "Avbryt",
+      "submitting": "Skickar...",
+      "success": "Recension skickad! Den visas efter moderering.",
+      "updateSuccess": "Recension uppdaterad!",
+      "deleteSuccess": "Recension borttagen.",
+      "error": "Ett fel uppstod. Försök igen.",
+      "alreadyReviewed": "Du har redan recenserat denna bokning."
     },
     "deleteModal": {
-      "title": "Delete this review?",
-      "description": "This action cannot be undone. Your review will be permanently deleted.",
-      "cancel": "Cancel",
-      "confirm": "Delete"
+      "title": "Ta bort denna recension?",
+      "description": "Denna åtgärd kan inte ångras. Din recension tas bort permanent.",
+      "cancel": "Avbryt",
+      "confirm": "Ta bort"
     },
     "card": {
-      "diveOn": "Dive on",
-      "postedOn": "Posted on",
-      "modifiable": "Editable while review is pending moderation."
+      "diveOn": "Dyk den",
+      "postedOn": "Publicerad",
+      "modifiable": "Redigerbar så länge recensionen väntar på moderering."
     },
     "stars": {
-      "1": "Very bad",
-      "2": "Bad",
-      "3": "Average",
-      "4": "Good",
-      "5": "Excellent"
+      "1": "Mycket dåligt",
+      "2": "Dåligt",
+      "3": "Genomsnittligt",
+      "4": "Bra",
+      "5": "Utmärkt"
     }
   },
   "centerRegistration": {
     "meta": {
-      "title": "Register Dive Center - EviDive",
-      "description": "Register your dive center on EviDive and join our international network."
+      "title": "Registrera dykcenter - EviDive",
+      "description": "Registrera ditt dykcenter på EviDive och gå med i vårt internationella nätverk."
     },
-    "title": "Register your dive center",
-    "subtitle": "Join EviDive and increase your international visibility",
-    "alreadyAccount": "Already have an account?",
-    "loginLink": "Sign in",
+    "title": "Registrera ditt dykcenter",
+    "subtitle": "Gå med i EviDive och öka din internationella synlighet",
+    "alreadyAccount": "Har du redan ett konto?",
+    "loginLink": "Logga in",
     "steps": {
-      "personal": "Personal info",
-      "center": "Your center",
-      "legal": "Legal info",
-      "confirmation": "Confirmation"
+      "personal": "Personuppgifter",
+      "center": "Ditt center",
+      "legal": "Juridisk info",
+      "confirmation": "Bekräftelse"
     },
     "step1": {
-      "title": "Personal information",
-      "description": "Enter your information as the legal representative of the center.",
-      "firstName": "First name",
-      "lastName": "Last name",
-      "email": "Professional email",
-      "phone": "Phone",
-      "password": "Password",
-      "confirmPassword": "Confirm password",
-      "next": "Continue",
-      "checkingEmail": "Checking email...",
-      "emailAvailable": "Email available",
+      "title": "Personuppgifter",
+      "description": "Ange dina uppgifter som legal representant för centret.",
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "email": "Företags-e-post",
+      "phone": "Telefon",
+      "password": "Lösenord",
+      "confirmPassword": "Bekräfta lösenord",
+      "next": "Fortsätt",
+      "checkingEmail": "Kontrollerar e-post...",
+      "emailAvailable": "E-post tillgänglig",
       "errors": {
-        "emailExists": "An account already exists with this email"
+        "emailExists": "Ett konto med denna e-post finns redan"
       }
     },
     "step2": {
-      "title": "Center information",
-      "description": "Present your dive center to future customers.",
-      "centerNameSection": "Center name (multilingual)",
-      "centerNameFr": "Name in French",
-      "centerNameEn": "Name in English",
-      "addressSection": "Center address",
-      "street": "Street address",
-      "city": "City",
-      "postalCode": "Postal code",
-      "country": "Country",
-      "latitude": "Latitude",
-      "longitude": "Longitude",
-      "coordsHint": "You can find coordinates on Google Maps (right-click on the location).",
-      "website": "Website (optional)",
-      "descriptionSection": "Short description (multilingual)",
-      "descriptionFr": "Description in French",
-      "descriptionEn": "Description in English",
-      "descriptionPlaceholder": "Décrivez votre centre, vos spécialités, votre équipe...",
+      "title": "Centerinformation",
+      "description": "Presentera ditt dykcenter för framtida kunder.",
+      "centerNameSection": "Centernamn (flerspråkigt)",
+      "centerNameFr": "Namn på franska",
+      "centerNameEn": "Namn på engelska",
+      "addressSection": "Centeradress",
+      "street": "Gatuadress",
+      "city": "Stad",
+      "postalCode": "Postnummer",
+      "country": "Land",
+      "latitude": "Latitud",
+      "longitude": "Longitud",
+      "coordsHint": "Du kan hitta koordinater på Google Maps (högerklicka på platsen).",
+      "website": "Webbplats (valfritt)",
+      "descriptionSection": "Kort beskrivning (flerspråkigt)",
+      "descriptionFr": "Beskrivning på franska",
+      "descriptionEn": "Beskrivning på engelska",
+      "descriptionPlaceholder": "Beskriv ditt center, specialiteter, team...",
       "descriptionPlaceholderEn": "Describe your center, specialties, team...",
-      "back": "Back",
-      "next": "Continue"
+      "back": "Tillbaka",
+      "next": "Fortsätt"
     },
     "step3": {
-      "title": "Legal information",
-      "description": "This information is optional but recommended for verification.",
-      "companySection": "Company",
-      "optional": "optional",
-      "companyName": "Company name",
-      "companyNamePlaceholder": "My Dive Center LLC",
-      "siretOrVat": "SIRET or VAT number",
-      "siretOrVatPlaceholder": "FR12345678901 or 12345678901234",
-      "siretOrVatHint": "SIRET (France), EU VAT number or local equivalent.",
-      "certificationsSection": "Center certifications",
-      "certificationsHint": "Select all certifications your center can issue.",
-      "selectedCount": "{count} certification(s) selected",
-      "note": "This information can be modified later from your center dashboard.",
-      "back": "Back",
-      "next": "Continue"
+      "title": "Juridisk information",
+      "description": "Denna information är valfri men rekommenderas för verifiering.",
+      "companySection": "Företag",
+      "optional": "valfritt",
+      "companyName": "Företagsnamn",
+      "companyNamePlaceholder": "Mitt Dykcenter AB",
+      "siretOrVat": "Organisationsnummer eller VAT",
+      "siretOrVatPlaceholder": "SE123456789001 eller 556000-0000",
+      "siretOrVatHint": "VAT-nummer (EU), organisationsnummer (Sverige) eller lokal motsvarighet.",
+      "certificationsSection": "Centercertifieringar",
+      "certificationsHint": "Välj alla certifieringar ditt center kan utfärda.",
+      "selectedCount": "{count} certifiering(ar) valda",
+      "note": "Denna information kan ändras senare från din centerinstrumentpanel.",
+      "back": "Tillbaka",
+      "next": "Fortsätt"
     },
     "step4": {
-      "title": "Confirmation",
-      "description": "Review your information before submitting your registration request.",
+      "title": "Bekräftelse",
+      "description": "Kontrollera dina uppgifter innan du skickar din registreringsansökan.",
       "sections": {
-        "personal": "Personal information",
-        "center": "Center information",
-        "location": "Location",
-        "legal": "Legal information",
-        "certifications": "Certifications"
+        "personal": "Personuppgifter",
+        "center": "Centerinformation",
+        "location": "Plats",
+        "legal": "Juridisk information",
+        "certifications": "Certifieringar"
       },
       "labels": {
-        "name": "Full name",
-        "email": "Email",
-        "phone": "Phone",
-        "centerName": "Center name",
-        "website": "Website",
-        "address": "Address",
-        "country": "Country",
-        "coordinates": "Coordinates",
-        "company": "Company",
-        "siretVat": "SIRET/VAT"
+        "name": "Fullständigt namn",
+        "email": "E-post",
+        "phone": "Telefon",
+        "centerName": "Centernamn",
+        "website": "Webbplats",
+        "address": "Adress",
+        "country": "Land",
+        "coordinates": "Koordinater",
+        "company": "Företag",
+        "siretVat": "Org.nr/VAT"
       },
-      "passwordConfirmTitle": "Confirmation required",
-      "passwordConfirmDescription": "For security reasons, please enter your password to complete the registration.",
-      "passwordLabel": "Password",
-      "termsText": "I accept the",
-      "termsLink": "Terms and Conditions",
-      "and": "and the",
-      "privacyLink": "Privacy Policy",
-      "back": "Back",
-      "submit": "Submit my application",
+      "passwordConfirmTitle": "Bekräftelse krävs",
+      "passwordConfirmDescription": "Av säkerhetsskäl, ange ditt lösenord för att slutföra registreringen.",
+      "passwordLabel": "Lösenord",
+      "termsText": "Jag accepterar",
+      "termsLink": "Användarvillkoren",
+      "and": "och",
+      "privacyLink": "Integritetspolicyn",
+      "back": "Tillbaka",
+      "submit": "Skicka min ansökan",
       "errors": {
-        "termsRequired": "You must accept the terms and conditions.",
-        "passwordRequired": "Please enter your password.",
-        "emailExists": "An account already exists with this email.",
-        "rateLimit": "Too many attempts. Please try again later.",
-        "validation": "Some information is invalid. Please check your data.",
-        "generic": "An error occurred. Please try again."
+        "termsRequired": "Du måste acceptera användarvillkoren.",
+        "passwordRequired": "Ange ditt lösenord.",
+        "emailExists": "Ett konto med denna e-post finns redan.",
+        "rateLimit": "För många försök. Försök igen senare.",
+        "validation": "Viss information är ogiltig. Kontrollera dina uppgifter.",
+        "generic": "Ett fel uppstod. Försök igen."
       }
     },
     "success": {
       "meta": {
-        "title": "Application Sent - EviDive",
-        "description": "Your registration application has been sent successfully."
+        "title": "Ansökan skickad - EviDive",
+        "description": "Din registreringsansökan har skickats framgångsrikt."
       },
-      "title": "Application sent!",
-      "subtitle": "Your registration application has been received.",
+      "title": "Ansökan skickad!",
+      "subtitle": "Din registreringsansökan har mottagits.",
       "emailSent": {
-        "title": "Confirmation email sent",
-        "description": "A confirmation email has been sent to your email address."
+        "title": "Bekräftelsemail skickat",
+        "description": "Ett bekräftelsemail har skickats till din e-postadress."
       },
       "review": {
-        "title": "Under review",
-        "description": "Our team will review your application and contact you within 48-72 hours."
+        "title": "Under granskning",
+        "description": "Vårt team granskar din ansökan och kontaktar dig inom 48-72 timmar."
       },
       "whatsNext": {
-        "title": "What's next",
-        "step1": "Check your email for the confirmation receipt.",
-        "step2": "Our team reviews your application (48-72h).",
-        "step3": "Once approved, you'll have access to your center dashboard."
+        "title": "Nästa steg",
+        "step1": "Kontrollera din e-post för bekräftelsemeddelandet.",
+        "step2": "Vårt team granskar din ansökan (48-72 timmar).",
+        "step3": "Efter godkännande får du åtkomst till din centerinstrumentpanel."
       },
-      "dashboardButton": "Go to my dashboard",
-      "homeButton": "Back to home"
+      "dashboardButton": "Till min instrumentpanel",
+      "homeButton": "Tillbaka till startsidan"
     }
   },
   "bookings": {
     "meta": {
-      "title": "My Bookings - EviDive",
-      "description": "View and manage your dive bookings on EviDive."
+      "title": "Mina bokningar - EviDive",
+      "description": "Se och hantera dina dykbokningar på EviDive."
     },
-    "title": "My Bookings",
-    "subtitle": "View and manage all your dive bookings.",
-    "newBooking": "New booking",
-    "viewDetails": "View details",
-    "participants": "participant(s)",
+    "title": "Mina bokningar",
+    "subtitle": "Se och hantera alla dina dykbokningar.",
+    "newBooking": "Ny bokning",
+    "viewDetails": "Visa detaljer",
+    "participants": "deltagare",
     "filters": {
-      "all": "All",
-      "upcoming": "Upcoming",
-      "past": "Past",
-      "cancelled": "Cancelled"
+      "all": "Alla",
+      "upcoming": "Kommande",
+      "past": "Tidigare",
+      "cancelled": "Avbokade"
     },
     "status": {
-      "PENDING": "Pending",
-      "CONFIRMED": "Confirmed",
-      "PAID": "Paid",
-      "RUNNING": "In progress",
-      "COMPLETED": "Completed",
-      "CANCELLED": "Cancelled",
-      "NOSHOW": "No show",
-      "REMOVED": "Removed"
+      "PENDING": "Väntande",
+      "CONFIRMED": "Bekräftad",
+      "PAID": "Betald",
+      "RUNNING": "Pågående",
+      "COMPLETED": "Slutförd",
+      "CANCELLED": "Avbokad",
+      "NOSHOW": "Utebliven",
+      "REMOVED": "Borttagen"
     },
     "empty": {
-      "title": "No bookings",
-      "description": "You don't have any bookings yet. Explore our partner centers and book your next dive!",
-      "filtered": "No bookings match this filter.",
-      "cta": "Explore destinations"
+      "title": "Inga bokningar",
+      "description": "Du har inga bokningar ännu. Utforska våra partnercenter och boka ditt nästa dyk!",
+      "filtered": "Inga bokningar matchar detta filter.",
+      "cta": "Utforska destinationer"
     },
     "details": {
       "meta": {
-        "title": "Booking Details - EviDive",
-        "description": "View your dive booking details."
+        "title": "Bokningsdetaljer - EviDive",
+        "description": "Se detaljerna för din dykbokning."
       },
-      "backToBookings": "Back to bookings",
-      "reference": "Reference",
-      "dateTime": "Date & Time",
-      "date": "Date",
-      "time": "Time",
-      "participants": "Participants",
-      "duration": "Duration",
-      "payment": "Payment",
-      "unitPrice": "Unit price",
-      "extras": "Extras",
-      "discount": "Discount",
-      "total": "Total",
-      "paidOn": "Paid on {date}",
-      "center": "Dive Center",
-      "viewCenter": "View center",
-      "additionalInfo": "Additional Information",
-      "selectedExtras": "Selected extras",
-      "specialRequests": "Special requests",
-      "noAdditionalInfo": "No additional information.",
-      "addToCalendar": "Add to Google Calendar",
-      "contactCenter": "Contact center",
-      "leaveReview": "Leave a review",
-      "cancel": "Cancel booking",
-      "emailSubject": "Question about my booking",
-      "emailBody": "Hello,\n\nI'm contacting you regarding my booking {reference} scheduled for {date}.\n\n",
+      "backToBookings": "Tillbaka till bokningar",
+      "reference": "Referens",
+      "dateTime": "Datum & Tid",
+      "date": "Datum",
+      "time": "Tid",
+      "participants": "Deltagare",
+      "duration": "Längd",
+      "payment": "Betalning",
+      "unitPrice": "Enhetspris",
+      "extras": "Tillägg",
+      "discount": "Rabatt",
+      "total": "Totalt",
+      "paidOn": "Betald {date}",
+      "center": "Dykcenter",
+      "viewCenter": "Visa center",
+      "additionalInfo": "Ytterligare information",
+      "selectedExtras": "Valda tillägg",
+      "specialRequests": "Särskilda önskemål",
+      "noAdditionalInfo": "Ingen ytterligare information.",
+      "addToCalendar": "Lägg till i Google Calendar",
+      "contactCenter": "Kontakta center",
+      "leaveReview": "Lämna recension",
+      "cancel": "Avboka bokning",
+      "emailSubject": "Fråga om min bokning",
+      "emailBody": "Hej,\n\nJag kontaktar dig angående min bokning {reference} planerad till {date}.\n\n",
       "cancellation": {
-        "title": "Cancellation",
-        "warning": "Cancellation is possible up to 48 hours before the dive date. Fees may apply according to the center's policy.",
-        "contactCenter": "Contact the center for more information",
+        "title": "Avbokning",
+        "warning": "Avbokning är möjlig upp till 48 timmar före dykdatumet. Avgifter kan tillkomma enligt centrets policy.",
+        "contactCenter": "Kontakta centret för mer information",
         "reasons": {
-          "status_not_cancellable": "This booking can no longer be cancelled as it is already completed or cancelled.",
-          "date_passed": "This booking can no longer be cancelled as the date has passed.",
-          "too_close_to_date": "Cancellation not possible - less than 48 hours before the dive. Contact the center directly."
+          "status_not_cancellable": "Denna bokning kan inte längre avbokas eftersom den redan är slutförd eller avbokad.",
+          "date_passed": "Denna bokning kan inte längre avbokas eftersom datumet har passerat.",
+          "too_close_to_date": "Avbokning inte möjlig - mindre än 48 timmar till dyket. Kontakta centret direkt."
         }
       }
     }
   },
   "centerServices": {
     "meta": {
-      "title": "Service Management - My Center",
-      "description": "Manage your dive center's services and offerings."
+      "title": "Tjänsthantering - Mitt Center",
+      "description": "Hantera tjänsterna och erbjudandena för ditt dykcenter."
     },
-    "title": "My Services",
-    "subtitle": "Manage your dive services",
-    "newService": "New Service",
-    "editService": "Edit Service",
-    "duplicateService": "Duplicate",
-    "archiveService": "Archive",
-    "activateService": "Activate",
-    "deleteService": "Delete",
-    "backToServices": "Back to services",
+    "title": "Mina tjänster",
+    "subtitle": "Hantera dina dyktjänster",
+    "newService": "Ny tjänst",
+    "editService": "Redigera tjänst",
+    "duplicateService": "Duplicera",
+    "archiveService": "Arkivera",
+    "activateService": "Aktivera",
+    "deleteService": "Ta bort",
+    "backToServices": "Tillbaka till tjänster",
     "filters": {
-      "all": "All",
-      "active": "Active",
-      "archived": "Archived"
+      "all": "Alla",
+      "active": "Aktiva",
+      "archived": "Arkiverade",
+      "label": "Filtrera:",
+      "categoryPlaceholder": "Kategori",
+      "allCategories": "Alla kategorier"
     },
     "empty": {
-      "title": "No services",
-      "description": "You haven't created any services yet. Start by adding your first dive offering.",
-      "cta": "Create a service"
+      "title": "Inga tjänster",
+      "description": "Du har inte skapat några tjänster ännu. Börja med att lägga till ditt första dykerbjudande.",
+      "cta": "Skapa tjänst"
     },
     "card": {
-      "category": "Category",
-      "price": "Price",
-      "duration": "Duration",
-      "participants": "Participants",
+      "category": "Kategori",
+      "price": "Pris",
+      "duration": "Längd",
+      "participants": "Deltagare",
       "minParticipants": "min",
       "maxParticipants": "max",
-      "certification": "Required certification",
-      "extras": "option(s)",
-      "active": "Active",
-      "archived": "Archived",
-      "equipmentIncluded": "Equipment included"
+      "certification": "Certifieringskrav",
+      "extras": "alternativ",
+      "active": "Aktiv",
+      "archived": "Arkiverad",
+      "equipmentIncluded": "Utrustning ingår"
     },
     "form": {
-      "title": "Service Information",
-      "basicInfo": "Basic Information",
-      "pricing": "Pricing",
-      "capacity": "Capacity & Requirements",
-      "schedule": "Availability",
+      "title": "Tjänstinformation",
+      "basicInfo": "Grundläggande information",
+      "pricing": "Prissättning",
+      "capacity": "Kapacitet och krav",
+      "schedule": "Tillgänglighet",
       "media": "Media",
-      "extras": "Additional Options",
-      "name": "Service Name",
-      "nameFr": "Name (French)",
-      "nameEn": "Name (English)",
-      "namePlaceholder": "E.g., Discovery Dive",
-      "description": "Description",
-      "descriptionFr": "Description (French)",
-      "descriptionEn": "Description (English)",
-      "descriptionPlaceholder": "Describe this service in detail...",
-      "category": "Category",
-      "selectCategory": "Select a category",
-      "price": "Price",
-      "currency": "Currency",
-      "pricePerPerson": "Price per person",
-      "duration": "Duration (minutes)",
-      "minParticipants": "Minimum participants",
-      "maxParticipants": "Maximum participants",
-      "minCertification": "Minimum required certification",
-      "noCertification": "None (beginner)",
-      "minAge": "Minimum age",
-      "maxDepth": "Maximum depth (m)",
-      "equipmentIncluded": "Equipment included",
-      "equipmentDetails": "Equipment details",
-      "equipmentDetailsPlaceholder": "Mask, fins, wetsuit...",
-      "includes": "Included in service",
-      "includesPlaceholder": "Enter an item and press Enter",
-      "availableDays": "Available days",
-      "startTimes": "Start times",
-      "addTime": "Add a time",
-      "photos": "Service photos",
-      "addPhoto": "Add a photo",
-      "submit": "Save Service",
-      "creating": "Creating...",
-      "updating": "Updating...",
-      "success": "Service saved successfully!",
-      "error": "An error occurred. Please try again."
+      "extras": "Tilläggsalternativ",
+      "name": "Tjänstnamn",
+      "nameFr": "Namn (franska)",
+      "nameEn": "Namn (engelska)",
+      "namePlaceholder": "T.ex.: Upptäckardyk",
+      "description": "Beskrivning",
+      "descriptionFr": "Beskrivning (franska)",
+      "descriptionEn": "Beskrivning (engelska)",
+      "descriptionPlaceholder": "Beskriv denna tjänst i detalj...",
+      "category": "Kategori",
+      "selectCategory": "Välj en kategori",
+      "price": "Pris",
+      "currency": "Valuta",
+      "pricePerPerson": "Pris per person",
+      "duration": "Längd (minuter)",
+      "minParticipants": "Minsta antal deltagare",
+      "maxParticipants": "Högsta antal deltagare",
+      "minCertification": "Minimicertifiering",
+      "noCertification": "Ingen (nybörjare)",
+      "minAge": "Minimiålder",
+      "maxDepth": "Maxdjup (m)",
+      "equipmentIncluded": "Utrustning ingår",
+      "equipmentDetails": "Utrustningsdetaljer",
+      "equipmentDetailsPlaceholder": "Mask, fenor, våtdräkt...",
+      "includes": "Ingår i tjänsten",
+      "includesPlaceholder": "Skriv ett objekt och tryck Enter",
+      "availableDays": "Tillgängliga dagar",
+      "startTimes": "Starttider",
+      "addTime": "Lägg till tid",
+      "photos": "Tjänstfoton",
+      "addPhoto": "Lägg till foto",
+      "submit": "Spara tjänst",
+      "creating": "Skapar...",
+      "updating": "Uppdaterar...",
+      "success": "Tjänst sparad!",
+      "error": "Ett fel uppstod. Försök igen."
     },
     "extras": {
-      "title": "Additional Options",
-      "subtitle": "Add extras that customers can add to their booking.",
-      "add": "Add an option",
-      "name": "Option name",
-      "nameFr": "Name (French)",
-      "nameEn": "Name (English)",
-      "namePlaceholder": "E.g., Camera rental",
-      "description": "Description",
-      "price": "Price",
-      "multiplyByPax": "Multiply by number of participants",
-      "isRequired": "Required option",
-      "isActive": "Active",
-      "remove": "Remove",
-      "empty": "No options added"
+      "title": "Tilläggsalternativ",
+      "subtitle": "Lägg till tillägg som kunder kan lägga till sin bokning.",
+      "add": "Lägg till alternativ",
+      "name": "Alternativnamn",
+      "nameFr": "Namn (franska)",
+      "nameEn": "Namn (engelska)",
+      "namePlaceholder": "T.ex.: Kamerauthyrning",
+      "description": "Beskrivning",
+      "price": "Pris",
+      "multiplyByPax": "Multiplicera med antal deltagare",
+      "isRequired": "Obligatoriskt alternativ",
+      "isActive": "Aktivt",
+      "remove": "Ta bort",
+      "empty": "Inga alternativ tillagda"
     },
     "days": {
-      "monday": "Monday",
-      "tuesday": "Tuesday",
-      "wednesday": "Wednesday",
-      "thursday": "Thursday",
-      "friday": "Friday",
-      "saturday": "Saturday",
-      "sunday": "Sunday"
+      "monday": "Måndag",
+      "tuesday": "Tisdag",
+      "wednesday": "Onsdag",
+      "thursday": "Torsdag",
+      "friday": "Fredag",
+      "saturday": "Lördag",
+      "sunday": "Söndag"
     },
     "certifications": {
-      "none": "None (beginner)",
+      "none": "Ingen (nybörjare)",
       "ow": "Open Water",
       "aow": "Advanced Open Water",
       "rescue": "Rescue Diver",
       "dm": "Divemaster",
-      "instructor": "Instructor"
+      "instructor": "Instruktör"
     },
     "categories": {
-      "discovery": "Discovery",
-      "fun_dive": "Fun Dive",
-      "training": "Training",
-      "night_dive": "Night Dive",
-      "deep_dive": "Deep Dive",
-      "wreck": "Wreck",
-      "drift": "Drift Dive",
+      "discovery": "Upptäckt",
+      "fun_dive": "Fritidsdyk",
+      "training": "Utbildning",
+      "night_dive": "Nattdyk",
+      "deep_dive": "Djupdyk",
+      "wreck": "Vrak",
+      "drift": "Driftdyk",
       "nitrox": "Nitrox",
-      "tech": "Technical",
-      "snorkeling": "Snorkeling",
-      "other": "Other"
+      "tech": "Tekniskt",
+      "snorkeling": "Snorkling",
+      "other": "Annat"
     },
     "confirmDelete": {
-      "title": "Delete this service?",
-      "description": "This action cannot be undone. The service will be permanently deleted.",
-      "cancel": "Cancel",
-      "confirm": "Delete"
+      "title": "Ta bort denna tjänst?",
+      "description": "Denna åtgärd kan inte ångras. Tjänsten tas bort permanent.",
+      "cancel": "Avbryt",
+      "confirm": "Ta bort"
     },
     "confirmArchive": {
-      "title": "Archive this service?",
-      "description": "The service will no longer be visible to customers but can be reactivated later.",
-      "cancel": "Cancel",
-      "confirm": "Archive"
+      "title": "Arkivera denna tjänst?",
+      "description": "Tjänsten kommer inte längre vara synlig för kunder men kan återaktiveras senare.",
+      "cancel": "Avbryt",
+      "confirm": "Arkivera"
     },
     "errors": {
-      "name_required": "Name is required",
-      "price_required": "Price is required",
-      "price_positive": "Price must be greater than 0",
-      "duration_required": "Duration is required",
-      "duration_positive": "Duration must be greater than 0",
-      "participants_invalid": "Minimum must be less than or equal to maximum",
-      "unauthorized": "Unauthorized",
-      "not_found": "Service not found",
-      "server_error": "Server error"
+      "name_required": "Namn krävs",
+      "price_required": "Pris krävs",
+      "price_positive": "Pris måste vara större än 0",
+      "duration_required": "Längd krävs",
+      "duration_positive": "Längd måste vara större än 0",
+      "participants_invalid": "Minimum måste vara mindre än eller lika med maximum",
+      "unauthorized": "Ej auktoriserad",
+      "not_found": "Tjänst hittades inte",
+      "server_error": "Serverfel"
     }
   },
   "centerReviews": {
     "meta": {
-      "title": "Reviews Received - My Center",
-      "description": "View and respond to customer reviews."
+      "title": "Mottagna recensioner - Mitt Center",
+      "description": "Se och svara på kundrecensioner."
     },
-    "title": "Reviews Received",
-    "subtitle": "Customer reviews for {centerName}",
-    "backToDashboard": "Back to dashboard",
-    "listTitle": "All Reviews",
-    "showingResults": "{count} reviews",
+    "title": "Mottagna recensioner",
+    "subtitle": "Kundrecensioner för {centerName}",
+    "backToDashboard": "Tillbaka till instrumentpanel",
+    "listTitle": "Alla recensioner",
+    "showingResults": "{count} recensioner",
     "pendingApproval": {
-      "title": "Center pending approval",
-      "description": "Your center is under review. You can view reviews once approved.",
-      "backToDashboard": "Back to dashboard"
+      "title": "Center väntar på godkännande",
+      "description": "Ditt center granskas. Du kan se recensioner efter godkännande.",
+      "backToDashboard": "Tillbaka till instrumentpanel"
     },
     "stats": {
-      "averageRating": "Average Rating",
-      "totalReviews": "Total Reviews",
+      "averageRating": "Genomsnittsbetyg",
+      "totalReviews": "Totalt antal recensioner",
       "outOf5": "/ 5",
-      "reviews": "reviews"
+      "reviews": "recensioner"
     },
     "distribution": {
-      "title": "Rating Distribution",
-      "stars": "stars"
+      "title": "Betygsfördelning",
+      "stars": "stjärnor"
     },
     "filters": {
-      "sortBy": "Sort by",
-      "sortNewest": "Newest first",
-      "sortOldest": "Oldest first",
-      "sortHighest": "Highest rated",
-      "sortLowest": "Lowest rated",
-      "filterByRating": "Filter by rating",
-      "allRatings": "All ratings",
-      "starsFilter": "stars",
-      "clearFilters": "Clear"
+      "sortBy": "Sortera efter",
+      "sortNewest": "Nyaste först",
+      "sortOldest": "Äldsta först",
+      "sortHighest": "Högsta betyg",
+      "sortLowest": "Lägsta betyg",
+      "filterByRating": "Filtrera efter betyg",
+      "allRatings": "Alla betyg",
+      "starsFilter": "stjärnor",
+      "clearFilters": "Rensa"
     },
     "empty": {
-      "title": "No reviews yet",
-      "filtered": "No reviews match this filter"
+      "title": "Inga recensioner ännu",
+      "filtered": "Inga recensioner matchar detta filter"
     },
     "card": {
-      "respond": "Respond",
-      "responded": "Response published",
-      "service": "Service",
-      "yourResponse": "Your response",
-      "respondedOn": "Responded on",
-      "showPhotos": "Show photos",
-      "hidePhotos": "Hide photos"
+      "respond": "Svara",
+      "responded": "Svar publicerat",
+      "service": "Tjänst",
+      "yourResponse": "Ditt svar",
+      "respondedOn": "Svarade den",
+      "showPhotos": "Visa foton",
+      "hidePhotos": "Dölj foton"
     },
     "modal": {
-      "title": "Respond to Review",
-      "description": "Your response will be publicly visible. You cannot edit it after publishing.",
-      "responseLabel": "Your response",
-      "responsePlaceholder": "Thank the customer for their feedback and address their comments...",
-      "cancel": "Cancel",
-      "submit": "Publish response",
-      "submitting": "Publishing...",
-      "success": "Response published successfully!",
-      "error": "An error occurred. Please try again.",
-      "minLength": "Minimum 10 characters",
-      "maxLength": "Maximum 1000 characters",
-      "alreadyResponded": "You have already responded to this review"
+      "title": "Svara på recension",
+      "description": "Ditt svar är offentligt synligt. Du kan inte redigera det efter publicering.",
+      "responseLabel": "Ditt svar",
+      "responsePlaceholder": "Tacka kunden för feedback och kommentera...",
+      "cancel": "Avbryt",
+      "submit": "Publicera svar",
+      "submitting": "Publicerar...",
+      "success": "Svar publicerat!",
+      "error": "Ett fel uppstod. Försök igen.",
+      "minLength": "Minst 10 tecken",
+      "maxLength": "Max 1000 tecken",
+      "alreadyResponded": "Du har redan svarat på denna recension"
     }
   },
   "centerProfile": {
     "meta": {
-      "title": "Center Profile - EviDive",
-      "description": "Edit your dive center information."
+      "title": "Centerprofil - EviDive",
+      "description": "Redigera informationen om ditt dykcenter."
     },
-    "title": "Center Profile",
-    "subtitle": "Edit your center's public information",
-    "backToDashboard": "Back to dashboard",
-    "previewLink": "View public page",
-    "saveSuccess": "Changes saved",
-    "saveError": "Error saving changes",
-    "saving": "Saving...",
-    "save": "Save",
+    "title": "Centerprofil",
+    "subtitle": "Redigera den offentliga informationen om ditt center",
+    "backToDashboard": "Tillbaka till instrumentpanel",
+    "previewLink": "Visa offentlig sida",
+    "saveSuccess": "Ändringar sparade",
+    "saveError": "Fel vid sparning av ändringar",
+    "saving": "Sparar...",
+    "save": "Spara",
     "pendingApproval": {
-      "title": "Center pending approval",
-      "description": "Your center is under review. You can edit your profile once approved.",
-      "backToDashboard": "Back to dashboard"
+      "title": "Center väntar på godkännande",
+      "description": "Ditt center granskas. Du kan redigera din profil efter godkännande.",
+      "backToDashboard": "Tillbaka till instrumentpanel"
     },
     "sections": {
       "identity": {
-        "title": "Identity",
-        "description": "Name, logo and images of your center"
+        "title": "Identitet",
+        "description": "Namn, logotyp och bilder för ditt center"
       },
       "description": {
-        "title": "Description",
-        "description": "Present your center to visitors"
+        "title": "Beskrivning",
+        "description": "Presentera ditt center för besökare"
       },
       "contact": {
-        "title": "Contact Details",
-        "description": "Address and contact information"
+        "title": "Kontaktuppgifter",
+        "description": "Adress och kontaktinformation"
       },
       "practical": {
-        "title": "Practical Information",
-        "description": "Hours, languages and certifications"
+        "title": "Praktisk information",
+        "description": "Öppettider, språk och certifieringar"
       },
       "engagement": {
-        "title": "Eco-responsibility Commitment",
-        "description": "Your actions to protect the oceans"
+        "title": "Miljöengagemang",
+        "description": "Dina åtgärder för att skydda haven"
       },
       "payments": {
-        "title": "Payments",
-        "description": "Payment methods and Stripe configuration"
+        "title": "Betalningar",
+        "description": "Betalningsmetoder och Stripe-konfiguration"
       },
       "location": {
-        "title": "Location",
-        "description": "Position on the map"
+        "title": "Plats",
+        "description": "Position på kartan"
       }
     },
     "fields": {
-      "name": "Center name",
-      "logo": "Logo",
-      "coverImage": "Cover image",
-      "gallery": "Photo gallery",
-      "shortDescription": "Short description",
-      "fullDescription": "Full description",
-      "address": "Address",
-      "street2": "Address line 2",
-      "city": "City",
+      "name": "Centernamn",
+      "logo": "Logotyp",
+      "coverImage": "Omslagsbild",
+      "gallery": "Fotogalleri",
+      "shortDescription": "Kort beskrivning",
+      "fullDescription": "Fullständig beskrivning",
+      "address": "Adress",
+      "street2": "Adressrad 2",
+      "city": "Stad",
       "region": "Region",
-      "country": "Country",
-      "zip": "Postal code",
-      "phone": "Phone",
-      "email": "Email",
-      "website": "Website",
+      "country": "Land",
+      "zip": "Postnummer",
+      "phone": "Telefon",
+      "email": "E-post",
+      "website": "Webbplats",
       "facebook": "Facebook",
       "instagram": "Instagram",
       "whatsapp": "WhatsApp",
-      "openingHours": "Opening hours",
-      "languages": "Languages spoken",
-      "certifications": "Certifications offered",
-      "equipmentRental": "Equipment rental",
-      "ecoCommitment": "Eco-responsibility commitment",
-      "paymentTypes": "Accepted payment methods",
-      "stripeAccount": "Stripe Connect Account",
-      "stripeConnected": "Account connected",
-      "stripeNotConnected": "Stripe not configured - Set up your account to receive payments",
-      "stripeOnboarding": "Configure Stripe",
-      "latitude": "Latitude",
-      "longitude": "Longitude"
+      "openingHours": "Öppettider",
+      "languages": "Språk",
+      "certifications": "Erbjudna certifieringar",
+      "equipmentRental": "Utrustningsuthyrning",
+      "ecoCommitment": "Miljöengagemang",
+      "paymentTypes": "Accepterade betalningsmetoder",
+      "stripeAccount": "Stripe Connect-konto",
+      "stripeConnected": "Konto anslutet",
+      "stripeNotConnected": "Stripe ej konfigurerad — Konfigurera ditt konto för att ta emot betalningar",
+      "stripeOnboarding": "Konfigurera Stripe",
+      "latitude": "Latitud",
+      "longitude": "Longitud"
     },
     "days": {
-      "monday": "Monday",
-      "tuesday": "Tuesday",
-      "wednesday": "Wednesday",
-      "thursday": "Thursday",
-      "friday": "Friday",
-      "saturday": "Saturday",
-      "sunday": "Sunday"
+      "monday": "Måndag",
+      "tuesday": "Tisdag",
+      "wednesday": "Onsdag",
+      "thursday": "Torsdag",
+      "friday": "Fredag",
+      "saturday": "Lördag",
+      "sunday": "Söndag"
     },
-    "open": "Open",
-    "closed": "Closed",
-    "yes": "Yes",
-    "no": "No"
+    "open": "Öppet",
+    "closed": "Stängt",
+    "yes": "Ja",
+    "no": "Nej",
+    "placeholders": {
+      "street2": "Byggnad, våning...",
+      "city": "Stockholm",
+      "region": "Stockholm",
+      "country": "Sverige",
+      "email": "kontakt@center.se",
+      "website": "https://www.center.se",
+      "facebook": "https://facebook.com/dittcenter",
+      "instagram": "https://instagram.com/dittcenter",
+      "ecoCommitment": "Beskriv ditt miljöengagemang..."
+    }
   },
   "centerSettings": {
     "meta": {
-      "title": "Center Settings - EviDive",
-      "description": "Configure your dive center settings."
+      "title": "Centerinställningar - EviDive",
+      "description": "Konfigurera inställningarna för ditt dykcenter."
     },
-    "title": "Settings",
-    "subtitle": "Configure settings for {centerName}",
-    "backToDashboard": "Back to dashboard",
-    "save": "Save",
-    "saving": "Saving...",
-    "saved": "Settings saved",
-    "error": "An error occurred",
-    "cancel": "Cancel",
-    "confirm": "Confirm",
-    "confirming": "Confirming...",
+    "title": "Inställningar",
+    "subtitle": "Konfigurera inställningar för {centerName}",
+    "backToDashboard": "Tillbaka till instrumentpanel",
+    "save": "Spara",
+    "saving": "Sparar...",
+    "saved": "Inställningar sparade",
+    "error": "Ett fel uppstod",
+    "cancel": "Avbryt",
+    "confirm": "Bekräfta",
+    "confirming": "Bekräftar...",
     "pendingApproval": {
-      "title": "Center pending approval",
-      "description": "Your center is under review. You can access settings once approved."
+      "title": "Center väntar på godkännande",
+      "description": "Ditt center granskas. Du kan komma åt inställningar efter godkännande."
     },
     "suspendedWarning": {
-      "title": "Center deactivated",
-      "description": "Your center is currently deactivated and does not appear in searches. You can reactivate it from the danger zone."
+      "title": "Center inaktiverat",
+      "description": "Ditt center är för närvarande inaktiverat och visas inte i sökningar. Du kan återaktivera det från farozonen."
     },
     "notifications": {
-      "title": "Notifications",
-      "emailOnNewBooking": "Email on new booking",
-      "emailOnNewBookingDesc": "Receive an email for each new booking request.",
-      "emailOnCancellation": "Email on cancellation",
-      "emailOnCancellationDesc": "Receive an email when a customer cancels their booking.",
-      "emailOnNewReview": "Email on new review",
-      "emailOnNewReviewDesc": "Receive an email when a customer leaves a review for your center.",
-      "smsOnNewBooking": "SMS on new booking",
-      "smsOnNewBookingDesc": "Receive an SMS for each new booking (requires a verified phone number).",
-      "smsRequiresPhone": "Add a phone number to your center to enable SMS notifications.",
-      "dailyBookingReminder": "Daily reminder",
-      "dailyBookingReminderDesc": "Receive a daily summary of the day's bookings."
+      "title": "Notiser",
+      "emailOnNewBooking": "E-post vid ny bokning",
+      "emailOnNewBookingDesc": "Få ett e-postmeddelande för varje ny bokningsförfrågan.",
+      "emailOnCancellation": "E-post vid avbokning",
+      "emailOnCancellationDesc": "Få ett e-postmeddelande när en kund avbokar.",
+      "emailOnNewReview": "E-post vid ny recension",
+      "emailOnNewReviewDesc": "Få ett e-postmeddelande när en kund lämnar en recension.",
+      "smsOnNewBooking": "SMS vid ny bokning",
+      "smsOnNewBookingDesc": "Få ett SMS för varje ny bokning (kräver verifierat telefonnummer).",
+      "smsRequiresPhone": "Lägg till ett telefonnummer till ditt center för att aktivera SMS-notiser.",
+      "dailyBookingReminder": "Daglig sammanfattning",
+      "dailyBookingReminderDesc": "Få en daglig sammanfattning av dagens bokningar."
     },
     "cancellation": {
-      "title": "Cancellation Policy",
-      "policyLabel": "Policy type",
-      "flexible": "Flexible",
-      "flexibleDesc": "Free cancellation up to 24h before. Full refund.",
-      "moderate": "Moderate",
-      "moderateDesc": "Free cancellation up to 48h before. Partial refund after.",
-      "strict": "Strict",
-      "strictDesc": "Free cancellation up to 72h before. No refund after.",
-      "hoursLabel": "Free cancellation deadline (hours)",
-      "hoursDesc": "Number of hours before the dive where cancellation is free.",
-      "refundLabel": "Refund after deadline (%)",
-      "refundDesc": "Percentage refunded if cancellation occurs after the free deadline.",
-      "invalidHours": "Deadline must be between 0 and 168 hours.",
-      "invalidRefund": "Percentage must be between 0 and 100."
+      "title": "Avbokningspolicy",
+      "policyLabel": "Policytyp",
+      "flexible": "Flexibel",
+      "flexibleDesc": "Gratis avbokning upp till 24 timmar före. Full återbetalning.",
+      "moderate": "Moderat",
+      "moderateDesc": "Gratis avbokning upp till 48 timmar före. Delvis återbetalning därefter.",
+      "strict": "Strikt",
+      "strictDesc": "Gratis avbokning upp till 72 timmar före. Ingen återbetalning därefter.",
+      "hoursLabel": "Gratis avbokningsfrist (timmar)",
+      "hoursDesc": "Antal timmar före dyket då avbokning är gratis.",
+      "refundLabel": "Återbetalning efter frist (%)",
+      "refundDesc": "Procent som återbetalas om avbokning sker efter gratisfristen.",
+      "invalidHours": "Frist måste vara mellan 0 och 168 timmar.",
+      "invalidRefund": "Procent måste vara mellan 0 och 100."
     },
     "payment": {
-      "title": "Payment",
-      "stripeConnected": "Stripe Connect enabled",
-      "stripeNotConnected": "Stripe not configured",
-      "stripeConnectedDesc": "Your Stripe account is connected. You can receive payments.",
-      "stripeNotConnectedDesc": "Configure Stripe Connect to receive customer payments.",
-      "connectStripe": "Configure Stripe",
-      "manageStripe": "Manage Stripe",
-      "comingSoon": "Stripe integration will be available soon.",
-      "ibanTitle": "Bank details",
-      "ibanLabel": "IBAN (optional)",
-      "ibanDesc": "Bank details for manual transfers (informational only).",
-      "ibanPlaceholder": "GB82 WEST 1234 5698 7654 32",
-      "invalidIban": "Invalid IBAN format.",
-      "commissionTitle": "Commission rate",
-      "commissionDesc": "of each booking goes to you",
-      "commissionReadOnly": "This rate is set by the EviDive administrator and cannot be modified."
+      "title": "Betalning",
+      "stripeConnected": "Stripe Connect aktiverat",
+      "stripeNotConnected": "Stripe ej konfigurerad",
+      "stripeConnectedDesc": "Ditt Stripe-konto är anslutet. Du kan ta emot betalningar.",
+      "stripeNotConnectedDesc": "Konfigurera Stripe Connect för att ta emot kundbetalningar.",
+      "connectStripe": "Konfigurera Stripe",
+      "manageStripe": "Hantera Stripe",
+      "comingSoon": "Stripe-integration kommer snart.",
+      "ibanTitle": "Bankuppgifter",
+      "ibanLabel": "IBAN (valfritt)",
+      "ibanDesc": "Bankuppgifter för manuella överföringar (endast information).",
+      "ibanPlaceholder": "SE45 5000 0000 0583 9825 7466",
+      "invalidIban": "Ogiltigt IBAN-format.",
+      "commissionTitle": "Provisionssats",
+      "commissionDesc": "av varje bokning går till dig",
+      "commissionReadOnly": "Denna sats är satt av EviDive-administratören och kan inte ändras."
     },
     "team": {
       "title": "Team",
-      "description": "Manage your team members and their access.",
-      "manage": "Manage team"
+      "description": "Hantera dina teammedlemmar och deras åtkomst.",
+      "manage": "Hantera team"
     },
     "danger": {
-      "title": "Danger Zone",
-      "description": "These actions are irreversible or have significant consequences.",
+      "title": "Farozon",
+      "description": "Dessa åtgärder är oåterkalleliga eller har betydande konsekvenser.",
       "deactivate": {
-        "title": "Deactivate center",
-        "description": "Your center will no longer be visible in searches and will not be able to receive new bookings. Existing bookings will be preserved.",
-        "button": "Deactivate center",
-        "success": "Center deactivated successfully"
+        "title": "Inaktivera center",
+        "description": "Ditt center kommer inte längre vara synligt i sökningar och kan inte ta emot nya bokningar. Befintliga bokningar behålls.",
+        "button": "Inaktivera center",
+        "success": "Center inaktiverat framgångsrikt"
       },
       "reactivate": {
-        "title": "Reactivate center",
-        "description": "Your center will become visible in searches again and will be able to receive new bookings.",
-        "button": "Reactivate center",
-        "success": "Center reactivated successfully"
+        "title": "Återaktivera center",
+        "description": "Ditt center blir synligt i sökningar igen och kan ta emot nya bokningar.",
+        "button": "Återaktivera center",
+        "success": "Center återaktiverat framgångsrikt"
       },
       "delete": {
-        "title": "Permanently delete center",
-        "description": "This action is irreversible. All data related to your center will be permanently deleted.",
-        "warningTitle": "This action will delete:",
-        "warning1": "All center information",
-        "warning2": "All services and pricing",
-        "warning3": "All past booking history",
-        "confirmLabel": "Confirmation",
-        "confirmPlaceholder": "Type the center slug",
-        "confirmHint": "Type",
-        "button": "Delete center",
-        "confirmButton": "Permanently delete",
-        "deleting": "Deleting...",
-        "success": "Center deleted successfully",
-        "mismatch": "Confirmation text does not match.",
-        "hasActiveBookings": "Cannot delete: you have active upcoming bookings."
+        "title": "Ta bort center permanent",
+        "description": "Denna åtgärd är oåterkallelig. All data relaterad till ditt center tas bort permanent.",
+        "warningTitle": "Denna åtgärd tar bort:",
+        "warning1": "All centerinformation",
+        "warning2": "Alla tjänster och priser",
+        "warning3": "All bokningshistorik",
+        "confirmLabel": "Bekräftelse",
+        "confirmPlaceholder": "Skriv center-slug",
+        "confirmHint": "Skriv",
+        "button": "Ta bort center",
+        "confirmButton": "Ta bort permanent",
+        "deleting": "Tar bort...",
+        "success": "Center borttaget framgångsrikt",
+        "mismatch": "Bekräftelsetexten matchar inte.",
+        "hasActiveBookings": "Kan inte ta bort: du har aktiva framtida bokningar."
       }
     }
   },
   "centerTeam": {
     "meta": {
-      "title": "Team Management - My Center",
-      "description": "Manage your dive center team members."
+      "title": "Teamhantering - Mitt Center",
+      "description": "Hantera teammedlemmarna för ditt dykcenter."
     },
-    "title": "Team Management",
-    "subtitle": "Manage your team members",
-    "addMember": "Add member",
-    "backToCenter": "Back to dashboard",
+    "title": "Teamhantering",
+    "subtitle": "Hantera dina teammedlemmar",
+    "addMember": "Lägg till medlem",
+    "backToCenter": "Tillbaka till instrumentpanel",
     "empty": {
-      "title": "No team members",
-      "description": "Add your team members to facilitate booking assignments.",
-      "cta": "Add a member"
+      "title": "Inga teammedlemmar",
+      "description": "Lägg till dina teammedlemmar för att underlätta bokningstilldelningar.",
+      "cta": "Lägg till medlem"
     },
     "card": {
-      "edit": "Edit",
-      "deactivate": "Deactivate",
-      "reactivate": "Reactivate",
-      "delete": "Delete",
-      "owner": "Owner",
-      "active": "Active",
-      "inactive": "Inactive",
-      "noCertifications": "No certifications",
-      "noLanguages": "No languages",
-      "confirmDeactivateTitle": "Deactivate this member?",
-      "confirmDeactivateDescription": "This member will no longer be assignable to new bookings.",
-      "confirmDeleteTitle": "Delete this member?",
-      "confirmDeleteDescription": "This action cannot be undone. The member will be permanently deleted.",
-      "cannotDeleteWithBookings": "This member cannot be deleted because they have associated bookings. You can only deactivate them.",
-      "cancel": "Cancel"
+      "edit": "Redigera",
+      "deactivate": "Inaktivera",
+      "reactivate": "Återaktivera",
+      "delete": "Ta bort",
+      "owner": "Ägare",
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "noCertifications": "Inga certifieringar",
+      "noLanguages": "Inga språk",
+      "confirmDeactivateTitle": "Inaktivera denna medlem?",
+      "confirmDeactivateDescription": "Denna medlem kan inte längre tilldelas nya bokningar.",
+      "confirmDeleteTitle": "Ta bort denna medlem?",
+      "confirmDeleteDescription": "Denna åtgärd kan inte ångras. Medlemmen tas bort permanent.",
+      "cannotDeleteWithBookings": "Denna medlem kan inte tas bort eftersom den har kopplade bokningar. Du kan endast inaktivera den.",
+      "cancel": "Avbryt"
     },
     "form": {
-      "createTitle": "Add a member",
-      "editTitle": "Edit member",
-      "createDescription": "Add a new member to your team.",
-      "editDescription": "Edit this member's information.",
-      "name": "Name",
-      "namePlaceholder": "Full name",
-      "email": "Email",
-      "emailPlaceholder": "email@example.com",
-      "phone": "Phone",
-      "phonePlaceholder": "+1 234 567 8900",
-      "photo": "Photo",
-      "photoHint": "JPG, PNG or WebP. Max 5 MB.",
-      "bio": "Biography",
-      "bioPlaceholder": "Describe this member's experience and specialties...",
-      "certifications": "Certifications",
-      "languages": "Languages spoken",
-      "cancel": "Cancel",
-      "save": "Save",
-      "saving": "Saving...",
-      "create": "Add",
-      "creating": "Adding...",
-      "optional": "optional",
+      "createTitle": "Lägg till medlem",
+      "editTitle": "Redigera medlem",
+      "createDescription": "Lägg till en ny medlem i ditt team.",
+      "editDescription": "Redigera informationen för denna medlem.",
+      "name": "Namn",
+      "namePlaceholder": "Fullständigt namn",
+      "email": "E-post",
+      "emailPlaceholder": "email@exempel.se",
+      "phone": "Telefon",
+      "phonePlaceholder": "+46 70 123 45 67",
+      "photo": "Foto",
+      "photoHint": "JPG, PNG eller WebP. Max 5 MB.",
+      "bio": "Biografi",
+      "bioPlaceholder": "Beskriv erfarenheten och specialiteterna för denna medlem...",
+      "certifications": "Certifieringar",
+      "languages": "Språk",
+      "cancel": "Avbryt",
+      "save": "Spara",
+      "saving": "Sparar...",
+      "create": "Lägg till",
+      "creating": "Lägger till...",
+      "optional": "valfritt",
       "errors": {
-        "nameRequired": "Name is required",
-        "emailInvalid": "Invalid email",
-        "generic": "An error occurred"
+        "nameRequired": "Namn krävs",
+        "emailInvalid": "Ogiltig e-post",
+        "generic": "Ett fel uppstod"
       }
     },
     "certifications": {
@@ -2255,82 +2214,83 @@
       "aow": "Advanced Open Water",
       "rescue": "Rescue Diver",
       "dm": "Divemaster",
-      "instructor": "Instructor",
+      "instructor": "Instruktör",
       "nitrox": "Nitrox",
       "deep": "Deep Diver",
       "wreck": "Wreck Diver",
       "night": "Night Diver",
-      "efr": "EFR / First Aid"
+      "efr": "EFR / Första hjälpen"
     },
     "languages": {
-      "fr": "French",
-      "en": "English",
-      "es": "Spanish",
-      "it": "Italian",
-      "de": "German",
-      "pt": "Portuguese",
-      "nl": "Dutch",
-      "ru": "Russian",
-      "zh": "Chinese",
-      "ja": "Japanese"
+      "fr": "Franska",
+      "en": "Engelska",
+      "es": "Spanska",
+      "it": "Italienska",
+      "de": "Tyska",
+      "pt": "Portugisiska",
+      "nl": "Holländska",
+      "ru": "Ryska",
+      "zh": "Kinesiska",
+      "ja": "Japanska",
+      "sv": "Svenska"
     }
   },
   "centerStats": {
     "meta": {
-      "title": "Statistics - My Center",
-      "description": "Analyze the performance of your dive center."
+      "title": "Statistik - Mitt Center",
+      "description": "Analysera prestandan för ditt dykcenter."
     },
-    "title": "Statistics",
-    "subtitle": "Analyze the performance of {centerName}",
-    "backToDashboard": "Back to dashboard",
+    "title": "Statistik",
+    "subtitle": "Analysera prestandan för {centerName}",
+    "backToDashboard": "Tillbaka till instrumentpanel",
     "pendingApproval": {
-      "title": "Center pending approval",
-      "description": "Your center is under review. Statistics will be available once approved.",
-      "backToDashboard": "Back to dashboard"
+      "title": "Center väntar på godkännande",
+      "description": "Ditt center granskas. Statistik finns tillgänglig efter godkännande.",
+      "backToDashboard": "Tillbaka till instrumentpanel"
     },
     "error": {
-      "title": "Error",
-      "description": "Unable to load statistics. Please try again.",
-      "generic": "An error occurred"
+      "title": "Fel",
+      "description": "Kunde inte ladda statistik. Försök igen.",
+      "generic": "Ett fel uppstod"
     },
-    "loading": "Loading...",
+    "loading": "Laddar...",
     "periods": {
-      "30d": "30 days",
-      "90d": "90 days",
-      "12m": "12 months",
-      "all": "All time"
+      "30d": "30 dagar",
+      "90d": "90 dagar",
+      "12m": "12 månader",
+      "all": "Alltid"
     },
     "cards": {
-      "totalRevenue": "Gross Revenue",
-      "netRevenue": "Net Revenue",
-      "totalBookings": "Bookings",
-      "confirmationRate": "Confirmation Rate",
-      "cancellationRate": "Cancellation Rate",
-      "totalClients": "Unique Clients",
-      "newClients": "New Clients",
-      "returnRate": "Return Rate",
-      "totalReviews": "Reviews Received",
-      "avgRating": "Average Rating",
-      "vsPreviousPeriod": "vs previous period"
+      "totalRevenue": "Bruttointäkter",
+      "netRevenue": "Nettointäkter",
+      "totalBookings": "Bokningar",
+      "confirmationRate": "Bekräftelserate",
+      "cancellationRate": "Avbokningsrate",
+      "totalClients": "Unika kunder",
+      "newClients": "Nya kunder",
+      "returnRate": "Återkomstrate",
+      "totalReviews": "Mottagna recensioner",
+      "avgRating": "Genomsnittsbetyg",
+      "vsPreviousPeriod": "vs föregående period"
     },
     "charts": {
-      "revenueTitle": "Revenue Evolution",
-      "grossRevenue": "Gross Revenue",
-      "netRevenue": "Net Revenue",
-      "commission": "EviDive Commission",
-      "bookingsTitle": "Bookings per Month",
-      "bookings": "Bookings",
-      "reviewsTitle": "Reviews and Average Rating",
-      "reviews": "Number of Reviews",
-      "avgRating": "Average Rating",
-      "noData": "No data for this period"
+      "revenueTitle": "Intäktsutveckling",
+      "grossRevenue": "Bruttointäkter",
+      "netRevenue": "Nettointäkter",
+      "commission": "EviDive-provision",
+      "bookingsTitle": "Bokningar per månad",
+      "bookings": "Bokningar",
+      "reviewsTitle": "Recensioner och genomsnittsbetyg",
+      "reviews": "Antal recensioner",
+      "avgRating": "Genomsnittsbetyg",
+      "noData": "Ingen data för denna period"
     },
     "tables": {
-      "topServicesTitle": "Most Booked Services",
-      "service": "Service",
-      "bookingsCount": "Bookings",
-      "revenue": "Revenue",
-      "noData": "No services booked"
+      "topServicesTitle": "Mest bokade tjänster",
+      "service": "Tjänst",
+      "bookingsCount": "Bokningar",
+      "revenue": "Intäkter",
+      "noData": "Inga bokade tjänster"
     }
   }
 }

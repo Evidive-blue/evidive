@@ -201,6 +201,7 @@ export default async function BookingsPage({
           </Card>
         ) : (
           <div className="space-y-4">
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             {bookings.map((booking: any) => (
               <BookingCard
                 key={booking.id}

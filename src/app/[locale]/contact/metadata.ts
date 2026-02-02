@@ -1,7 +1,16 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { locales } from "@/i18n/config";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+const generateAlternates = (path: string) => {
+ const languages: Record<string, string> = {};
+ locales.forEach((locale) => {
+  languages[locale] = `${baseUrl}/${locale}${path}`;
+ });
+ return languages;
+};
 
 export async function generateMetadata({
  params,
@@ -14,12 +23,12 @@ export async function generateMetadata({
  return {
   title: t("title"),
   description: t("description"),
-  metadataBase: new URL(baseUrl!),
+  metadataBase: new URL(baseUrl),
   openGraph: {
    title: t("title"),
    description: t("description"),
    type: "website",
-   locale: locale === "fr" ? "fr_FR" : locale === "de" ? "de_DE" : "en_US",
+   locale: locale === "fr" ? "fr_FR" : locale === "de" ? "de_DE" : locale === "es" ? "es_ES" : locale === "it" ? "it_IT" : "en_GB",
    url: `${baseUrl}/${locale}/contact`,
    siteName: "EviDive",
   },
@@ -27,15 +36,10 @@ export async function generateMetadata({
    card: "summary_large_image",
    title: t("title"),
    description: t("description"),
-   images: [`${baseUrl}/og-contact.png`],
   },
   alternates: {
    canonical: `${baseUrl}/${locale}/contact`,
-   languages: {
-    fr: `${baseUrl}/fr/contact`,
-    en: `${baseUrl}/en/contact`,
-    de: `${baseUrl}/de/contact`,
-   },
+   languages: generateAlternates("/contact"),
   },
   robots: {
    index: true,

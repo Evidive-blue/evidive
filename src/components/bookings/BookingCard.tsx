@@ -1,9 +1,8 @@
 import { Link } from "@/i18n/navigation";
-import { Calendar, Clock, Users, MapPin, CreditCard } from "lucide-react";
+import { Clock, Users, MapPin, CreditCard } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookingStatusBadge } from "./BookingStatusBadge";
-import { cn } from "@/lib/utils";
 import type { BookingStatus } from "@prisma/client";
 
 type LocalizedJson = Record<string, unknown>;
@@ -66,13 +65,6 @@ export function BookingCard({ booking, locale, translations }: BookingCardProps)
   const locationLabel = [booking.center.city, booking.center.country]
     .filter(Boolean)
     .join(", ");
-
-  const formattedDate = new Date(booking.diveDate).toLocaleDateString(locale, {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
 
   const formattedTime = new Date(booking.diveTime).toLocaleTimeString(locale, {
     hour: "2-digit",

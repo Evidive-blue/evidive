@@ -9,7 +9,6 @@ import { Loader2, AlertCircle, CheckCircle } from "lucide-react";
 import { LiquidInput } from "@/components/ui/liquid-input";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { PasswordStrengthIndicator } from "@/components/ui/password-strength-indicator";
-import { signIn } from "next-auth/react";
 import { createDiverAccount, checkEmailAvailability } from "@/app/[locale]/register/actions";
 
 export function RegisterForm() {
@@ -191,20 +190,8 @@ export function RegisterForm() {
 
       setSuccess(true);
 
-      // Auto-login after registration
-      const signInResult = await signIn("credentials", {
-        email: formData.email,
-        password: formData.password,
-        redirect: false,
-      });
-
-      if (signInResult?.ok) {
-        router.push(`/${locale}/dashboard`);
-        router.refresh();
-      } else {
-        // Redirect to login if auto-login fails
-        router.push(`/${locale}/login`);
-      }
+      // Redirect to email verification page
+      router.push(`/${locale}/verify-email?email=${encodeURIComponent(formData.email)}`)
     } catch {
       setError(t("generic_error"));
     } finally {

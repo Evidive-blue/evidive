@@ -421,6 +421,20 @@
     "your_email": "tu dirección de email",
     "remember_me": "Recordarme",
     "checking_email": "Verificando disponibilidad del email...",
+    "verifying_email": "Verificando...",
+    "please_wait": "Por favor espera mientras verificamos tu email.",
+    "email_verified_title": "¡Email verificado!",
+    "email_verified_desc": "Tu email ha sido verificado con éxito. Ya puedes iniciar sesión.",
+    "go_to_login": "Ir al inicio de sesión",
+    "verification_failed": "Verificación fallida",
+    "verification_error_token_missing": "El enlace de verificación es inválido.",
+    "verification_error_token_invalid": "El enlace de verificación es inválido o ha expirado.",
+    "verification_error_token_already_used": "Este enlace ya ha sido utilizado.",
+    "verification_error_token_expired": "El enlace de verificación ha expirado. Por favor solicita uno nuevo.",
+    "verification_error_user_not_found": "No se encontró ninguna cuenta con esta dirección de email.",
+    "verification_error_unknown": "Ocurrió un error. Por favor intenta de nuevo.",
+    "try_again": "Intentar de nuevo",
+    "email_resent": "¡Se ha enviado un nuevo email de verificación!",
     "password_strength": {
       "label": "Seguridad de la contraseña",
       "none": "Ninguna",
@@ -610,6 +624,8 @@
     "searchButton": "Buscar"
   },
   "features": {
+    "badge": "Cómo funciona",
+    "sectionTitle": "Simple como nunca",
     "explore": {
       "title": "Explora las profundidades",
       "description": "Navega por nuestro mapa interactivo y descubre los sitios de buceo más hermosos del mundo."
@@ -1109,6 +1125,10 @@
     "resetPassword": {
       "title": "Restablecer contraseña - EviDive",
       "description": "Restablece tu contraseña de EviDive para recuperar el acceso a tu cuenta."
+    },
+    "forgotPassword": {
+      "title": "Olvidé mi contraseña - EviDive",
+      "description": "Solicita un enlace para restablecer la contraseña de tu cuenta EviDive."
     },
     "verifyEmail": {
       "title": "Verificación de email - EviDive",

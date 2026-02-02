@@ -21,8 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { updateProfile, getProfileData } from "@/actions/profile";
-import { toast } from "sonner";
+import { getProfile, updateProfile, type ProfileData } from "./actions";
 
 const certificationLevels = [
   { value: "none", label: "Non certifié" },
@@ -58,7 +57,6 @@ export default function ProfilePage() {
   const locale = params.locale as string;
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -74,31 +72,28 @@ export default function ProfilePage() {
     totalDives: 0,
   });
 
-  // Load profile data
+  // Load profile data on mount
   useEffect(() => {
-    const loadProfile = async () => {
-      if (status === "authenticated") {
-        setIsLoading(true);
-        const profile = await getProfileData();
-        if (profile) {
-          setFormData({
-            firstName: profile.firstName || "",
-            lastName: profile.lastName || "",
-            phone: profile.phone || "",
-            address: profile.address || "",
-            city: profile.city || "",
-            country: profile.country || "",
-            bio: profile.bio || "",
-            certificationLevel: profile.certificationLevel || "none",
-            certificationOrg: profile.certificationOrg || "padi",
-            totalDives: profile.totalDives || 0,
-          });
-        }
-        setIsLoading(false);
+    async function loadProfile() {
+      const result = await getProfile();
+      if (result.success && result.data) {
+        setFormData({
+          firstName: result.data.firstName || "",
+          lastName: result.data.lastName || "",
+          phone: result.data.phone || "",
+          address: result.data.address || "",
+          city: result.data.city || "",
+          country: result.data.country || "",
+          bio: result.data.bio || "",
+          certificationLevel: result.data.certificationLevel || "none",
+          certificationOrg: result.data.certificationOrg || "padi",
+          totalDives: result.data.totalDives || 0,
+        });
       }
-    };
-
-    loadProfile();
+    }
+    if (status === "authenticated") {
+      loadProfile();
+    }
   }, [status]);
 
   // Redirect if not authenticated
@@ -108,7 +103,7 @@ export default function ProfilePage() {
     }
   }, [status, router, locale]);
 
-  if (status === "unauthenticated" || status === "loading" || isLoading) {
+  if (status === "unauthenticated" || status === "loading") {
     return (
       <div className="min-h-screen pt-24 pb-16">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -126,25 +121,15 @@ export default function ProfilePage() {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      const result = await updateProfile(formData);
-      
-      if (result.ok) {
-        toast.success(t("success.title"), {
-          description: t("success.description"),
-        });
-        setIsEditing(false);
-      } else {
-        toast.error(t("error.title"), {
-          description: t(`error.${result.error}`) || t("error.generic"),
-        });
+      const result = await updateProfile(formData as ProfileData);
+      if (!result.success) {
+        console.error("Failed to save profile:", result.error);
       }
     } catch (error) {
-      console.error("Profile update error:", error);
-      toast.error(t("error.title"), {
-        description: t("error.generic"),
-      });
+      console.error("Error saving profile:", error);
     } finally {
       setIsSaving(false);
+      setIsEditing(false);
     }
   };
 

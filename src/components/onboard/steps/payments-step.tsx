@@ -1,7 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CreditCard, Lock, ArrowLeft, ArrowRight } from "lucide-react";
+import { useRouter } from "@/i18n/navigation";
+import { CreditCard, Lock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface CenterPaymentsStepProps {
@@ -10,8 +11,17 @@ interface CenterPaymentsStepProps {
   onBack?: () => void;
 }
 
-export function PaymentsStep({ onNext, onBack }: CenterPaymentsStepProps) {
+export function PaymentsStep({ onNext }: CenterPaymentsStepProps) {
   const t = useTranslations("onboard.center.payments");
+  const router = useRouter();
+
+  const handleContinue = () => {
+    if (onNext) {
+      onNext();
+    } else {
+      router.push("/onboard/center/review");
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -58,31 +68,14 @@ export function PaymentsStep({ onNext, onBack }: CenterPaymentsStepProps) {
         ))}
       </div>
 
-      {onBack || onNext ? (
-        <div className="flex gap-4">
-          {onBack ? (
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 flex-1 rounded-xl border-white/20 bg-white/5 text-white"
-              onClick={onBack}
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              {t("back")}
-            </Button>
-          ) : null}
-          {onNext ? (
-            <Button
-              type="button"
-              className="h-12 flex-1 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-sm font-semibold"
-              onClick={onNext}
-            >
-              {t("continue")}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          ) : null}
-        </div>
-      ) : null}
+      <Button
+        type="button"
+        className="w-full h-12 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-sm font-semibold"
+        onClick={handleContinue}
+      >
+        {t("continue")}
+        <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
     </div>
   );
 }

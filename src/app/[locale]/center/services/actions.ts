@@ -35,7 +35,7 @@ type LocalizedJson = {
  */
 async function verifyCenterOwnership(
   userId: string
-): Promise<{ centerId: string } | null> {
+): Promise<{ id: string } | null> {
   const center = await prisma.diveCenter.findFirst({
     where: {
       ownerId: userId,
@@ -131,7 +131,7 @@ export async function createService(formData: FormData): Promise<ActionResult> {
       // Create the service
       const newService = await tx.diveService.create({
         data: {
-          centerId: center.centerId,
+          centerId: center.id,
           name: data.name as Prisma.InputJsonValue,
           description: data.description as Prisma.InputJsonValue | undefined,
           categoryId: data.categoryId || undefined,
@@ -202,7 +202,7 @@ export async function updateService(formData: FormData): Promise<ActionResult> {
     }
 
     // Verify ownership
-    const isOwner = await verifyServiceOwnership(serviceId, center.centerId);
+    const isOwner = await verifyServiceOwnership(serviceId, center.id);
     if (!isOwner) {
       return { success: false, error: "Service not found" };
     }
@@ -334,7 +334,7 @@ export async function archiveService(formData: FormData): Promise<ActionResult> 
     }
 
     // Verify ownership
-    const isOwner = await verifyServiceOwnership(serviceId, center.centerId);
+    const isOwner = await verifyServiceOwnership(serviceId, center.id);
     if (!isOwner) {
       return { success: false, error: "Service not found" };
     }
@@ -376,7 +376,7 @@ export async function activateService(formData: FormData): Promise<ActionResult>
     }
 
     // Verify ownership
-    const isOwner = await verifyServiceOwnership(serviceId, center.centerId);
+    const isOwner = await verifyServiceOwnership(serviceId, center.id);
     if (!isOwner) {
       return { success: false, error: "Service not found" };
     }
@@ -418,7 +418,7 @@ export async function deleteService(formData: FormData): Promise<ActionResult> {
     }
 
     // Verify ownership
-    const isOwner = await verifyServiceOwnership(serviceId, center.centerId);
+    const isOwner = await verifyServiceOwnership(serviceId, center.id);
     if (!isOwner) {
       return { success: false, error: "Service not found" };
     }
@@ -474,7 +474,7 @@ export async function duplicateService(formData: FormData): Promise<ActionResult
     }
 
     // Verify ownership
-    const isOwner = await verifyServiceOwnership(serviceId, center.centerId);
+    const isOwner = await verifyServiceOwnership(serviceId, center.id);
     if (!isOwner) {
       return { success: false, error: "Service not found" };
     }
@@ -503,7 +503,7 @@ export async function duplicateService(formData: FormData): Promise<ActionResult
     const newService = await prisma.$transaction(async (tx) => {
       const service = await tx.diveService.create({
         data: {
-          centerId: center.centerId,
+          centerId: center.id,
           categoryId: original.categoryId,
           name: duplicatedName as Prisma.InputJsonValue,
           description: original.description as Prisma.InputJsonValue | undefined,
@@ -587,7 +587,7 @@ export async function createExtra(formData: FormData): Promise<ActionResult> {
     }
 
     // Verify service ownership
-    const isOwner = await verifyServiceOwnership(serviceId, center.centerId);
+    const isOwner = await verifyServiceOwnership(serviceId, center.id);
     if (!isOwner) {
       return { success: false, error: "Service not found" };
     }
@@ -651,7 +651,7 @@ export async function updateExtra(formData: FormData): Promise<ActionResult> {
     }
 
     // Verify service ownership
-    const isOwner = await verifyServiceOwnership(serviceId, center.centerId);
+    const isOwner = await verifyServiceOwnership(serviceId, center.id);
     if (!isOwner) {
       return { success: false, error: "Service not found" };
     }
@@ -710,7 +710,7 @@ export async function deleteExtra(formData: FormData): Promise<ActionResult> {
     }
 
     // Verify service ownership
-    const isOwner = await verifyServiceOwnership(extra.serviceId, center.centerId);
+    const isOwner = await verifyServiceOwnership(extra.serviceId, center.id);
     if (!isOwner) {
       return { success: false, error: "Unauthorized" };
     }

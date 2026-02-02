@@ -2,7 +2,6 @@ import { z } from "zod";
 import {
   emailSchema,
   passwordSchema,
-  phoneSchema,
   firstNameSchema,
   lastNameSchema,
 } from "./auth";

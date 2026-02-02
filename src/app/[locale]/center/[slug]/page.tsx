@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
+import type { Decimal } from "@prisma/client/runtime/library";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 
 type LocalizedJson = Record<string, unknown>;
+
+// Service type for Prisma Accelerate compatibility
+type CenterService = {
+  id: string;
+  name: unknown;
+  description: unknown;
+  price: Decimal;
+  durationMinutes: number;
+  maxParticipants: number;
+  minCertification: string | null;
+};
 
 function getLocalizedText(value: unknown, locale: string): string {
   if (!value || typeof value !== "object") return "";
@@ -72,6 +84,19 @@ export default async function CenterPage({
       status: true,
       rating: true,
       reviewCount: true,
+      services: {
+        where: { isActive: true },
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          price: true,
+          durationMinutes: true,
+          maxParticipants: true,
+          minCertification: true,
+        },
+        orderBy: { createdAt: "asc" },
+      },
     },
   });
 
@@ -118,6 +143,45 @@ export default async function CenterPage({
             })}
           </div>
         </div>
+
+        {/* Services Section */}
+        {(center as unknown as { services?: CenterService[] }).services && (center as unknown as { services?: CenterService[] }).services!.length > 0 && (
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold text-white mb-6">{t("directory.services")}</h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {(center as unknown as { services: CenterService[] }).services.map((service: CenterService) => {
+                const serviceName = getLocalizedText(service.name, locale);
+                const serviceDescription = getLocalizedText(service.description, locale);
+                return (
+                  <div
+                    key={service.id}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+                  >
+                    <h3 className="text-lg font-semibold text-white">{serviceName}</h3>
+                    {serviceDescription && (
+                      <p className="mt-2 text-sm text-white/60 line-clamp-2">{serviceDescription}</p>
+                    )}
+                    <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
+                      <span className="text-cyan-400 font-medium">
+                        {Number(service.price).toLocaleString(locale, { style: "currency", currency: "CHF" })}
+                      </span>
+                      {service.durationMinutes && (
+                        <span className="text-white/50">
+                          {service.durationMinutes} {t("directory.minutes")}
+                        </span>
+                      )}
+                      {service.maxParticipants && (
+                        <span className="text-white/50">
+                          {t("directory.maxParticipants", { count: service.maxParticipants })}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

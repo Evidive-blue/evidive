@@ -22,6 +22,7 @@ interface CTASectionProps {
 }
 
 export function CTASection({ locale }: CTASectionProps) {
+  void locale; // Reserved for locale-specific CTAs
   const t = useTranslations("centers");
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -147,7 +148,7 @@ export function CTASection({ locale }: CTASectionProps) {
                 >
                   <Sparkles className="h-4 w-4 text-cyan-400" />
                   <span className="text-sm font-medium text-cyan-300">
-                    Pour les professionnels
+                    {t("badge")}
                   </span>
                 </motion.div>
 

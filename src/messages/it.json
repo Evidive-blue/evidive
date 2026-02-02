@@ -421,6 +421,20 @@
     "your_email": "il tuo indirizzo email",
     "remember_me": "Ricordami",
     "checking_email": "Verifica disponibilità email...",
+    "verifying_email": "Verifica in corso...",
+    "please_wait": "Attendi mentre verifichiamo la tua email.",
+    "email_verified_title": "Email verificata!",
+    "email_verified_desc": "La tua email è stata verificata con successo. Ora puoi accedere.",
+    "go_to_login": "Vai all'accesso",
+    "verification_failed": "Verifica fallita",
+    "verification_error_token_missing": "Il link di verifica non è valido.",
+    "verification_error_token_invalid": "Il link di verifica non è valido o è scaduto.",
+    "verification_error_token_already_used": "Questo link è già stato utilizzato.",
+    "verification_error_token_expired": "Il link di verifica è scaduto. Richiedi uno nuovo.",
+    "verification_error_user_not_found": "Nessun account trovato con questo indirizzo email.",
+    "verification_error_unknown": "Si è verificato un errore. Riprova.",
+    "try_again": "Riprova",
+    "email_resent": "È stata inviata una nuova email di verifica!",
     "password_strength": {
       "label": "Sicurezza della password",
       "none": "Nessuna",
@@ -610,6 +624,8 @@
     "searchButton": "Cerca"
   },
   "features": {
+    "badge": "Come funziona",
+    "sectionTitle": "Semplice come mai",
     "explore": {
       "title": "Esplora le profondità",
       "description": "Sfoglia la nostra mappa interattiva e scopri i siti di immersione più belli del mondo."
@@ -1109,6 +1125,10 @@
     "resetPassword": {
       "title": "Reimposta password - EviDive",
       "description": "Reimposta la tua password EviDive per recuperare l'accesso al tuo account."
+    },
+    "forgotPassword": {
+      "title": "Password dimenticata - EviDive",
+      "description": "Richiedi un link per reimpostare la password del tuo account EviDive."
     },
     "verifyEmail": {
       "title": "Verifica email - EviDive",

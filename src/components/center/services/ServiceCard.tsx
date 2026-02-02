@@ -62,6 +62,7 @@ interface ServiceCardProps {
     };
   };
   locale: string;
+  basePath?: string;
   translations: {
     edit: string;
     duplicate: string;
@@ -92,6 +93,7 @@ interface ServiceCardProps {
 export function ServiceCard({
   service,
   locale,
+  basePath,
   translations: t,
   certificationsTranslations,
   onArchive,
@@ -99,6 +101,7 @@ export function ServiceCard({
   onDelete,
   onDuplicate,
 }: ServiceCardProps) {
+  const servicesBasePath = basePath || `/${locale}/center`;
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [showArchiveDialog, setShowArchiveDialog] = useState(false);
@@ -270,7 +273,7 @@ export function ServiceCard({
               <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuItem
                   onClick={() =>
-                    router.push(`/${locale}/center/services/${service.id}/edit`)
+                    router.push(`${servicesBasePath}/services/${service.id}/edit`)
                   }
                 >
                   <Pencil className="mr-2 h-4 w-4" />

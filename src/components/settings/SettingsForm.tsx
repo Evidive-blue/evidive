@@ -13,11 +13,9 @@ import {
   Trash2,
   User,
   ChevronRight,
-  ChevronLeft,
   CheckCircle,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { NotificationToggles } from "./NotificationToggles";
 import { PrivacyToggles } from "./PrivacyToggles";

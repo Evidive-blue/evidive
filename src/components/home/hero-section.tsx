@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 function useImageTranslations() {
   return useTranslations("images");
 }
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { Search, MapPin, Calendar, Users, Waves } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 // Animated depth counter
-function DepthCounter() {
+function DepthCounter({ depthLabel }: { depthLabel: string }) {
   const [depth, setDepth] = useState(0);
   const targetDepth = 40;
 
@@ -43,7 +43,7 @@ function DepthCounter() {
     >
       <Waves className="h-5 w-5 text-cyan-400" />
       <div className="depth-meter text-lg font-mono">
-        <span className="text-white/60">Profondeur : </span>
+        <span className="text-white/60">{depthLabel} : </span>
         <span className="text-cyan-400">{depth}</span>
         <span className="text-white/40">m</span>
       </div>
@@ -112,26 +112,6 @@ export function HeroSection() {
   const tSearch = useTranslations("search");
   const tImages = useImageTranslations();
 
-  // Mouse parallax effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const smoothY = useSpring(mouseY, { stiffness: 50, damping: 20 });
-  const titleX = useTransform(smoothX, [-500, 500], [-10, 10]);
-  const titleY = useTransform(smoothY, [-500, 500], [-5, 5]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      mouseX.set(e.clientX - centerX);
-      mouseY.set(e.clientY - centerY);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-20">
       {/* Light rays effect */}
@@ -154,17 +134,16 @@ export function HeroSection() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500" />
           </span>
           <span className="text-sm font-medium text-cyan-300">
-            Découvrez les profondeurs
+            {t("badge")}
           </span>
         </motion.div>
 
-        {/* Logo with parallax */}
+        {/* Logo */}
         <motion.div
           className="mb-6 flex items-center justify-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{ x: titleX, y: titleY }}
         >
           <motion.div
             className="relative"
@@ -289,7 +268,7 @@ export function HeroSection() {
       </div>
 
       {/* Depth counter */}
-      <DepthCounter />
+      <DepthCounter depthLabel={t("depthLabel")} />
     </section>
   );
 }

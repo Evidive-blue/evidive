@@ -421,6 +421,20 @@
   "back_to_login": "Back to login",
   "your_email": "your email address",
   "checking_email": "Checking email availability...",
+  "verifying_email": "Verifying...",
+  "please_wait": "Please wait while we verify your email.",
+  "email_verified_title": "Email verified!",
+  "email_verified_desc": "Your email has been verified successfully. You can now log in.",
+  "go_to_login": "Go to login",
+  "verification_failed": "Verification failed",
+  "verification_error_token_missing": "The verification link is invalid.",
+  "verification_error_token_invalid": "The verification link is invalid or has expired.",
+  "verification_error_token_already_used": "This link has already been used.",
+  "verification_error_token_expired": "The verification link has expired. Please request a new one.",
+  "verification_error_user_not_found": "No account found with this email address.",
+  "verification_error_unknown": "An error occurred. Please try again.",
+  "try_again": "Try again",
+  "email_resent": "A new verification email has been sent!",
   "password_strength": {
     "label": "Password strength",
     "none": "None",
@@ -583,15 +597,18 @@
   "learnMore": "Learn more"
  },
  "hero": {
+  "badge": "Discover the depths",
   "tagline": "Dive into Adventure",
   "title": "Explore the Depths",
   "subtitle": "Book your dives at the world's most beautiful sites. Unique experiences, certified centers, unforgettable memories.",
   "discover": "Discover",
   "cta": "Explore destinations",
   "depth": "{depth}m deep",
+  "depthLabel": "Depth",
   "scroll": "Scroll down"
  },
  "worldExplorer": {
+  "badge": "Interactive globe",
   "title": "Explore the depths of the world",
   "subtitle": "Click on a destination to discover the best diving spots"
  },
@@ -610,6 +627,8 @@
   "searchButton": "Search"
  },
  "features": {
+  "badge": "How it works",
+  "sectionTitle": "Simple as can be",
   "explore": {
    "title": "Explore the depths",
    "description": "Browse our interactive map and discover the most beautiful diving sites in the world."
@@ -624,6 +643,7 @@
   }
  },
  "destinations": {
+  "badge": "Popular destinations",
   "title": "Popular destinations",
   "subtitle": "Our community's favorite spots",
   "reviews": "reviews",
@@ -649,6 +669,7 @@
   }
  },
  "centers": {
+  "badge": "For professionals",
   "title": "Dive centers",
   "subtitle": "Certified professionals are waiting for you",
   "viewAll": "View all centers",
@@ -669,7 +690,10 @@
    "viewCenter": "View center",
    "backToCenters": "Back to centers",
    "rating": "{rating} ★ ({count} reviews)",
-   "globeHint": "Tip: right-click on a point to open the center."
+   "globeHint": "Tip: right-click on a point to open the center.",
+   "services": "Services",
+   "minutes": "min",
+   "maxParticipants": "Max {count} participants"
   },
   "benefits": {
    "visibility": "International visibility",
@@ -880,7 +904,13 @@
     "removeBlacklist": "Remove blacklist",
     "addBlacklist": "Blacklist",
     "delete": "Delete",
-    "noUsers": "No users."
+    "noUsers": "No users.",
+    "userTypes": {
+     "diver": "Diver",
+     "seller": "Seller",
+     "center": "Center Owner",
+     "admin": "Admin"
+    }
    }
   }
  },
@@ -1146,6 +1176,51 @@
    "description": "Verify your email address to activate your EviDive account and access all features."
   }
  },
+ "adminDashboard": {
+  "meta": {
+   "title": "Admin Dashboard - EviDive",
+   "description": "Platform administration and statistics overview."
+  },
+  "title": "Admin Dashboard",
+  "subtitle": "Platform overview and statistics",
+  "backToDashboard": "Back to dashboard",
+  "stats": {
+   "totalUsers": "Total users",
+   "totalCenters": "Total centers",
+   "totalBookings": "Total bookings",
+   "platformRevenue": "Platform revenue",
+   "thisMonth": "this month",
+   "pending": "pending",
+   "approved": "approved"
+  },
+  "quickActions": {
+   "title": "Quick Actions",
+   "users": "Users",
+   "centers": "Centers",
+   "bookings": "Bookings",
+   "reviews": "Reviews",
+   "commissions": "Commissions",
+   "explorer": "Explorer"
+  },
+  "recentUsers": {
+   "title": "Recent Users",
+   "empty": "No users yet."
+  },
+  "recentCenters": {
+   "title": "Recent Centers",
+   "empty": "No centers yet."
+  },
+  "viewAll": "View all",
+  "alerts": {
+   "title": "Requires Attention",
+   "pendingCenters": "pending centers",
+   "pendingBookings": "pending bookings",
+   "pendingReviews": "pending reviews",
+   "needsValidation": "Need validation",
+   "awaitingConfirmation": "Awaiting confirmation",
+   "needsModeration": "Needs moderation"
+  }
+ },
  "adminCenters": {
   "title": "Admin · Centers",
   "subtitle": "Validate center signups (PENDING → APPROVED/REJECTED).",
@@ -1160,6 +1235,91 @@
   "phone": "Phone",
   "approve": "Approve",
   "reject": "Reject"
+ },
+ "adminBookings": {
+  "meta": {
+   "title": "Admin · Bookings - EviDive",
+   "description": "View and manage all platform bookings."
+  },
+  "title": "Admin · Bookings",
+  "subtitle": "View all bookings across all centers",
+  "backToAdmin": "Back to admin",
+  "results": "{count, plural, =0 {No bookings} one {# booking} other {# bookings}}",
+  "status": {
+   "ALL": "All",
+   "PENDING": "Pending",
+   "CONFIRMED": "Confirmed",
+   "PAID": "Paid",
+   "RUNNING": "In progress",
+   "COMPLETED": "Completed",
+   "CANCELLED": "Cancelled",
+   "NOSHOW": "No-show"
+  },
+  "client": "Client",
+  "center": "Center",
+  "service": "Service",
+  "participants": "participants",
+  "noBookings": "No bookings found.",
+  "previous": "Previous",
+  "next": "Next",
+  "pageInfo": "Page {current} of {total}"
+ },
+ "adminReviews": {
+  "meta": {
+   "title": "Admin · Reviews - EviDive",
+   "description": "Moderate platform reviews."
+  },
+  "title": "Admin · Reviews",
+  "subtitle": "Moderate and manage user reviews",
+  "backToAdmin": "Back to admin",
+  "results": "{count, plural, =0 {No reviews} one {# review} other {# reviews}}",
+  "status": {
+   "ALL": "All",
+   "PENDING": "Pending",
+   "APPROVED": "Approved",
+   "REJECTED": "Rejected"
+  },
+  "center": "Center",
+  "user": "User",
+  "rating": "Rating",
+  "comment": "Comment",
+  "noReviews": "No reviews found.",
+  "approve": "Approve",
+  "reject": "Reject",
+  "previous": "Previous",
+  "next": "Next",
+  "pageInfo": "Page {current} of {total}"
+ },
+ "adminCommissions": {
+  "meta": {
+   "title": "Admin · Commissions - EviDive",
+   "description": "View platform financial overview."
+  },
+  "title": "Admin · Commissions",
+  "subtitle": "Financial overview and commission tracking",
+  "backToAdmin": "Back to admin",
+  "stats": {
+   "totalRevenue": "Total Platform Revenue",
+   "pendingPayouts": "Pending Payouts",
+   "paidOut": "Paid to Centers",
+   "thisMonth": "This Month"
+  },
+  "results": "{count, plural, =0 {No commissions} one {# commission} other {# commissions}}",
+  "status": {
+   "ALL": "All",
+   "PENDING": "Pending",
+   "PAID": "Paid",
+   "CANCELLED": "Cancelled"
+  },
+  "booking": "Booking",
+  "center": "Center",
+  "amount": "Amount",
+  "platformFee": "Platform Fee",
+  "centerAmount": "Center Amount",
+  "noCommissions": "No commissions found.",
+  "previous": "Previous",
+  "next": "Next",
+  "pageInfo": "Page {current} of {total}"
  },
  "onboard": {
   "meta": {
@@ -1251,24 +1411,30 @@
     },
     "admin": {
      "users": {
-      "title": "Admin — Utilisateurs",
-      "subtitle": "Modifier les droits, activer/désactiver, blacklister et supprimer des comptes.",
-      "validateCenters": "Valider les centres",
-      "dashboard": "Tableau de bord",
+      "title": "Admin — Users",
+      "subtitle": "Modify rights, activate/deactivate, blacklist and delete accounts.",
+      "validateCenters": "Validate centers",
+      "dashboard": "Dashboard",
       "userType": "Type",
-      "active": "Actif",
-      "inactive": "Désactivé",
+      "active": "Active",
+      "inactive": "Disabled",
       "blacklist": "Blacklist",
       "ok": "OK",
-      "verified": "Email vérifié",
-      "unverified": "Email non vérifié",
-      "apply": "Appliquer",
-      "deactivate": "Désactiver",
-      "activate": "Activer",
-      "removeBlacklist": "Retirer blacklist",
+      "verified": "Email verified",
+      "unverified": "Email not verified",
+      "apply": "Apply",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "removeBlacklist": "Remove blacklist",
       "addBlacklist": "Blacklist",
-      "delete": "Supprimer",
-      "noUsers": "Aucun utilisateur."
+      "delete": "Delete",
+      "noUsers": "No users.",
+      "userTypes": {
+        "diver": "Diver",
+        "seller": "Seller",
+        "center": "Center Owner",
+        "admin": "Admin"
+      }
      }
     },
     "common": {
@@ -2332,5 +2498,29 @@
       "revenue": "Revenue",
       "noData": "No services booked"
     }
+  },
+  "centerManage": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "bookings": "Bookings",
+      "services": "Services",
+      "calendar": "Calendar",
+      "reviews": "Reviews",
+      "team": "Team",
+      "stats": "Statistics",
+      "profile": "Profile",
+      "settings": "Settings"
+    },
+    "verified": "Verified center",
+    "backToDashboard": "Back to dashboard",
+    "addCenter": "Add a center",
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "switchCenter": "Switch center",
+    "noCenters": "You don't have any center yet",
+    "createFirst": "Create my first center"
   }
 }

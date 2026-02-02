@@ -74,7 +74,6 @@ export async function sendEmail(payload: MailPayload): Promise<void> {
 
     if (isJson) {
       // Useful in local/dev when no SMTP is configured
-      // eslint-disable-next-line no-console
       console.info("[mailer] JSON transport (no SMTP). Email captured:", {
         to,
         subject: payload.subject,

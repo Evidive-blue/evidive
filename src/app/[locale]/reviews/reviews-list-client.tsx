@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Star, MessageSquarePlus } from "lucide-react";
+import { Star } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ReviewCard } from "@/components/reviews/ReviewCard";
 import { ReviewForm } from "@/components/reviews/ReviewForm";
@@ -35,14 +35,14 @@ interface PendingBooking {
   center: {
     id: string;
     slug: string;
-    name: unknown;
+    name: string;
     logoUrl: string | null;
     city: string;
     country: string;
   };
   service: {
     id: string;
-    name: unknown;
+    name: string;
   };
 }
 
@@ -59,7 +59,7 @@ export function ReviewsListClient({
 }: ReviewsListClientProps) {
   const t = useTranslations("reviews");
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   // Edit modal state
   const [editingReview, setEditingReview] = useState<Review | null>(null);

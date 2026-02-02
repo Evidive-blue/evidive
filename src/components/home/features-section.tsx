@@ -51,10 +51,10 @@ export function FeaturesSection() {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Comment ça marche
+            {t("badge")}
           </motion.span>
           <h2 className="text-4xl font-bold text-white sm:text-5xl">
-            Simple comme bonjour
+            {t("sectionTitle")}
           </h2>
         </motion.div>
 

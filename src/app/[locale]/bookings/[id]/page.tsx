@@ -2,8 +2,6 @@ import { redirect, notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   Calendar,
-  Clock,
-  Users,
   MapPin,
   CreditCard,
   Mail,

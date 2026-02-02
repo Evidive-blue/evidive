@@ -4,9 +4,9 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { Link } from "@/i18n/navigation";
 import { TeamListClient } from "./team-list-client";
-import { Button } from "@/components/ui/button";
-import { Plus, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
+import type { Prisma } from "@prisma/client";
 
 export async function generateMetadata({
   params,
@@ -54,6 +54,11 @@ export default async function CenterTeamPage({
     redirect(`/${locale}/center`);
   }
 
+  // Type for worker with booking count
+  type WorkerWithCount = Prisma.CenterWorkerGetPayload<{
+    include: { _count: { select: { bookings: true } } };
+  }>;
+
   // Fetch all workers for this center
   const workers = await prisma.centerWorker.findMany({
     where: { centerId: center.id },
@@ -66,7 +71,7 @@ export default async function CenterTeamPage({
       { isDefault: "desc" }, // Owner first
       { createdAt: "asc" },
     ],
-  });
+  }) as WorkerWithCount[];
 
   // Serialize workers for client component
   const serializedWorkers = workers.map((w) => ({

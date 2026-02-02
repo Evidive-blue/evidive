@@ -3,7 +3,6 @@
 import * as React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { DaySlot } from "./DaySlot";
 import { SlotDetailsModal } from "./SlotDetailsModal";
 import { BlockDateModal } from "./BlockDateModal";
@@ -14,7 +13,6 @@ import {
   Calendar,
   CalendarDays,
   CalendarRange,
-  Plus,
   List,
   LayoutGrid,
 } from "lucide-react";

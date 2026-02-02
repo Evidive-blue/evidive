@@ -86,7 +86,7 @@ export default async function CenterDashboardPage({
     redirect(`/${locale}/dashboard`);
   }
 
-  // CENTER_OWNER sees only their centers. ADMIN sees pending centers list shortcut.
+  // CENTER_OWNER sees only their centers. ADMIN sees all centers.
   const centers =
     userType === "CENTER_OWNER"
       ? await prisma.diveCenter.findMany({
@@ -106,8 +106,7 @@ export default async function CenterDashboardPage({
           take: 50,
         })
       : await prisma.diveCenter.findMany({
-          where: { status: "PENDING" },
-          orderBy: { createdAt: "desc" },
+          orderBy: [{ status: "asc" }, { createdAt: "desc" }],
           select: {
             id: true,
             slug: true,
@@ -119,7 +118,7 @@ export default async function CenterDashboardPage({
             stripeAccountId: true,
             createdAt: true,
           },
-          take: 50,
+          take: 100,
         });
 
   const today = normalizeDateOnly(new Date());
@@ -268,6 +267,60 @@ export default async function CenterDashboardPage({
           </div>
         </div>
 
+        {/* Admin Quick Navigation */}
+        {userType === "ADMIN" && (
+          <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+            <h2 className="text-lg font-semibold text-white mb-4">Navigation Admin</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+              <Link
+                href="/admin/users"
+                className="rounded-xl border border-white/10 bg-white/5 p-4 text-center transition hover:bg-white/10"
+              >
+                <div className="text-2xl mb-1">👥</div>
+                <div className="text-xs font-medium text-white/80">Utilisateurs</div>
+              </Link>
+              <Link
+                href="/admin/centers"
+                className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4 text-center transition hover:bg-amber-500/20"
+              >
+                <div className="text-2xl mb-1">🏢</div>
+                <div className="text-xs font-medium text-amber-200">Valider centres</div>
+                {pendingCentersCount > 0 && (
+                  <div className="mt-1 text-xs text-amber-300">({pendingCentersCount})</div>
+                )}
+              </Link>
+              <Link
+                href="/center"
+                className="rounded-xl border border-cyan-500/20 bg-cyan-500/10 p-4 text-center transition hover:bg-cyan-500/20"
+              >
+                <div className="text-2xl mb-1">📊</div>
+                <div className="text-xs font-medium text-cyan-200">Dashboard Centre</div>
+              </Link>
+              <Link
+                href="/center/bookings"
+                className="rounded-xl border border-white/10 bg-white/5 p-4 text-center transition hover:bg-white/10"
+              >
+                <div className="text-2xl mb-1">📅</div>
+                <div className="text-xs font-medium text-white/80">Réservations</div>
+              </Link>
+              <Link
+                href="/center/services"
+                className="rounded-xl border border-white/10 bg-white/5 p-4 text-center transition hover:bg-white/10"
+              >
+                <div className="text-2xl mb-1">🤿</div>
+                <div className="text-xs font-medium text-white/80">Services</div>
+              </Link>
+              <Link
+                href="/explorer"
+                className="rounded-xl border border-white/10 bg-white/5 p-4 text-center transition hover:bg-white/10"
+              >
+                <div className="text-2xl mb-1">🌍</div>
+                <div className="text-xs font-medium text-white/80">Explorateur</div>
+              </Link>
+            </div>
+          </div>
+        )}
+
         {centers.length === 0 ? (
           <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-8 text-white/70 backdrop-blur-xl">
             {userType === "CENTER_OWNER" ? (
@@ -346,14 +399,47 @@ export default async function CenterDashboardPage({
                       ) : null}
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      <Link
-                        href={center.status === "APPROVED" ? `/center/${center.slug}` : "/centers"}
-                        className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white/90 transition hover:bg-white/10"
-                      >
-                        {center.status === "APPROVED" ? t("viewPublicCenter") : t("viewCenters")}
-                      </Link>
-                      {/* TODO: add edit center page later */}
+                    <div className="flex flex-wrap items-center gap-2">
+                      {center.status === "APPROVED" && (
+                        <>
+                          <Link
+                            href={`/center/${center.slug}`}
+                            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white/90 transition hover:bg-white/10"
+                          >
+                            {t("viewPublicCenter")}
+                          </Link>
+                          {userType === "ADMIN" && (
+                            <>
+                              <Link
+                                href="/center/bookings"
+                                className="rounded-xl border border-cyan-500/20 bg-cyan-500/10 px-3 py-2 text-xs font-semibold text-cyan-200 transition hover:bg-cyan-500/20"
+                              >
+                                Réservations
+                              </Link>
+                              <Link
+                                href="/center/services"
+                                className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white/90 transition hover:bg-white/10"
+                              >
+                                Services
+                              </Link>
+                              <Link
+                                href="/center/profile"
+                                className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white/90 transition hover:bg-white/10"
+                              >
+                                Profil
+                              </Link>
+                            </>
+                          )}
+                        </>
+                      )}
+                      {center.status !== "APPROVED" && (
+                        <Link
+                          href="/centers"
+                          className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white/90 transition hover:bg-white/10"
+                        >
+                          {t("viewCenters")}
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>

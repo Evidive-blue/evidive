@@ -7,8 +7,18 @@ import {
 } from "@/components/home";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { locales } from "@/i18n/config";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+// Generate hreflang alternates for all European languages
+const generateAlternates = (path: string = "") => {
+  const languages: Record<string, string> = {};
+  locales.forEach((locale) => {
+    languages[locale] = `${baseUrl}/${locale}${path}`;
+  });
+  return languages;
+};
 
 export async function generateMetadata({
   params,
@@ -22,11 +32,18 @@ export async function generateMetadata({
     metadataBase: new URL(baseUrl),
     title: t("home.title"),
     description: t("home.description"),
+    keywords: [
+      "plongée", "diving", "scuba", "tauchen", "buceo", "immersione",
+      "réservation plongée", "dive booking", "dive center", "centre de plongée",
+      "snorkeling", "PADI", "SSI", "CMAS"
+    ],
     openGraph: {
       type: "website",
-      url: baseUrl,
+      url: `${baseUrl}/${locale}`,
+      siteName: "EviDive",
       title: t("home.title"),
       description: t("home.description"),
+      locale: locale === "fr" ? "fr_FR" : locale === "de" ? "de_DE" : locale === "es" ? "es_ES" : locale === "it" ? "it_IT" : locale === "pt" ? "pt_PT" : locale === "nl" ? "nl_NL" : locale === "pl" ? "pl_PL" : locale === "sv" ? "sv_SE" : locale === "el" ? "el_GR" : locale === "ru" ? "ru_RU" : "en_GB",
       images: [
         {
           url: `${baseUrl}/og-image.png`,
@@ -43,12 +60,8 @@ export async function generateMetadata({
       images: [`${baseUrl}/og-image.png`],
     },
     alternates: {
-      canonical: baseUrl,
-      languages: {
-        fr: `${baseUrl}/fr`,
-        en: `${baseUrl}/en`,
-        de: `${baseUrl}/de`,
-      },
+      canonical: `${baseUrl}/${locale}`,
+      languages: generateAlternates(),
     },
   };
 }

@@ -16,9 +16,9 @@ function generateReference(): string {
 }
 
 /**
- * Get the authenticated user's center
+ * Get the authenticated user's center (first one or specific one)
  */
-async function getAuthorizedCenter() {
+async function getAuthorizedCenter(centerId?: string) {
   const session = await auth();
 
   if (!session?.user) {
@@ -32,6 +32,20 @@ async function getAuthorizedCenter() {
     return null;
   }
 
+  // If centerId is provided, verify ownership of that specific center
+  if (centerId) {
+    const center = await prisma.diveCenter.findFirst({
+      where: {
+        id: centerId,
+        // ADMIN can access any center
+        ...(session.user.userType !== "ADMIN" ? { ownerId: session.user.id } : {}),
+      },
+      select: { id: true, ownerId: true },
+    });
+    return center;
+  }
+
+  // Otherwise, return first center (for backward compatibility)
   const center = await prisma.diveCenter.findFirst({
     where: { ownerId: session.user.id },
     select: { id: true, ownerId: true },
@@ -136,6 +150,7 @@ export async function updateBookingStatus(
  * Create a manual booking
  */
 export async function createManualBooking(data: {
+  centerId?: string;
   serviceId: string;
   diveDate: Date;
   diveTime: string;
@@ -153,7 +168,7 @@ export async function createManualBooking(data: {
   error?: string;
 }> {
   try {
-    const center = await getAuthorizedCenter();
+    const center = await getAuthorizedCenter(data.centerId);
 
     if (!center) {
       return { success: false, error: "Unauthorized" };
@@ -266,6 +281,7 @@ export async function createManualBooking(data: {
  * Export bookings to CSV format
  */
 export async function exportBookingsCSV(filters?: {
+  centerId?: string;
   status?: BookingStatus;
   dateFrom?: Date;
   dateTo?: Date;
@@ -277,7 +293,7 @@ export async function exportBookingsCSV(filters?: {
   error?: string;
 }> {
   try {
-    const center = await getAuthorizedCenter();
+    const center = await getAuthorizedCenter(filters?.centerId);
 
     if (!center) {
       return { success: false, error: "Unauthorized" };
@@ -383,7 +399,7 @@ export async function exportBookingsCSV(filters?: {
 /**
  * Get center services for manual booking form
  */
-export async function getCenterServices(): Promise<{
+export async function getCenterServices(centerId?: string): Promise<{
   success: boolean;
   services?: Array<{
     id: string;
@@ -405,7 +421,7 @@ export async function getCenterServices(): Promise<{
   error?: string;
 }> {
   try {
-    const center = await getAuthorizedCenter();
+    const center = await getAuthorizedCenter(centerId);
 
     if (!center) {
       return { success: false, error: "Unauthorized" };
@@ -432,6 +448,7 @@ export async function getCenterServices(): Promise<{
         maxParticipants: s.maxParticipants,
         pricePerPerson: s.pricePerPerson,
         startTimes: s.startTimes,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         extras: s.extras.map((e: any) => ({
           id: e.id,
           name: e.name as Record<string, string>,

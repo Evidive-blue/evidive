@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Upload, FileText, Shield, Award, ArrowLeft, ArrowRight } from "lucide-react";
+import { useRouter } from "@/i18n/navigation";
+import { Upload, FileText, Shield, Award, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type DocumentType = "license" | "insurance" | "certification";
@@ -19,8 +20,9 @@ interface CenterDocumentsStepProps {
   onBack?: () => void;
 }
 
-export function DocumentsStep({ onNext, onBack }: CenterDocumentsStepProps) {
+export function DocumentsStep({ onNext }: CenterDocumentsStepProps) {
   const t = useTranslations("onboard.center.documents");
+  const router = useRouter();
   const [documents, setDocuments] = useState<UploadedDoc[]>([]);
 
   const documentTypes: { type: DocumentType; icon: React.ReactNode; required: boolean }[] = [
@@ -41,6 +43,14 @@ export function DocumentsStep({ onNext, onBack }: CenterDocumentsStepProps) {
   };
 
   const getDocument = (type: DocumentType) => documents.find((d) => d.type === type);
+
+  const handleContinue = () => {
+    if (onNext) {
+      onNext();
+    } else {
+      router.push("/onboard/center/payments");
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -93,31 +103,14 @@ export function DocumentsStep({ onNext, onBack }: CenterDocumentsStepProps) {
 
       <p className="text-center text-sm text-white/40">{t("acceptedFormats")}</p>
 
-      {onBack || onNext ? (
-        <div className="flex gap-4">
-          {onBack ? (
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 flex-1 rounded-xl border-white/20 bg-white/5 text-white"
-              onClick={onBack}
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              {t("back")}
-            </Button>
-          ) : null}
-          {onNext ? (
-            <Button
-              type="button"
-              className="h-12 flex-1 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-sm font-semibold"
-              onClick={onNext}
-            >
-              {t("continue")}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          ) : null}
-        </div>
-      ) : null}
+      <Button
+        type="button"
+        className="w-full h-12 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-sm font-semibold"
+        onClick={handleContinue}
+      >
+        {t("continue")}
+        <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
     </div>
   );
 }

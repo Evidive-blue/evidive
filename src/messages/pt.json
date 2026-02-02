@@ -610,6 +610,8 @@
     "searchButton": "Pesquisar"
   },
   "features": {
+    "badge": "Como funciona",
+    "sectionTitle": "Simples assim",
     "explore": {
       "title": "Explore as profundezas",
       "description": "Navegue pelo nosso mapa interativo e descubra os mais belos locais de mergulho do mundo."

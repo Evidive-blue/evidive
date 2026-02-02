@@ -2,7 +2,6 @@
 
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import type { Decimal } from "@prisma/client/runtime/library";
 
 export type StatsPeriod = "30d" | "90d" | "12m" | "all";
 

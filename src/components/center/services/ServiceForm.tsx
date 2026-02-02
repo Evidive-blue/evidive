@@ -23,7 +23,6 @@ import {
 import { MultipleImageUploader } from "@/components/ui/image-uploader";
 import { ExtrasEditor } from "./ExtrasEditor";
 import { AvailabilityEditor } from "./AvailabilityEditor";
-import { cn } from "@/lib/utils";
 import {
   Save,
   Loader2,
@@ -147,6 +146,7 @@ export function ServiceForm({
   certificationsTranslations,
   onSubmit,
 }: ServiceFormProps) {
+  void daysTranslations; // Reserved for availability scheduling UI
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);

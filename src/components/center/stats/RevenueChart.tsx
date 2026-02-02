@@ -90,8 +90,8 @@ export function RevenueChart({ data, translations }: RevenueChartProps) {
                   borderRadius: "8px",
                   color: "#fff",
                 }}
-                formatter={(value: number, name: string) => [
-                  formatCurrency(value),
+                formatter={(value, name) => [
+                  formatCurrency(Number(value) || 0),
                   name,
                 ]}
                 labelStyle={{ color: "rgba(255,255,255,0.7)" }}

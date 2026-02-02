@@ -89,9 +89,6 @@ export default async function CenterCalendarPage({
     ? centerIdParam
     : centers[0].id;
 
-  const selectedCenter = centers.find(c => c.id === selectedCenterId)!;
-  const centerName = getLocalizedText(selectedCenter.name, locale) || selectedCenter.slug;
-
   // Get current month/year or use params
   const now = new Date();
   const currentYear = yearParam ? parseInt(yearParam, 10) : now.getFullYear();

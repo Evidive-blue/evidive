@@ -610,6 +610,8 @@
     "searchButton": "Zoeken"
   },
   "features": {
+    "badge": "Hoe het werkt",
+    "sectionTitle": "Zo simpel als dat",
     "explore": {
       "title": "Verken de diepten",
       "description": "Blader door onze interactieve kaart en ontdek de mooiste duiklocaties ter wereld."

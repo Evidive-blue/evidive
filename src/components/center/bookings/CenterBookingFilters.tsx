@@ -19,6 +19,8 @@ interface CenterBookingFiltersProps {
   services: Array<{ id: string; name: string }>;
   currentServiceId?: string;
   counts: Record<StatusFilter, number>;
+  basePath?: string;
+  centerId?: string;
   translations: {
     search: string;
     searchPlaceholder: string;
@@ -61,6 +63,8 @@ export function CenterBookingFilters({
   services,
   currentServiceId,
   counts,
+  // basePath is kept for API compatibility but not used in this component
+  centerId,
   translations: t,
 }: CenterBookingFiltersProps) {
   const router = useRouter();
@@ -112,6 +116,7 @@ export function CenterBookingFilters({
     setIsExporting(true);
     try {
       const result = await exportBookingsCSV({
+        centerId,
         status: currentStatus !== "all" ? currentStatus : undefined,
         dateFrom: currentDateFrom ? new Date(currentDateFrom) : undefined,
         dateTo: currentDateTo ? new Date(currentDateTo) : undefined,
@@ -131,7 +136,7 @@ export function CenterBookingFilters({
     } finally {
       setIsExporting(false);
     }
-  }, [currentStatus, currentDateFrom, currentDateTo, currentServiceId, currentSearch]);
+  }, [centerId, currentStatus, currentDateFrom, currentDateTo, currentServiceId, currentSearch]);
 
   const hasActiveFilters =
     currentStatus !== "all" ||

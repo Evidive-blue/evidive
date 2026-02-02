@@ -2,8 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  AreaChart,
-  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -89,11 +87,12 @@ export function ReviewsChart({ data, translations }: ReviewsChartProps) {
                   borderRadius: "8px",
                   color: "#fff",
                 }}
-                formatter={(value: number, name: string) => {
+                formatter={(value, name) => {
+                  const v = Number(value) || 0;
                   if (name === translations.avgRating) {
-                    return [value.toFixed(1) + "/5", name];
+                    return [v.toFixed(1) + "/5", name];
                   }
-                  return [value, name];
+                  return [v, name];
                 }}
                 labelStyle={{ color: "rgba(255,255,255,0.7)" }}
               />

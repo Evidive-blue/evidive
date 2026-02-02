@@ -20,10 +20,6 @@ interface ReviewUser {
   avatarUrl: string | null;
 }
 
-interface ReviewService {
-  name: string;
-}
-
 interface CenterReviewCardProps {
   review: {
     id: string;
@@ -122,6 +118,7 @@ export function CenterReviewCard({
           <div className="flex items-center gap-3">
             {/* Avatar */}
             {review.user.avatarUrl ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={review.user.avatarUrl}
                 alt={getUserDisplayName(review.user)}
@@ -190,6 +187,7 @@ export function CenterReviewCard({
                     rel="noopener noreferrer"
                     className="aspect-square overflow-hidden rounded-lg"
                   >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={photo}
                       alt={`Photo ${index + 1}`}

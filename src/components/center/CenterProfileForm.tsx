@@ -218,6 +218,7 @@ export function CenterProfileForm({
   translations: t,
   locale,
 }: CenterProfileFormProps) {
+  void locale; // Reserved for future multilingual field editing
   // Form state
   const [isSaving, setIsSaving] = React.useState(false);
 
@@ -880,6 +881,7 @@ export function CenterProfileForm({
               )}
             </div>
             {!initialData.stripeAccountId && (
+              // eslint-disable-next-line @next/next/no-html-link-for-pages -- API route redirect, not a page
               <a
                 href="/api/stripe/connect"
                 className={cn(

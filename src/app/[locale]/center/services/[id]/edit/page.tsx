@@ -139,6 +139,7 @@ export default async function EditServicePage({
     photos: service.photos,
     availableDays: service.availableDays,
     startTimes: service.startTimes,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     extras: ((service as any).extras as ServiceExtra[]).map((e) => ({
       id: e.id,
       name: e.name as LocalizedJson,
@@ -238,8 +239,8 @@ export default async function EditServicePage({
         </div>
 
         {/* Form */}
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         <ServiceForm
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           service={serializedService as any}
           categories={serializedCategories}
           locale={locale}

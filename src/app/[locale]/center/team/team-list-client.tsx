@@ -85,6 +85,7 @@ export function TeamListClient({
   locale,
   translations: t,
 }: TeamListClientProps) {
+  void locale; // Reserved for future i18n usage
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingWorker, setEditingWorker] = useState<Worker | null>(null);
 

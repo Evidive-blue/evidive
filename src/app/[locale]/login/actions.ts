@@ -25,7 +25,7 @@ function getRedirectUrl(userType: UserType, locale: string): string {
     case "CENTER_OWNER":
       return `/${locale}/center`;
     case "SELLER":
-      return `/${locale}/seller`;
+      return `/${locale}/dashboard/seller`;
     case "DIVER":
     default:
       return `/${locale}/app`;
@@ -90,7 +90,8 @@ export async function loginAction(
     };
   }
   
-  const { email, password, rememberMe } = parsed.data;
+  const { email, password } = parsed.data;
+  // Note: rememberMe is parsed but session duration is handled by NextAuth config
   const normalizedEmail = email.toLowerCase();
   
   // Check rate limit by email

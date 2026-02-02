@@ -12,7 +12,7 @@ export default async function AdminUsersPage({
 }) {
   const { locale } = await params;
   const session = await auth();
-  const t = await getTranslations({ locale, namespace: "admin.users" });
+  const t = await getTranslations({ locale, namespace: "dashboard.admin.users" });
 
   if (!session?.user) {
     redirect(`/${locale}/login`);

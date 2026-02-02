@@ -76,7 +76,7 @@ export function BookingsChart({ data, translations }: BookingsChartProps) {
                   borderRadius: "8px",
                   color: "#fff",
                 }}
-                formatter={(value: number) => [value, translations.bookings]}
+                formatter={(value) => [value ?? 0, translations.bookings]}
                 labelStyle={{ color: "rgba(255,255,255,0.7)" }}
               />
               <Bar

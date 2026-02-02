@@ -42,6 +42,7 @@ interface PendingBooking {
 interface PendingBookingsWidgetProps {
   bookings: PendingBooking[];
   locale: string;
+  centerSlug?: string;
   translations: {
     title: string;
     emptyTitle: string;
@@ -191,14 +192,17 @@ function BookingCard({
 export function PendingBookingsWidget({
   bookings,
   locale,
+  centerSlug,
   translations: t,
 }: PendingBookingsWidgetProps) {
+  const bookingsHref = centerSlug ? `/center/manage/${centerSlug}/bookings` : "/center/bookings";
+
   return (
     <Card className="border-white/10 bg-white/5 backdrop-blur-xl">
       <CardHeader className="flex flex-row items-center justify-between border-b border-white/10">
         <CardTitle className="text-lg text-white">{t.title}</CardTitle>
         <Link
-          href="/center/bookings"
+          href={bookingsHref}
           className="flex items-center gap-1 text-sm text-cyan-400 transition hover:text-cyan-300"
         >
           {t.viewAll}

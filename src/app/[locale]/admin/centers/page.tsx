@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/navigation";
+import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import { approveCenter, rejectCenter } from "./actions";
@@ -33,25 +34,29 @@ export default async function AdminCentersPage({
   const t = await getTranslations({ locale, namespace: "adminCenters" });
 
   const session = await auth();
-  const isAuthorized = session?.user?.userType === "ADMIN";
 
-  const pendingCenters = isAuthorized
-    ? await prisma.diveCenter.findMany({
-        where: { status: "PENDING" },
-        orderBy: { createdAt: "desc" },
-        select: {
-          id: true,
-          slug: true,
-          name: true,
-          city: true,
-          country: true,
-          email: true,
-          phone: true,
-          createdAt: true,
-        },
-        take: 200,
-      })
-    : [];
+  if (!session?.user) {
+    redirect(`/${locale}/login`);
+  }
+  if (session.user.userType !== "ADMIN") {
+    redirect(`/${locale}/dashboard`);
+  }
+
+  const pendingCenters = await prisma.diveCenter.findMany({
+    where: { status: "PENDING" },
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      slug: true,
+      name: true,
+      city: true,
+      country: true,
+      email: true,
+      phone: true,
+      createdAt: true,
+    },
+    take: 200,
+  });
 
   return (
     <div className="min-h-screen pt-24 pb-16">
@@ -64,24 +69,14 @@ export default async function AdminCentersPage({
             </p>
           </div>
           <Link
-            href="/centers"
+            href="/admin"
             className="text-sm text-white/60 hover:text-white transition-colors"
           >
-            ← {t("backToCenters")}
+            ← {t("backToAdmin")}
           </Link>
         </div>
 
-        {!isAuthorized ? (
-          <div className="mt-8 rounded-2xl border border-red-500/20 bg-red-500/10 p-6 text-red-100">
-            <div className="font-semibold">{t("accessDeniedTitle")}</div>
-            <div className="mt-1 text-sm opacity-90">
-              {t("accessDeniedDesc")}
-            </div>
-          </div>
-        ) : null}
-
-        {isAuthorized ? (
-          <div className="mt-10">
+        <div className="mt-10">
           <h2 className="text-lg font-semibold text-white">
             {t("pendingTitle")} ({pendingCenters.length})
           </h2>
@@ -121,8 +116,7 @@ export default async function AdminCentersPage({
                           <input type="hidden" name="locale" value={locale} />
                           <button
                             type="submit"
-                            disabled={!isAuthorized}
-                            className="rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-cyan-400 disabled:opacity-50"
+                            className="rounded-xl bg-cyan-500 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-cyan-400"
                           >
                             {t("approve")}
                           </button>
@@ -133,8 +127,7 @@ export default async function AdminCentersPage({
                           <input type="hidden" name="locale" value={locale} />
                           <button
                             type="submit"
-                            disabled={!isAuthorized}
-                            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 disabled:opacity-50"
+                            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
                           >
                             {t("reject")}
                           </button>
@@ -146,8 +139,7 @@ export default async function AdminCentersPage({
               })}
             </div>
           )}
-          </div>
-        ) : null}
+        </div>
       </div>
     </div>
   );

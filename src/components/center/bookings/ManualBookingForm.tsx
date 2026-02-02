@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -34,7 +34,7 @@ const formSchema = z.object({
   serviceId: z.string().min(1, "Service is required"),
   diveDate: z.string().min(1, "Date is required"),
   diveTime: z.string().min(1, "Time is required"),
-  participants: z.coerce.number().min(1, "At least 1 participant"),
+  participants: z.number().min(1, "At least 1 participant"),
   guestFirstName: z.string().min(1, "First name is required"),
   guestLastName: z.string().min(1, "Last name is required"),
   guestEmail: z.string().email("Invalid email"),
@@ -66,6 +66,7 @@ interface Service {
 
 interface ManualBookingFormProps {
   locale: string;
+  centerId?: string;
   translations: {
     title: string;
     description: string;
@@ -103,7 +104,7 @@ function getLocalizedText(value: Record<string, string>, locale: string): string
   return value[locale] || value.fr || value.en || Object.values(value)[0] || "";
 }
 
-export function ManualBookingForm({ locale, translations: t }: ManualBookingFormProps) {
+export function ManualBookingForm({ locale, centerId, translations: t }: ManualBookingFormProps) {
   const [open, setOpen] = useState(false);
   const [services, setServices] = useState<Service[]>([]);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
@@ -119,7 +120,7 @@ export function ManualBookingForm({ locale, translations: t }: ManualBookingForm
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     setValue,
     reset,
     formState: { errors },
@@ -131,25 +132,27 @@ export function ManualBookingForm({ locale, translations: t }: ManualBookingForm
     },
   });
 
-  const participants = watch("participants");
-  const serviceId = watch("serviceId");
+  const participants = useWatch({ control, name: "participants" }) ?? 1;
+  const serviceId = useWatch({ control, name: "serviceId" });
 
   // Load services when dialog opens
   useEffect(() => {
     if (open && services.length === 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- Loading state needed before async fetch
       setIsLoading(true);
-      getCenterServices().then((res) => {
+      getCenterServices(centerId).then((res) => {
         if (res.success && res.services) {
           setServices(res.services);
         }
         setIsLoading(false);
       });
     }
-  }, [open, services.length]);
+  }, [open, services.length, centerId]);
 
   // Update selected service when serviceId changes
   useEffect(() => {
     const service = services.find((s) => s.id === serviceId);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Derived state update when serviceId changes
     setSelectedService(service || null);
     setSelectedExtras([]);
     setValue("extraIds", []);
@@ -195,6 +198,7 @@ export function ManualBookingForm({ locale, translations: t }: ManualBookingForm
 
     startTransition(async () => {
       const res = await createManualBooking({
+        centerId,
         serviceId: data.serviceId,
         diveDate: new Date(data.diveDate),
         diveTime: data.diveTime,
@@ -375,7 +379,7 @@ export function ManualBookingForm({ locale, translations: t }: ManualBookingForm
                     </label>
                     <Input
                       type="number"
-                      {...register("participants")}
+                      {...register("participants", { valueAsNumber: true })}
                       className="bg-white/5 border-white/10 text-white"
                       min={selectedService?.minParticipants || 1}
                       max={selectedService?.maxParticipants || 20}

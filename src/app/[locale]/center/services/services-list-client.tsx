@@ -93,6 +93,7 @@ interface ServicesListClientProps {
   categories: Category[];
   locale: string;
   translations: Translations;
+  basePath?: string;
 }
 
 type StatusFilter = "all" | "active" | "archived";
@@ -102,9 +103,11 @@ export function ServicesListClient({
   categories,
   locale,
   translations: t,
+  basePath,
 }: ServicesListClientProps) {
+  const servicesBasePath = basePath || `/${locale}/center`;
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
 
@@ -171,7 +174,7 @@ export function ServicesListClient({
       formData.append("id", id);
       const result = await duplicateService(formData);
       if (result.success && result.serviceId) {
-        router.push(`/${locale}/center/services/${result.serviceId}/edit`);
+        router.push(`${servicesBasePath}/services/${result.serviceId}/edit`);
       } else {
         router.refresh();
       }
@@ -255,7 +258,7 @@ export function ServicesListClient({
           </h3>
           <p className="mt-2 text-white/60">{t.empty.description}</p>
           <Button
-            onClick={() => router.push(`/${locale}/center/services/new`)}
+            onClick={() => router.push(`${servicesBasePath}/services/new`)}
             className="mt-6 bg-cyan-600 text-white hover:bg-cyan-700"
           >
             <Plus className="mr-2 h-4 w-4" />
@@ -269,6 +272,7 @@ export function ServicesListClient({
               key={service.id}
               service={service}
               locale={locale}
+              basePath={servicesBasePath}
               translations={t.card}
               certificationsTranslations={t.certifications}
               onArchive={handleArchive}

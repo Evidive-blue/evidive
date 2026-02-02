@@ -212,6 +212,7 @@ export function ReviewForm({
                       key={index}
                       className="relative h-20 w-20 overflow-hidden rounded-lg bg-white/10 group"
                     >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={photo}
                         alt={`Photo ${index + 1}`}

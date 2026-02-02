@@ -42,10 +42,9 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="dark" suppressHydrationWarning>
+    <html lang={locale} className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen font-sans antialiased`}
-        suppressHydrationWarning
       >
         <NextIntlClientProvider messages={messages}>
           <Providers>

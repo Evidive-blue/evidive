@@ -7,11 +7,9 @@ import { Link } from "@/i18n/navigation";
 import {
   Check,
   X,
-  Clock,
   Users,
   Mail,
   Eye,
-  CalendarClock,
   Loader2,
   MoreHorizontal,
   CheckCircle2,
@@ -62,6 +60,7 @@ interface CenterBookingCardProps {
     }>;
   };
   locale: string;
+  detailsHref?: string;
   translations: {
     viewDetails: string;
     confirm: string;
@@ -109,15 +108,6 @@ interface CenterBookingCardProps {
   };
 }
 
-function formatDate(date: Date, locale: string): string {
-  return new Date(date).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-}
-
 function formatTime(date: Date): string {
   return new Date(date).toLocaleTimeString("fr-FR", {
     hour: "2-digit",
@@ -141,6 +131,7 @@ function getClientEmail(booking: CenterBookingCardProps["booking"]): string {
 export function CenterBookingCard({
   booking,
   locale,
+  detailsHref,
   translations: t,
 }: CenterBookingCardProps) {
   const [isPending, startTransition] = useTransition();
@@ -188,8 +179,6 @@ export function CenterBookingCard({
   const canConfirm = booking.status === "PENDING";
   const canCancel = ["PENDING", "CONFIRMED"].includes(booking.status);
   const canComplete = ["CONFIRMED", "PAID", "RUNNING"].includes(booking.status);
-  const canMarkNoShow = ["CONFIRMED", "PAID", "RUNNING"].includes(booking.status);
-
   const sourceLabel = t.sources[booking.source as keyof typeof t.sources] || booking.source;
 
   return (
@@ -340,7 +329,7 @@ export function CenterBookingCard({
                   >
                     <DropdownMenuItem asChild>
                       <Link
-                        href={`/center/bookings/${booking.id}`}
+                        href={detailsHref || `/center/bookings/${booking.id}`}
                         className="flex items-center gap-2 text-white"
                       >
                         <Eye className="h-4 w-4" />
@@ -380,7 +369,7 @@ export function CenterBookingCard({
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <Link href={`/center/bookings/${booking.id}`}>
+                <Link href={detailsHref || `/center/bookings/${booking.id}`}>
                   <Button
                     size="sm"
                     variant="ghost"

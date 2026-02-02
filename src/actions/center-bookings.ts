@@ -3,6 +3,7 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { sendEmail } from "@/lib/mailer";
 
 /**
  * Verifies that the current user owns the center associated with a booking.
@@ -23,7 +24,7 @@ async function getAuthorizedBooking(bookingId: string) {
     return null;
   }
 
-  // Get the booking with center info
+  // Get the booking with center and user info
   const booking = await prisma.booking.findUnique({
     where: { id: bookingId },
     include: {
@@ -31,6 +32,15 @@ async function getAuthorizedBooking(bookingId: string) {
         select: {
           id: true,
           ownerId: true,
+          name: true,
+        },
+      },
+      user: {
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          lastName: true,
         },
       },
     },
@@ -115,7 +125,33 @@ export async function confirmBooking(bookingId: string): Promise<{
       });
     }
 
-    // TODO: Send confirmation email to customer
+    // Send confirmation email to customer
+    if (booking.user?.email) {
+      const centerName = typeof booking.center.name === "object"
+        ? (booking.center.name as Record<string, string>).fr || (booking.center.name as Record<string, string>).en || "le centre"
+        : booking.center.name || "le centre";
+      const customerName = booking.user.firstName || "Cher plongeur";
+
+      await sendEmail({
+        to: booking.user.email,
+        subject: `Réservation confirmée - ${booking.reference}`,
+        template: "booking-confirmed",
+        html: `
+          <h1>Votre réservation est confirmée !</h1>
+          <p>Bonjour ${customerName},</p>
+          <p>Nous avons le plaisir de vous confirmer votre réservation <strong>${booking.reference}</strong> auprès de <strong>${centerName}</strong>.</p>
+          <p>Vous pouvez consulter les détails de votre réservation dans votre espace personnel.</p>
+          <p>À bientôt sous l'eau !</p>
+          <p>L'équipe EviDive</p>
+        `,
+        text: `Bonjour ${customerName}, votre réservation ${booking.reference} auprès de ${centerName} est confirmée.`,
+        userId: booking.user.id,
+        centerId: booking.centerId,
+        metadata: { bookingId: booking.id, reference: booking.reference },
+      }).catch((err) => {
+        console.error("Failed to send confirmation email:", err);
+      });
+    }
 
     // Revalidate relevant pages
     revalidatePath("/center");
@@ -186,7 +222,33 @@ export async function rejectBooking(
       });
     }
 
-    // TODO: Send rejection email to customer
+    // Send rejection email to customer
+    if (booking.user?.email) {
+      const centerName = typeof booking.center.name === "object"
+        ? (booking.center.name as Record<string, string>).fr || (booking.center.name as Record<string, string>).en || "le centre"
+        : booking.center.name || "le centre";
+      const customerName = booking.user.firstName || "Cher plongeur";
+
+      await sendEmail({
+        to: booking.user.email,
+        subject: `Réservation refusée - ${booking.reference}`,
+        template: "booking-rejected",
+        html: `
+          <h1>Réservation non confirmée</h1>
+          <p>Bonjour ${customerName},</p>
+          <p>Nous sommes désolés de vous informer que votre réservation <strong>${booking.reference}</strong> auprès de <strong>${centerName}</strong> n'a pas pu être confirmée.</p>
+          ${reason ? `<p><strong>Motif :</strong> ${reason}</p>` : ""}
+          <p>N'hésitez pas à rechercher d'autres disponibilités ou à contacter le centre directement.</p>
+          <p>L'équipe EviDive</p>
+        `,
+        text: `Bonjour ${customerName}, nous sommes désolés mais votre réservation ${booking.reference} n'a pas pu être confirmée.${reason ? ` Motif: ${reason}` : ""}`,
+        userId: booking.user.id,
+        centerId: booking.centerId,
+        metadata: { bookingId: booking.id, reference: booking.reference, reason },
+      }).catch((err) => {
+        console.error("Failed to send rejection email:", err);
+      });
+    }
 
     // Revalidate relevant pages
     revalidatePath("/center");

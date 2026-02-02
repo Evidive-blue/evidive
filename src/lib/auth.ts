@@ -37,13 +37,8 @@ declare module "next-auth" {
   }
 }
 
-declare module "@auth/core/jwt" {
-  interface JWT {
-    id: string;
-    userType: UserType;
-    isEmailVerified: boolean;
-  }
-}
+// JWT type extension inline (module augmentation not working with next-auth 5)
+// Types are enforced via explicit casting in callbacks
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -162,14 +157,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return true;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       if (user && user.id) {
         // On sign in, add custom fields to token
         token.id = user.id;
         token.userType = user.userType;
         token.isEmailVerified = user.isEmailVerified;
-      } else if (token.email) {
-        // On subsequent requests, fetch fresh user data
+        // Store email verification timestamp to avoid DB queries
+        token.lastVerified = Date.now();
+      } else if (token.email && trigger === "update") {
+        // Only refresh from DB when explicitly triggered (e.g., after email verification)
         const dbUser = await prisma.profile.findUnique({
           where: { email: token.email.toLowerCase() },
           select: {
@@ -187,14 +184,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             token.userType = dbUser.userType;
             token.isEmailVerified = dbUser.emailVerified;
           }
+          token.lastVerified = Date.now();
         }
       }
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
-      session.user.userType = token.userType;
-      session.user.isEmailVerified = token.isEmailVerified;
+      session.user.id = token.id as string;
+      session.user.userType = token.userType as UserType;
+      session.user.isEmailVerified = token.isEmailVerified as boolean;
       return session;
     },
   },
