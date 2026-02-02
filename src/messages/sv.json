@@ -1211,6 +1211,34 @@
     "approve": "Godkänn",
     "reject": "Avvisa"
   },
+  "adminBookings": {
+    "meta": {
+      "title": "Admin · Bokningar - EviDive",
+      "description": "Visa och hantera alla bokningar på plattformen."
+    },
+    "title": "Admin · Bokningar",
+    "subtitle": "Visa alla bokningar från alla center",
+    "backToAdmin": "Tillbaka till admin",
+    "results": "{count, plural, =0 {Inga bokningar} one {# bokning} other {# bokningar}}",
+    "status": {
+      "ALL": "Alla",
+      "PENDING": "Väntande",
+      "CONFIRMED": "Bekräftad",
+      "PAID": "Betald",
+      "RUNNING": "Pågående",
+      "COMPLETED": "Slutförd",
+      "CANCELLED": "Avbokad",
+      "NOSHOW": "Uteblivande"
+    },
+    "client": "Klient",
+    "center": "Center",
+    "service": "Tjänst",
+    "participants": "deltagare",
+    "noBookings": "Inga bokningar hittades.",
+    "previous": "Föregående",
+    "next": "Nästa",
+    "pageInfo": "Sida {current} av {total}"
+  },
   "onboard": {
     "meta": {
       "title": "Registrera - EviDive",

@@ -115,7 +115,263 @@
       "error": "Произошла ошибка при отмене"
     }
   },
-  "auth": {
+    "centerServices": {
+    "meta": {
+      "title": "Service Management - My Center",
+      "description": "Manage your dive center's services and offerings."
+    },
+    "title": "My Services",
+    "subtitle": "Manage your dive services",
+    "newService": "New Service",
+    "editService": "Edit Service",
+    "duplicateService": "Duplicate",
+    "archiveService": "Archive",
+    "activateService": "Activate",
+    "deleteService": "Delete",
+    "backToServices": "Back to services",
+    "filters": {
+      "all": "All",
+      "active": "Active",
+      "archived": "Archived"
+    },
+    "empty": {
+      "title": "No services",
+      "description": "You haven't created any services yet. Start by adding your first dive offering.",
+      "cta": "Create a service"
+    },
+    "card": {
+      "category": "Category",
+      "price": "Price",
+      "duration": "Duration",
+      "participants": "Participants",
+      "minParticipants": "min",
+      "maxParticipants": "max",
+      "certification": "Required certification",
+      "extras": "option(s)",
+      "active": "Active",
+      "archived": "Archived",
+      "equipmentIncluded": "Equipment included"
+    },
+    "form": {
+      "title": "Service Information",
+      "basicInfo": "Basic Information",
+      "pricing": "Pricing",
+      "capacity": "Capacity & Requirements",
+      "schedule": "Availability",
+      "media": "Media",
+      "extras": "Additional Options",
+      "name": "Service Name",
+      "nameFr": "Name (French)",
+      "nameEn": "Name (English)",
+      "namePlaceholder": "E.g., Discovery Dive",
+      "description": "Description",
+      "descriptionFr": "Description (French)",
+      "descriptionEn": "Description (English)",
+      "descriptionPlaceholder": "Describe this service in detail...",
+      "category": "Category",
+      "selectCategory": "Select a category",
+      "price": "Price",
+      "currency": "Currency",
+      "pricePerPerson": "Price per person",
+      "duration": "Duration (minutes)",
+      "minParticipants": "Minimum participants",
+      "maxParticipants": "Maximum participants",
+      "minCertification": "Minimum required certification",
+      "noCertification": "None (beginner)",
+      "minAge": "Minimum age",
+      "maxDepth": "Maximum depth (m)",
+      "equipmentIncluded": "Equipment included",
+      "equipmentDetails": "Equipment details",
+      "equipmentDetailsPlaceholder": "Mask, fins, wetsuit...",
+      "includes": "Included in service",
+      "includesPlaceholder": "Enter an item and press Enter",
+      "availableDays": "Available days",
+      "startTimes": "Start times",
+      "addTime": "Add a time",
+      "photos": "Service photos",
+      "addPhoto": "Add a photo",
+      "submit": "Save Service",
+      "creating": "Creating...",
+      "updating": "Updating...",
+      "success": "Service saved successfully!",
+      "error": "An error occurred. Please try again."
+    },
+    "extras": {
+      "title": "Additional Options",
+      "subtitle": "Add extras that customers can add to their booking.",
+      "add": "Add an option",
+      "name": "Option name",
+      "nameFr": "Name (French)",
+      "nameEn": "Name (English)",
+      "namePlaceholder": "E.g., Camera rental",
+      "description": "Description",
+      "price": "Price",
+      "multiplyByPax": "Multiply by number of participants",
+      "isRequired": "Required option",
+      "isActive": "Active",
+      "remove": "Remove",
+      "empty": "No options added"
+    },
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "certifications": {
+      "none": "None (beginner)",
+      "ow": "Open Water",
+      "aow": "Advanced Open Water",
+      "rescue": "Rescue Diver",
+      "dm": "Divemaster",
+      "instructor": "Instructor"
+    },
+    "categories": {
+      "discovery": "Discovery",
+      "fun_dive": "Fun Dive",
+      "training": "Training",
+      "night_dive": "Night Dive",
+      "deep_dive": "Deep Dive",
+      "wreck": "Wreck",
+      "drift": "Drift Dive",
+      "nitrox": "Nitrox",
+      "tech": "Technical",
+      "snorkeling": "Snorkeling",
+      "other": "Other"
+    },
+    "confirmDelete": {
+      "title": "Delete this service?",
+      "description": "This action cannot be undone. The service will be permanently deleted.",
+      "cancel": "Cancel",
+      "confirm": "Delete"
+    },
+    "confirmArchive": {
+      "title": "Archive this service?",
+      "description": "The service will no longer be visible to customers but can be reactivated later.",
+      "cancel": "Cancel",
+      "confirm": "Archive"
+    },
+    "errors": {
+      "name_required": "Name is required",
+      "price_required": "Price is required",
+      "price_positive": "Price must be greater than 0",
+      "duration_required": "Duration is required",
+      "duration_positive": "Duration must be greater than 0",
+      "participants_invalid": "Minimum must be less than or equal to maximum",
+      "unauthorized": "Unauthorized",
+      "not_found": "Service not found",
+      "server_error": "Server error"
+    }
+  },
+    "centerDashboard": {
+      "meta": {
+        "title": "Панель - Мой центр",
+        "description": "Управляйте вашим дайв-центром, бронированиями и отзывами."
+      },
+      "subtitle": "Управляйте бронированиями и активностью",
+      "verified": "Проверенный центр",
+      "pendingApproval": {
+        "title": "Центр ожидает утверждения",
+        "description": "Ваш центр в настоящее время проверяется нашей командой. Вы получите письмо после утверждения.",
+        "backToDashboard": "Вернуться к панели"
+      },
+      "stats": {
+        "todayBookings": "Бронирования сегодня",
+        "weekBookings": "На этой неделе",
+        "monthRevenue": "Месячный доход",
+        "rating": "Средняя оценка"
+      },
+      "pendingBookings": {
+        "title": "Ожидающие бронирования",
+        "emptyTitle": "Нет ожидающих бронирований",
+        "emptyDescription": "Новые запросы на бронирование появятся здесь.",
+        "confirm": "Подтвердить",
+        "reject": "Отклонить",
+        "participants": "участников",
+        "viewAll": "Показать все"
+      },
+      "calendar": {
+        "title": "На этой неделе",
+        "participants": "участников",
+        "noBookings": "Нет погружений на этой неделе",
+        "viewCalendar": "Календарь"
+      },
+      "reviews": {
+        "title": "Последние отзывы",
+        "emptyTitle": "Нет отзывов",
+        "emptyDescription": "Отзывы клиентов появятся здесь.",
+        "respond": "Ответить",
+        "responded": "Ответ опубликован",
+        "viewAll": "Все отзывы"
+      },
+      "quickActions": {
+        "title": "Быстрые действия",
+        "createOffer": "Создать предложение",
+        "createOfferDesc": "Добавить новую услугу",
+        "viewCalendar": "Просмотр календаря",
+        "viewCalendarDesc": "Расписание погружений",
+        "manageBookings": "Управление бронированиями",
+        "manageBookingsDesc": "Все бронирования",
+        "viewStats": "Статистика",
+        "viewStatsDesc": "Анализ эффективности",
+        "manageTeam": "Управление командой",
+        "manageTeamDesc": "Члены команды",
+        "editCenter": "Редактировать центр",
+        "editCenterDesc": "Настройки центра"
+      }
+    },
+    "centerReviews": {
+      "meta": {
+        "title": "Отзывы - Мой центр",
+        "description": "Просматривайте и отвечайте на отзывы клиентов."
+      },
+      "title": "Отзывы",
+      "subtitle": "Отзывы клиентов для {centerName}",
+      "backToDashboard": "Вернуться к панели",
+      "listTitle": "Все отзывы",
+      "showingResults": "{count} отзывов",
+      "pendingApproval": {
+        "title": "Центр ожидает утверждения",
+        "description": "Ваш центр сейчас проверяется. Вы сможете просматривать отзывы после утверждения.",
+        "backToDashboard": "Вернуться к панели"
+      },
+      "stats": {
+        "averageRating": "Средняя оценка",
+        "totalReviews": "Всего отзывов",
+        "outOf5": "/ 5",
+        "reviews": "отзывов"
+      },
+      "distribution": {
+        "title": "Распределение оценок",
+        "stars": "звезды"
+      },
+      "filters": {
+        "sortBy": "Сортировать",
+        "sortNewest": "Сначала новые",
+        "sortOldest": "Сначала старые",
+        "sortHighest": "Сначала с высокой оценкой",
+        "sortLowest": "Сначала с низкой оценкой",
+        "filterByRating": "Фильтр по оценке",
+        "allRatings": "Все оценки",
+        "starsFilter": "звезды",
+        "clearFilters": "Очистить"
+      },
+      "empty": {
+        "title": "Пока нет отзывов",
+        "filtered": "Нет отзывов, соответствующих фильтру"
+      },
+      "card": {
+        "respond": "Ответить",
+        "responded": "Ответ опубликован",
+        "service": "Услуга",
+        "yourResponse": "Ваш ответ",
+        "respondedOn": "Ответ дан"
+      }
+    },
+    "auth": {
     "login_title": "Вход",
     "register_title": "Регистрация",
     "email": "Email",
@@ -945,11 +1201,137 @@
       }
     },
     "center": {
-      "title": "Я центр",
-      "description": "Управляйте бронированиями и увеличивайте международную видимость.",
-      "feature1": "Глобальная видимость",
-      "feature2": "Управление бронированиями",
-      "feature3": "Безопасные платежи"
+      "title": "I am a center",
+      "description": "Manage your bookings and increase your international visibility.",
+      "feature1": "Worldwide visibility",
+      "feature2": "Booking management",
+      "feature3": "Secure payments",
+      "steps": {
+        "account": "Account",
+        "info": "Information",
+        "location": "Location",
+        "documents": "Documents",
+        "payments": "Payments",
+        "review": "Review"
+      },
+      "invalidStep": "Invalid step",
+      "back": "Back",
+      "next": "Next",
+      "account": {
+        "description": "Create your center owner account.",
+        "fullName": "Full name",
+        "phone": "Phone",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "submit": "Create my account"
+      },
+      "info": {
+        "description": "Present your dive center.",
+        "centerName": "Center name",
+        "aboutCenter": "Center description",
+        "aboutPlaceholder": "Describe your center, specialties, team...",
+        "website": "Website",
+        "facebook": "Facebook page",
+        "instagram": "Instagram account",
+        "submit": "Continue",
+        "errors": {
+          "centerName": "Center name must be at least 2 characters.",
+          "description": "Description must be at least 20 characters.",
+          "website": "Invalid URL."
+        }
+      },
+      "location": {
+        "description": "Indicate your center location.",
+        "address": "Address",
+        "city": "City",
+        "postalCode": "Postal code",
+        "country": "Country",
+        "mapPlaceholder": "Interactive map (coming soon)",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "submit": "Continue",
+        "errors": {
+          "address": "Address is required.",
+          "city": "City is required.",
+          "country": "Country is required.",
+          "latitude": "Invalid latitude.",
+          "longitude": "Invalid longitude."
+        }
+      },
+      "documents": {
+        "description": "Upload the required documents for verification.",
+        "required": "Required",
+        "back": "Back",
+        "continue": "Continue",
+        "types": {
+          "license": "Professional license",
+          "insurance": "Insurance certificate",
+          "certification": "Certifications"
+        },
+        "upload": "Upload",
+        "acceptedFormats": "Accepted formats: PDF, JPG, PNG (max 5 MB)"
+      },
+      "payments": {
+        "description": "Set up your payments to receive bookings.",
+        "back": "Back",
+        "continue": "Continue",
+        "comingSoon": "Stripe connection coming soon. You will be able to complete this step after your center is approved.",
+        "commissionTitle": "EviDive Commission",
+        "commissionDescription": "We charge a commission on each confirmed booking.",
+        "perBooking": "per booking",
+        "stripeConnect": "Stripe Connect",
+        "stripeDescription": "Connect your bank account to receive payments.",
+        "connectButton": "Connect my account",
+        "connected": "Account connected",
+        "benefits": {
+          "secure": {
+            "title": "Secure",
+            "description": "Payments protected by Stripe"
+          },
+          "fast": {
+            "title": "Fast",
+            "description": "Transfers in 2-3 days"
+          },
+          "global": {
+            "title": "International",
+            "description": "Accept 135+ currencies"
+          }
+        }
+      },
+      "review": {
+        "description": "Review your information before submitting your signup.",
+        "errors": {
+          "generic": "Something went wrong. Please try again.",
+          "validationFailed": "Some information is invalid. Please check your fields and try again.",
+          "emailAlreadyRegistered": "This email is already in use."
+        },
+        "dashboardButton": "Go to my center dashboard",
+        "passwordLabel": "Password",
+        "sections": {
+          "account": "Owner account",
+          "accountStatus": "Complete",
+          "info": "Center information",
+          "infoStatus": "Complete",
+          "location": "Location",
+          "locationStatus": "Complete",
+          "documents": "Documents",
+          "documentsStatus": "Coming soon",
+          "payments": "Payments",
+          "paymentsStatus": "Coming soon"
+        },
+        "termsAccept": "I accept EviDive's Terms and Conditions and Privacy Policy.",
+        "submitButton": "Submit my signup",
+        "successTitle": "Signup submitted!",
+        "successDescription": "Your request has been sent. Our team will review your information and contact you within 48 hours.",
+        "homeButton": "Back to home",
+        "summary": "Summary",
+        "name": "Name",
+        "emailLabel": "Email",
+        "centerName": "Center",
+        "locationLabel": "Location",
+        "incomplete": "Incomplete"
+      }
     }
   },
   "adminDashboard": {
@@ -1147,6 +1529,37 @@
       "dashboardButton": "Перейти к моей панели",
       "homeButton": "Вернуться на главную"
     }
+  },
+  "adminCommissions": {
+    "meta": {
+      "title": "Админ · Комиссии - EviDive",
+      "description": "Просмотр финансовой информации платформы."
+    },
+    "title": "Админ · Комиссии",
+    "subtitle": "Финансовый обзор и отслеживание комиссий",
+    "backToAdmin": "Вернуться к админу",
+    "stats": {
+      "totalRevenue": "Общий доход платформы",
+      "pendingPayouts": "Ожидающие выплаты",
+      "paidOut": "Выплачено центрам",
+      "thisMonth": "В этом месяце"
+    },
+    "results": "{count, plural, =0 {Нет комиссий} one {# комиссия} other {# комиссий}}",
+    "status": {
+      "ALL": "Все",
+      "PENDING": "Ожидание",
+      "PAID": "Оплачено",
+      "CANCELLED": "Отменено"
+    },
+    "booking": "Бронирование",
+    "center": "Центр",
+    "amount": "Сумма",
+    "platformFee": "Комиссия платформы",
+    "centerAmount": "Сумма центра",
+    "noCommissions": "Комиссии не найдены.",
+    "previous": "Назад",
+    "next": "Вперёд",
+    "pageInfo": "Страница {current} из {total}"
   },
   "bookings": {
     "meta": {

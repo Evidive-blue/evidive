@@ -1195,6 +1195,65 @@
     "approve": "Aprobar",
     "reject": "Rechazar"
   },
+  "adminBookings": {
+    "meta": {
+      "title": "Admin · Reservas - EviDive",
+      "description": "Ver y gestionar todas las reservas de la plataforma."
+    },
+    "title": "Admin · Reservas",
+    "subtitle": "Ver todas las reservas de todos los centros",
+    "backToAdmin": "Volver a admin",
+    "results": "{count, plural, =0 {No hay reservas} one {# reserva} other {# reservas}}",
+    "status": {
+      "ALL": "Todas",
+      "PENDING": "Pendiente",
+      "CONFIRMED": "Confirmada",
+      "PAID": "Pagada",
+      "RUNNING": "En curso",
+      "COMPLETED": "Completada",
+      "CANCELLED": "Cancelada",
+      "NOSHOW": "No presentado"
+    },
+    "client": "Cliente",
+    "center": "Centro",
+    "service": "Servicio",
+    "participants": "participantes",
+    "noBookings": "No se encontraron reservas.",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "pageInfo": "Página {current} de {total}"
+  },
+  "adminCommissions": {
+    "meta": {
+      "title": "Admin · Comisiones - EviDive",
+      "description": "Ver resumen financiero de la plataforma."
+    },
+    "title": "Admin · Comisiones",
+    "subtitle": "Resumen financiero y seguimiento de comisiones",
+    "backToAdmin": "Volver a admin",
+    "stats": {
+      "totalRevenue": "Ingresos totales de la plataforma",
+      "pendingPayouts": "Pagos pendientes",
+      "paidOut": "Pagado a centros",
+      "thisMonth": "Este mes"
+    },
+    "results": "{count, plural, =0 {No hay comisiones} one {# comisión} other {# comisiones}}",
+    "status": {
+      "ALL": "Todas",
+      "PENDING": "Pendiente",
+      "PAID": "Pagada",
+      "CANCELLED": "Cancelada"
+    },
+    "booking": "Reserva",
+    "center": "Centro",
+    "amount": "Importe",
+    "platformFee": "Comisión de plataforma",
+    "centerAmount": "Importe del centro",
+    "noCommissions": "No se encontraron comisiones.",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "pageInfo": "Página {current} de {total}"
+  },
   "onboard": {
     "meta": {
       "title": "Registro - EviDive",

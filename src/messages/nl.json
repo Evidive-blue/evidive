@@ -1208,6 +1208,32 @@
     "approve": "Goedkeuren",
     "reject": "Afwijzen"
   },
+  "adminReviews": {
+    "meta": {
+      "title": "Admin · Beoordelingen - EviDive",
+      "description": "Modereren van platformbeoordelingen."
+    },
+    "title": "Admin · Beoordelingen",
+    "subtitle": "Modereren en beheren van gebruikersbeoordelingen",
+    "backToAdmin": "Terug naar admin",
+    "results": "{count, plural, =0 {Geen beoordelingen} one {# beoordeling} other {# beoordelingen}}",
+    "status": {
+      "ALL": "Alle",
+      "PENDING": "Wachtend",
+      "APPROVED": "Goedgekeurd",
+      "REJECTED": "Afgewezen"
+    },
+    "center": "Centrum",
+    "user": "Gebruiker",
+    "rating": "Beoordeling",
+    "comment": "Opmerking",
+    "noReviews": "Geen beoordelingen gevonden.",
+    "approve": "Goedkeuren",
+    "reject": "Afwijzen",
+    "previous": "Vorige",
+    "next": "Volgende",
+    "pageInfo": "Pagina {current} van {total}"
+  },
   "onboard": {
     "meta": {
       "title": "Registreren - EviDive",

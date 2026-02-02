@@ -1211,6 +1211,91 @@
     "approve": "Zatwierdź",
     "reject": "Odrzuć"
   },
+  "adminBookings": {
+    "meta": {
+      "title": "Admin · Rezerwacje - EviDive",
+      "description": "Przeglądaj i zarządzaj wszystkimi rezerwacjami platformy."
+    },
+    "title": "Admin · Rezerwacje",
+    "subtitle": "Zobacz wszystkie rezerwacje ze wszystkich centrów",
+    "backToAdmin": "Powrót do admin",
+    "results": "{count, plural, =0 {Brak rezerwacji} one {# rezerwacja} other {# rezerwacje}}",
+    "status": {
+      "ALL": "Wszystkie",
+      "PENDING": "Oczekujące",
+      "CONFIRMED": "Potwierdzone",
+      "PAID": "Opłacone",
+      "RUNNING": "W trakcie",
+      "COMPLETED": "Zakończone",
+      "CANCELLED": "Anulowane",
+      "NOSHOW": "Nieobecność"
+    },
+    "client": "Klient",
+    "center": "Centrum",
+    "service": "Usługa",
+    "participants": "uczestnicy",
+    "noBookings": "Nie znaleziono rezerwacji.",
+    "previous": "Poprzednia",
+    "next": "Następna",
+    "pageInfo": "Strona {current} z {total}"
+  },
+  "adminReviews": {
+    "meta": {
+      "title": "Admin · Recenzje - EviDive",
+      "description": "Moderuj i zarządzaj recenzjami na platformie."
+    },
+    "title": "Admin · Recenzje",
+    "subtitle": "Moderuj i zarządzaj opiniami użytkowników",
+    "backToAdmin": "Powrót do admin",
+    "results": "{count, plural, =0 {Brak recenzji} one {# recenzja} other {# recenzji}}",
+    "status": {
+      "ALL": "Wszystkie",
+      "PENDING": "Oczekujące",
+      "APPROVED": "Zaakceptowane",
+      "REJECTED": "Odrzucone"
+    },
+    "center": "Centrum",
+    "user": "Użytkownik",
+    "rating": "Ocena",
+    "comment": "Komentarz",
+    "noReviews": "Brak znalezionych recenzji.",
+    "approve": "Zatwierdź",
+    "reject": "Odrzuć",
+    "previous": "Poprzednia",
+    "next": "Następna",
+    "pageInfo": "Strona {current} z {total}"
+  },
+  "adminCommissions": {
+    "meta": {
+      "title": "Admin · Prowizje - EviDive",
+      "description": "Zobacz podsumowanie finansowe platformy."
+    },
+    "title": "Admin · Prowizje",
+    "subtitle": "Podsumowanie finansowe i śledzenie prowizji",
+    "backToAdmin": "Powrót do admin",
+    "stats": {
+      "totalRevenue": "Całkowite przychody platformy",
+      "pendingPayouts": "Oczekujące wypłaty",
+      "paidOut": "Wypłacono centrom",
+      "thisMonth": "W tym miesiącu"
+    },
+    "results": "{count, plural, =0 {Brak prowizji} one {# prowizja} other {# prowizje}}",
+    "status": {
+      "ALL": "Wszystkie",
+      "PENDING": "Oczekujące",
+      "PAID": "Opłacone",
+      "CANCELLED": "Anulowane"
+    },
+    "booking": "Rezerwacja",
+    "center": "Centrum",
+    "amount": "Kwota",
+    "platformFee": "Prowizja platformy",
+    "centerAmount": "Kwota centrum",
+    "noCommissions": "Nie znaleziono prowizji.",
+    "previous": "Poprzednia",
+    "next": "Następna",
+    "pageInfo": "Strona {current} z {total}"
+  },
   "onboard": {
     "meta": {
       "title": "Rejestracja - EviDive",

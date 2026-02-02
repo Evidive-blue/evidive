@@ -115,7 +115,64 @@
       "error": "Παρουσιάστηκε σφάλμα κατά την ακύρωση"
     }
   },
-  "auth": {
+    "centerDashboard": {
+      "meta": {
+        "title": "Πίνακας - Το κέντρο μου",
+        "description": "Διαχειριστείτε το καταδυτικό σας κέντρο, τις κρατήσεις και τις αξιολογήσεις."
+      },
+      "subtitle": "Διαχειριστείτε τις κρατήσεις και τη δραστηριότητα σας",
+      "verified": "Επαληθευμένο κέντρο",
+      "pendingApproval": {
+        "title": "Το κέντρο εκκρεμεί έγκρισης",
+        "description": "Το κέντρο σας εξετάζεται από την ομάδα μας. Θα λάβετε email μόλις εγκριθεί.",
+        "backToDashboard": "Επιστροφή στον πίνακα"
+      },
+      "stats": {
+        "todayBookings": "Κρατήσεις σήμερα",
+        "weekBookings": "Αυτή την εβδομάδα",
+        "monthRevenue": "Μηνιαίο έσοδο",
+        "rating": "Μέση βαθμολογία"
+      },
+      "pendingBookings": {
+        "title": "Εκκρεμείς κρατήσεις",
+        "emptyTitle": "Καμία εκκρεμής κράτηση",
+        "emptyDescription": "Εδώ θα εμφανιστούν νέες αιτήσεις κράτησης.",
+        "confirm": "Επιβεβαίωση",
+        "reject": "Απόρριψη",
+        "participants": "συμμετέχοντες",
+        "viewAll": "Δείτε όλες"
+      },
+      "calendar": {
+        "title": "Αυτή την εβδομάδα",
+        "participants": "συμμετέχοντες",
+        "noBookings": "Καμία κατάδυση αυτή την εβδομάδα",
+        "viewCalendar": "Ημερολόγιο"
+      },
+      "reviews": {
+        "title": "Πρόσφατες αξιολογήσεις",
+        "emptyTitle": "Καμία αξιολόγηση",
+        "emptyDescription": "Οι αξιολογήσεις πελατών θα εμφανιστούν εδώ.",
+        "respond": "Απαντήστε",
+        "responded": "Απάντηση δημοσιεύτηκε",
+        "viewAll": "Όλες οι αξιολογήσεις"
+      },
+      "quickActions": {
+        "title": "Γρήγορες ενέργειες",
+        "createOffer": "Δημιουργία προσφοράς",
+        "createOfferDesc": "Προσθέστε μια νέα υπηρεσία",
+        "viewCalendar": "Προβολή ημερολογίου",
+        "viewCalendarDesc": "Πρόγραμμα καταδύσεων",
+        "manageBookings": "Διαχείριση κρατήσεων",
+        "manageBookingsDesc": "Όλες οι κρατήσεις",
+        "viewStats": "Στατιστικά",
+        "viewStatsDesc": "Ανάλυση απόδοσης",
+        "manageTeam": "Διαχείριση ομάδας",
+        "manageTeamDesc": "Μέλη ομάδας",
+        "editCenter": "Επεξεργασία κέντρου",
+        "editCenterDesc": "Ρυθμίσεις κέντρου"
+      }
+    },
+    "auth": {
     "login_title": "Σύνδεση",
     "register_title": "Εγγραφή",
     "email": "Email",
@@ -810,11 +867,53 @@
     "title": "Γίνετε μέλος του EviDive",
     "subtitle": "Επιλέξτε τον τύπο λογαριασμού σας",
     "diver": {
-      "title": "Είμαι αγοραστής",
-      "description": "Βρείτε και κλείστε τις καταδύσεις σας στα καλύτερα κέντρα παγκοσμίως.",
-      "feature1": "Πρόσβαση σε όλα τα επαληθευμένα κέντρα",
-      "feature2": "Άμεση κράτηση",
-      "feature3": "Ημερολόγιο καταδύσεων"
+      "title": "I am a buyer",
+      "description": "Find and book your dives at the best centers worldwide.",
+      "feature1": "Access to all verified centers",
+      "feature2": "Instant booking",
+      "feature3": "Dive logbook",
+      "steps": {
+        "account": "Account",
+        "preferences": "Preferences",
+        "review": "Review"
+      },
+      "account": {
+        "description": "Create your diver account.",
+        "fullName": "Full name",
+        "phone": "Phone",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "submit": "Create my account"
+      },
+      "preferences": {
+        "description": "Customize your experience.",
+        "certificationLevel": "Certification level",
+        "certificationOrg": "Organization",
+        "totalDives": "Total dives",
+        "preferredLanguage": "Preferred language"
+      },
+      "review": {
+        "description": "Review your information.",
+        "passwordConfirmTitle": "Confirmation required",
+        "passwordConfirmDescription": "For security reasons, please enter your password to finalize your signup.",
+        "passwordRequired": "Please enter your password to continue.",
+        "errors": {
+          "generic": "Something went wrong. Please try again."
+        },
+        "termsAccept": "I accept EviDive's Terms and Conditions and Privacy Policy.",
+        "submitButton": "Complete registration",
+        "successTitle": "Welcome!",
+        "successDescription": "Your account has been created. You can now explore and book your dives.",
+        "exploreButton": "Explorer",
+        "summary": "Résumé",
+        "name": "Nom",
+        "emailLabel": "Email",
+        "phoneLabel": "Téléphone",
+        "certification": "Certification",
+        "dives": "Plongées",
+        "complete": "Complété"
+      },
     },
     "seller": {
       "title": "Είμαι πωλητής",
@@ -903,11 +1002,137 @@
       }
     },
     "center": {
-      "title": "Είμαι κέντρο",
-      "description": "Διαχειριστείτε τις κρατήσεις σας και αυξήστε τη διεθνή ορατότητά σας.",
-      "feature1": "Παγκόσμια ορατότητα",
-      "feature2": "Διαχείριση κρατήσεων",
-      "feature3": "Ασφαλείς πληρωμές"
+      "title": "I am a center",
+      "description": "Manage your bookings and increase your international visibility.",
+      "feature1": "Worldwide visibility",
+      "feature2": "Booking management",
+      "feature3": "Secure payments",
+      "steps": {
+        "account": "Account",
+        "info": "Information",
+        "location": "Location",
+        "documents": "Documents",
+        "payments": "Payments",
+        "review": "Review"
+      },
+      "invalidStep": "Invalid step",
+      "back": "Back",
+      "next": "Next",
+      "account": {
+        "description": "Create your center owner account.",
+        "fullName": "Full name",
+        "phone": "Phone",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "submit": "Create my account"
+      },
+      "info": {
+        "description": "Present your dive center.",
+        "centerName": "Center name",
+        "aboutCenter": "Center description",
+        "aboutPlaceholder": "Describe your center, specialties, team...",
+        "website": "Website",
+        "facebook": "Facebook page",
+        "instagram": "Instagram account",
+        "submit": "Continue",
+        "errors": {
+          "centerName": "Center name must be at least 2 characters.",
+          "description": "Description must be at least 20 characters.",
+          "website": "Invalid URL."
+        }
+      },
+      "location": {
+        "description": "Indicate your center location.",
+        "address": "Address",
+        "city": "City",
+        "postalCode": "Postal code",
+        "country": "Country",
+        "mapPlaceholder": "Interactive map (coming soon)",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "submit": "Continue",
+        "errors": {
+          "address": "Address is required.",
+          "city": "City is required.",
+          "country": "Country is required.",
+          "latitude": "Invalid latitude.",
+          "longitude": "Invalid longitude."
+        }
+      },
+      "documents": {
+        "description": "Upload the required documents for verification.",
+        "required": "Required",
+        "back": "Back",
+        "continue": "Continue",
+        "types": {
+          "license": "Professional license",
+          "insurance": "Insurance certificate",
+          "certification": "Certifications"
+        },
+        "upload": "Upload",
+        "acceptedFormats": "Accepted formats: PDF, JPG, PNG (max 5 MB)"
+      },
+      "payments": {
+        "description": "Set up your payments to receive bookings.",
+        "back": "Back",
+        "continue": "Continue",
+        "comingSoon": "Stripe connection coming soon. You will be able to complete this step after your center is approved.",
+        "commissionTitle": "EviDive Commission",
+        "commissionDescription": "We charge a commission on each confirmed booking.",
+        "perBooking": "per booking",
+        "stripeConnect": "Stripe Connect",
+        "stripeDescription": "Connect your bank account to receive payments.",
+        "connectButton": "Connect my account",
+        "connected": "Account connected",
+        "benefits": {
+          "secure": {
+            "title": "Secure",
+            "description": "Payments protected by Stripe"
+          },
+          "fast": {
+            "title": "Fast",
+            "description": "Transfers in 2-3 days"
+          },
+          "global": {
+            "title": "International",
+            "description": "Accept 135+ currencies"
+          }
+        }
+      },
+      "review": {
+        "description": "Review your information before submitting your signup.",
+        "errors": {
+          "generic": "Something went wrong. Please try again.",
+          "validationFailed": "Some information is invalid. Please check your fields and try again.",
+          "emailAlreadyRegistered": "This email is already in use."
+        },
+        "dashboardButton": "Go to my center dashboard",
+        "passwordLabel": "Password",
+        "sections": {
+          "account": "Owner account",
+          "accountStatus": "Complete",
+          "info": "Center information",
+          "infoStatus": "Complete",
+          "location": "Location",
+          "locationStatus": "Complete",
+          "documents": "Documents",
+          "documentsStatus": "Coming soon",
+          "payments": "Payments",
+          "paymentsStatus": "Coming soon"
+        },
+        "termsAccept": "I accept EviDive's Terms and Conditions and Privacy Policy.",
+        "submitButton": "Submit my signup",
+        "successTitle": "Signup submitted!",
+        "successDescription": "Your request has been sent. Our team will review your information and contact you within 48 hours.",
+        "homeButton": "Back to home",
+        "summary": "Summary",
+        "name": "Name",
+        "emailLabel": "Email",
+        "centerName": "Center",
+        "locationLabel": "Location",
+        "incomplete": "Incomplete"
+      }
     }
   },
   "adminDashboard": {
@@ -969,6 +1194,142 @@
     "phone": "Τηλέφωνο",
     "approve": "Έγκριση",
     "reject": "Απόρριψη"
+  },
+  "centerRegistration": {
+    "meta": {
+      "title": "Register Dive Center - EviDive",
+      "description": "Register your dive center on EviDive and join our international network."
+    },
+    "title": "Register your dive center",
+    "subtitle": "Join EviDive and increase your international visibility",
+    "alreadyAccount": "Already have an account?",
+    "loginLink": "Sign in",
+    "steps": {
+      "personal": "Personal info",
+      "center": "Your center",
+      "legal": "Legal info",
+      "confirmation": "Confirmation"
+    },
+    "step1": {
+      "title": "Personal information",
+      "description": "Enter your information as the legal representative of the center.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Professional email",
+      "phone": "Phone",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "next": "Continue",
+      "checkingEmail": "Checking email...",
+      "emailAvailable": "Email available",
+      "errors": {
+        "emailExists": "An account already exists with this email"
+      }
+    },
+    "step2": {
+      "title": "Center information",
+      "description": "Present your dive center to future customers.",
+      "centerNameSection": "Center name (multilingual)",
+      "centerNameFr": "Name in French",
+      "centerNameEn": "Name in English",
+      "addressSection": "Center address",
+      "street": "Street address",
+      "city": "City",
+      "postalCode": "Postal code",
+      "country": "Country",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "coordsHint": "You can find coordinates on Google Maps (right-click on the location).",
+      "website": "Website (optional)",
+      "descriptionSection": "Short description (multilingual)",
+      "descriptionFr": "Description in French",
+      "descriptionEn": "Description in English",
+      "descriptionPlaceholder": "Décrivez votre centre, vos spécialités, votre équipe...",
+      "descriptionPlaceholderEn": "Describe your center, specialties, team...",
+      "back": "Back",
+      "next": "Continue"
+    },
+    "step3": {
+      "title": "Legal information",
+      "description": "This information is optional but recommended for verification.",
+      "companySection": "Company",
+      "optional": "optional",
+      "companyName": "Company name",
+      "companyNamePlaceholder": "My Dive Center LLC",
+      "siretOrVat": "SIRET or VAT number",
+      "siretOrVatPlaceholder": "FR12345678901 or 12345678901234",
+      "siretOrVatHint": "SIRET (France), EU VAT number or local equivalent.",
+      "certificationsSection": "Center certifications",
+      "certificationsHint": "Select all certifications your center can issue.",
+      "selectedCount": "{count} certification(s) selected",
+      "note": "This information can be modified later from your center dashboard.",
+      "back": "Back",
+      "next": "Continue"
+    },
+    "step4": {
+      "title": "Confirmation",
+      "description": "Review your information before submitting your registration request.",
+      "sections": {
+        "personal": "Personal information",
+        "center": "Center information",
+        "location": "Location",
+        "legal": "Legal information",
+        "certifications": "Certifications"
+      },
+      "labels": {
+        "name": "Full name",
+        "email": "Email",
+        "phone": "Phone",
+        "centerName": "Center name",
+        "website": "Website",
+        "address": "Address",
+        "country": "Country",
+        "coordinates": "Coordinates",
+        "company": "Company",
+        "siretVat": "SIRET/VAT"
+      },
+      "passwordConfirmTitle": "Confirmation required",
+      "passwordConfirmDescription": "For security reasons, please enter your password to complete the registration.",
+      "passwordLabel": "Password",
+      "termsText": "I accept the",
+      "termsLink": "Terms and Conditions",
+      "and": "and the",
+      "privacyLink": "Privacy Policy",
+      "back": "Back",
+      "submit": "Submit my application",
+      "errors": {
+        "termsRequired": "You must accept the terms and conditions.",
+        "passwordRequired": "Please enter your password.",
+        "emailExists": "An account already exists with this email.",
+        "rateLimit": "Too many attempts. Please try again later.",
+        "validation": "Some information is invalid. Please check your data.",
+        "generic": "An error occurred. Please try again."
+      }
+    },
+    "success": {
+      "meta": {
+        "title": "Application Sent - EviDive",
+        "description": "Your registration application has been sent successfully."
+      },
+      "title": "Application sent!",
+      "subtitle": "Your registration application has been received.",
+      "emailSent": {
+        "title": "Confirmation email sent",
+        "description": "A confirmation email has been sent to your email address."
+      },
+      "review": {
+        "title": "Under review",
+        "description": "Our team will review your application and contact you within 48-72 hours."
+      },
+      "whatsNext": {
+        "title": "What's next",
+        "step1": "Check your email for the confirmation receipt.",
+        "step2": "Our team reviews your application (48-72h).",
+        "step3": "Once approved, you'll have access to your center dashboard."
+      },
+      "dashboardButton": "Go to my dashboard",
+      "homeButton": "Back to home"
+    }
   },
   "bookings": {
     "meta": {
@@ -1074,6 +1435,233 @@
     "instagram": "Instagram",
     "facebook": "Facebook",
     "refresh": "Ανανέωση"
+  },
+  "centerServices": {
+    "meta": {
+      "title": "Διαχείριση Υπηρεσιών - Το Κέντρο μου",
+      "description": "Διαχειριστείτε τις υπηρεσίες και τις προσφορές του καταδυτικού σας κέντρου."
+    },
+    "title": "Οι Υπηρεσίες Μου",
+    "subtitle": "Διαχειριστείτε τις υπηρεσίες κατάδυσης",
+    "newService": "Νέα Υπηρεσία",
+    "editService": "Επεξεργασία Υπηρεσίας",
+    "duplicateService": "Διπλότυπο",
+    "archiveService": "Αρχειοθέτηση",
+    "activateService": "Ενεργοποίηση",
+    "deleteService": "Διαγραφή",
+    "backToServices": "Επιστροφή στις υπηρεσίες",
+    "filters": {
+      "all": "Όλα",
+      "active": "Ενεργές",
+      "archived": "Αρχειοθετημένες"
+    },
+    "empty": {
+      "title": "Καμία υπηρεσία",
+      "description": "Δεν έχετε δημιουργήσει καμία υπηρεσία ακόμα. Ξεκινήστε προσθέτοντας την πρώτη σας προσφορά.",
+      "cta": "Δημιουργία υπηρεσίας"
+    },
+    "card": {
+      "category": "Κατηγορία",
+      "price": "Τιμή",
+      "duration": "Διάρκεια",
+      "participants": "Συμμετέχοντες",
+      "minParticipants": "ελάχιστο",
+      "maxParticipants": "μέγιστο",
+      "certification": "Απαιτούμενη πιστοποίηση",
+      "extras": "επιλογή(ές)",
+      "active": "Ενεργή",
+      "archived": "Αρχειοθετημένη",
+      "equipmentIncluded": "Εξοπλισμός συμπεριλαμβάνεται"
+    },
+    "form": {
+      "title": "Πληροφορίες Υπηρεσίας",
+      "basicInfo": "Βασικές Πληροφορίες",
+      "pricing": "Τιμολόγηση",
+      "capacity": "Χωρητικότητα & Απαιτήσεις",
+      "schedule": "Διαθεσιμότητα",
+      "media": "Μέσα",
+      "extras": "Επιπλέον Επιλογές",
+      "name": "Όνομα Υπηρεσίας",
+      "nameFr": "Όνομα (Γαλλικά)",
+      "nameEn": "Όνομα (Αγγλικά)",
+      "namePlaceholder": "π.χ. Discovery Dive",
+      "description": "Περιγραφή",
+      "descriptionFr": "Περιγραφή (Γαλλικά)",
+      "descriptionEn": "Περιγραφή (Αγγλικά)",
+      "descriptionPlaceholder": "Περιγράψτε αυτή την υπηρεσία λεπτομερώς...",
+      "category": "Κατηγορία",
+      "selectCategory": "Επιλέξτε κατηγορία",
+      "price": "Τιμή",
+      "currency": "Νόμισμα",
+      "pricePerPerson": "Τιμή ανά άτομο",
+      "duration": "Διάρκεια (λεπτά)",
+      "minParticipants": "Ελάχιστοι συμμετέχοντες",
+      "maxParticipants": "Μέγιστοι συμμετέχοντες",
+      "minCertification": "Ελάχιστη απαιτούμενη πιστοποίηση",
+      "noCertification": "Καμία (αρχάριος)",
+      "minAge": "Ελάχιστη ηλικία",
+      "maxDepth": "Μέγιστο βάθος (μ)",
+      "equipmentIncluded": "Εξοπλισμός συμπεριλαμβάνεται",
+      "equipmentDetails": "Λεπτομέρειες εξοπλισμού",
+      "equipmentDetailsPlaceholder": "Μάσκα, πτερύγια, στολή...",
+      "includes": "Συμπεριλαμβάνεται στην υπηρεσία",
+      "includesPlaceholder": "Εισάγετε ένα στοιχείο και πατήστε Enter",
+      "availableDays": "Διαθέσιμες ημέρες",
+      "startTimes": "Ώρες έναρξης",
+      "addTime": "Προσθήκη ώρας",
+      "photos": "Φωτογραφίες υπηρεσίας",
+      "addPhoto": "Προσθήκη φωτογραφίας",
+      "submit": "Αποθήκευση υπηρεσίας",
+      "creating": "Δημιουργία...",
+      "updating": "Ενημέρωση...",
+      "success": "Η υπηρεσία αποθηκεύτηκε με επιτυχία!",
+      "error": "Παρουσιάστηκε σφάλμα. Δοκιμάστε ξανά."
+    },
+    "extras": {
+      "title": "Επιπλέον Επιλογές",
+      "subtitle": "Προσθέστε επιπλέον επιλογές που οι πελάτες μπορούν να προσθέσουν στην κράτησή τους.",
+      "add": "Προσθήκη επιλογής",
+      "name": "Όνομα επιλογής",
+      "nameFr": "Όνομα (Γαλλικά)",
+      "nameEn": "Όνομα (Αγγλικά)",
+      "namePlaceholder": "π.χ. Ενοικίαση κάμερας",
+      "description": "Περιγραφή",
+      "price": "Τιμή",
+      "multiplyByPax": "Πολλαπλασιασμός ανά συμμετέχοντα",
+      "isRequired": "Υποχρεωτική επιλογή",
+      "isActive": "Ενεργή",
+      "remove": "Αφαίρεση",
+      "empty": "Δεν έχουν προστεθεί επιλογές"
+    },
+    "days": {
+      "monday": "Δευτέρα",
+      "tuesday": "Τρίτη",
+      "wednesday": "Τετάρτη",
+      "thursday": "Πέμπτη",
+      "friday": "Παρασκευή",
+      "saturday": "Σάββατο",
+      "sunday": "Κυριακή"
+    },
+    "certifications": {
+      "none": "Καμία (αρχάριος)",
+      "ow": "Open Water",
+      "aow": "Advanced Open Water",
+      "rescue": "Rescue Diver",
+      "dm": "Divemaster",
+      "instructor": "Instructor"
+    },
+    "categories": {
+      "discovery": "Discovery",
+      "fun_dive": "Fun Dive",
+      "training": "Training",
+      "night_dive": "Night Dive",
+      "deep_dive": "Deep Dive",
+      "wreck": "Wreck",
+      "drift": "Drift Dive",
+      "nitrox": "Nitrox",
+      "tech": "Technical",
+      "snorkeling": "Snorkeling",
+      "other": "Other"
+    },
+    "confirmDelete": {
+      "title": "Διαγραφή αυτής της υπηρεσίας;",
+      "description": "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί. Η υπηρεσία θα διαγραφεί μόνιμα.",
+      "cancel": "Ακύρωση",
+      "confirm": "Διαγραφή"
+    },
+    "confirmArchive": {
+      "title": "Αρχειοθέτηση αυτής της υπηρεσίας;",
+      "description": "Η υπηρεσία δεν θα είναι πλέον ορατή στους πελάτες αλλά μπορεί να ενεργοποιηθεί ξανά αργότερα.",
+      "cancel": "Ακύρωση",
+      "confirm": "Αρχειοθέτηση"
+    },
+    "errors": {
+      "name_required": "Το όνομα είναι υποχρεωτικό",
+      "price_required": "Η τιμή είναι υποχρεωτική",
+      "price_positive": "Η τιμή πρέπει να είναι μεγαλύτερη από 0",
+      "duration_required": "Η διάρκεια είναι υποχρεωτική",
+      "duration_positive": "Η διάρκεια πρέπει να είναι μεγαλύτερη από 0",
+      "participants_invalid": "Το ελάχιστο πρέπει να είναι μικρότερο ή ίσο του μέγιστου",
+      "unauthorized": "Μη εξουσιοδοτημένο",
+      "not_found": "Η υπηρεσία δεν βρέθηκε",
+      "server_error": "Σφάλμα διακομιστή"
+    }
+  },
+  "centerSettings": {
+    "meta": {
+      "title": "Center Settings - EviDive",
+      "description": "Configure your dive center settings."
+    },
+    "title": "Settings",
+    "subtitle": "Configure settings for {centerName}",
+    "backToDashboard": "Back to dashboard",
+    "save": "Save",
+    "saving": "Saving...",
+    "saved": "Settings saved",
+    "error": "An error occurred",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "confirming": "Confirming...",
+    "pendingApproval": {
+      "title": "Center pending approval",
+      "description": "Your center is under review. You can access settings once approved."
+    },
+    "suspendedWarning": {
+      "title": "Center deactivated",
+      "description": "Your center is currently deactivated and does not appear in searches. You can reactivate it from the danger zone."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "emailOnNewBooking": "Email on new booking",
+      "emailOnNewBookingDesc": "Receive an email for each new booking request.",
+      "emailOnCancellation": "Email on cancellation",
+      "emailOnCancellationDesc": "Receive an email when a customer cancels their booking.",
+      "emailOnNewReview": "Email on new review",
+      "emailOnNewReviewDesc": "Receive an email when a customer leaves a review for your center.",
+      "smsOnNewBooking": "SMS on new booking",
+      "smsOnNewBookingDesc": "Receive an SMS for each new booking (requires a verified phone number).",
+      "smsRequiresPhone": "Add a phone number to your center to enable SMS notifications.",
+      "dailyBookingReminder": "Daily reminder",
+      "dailyBookingReminderDesc": "Receive a daily summary of the day's bookings."
+    },
+    "cancellation": {
+      "title": "Cancellation Policy",
+      "policyLabel": "Policy type",
+      "flexible": "Flexible",
+      "flexibleDesc": "Free cancellation up to 24h before. Full refund.",
+      "moderate": "Moderate",
+      "moderateDesc": "Free cancellation up to 48h before. Partial refund after.",
+      "strict": "Strict",
+      "strictDesc": "Free cancellation up to 72h before. No refund after.",
+      "hoursLabel": "Free cancellation deadline (hours)",
+      "hoursDesc": "Number of hours before the dive where cancellation is free.",
+      "refundLabel": "Refund after deadline (%)",
+      "refundDesc": "Percentage refunded if cancellation occurs after the free deadline.",
+      "invalidHours": "Deadline must be between 0 and 168 hours.",
+      "invalidRefund": "Percentage must be between 0 and 100."
+    },
+    "payment": {
+      "title": "Payment",
+      "stripeConnected": "Stripe Connect enabled",
+      "stripeNotConnected": "Stripe not configured",
+      "stripeConnectedDesc": "Your Stripe account is connected. You can receive payments.",
+      "stripeNotConnectedDesc": "Configure Stripe Connect to receive customer payments.",
+      "connectStripe": "Configure Stripe",
+      "manageStripe": "Manage Stripe",
+      "comingSoon": "Stripe integration will be available soon.",
+      "ibanTitle": "Bank details",
+      "ibanLabel": "IBAN (optional)",
+      "ibanDesc": "Bank details for manual transfers (informational only).",
+      "ibanPlaceholder": "GB82 WEST 1234 5698 7654 32",
+      "invalidIban": "Invalid IBAN format.",
+      "commissionTitle": "Commission rate",
+      "commissionDesc": "of each booking goes to you",
+      "commissionReadOnly": "This rate is set by the EviDive administrator and cannot be modified."
+    },
+    "team": {
+      "title": "Team",
+      "subtitle": "Manage center team members"
+    }
   },
   "centerReviews": {
     "meta": {
