@@ -831,6 +831,51 @@
       "feature3": "Безопасные платежи"
     }
   },
+  "adminDashboard": {
+    "meta": {
+      "title": "Панель Администратора - EviDive",
+      "description": "Администрирование платформы и обзор статистики."
+    },
+    "title": "Панель Администратора",
+    "subtitle": "Обзор платформы и статистика",
+    "backToDashboard": "Вернуться к панели",
+    "stats": {
+      "totalUsers": "Всего пользователей",
+      "totalCenters": "Всего центров",
+      "totalBookings": "Всего бронирований",
+      "platformRevenue": "Доход платформы",
+      "thisMonth": "в этом месяце",
+      "pending": "в ожидании",
+      "approved": "одобрено"
+    },
+    "quickActions": {
+      "title": "Быстрые Действия",
+      "users": "Пользователи",
+      "centers": "Центры",
+      "bookings": "Бронирования",
+      "reviews": "Отзывы",
+      "commissions": "Комиссии",
+      "explorer": "Обозреватель"
+    },
+    "recentUsers": {
+      "title": "Последние Пользователи",
+      "empty": "Пока нет пользователей."
+    },
+    "recentCenters": {
+      "title": "Последние Центры",
+      "empty": "Пока нет центров."
+    },
+    "viewAll": "Показать все",
+    "alerts": {
+      "title": "Требует Внимания",
+      "pendingCenters": "центров в ожидании",
+      "pendingBookings": "бронирований в ожидании",
+      "pendingReviews": "отзывов в ожидании",
+      "needsValidation": "Требуется проверка",
+      "awaitingConfirmation": "Ожидание подтверждения",
+      "needsModeration": "Требуется модерация"
+    }
+  },
   "adminCenters": {
     "title": "Админ · Центры",
     "subtitle": "Проверка регистраций центров (ОЖИДАНИЕ → ОДОБРЕНО/ОТКЛОНЕНО).",

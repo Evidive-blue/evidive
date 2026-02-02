@@ -1151,6 +1151,51 @@
       "description": "Verifiera din e-postadress för att aktivera ditt EviDive-konto och få åtkomst till alla funktioner."
     }
   },
+  "adminDashboard": {
+    "meta": {
+      "title": "Admin Dashboard - EviDive",
+      "description": "Plattformsadministration och statistiköversikt."
+    },
+    "title": "Admin Dashboard",
+    "subtitle": "Plattformsöversikt och statistik",
+    "backToDashboard": "Tillbaka till dashboard",
+    "stats": {
+      "totalUsers": "Totalt användare",
+      "totalCenters": "Totalt center",
+      "totalBookings": "Totalt bokningar",
+      "platformRevenue": "Plattformsinkomster",
+      "thisMonth": "denna månad",
+      "pending": "väntande",
+      "approved": "godkänd"
+    },
+    "quickActions": {
+      "title": "Snabba Åtgärder",
+      "users": "Användare",
+      "centers": "Center",
+      "bookings": "Bokningar",
+      "reviews": "Recensioner",
+      "commissions": "Provisioner",
+      "explorer": "Utforskare"
+    },
+    "recentUsers": {
+      "title": "Senaste Användare",
+      "empty": "Inga användare ännu."
+    },
+    "recentCenters": {
+      "title": "Senaste Center",
+      "empty": "Inga center ännu."
+    },
+    "viewAll": "Visa alla",
+    "alerts": {
+      "title": "Kräver Uppmärksamhet",
+      "pendingCenters": "väntande center",
+      "pendingBookings": "väntande bokningar",
+      "pendingReviews": "väntande recensioner",
+      "needsValidation": "Behöver validering",
+      "awaitingConfirmation": "Väntar på bekräftelse",
+      "needsModeration": "Behöver moderering"
+    }
+  },
   "adminCenters": {
     "title": "Admin · Center",
     "subtitle": "Validera centerregistreringar (VÄNTANDE → GODKÄND/AVVISAD).",

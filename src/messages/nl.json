@@ -1148,6 +1148,51 @@
       "description": "Verifieer uw e-mailadres om uw EviDive-account te activeren en toegang te krijgen tot alle functies."
     }
   },
+  "adminDashboard": {
+    "meta": {
+      "title": "Admin Dashboard - EviDive",
+      "description": "Platformbeheer en statistiekoverzicht."
+    },
+    "title": "Admin Dashboard",
+    "subtitle": "Platformoverzicht en statistieken",
+    "backToDashboard": "Terug naar dashboard",
+    "stats": {
+      "totalUsers": "Totaal gebruikers",
+      "totalCenters": "Totaal centra",
+      "totalBookings": "Totaal boekingen",
+      "platformRevenue": "Platform-inkomsten",
+      "thisMonth": "deze maand",
+      "pending": "wachtend",
+      "approved": "goedgekeurd"
+    },
+    "quickActions": {
+      "title": "Snelle Acties",
+      "users": "Gebruikers",
+      "centers": "Centra",
+      "bookings": "Boekingen",
+      "reviews": "Beoordelingen",
+      "commissions": "Commissies",
+      "explorer": "Verkenner"
+    },
+    "recentUsers": {
+      "title": "Recente Gebruikers",
+      "empty": "Nog geen gebruikers."
+    },
+    "recentCenters": {
+      "title": "Recente Centra",
+      "empty": "Nog geen centra."
+    },
+    "viewAll": "Bekijk alles",
+    "alerts": {
+      "title": "Vereist Aandacht",
+      "pendingCenters": "wachtende centra",
+      "pendingBookings": "wachtende boekingen",
+      "pendingReviews": "wachtende beoordelingen",
+      "needsValidation": "Validatie vereist",
+      "awaitingConfirmation": "Wacht op bevestiging",
+      "needsModeration": "Moderatie vereist"
+    }
+  },
   "adminCenters": {
     "title": "Admin · Centra",
     "subtitle": "Centrumregistraties valideren (WACHTEND → GOEDGEKEURD/AFGEWEZEN).",

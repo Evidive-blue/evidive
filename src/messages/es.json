@@ -1135,6 +1135,51 @@
       "description": "Verifica tu dirección de email para activar tu cuenta EviDive y acceder a todas las funciones."
     }
   },
+  "adminDashboard": {
+    "meta": {
+      "title": "Panel de Admin - EviDive",
+      "description": "Administración de la plataforma y vista general de estadísticas."
+    },
+    "title": "Panel de Admin",
+    "subtitle": "Vista general de la plataforma y estadísticas",
+    "backToDashboard": "Volver al panel",
+    "stats": {
+      "totalUsers": "Usuarios totales",
+      "totalCenters": "Centros totales",
+      "totalBookings": "Reservas totales",
+      "platformRevenue": "Ingresos de la plataforma",
+      "thisMonth": "este mes",
+      "pending": "pendiente",
+      "approved": "aprobado"
+    },
+    "quickActions": {
+      "title": "Acciones Rápidas",
+      "users": "Usuarios",
+      "centers": "Centros",
+      "bookings": "Reservas",
+      "reviews": "Reseñas",
+      "commissions": "Comisiones",
+      "explorer": "Explorador"
+    },
+    "recentUsers": {
+      "title": "Usuarios Recientes",
+      "empty": "Aún no hay usuarios."
+    },
+    "recentCenters": {
+      "title": "Centros Recientes",
+      "empty": "Aún no hay centros."
+    },
+    "viewAll": "Ver todos",
+    "alerts": {
+      "title": "Requiere Atención",
+      "pendingCenters": "centros pendientes",
+      "pendingBookings": "reservas pendientes",
+      "pendingReviews": "reseñas pendientes",
+      "needsValidation": "Necesita validación",
+      "awaitingConfirmation": "Esperando confirmación",
+      "needsModeration": "Necesita moderación"
+    }
+  },
   "adminCenters": {
     "title": "Admin · Centros",
     "subtitle": "Validar inscripciones de centros (PENDING → APPROVED/REJECTED).",

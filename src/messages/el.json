@@ -831,6 +831,51 @@
       "feature3": "Ασφαλείς πληρωμές"
     }
   },
+  "adminDashboard": {
+    "meta": {
+      "title": "Πίνακας Διαχειριστή - EviDive",
+      "description": "Διαχείριση πλατφόρμας και επισκόπηση στατιστικών."
+    },
+    "title": "Πίνακας Διαχειριστή",
+    "subtitle": "Επισκόπηση πλατφόρμας και στατιστικών",
+    "backToDashboard": "Επιστροφή στον πίνακα",
+    "stats": {
+      "totalUsers": "Σύνολο χρηστών",
+      "totalCenters": "Σύνολο κέντρων",
+      "totalBookings": "Σύνολο κρατήσεων",
+      "platformRevenue": "Έσοδα πλατφόρμας",
+      "thisMonth": "αυτόν τον μήνα",
+      "pending": "σε αναμονή",
+      "approved": "εγκεκριμένο"
+    },
+    "quickActions": {
+      "title": "Γρήγορες Ενέργειες",
+      "users": "Χρήστες",
+      "centers": "Κέντρα",
+      "bookings": "Κρατήσεις",
+      "reviews": "Αξιολογήσεις",
+      "commissions": "Προμήθειες",
+      "explorer": "Εξερεύνηση"
+    },
+    "recentUsers": {
+      "title": "Πρόσφατοι Χρήστες",
+      "empty": "Δεν υπάρχουν χρήστες ακόμα."
+    },
+    "recentCenters": {
+      "title": "Πρόσφατα Κέντρα",
+      "empty": "Δεν υπάρχουν κέντρα ακόμα."
+    },
+    "viewAll": "Εμφάνιση όλων",
+    "alerts": {
+      "title": "Απαιτεί Προσοχή",
+      "pendingCenters": "κέντρα σε αναμονή",
+      "pendingBookings": "κρατήσεις σε αναμονή",
+      "pendingReviews": "αξιολογήσεις σε αναμονή",
+      "needsValidation": "Απαιτείται επικύρωση",
+      "awaitingConfirmation": "Αναμένοντας επιβεβαίωση",
+      "needsModeration": "Απαιτείται διαχείριση"
+    }
+  },
   "adminCenters": {
     "title": "Διαχ. · Κέντρα",
     "subtitle": "Επικύρωση εγγραφών κέντρων (ΑΝΑΜΟΝΗ → ΕΓΚΡΙΝΕΤΑΙ/ΑΠΟΡΡΙΦΘΗΚΕ).",

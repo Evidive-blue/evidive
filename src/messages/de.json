@@ -1108,6 +1108,51 @@
       "description": "Verifizieren Sie Ihre E-Mail-Adresse, um Ihr EviDive-Konto zu aktivieren und auf alle Funktionen zuzugreifen."
     }
   },
+  "adminDashboard": {
+    "meta": {
+      "title": "Admin Dashboard - EviDive",
+      "description": "Plattformverwaltung und Statistikübersicht."
+    },
+    "title": "Admin Dashboard",
+    "subtitle": "Plattformübersicht und Statistiken",
+    "backToDashboard": "Zurück zum Dashboard",
+    "stats": {
+      "totalUsers": "Benutzer insgesamt",
+      "totalCenters": "Zentren insgesamt",
+      "totalBookings": "Buchungen insgesamt",
+      "platformRevenue": "Plattform-Umsatz",
+      "thisMonth": "diesen Monat",
+      "pending": "ausstehend",
+      "approved": "genehmigt"
+    },
+    "quickActions": {
+      "title": "Schnellzugriffe",
+      "users": "Benutzer",
+      "centers": "Zentren",
+      "bookings": "Buchungen",
+      "reviews": "Bewertungen",
+      "commissions": "Provisionen",
+      "explorer": "Explorer"
+    },
+    "recentUsers": {
+      "title": "Letzte Benutzer",
+      "empty": "Noch keine Benutzer."
+    },
+    "recentCenters": {
+      "title": "Letzte Zentren",
+      "empty": "Noch keine Zentren."
+    },
+    "viewAll": "Alle anzeigen",
+    "alerts": {
+      "title": "Erfordert Aufmerksamkeit",
+      "pendingCenters": "ausstehende Zentren",
+      "pendingBookings": "ausstehende Buchungen",
+      "pendingReviews": "ausstehende Bewertungen",
+      "needsValidation": "Validierung erforderlich",
+      "awaitingConfirmation": "Warten auf Bestätigung",
+      "needsModeration": "Moderation erforderlich"
+    }
+  },
   "adminCenters": {
     "title": "Admin · Zentren",
     "subtitle": "Validierung der Zentrumsanmeldungen (PENDING → APPROVED/REJECTED).",

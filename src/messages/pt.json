@@ -1163,6 +1163,37 @@
     "approve": "Aprovar",
     "reject": "Rejeitar"
   },
+  "adminCommissions": {
+    "meta": {
+      "title": "Admin · Comissões - EviDive",
+      "description": "Visão financeira da plataforma."
+    },
+    "title": "Admin · Comissões",
+    "subtitle": "Visão financeira e acompanhamento de comissões",
+    "backToAdmin": "Voltar ao admin",
+    "stats": {
+      "totalRevenue": "Receita total da plataforma",
+      "pendingPayouts": "Pagamentos pendentes",
+      "paidOut": "Pago aos centros",
+      "thisMonth": "Este mês"
+    },
+    "results": "{count, plural, =0 {Nenhuma comissão} one {# comissão} other {# comissões}}",
+    "status": {
+      "ALL": "Todas",
+      "PENDING": "Pendente",
+      "PAID": "Paga",
+      "CANCELLED": "Cancelada"
+    },
+    "booking": "Reserva",
+    "center": "Centro",
+    "amount": "Valor",
+    "platformFee": "Comissão da plataforma",
+    "centerAmount": "Valor do centro",
+    "noCommissions": "Nenhuma comissão encontrada.",
+    "previous": "Anterior",
+    "next": "Próximo",
+    "pageInfo": "Página {current} de {total}"
+  },
   "onboard": {
     "meta": {
       "title": "Inscrição - EviDive",

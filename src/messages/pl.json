@@ -1151,6 +1151,51 @@
       "description": "Zweryfikuj swój adres e-mail, aby aktywować konto EviDive i uzyskać dostęp do wszystkich funkcji."
     }
   },
+  "adminDashboard": {
+    "meta": {
+      "title": "Panel Administratora - EviDive",
+      "description": "Administracja platformą i prze gląd statystyk."
+    },
+    "title": "Panel Administratora",
+    "subtitle": "Przegląd platformy i statystyki",
+    "backToDashboard": "Powrót do panelu",
+    "stats": {
+      "totalUsers": "Całkowita liczba użytkowników",
+      "totalCenters": "Całkowita liczba centrów",
+      "totalBookings": "Całkowita liczba rezerwacji",
+      "platformRevenue": "Przychód platformy",
+      "thisMonth": "w tym miesiącu",
+      "pending": "oczekujące",
+      "approved": "zatwierdzone"
+    },
+    "quickActions": {
+      "title": "Szybkie Akcje",
+      "users": "Użytkownicy",
+      "centers": "Centra",
+      "bookings": "Rezerwacje",
+      "reviews": "Recenzje",
+      "commissions": "Prowizje",
+      "explorer": "Eksplorator"
+    },
+    "recentUsers": {
+      "title": "Ostatni Użytkownicy",
+      "empty": "Brak użytkowników."
+    },
+    "recentCenters": {
+      "title": "Ostatnie Centra",
+      "empty": "Brak centrów."
+    },
+    "viewAll": "Zobacz wszystkie",
+    "alerts": {
+      "title": "Wymaga Uwagi",
+      "pendingCenters": "oczekujące centra",
+      "pendingBookings": "oczekujące rezerwacje",
+      "pendingReviews": "oczekujące recenzje",
+      "needsValidation": "Wymaga walidacji",
+      "awaitingConfirmation": "Oczekiwanie na potwierdzenie",
+      "needsModeration": "Wymaga moderacji"
+    }
+  },
   "adminCenters": {
     "title": "Admin · Centra",
     "subtitle": "Waliduj rejestracje centrów (OCZEKUJĄCE → ZATWIERDZONE/ODRZUCONE).",
