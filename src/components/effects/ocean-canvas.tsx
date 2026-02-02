@@ -42,6 +42,11 @@ function seededRandom(seed: number): number {
   return x - Math.floor(x);
 }
 
+// Helper pour arrondir les valeurs et éviter les problèmes d'hydratation
+function round(value: number, decimals: number = 2): number {
+  return Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
+}
+
 // ===========================================
 // TYPE DEFINITIONS
 // ===========================================
@@ -707,12 +712,12 @@ export function OceanCanvas() {
             key={`bubble-${b.id}`}
             className="absolute rounded-full"
             style={{
-              left: `${b.x}%`,
-              width: b.size,
-              height: b.size,
+              left: `${round(b.x, 2)}%`,
+              width: `${round(b.size, 2)}px`,
+              height: `${round(b.size, 2)}px`,
               background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.2))",
               border: "1px solid rgba(255,255,255,0.3)",
-              opacity: surfaceVisibility * 0.6,
+              opacity: `${round(surfaceVisibility * 0.6, 2)}`,
             }}
             animate={{
               y: ["100vh", "-10vh"],
@@ -734,10 +739,10 @@ export function OceanCanvas() {
               key={`tropical-${tf.id}`}
               className="absolute"
               style={{
-                top: `${tf.y}%`,
-                width: tf.size,
-                height: tf.size * 0.6,
-                opacity: surfaceVisibility * 0.9,
+                top: `${round(tf.y, 2)}%`,
+                width: `${round(tf.size, 2)}px`,
+                height: `${round(tf.size * 0.6, 2)}px`,
+                opacity: `${round(surfaceVisibility * 0.9, 2)}`,
               }}
               animate={{
                 x: tf.direction === 1 ? ["-10vw", "110vw"] : ["110vw", "-10vw"],
@@ -767,13 +772,13 @@ export function OceanCanvas() {
               key={`particle-${p.id}`}
               className="absolute rounded-full"
               style={{
-                left: `${p.x}%`,
-                top: `${parallaxY}%`,
-                width: p.size,
-                height: p.size,
+                left: `${round(p.x, 2)}%`,
+                top: `${round(parallaxY, 2)}%`,
+                width: `${round(p.size, 2)}px`,
+                height: `${round(p.size, 2)}px`,
                 backgroundColor: p.color,
-                boxShadow: `0 0 ${p.size * 2}px ${p.size}px ${p.color}50`,
-                opacity: visibility,
+                boxShadow: `0 0 ${round(p.size * 2, 2)}px ${round(p.size, 2)}px ${p.color}50`,
+                opacity: `${round(visibility, 2)}`,
               }}
               animate={{
                 opacity: [visibility, visibility * 0.3, visibility],
@@ -801,11 +806,11 @@ export function OceanCanvas() {
               key={`jelly-${jelly.id}`}
               className="absolute"
               style={{
-                left: `${jelly.x}%`,
-                top: `${parallaxY}%`,
-                width: jelly.size,
-                height: jelly.size * 1.5,
-                opacity: jellyOpacity,
+                left: `${round(jelly.x, 2)}%`,
+                top: `${round(parallaxY, 2)}%`,
+                width: `${round(jelly.size, 2)}px`,
+                height: `${round(jelly.size * 1.5, 2)}px`,
+                opacity: `${round(jellyOpacity, 2)}`,
               }}
               animate={{
                 y: [0, -20, 0],
@@ -873,10 +878,10 @@ export function OceanCanvas() {
               key={`turtle-${turtle.id}`}
               className="absolute"
               style={{
-                top: `${turtle.y}%`,
-                width: turtle.size,
-                height: turtle.size * 0.625,
-                opacity: middleVisibility * 0.85,
+                top: `${round(turtle.y, 2)}%`,
+                width: `${round(turtle.size, 2)}px`,
+                height: `${round(turtle.size * 0.625, 2)}px`,
+                opacity: `${round(middleVisibility * 0.85, 2)}`,
               }}
               animate={{
                 x: turtle.direction === 1 ? ["-15vw", "115vw"] : ["115vw", "-15vw"],
@@ -903,10 +908,10 @@ export function OceanCanvas() {
               key={`manta-${manta.id}`}
               className="absolute"
               style={{
-                top: `${manta.y}%`,
-                width: manta.size,
-                height: manta.size * 0.5,
-                opacity: middleVisibility * 0.7,
+                top: `${round(manta.y, 2)}%`,
+                width: `${round(manta.size, 2)}px`,
+                height: `${round(manta.size * 0.5, 2)}px`,
+                opacity: `${round(middleVisibility * 0.7, 2)}`,
               }}
               animate={{
                 x: manta.direction === 1 ? ["-20vw", "120vw"] : ["120vw", "-20vw"],
@@ -937,10 +942,10 @@ export function OceanCanvas() {
               key={`snow-${snow.id}`}
               className="absolute rounded-full bg-white"
               style={{
-                left: `${snow.x}%`,
-                width: snow.size,
-                height: snow.size,
-                opacity: deepVisibility * 0.4,
+                left: `${round(snow.x, 2)}%`,
+                width: `${round(snow.size, 2)}px`,
+                height: `${round(snow.size, 2)}px`,
+                opacity: `${round(deepVisibility * 0.4, 2)}`,
               }}
               animate={{
                 y: ["-10vh", "110vh"],
@@ -965,10 +970,10 @@ export function OceanCanvas() {
               key={`fish-${f.id}`}
               className="absolute"
               style={{
-                top: `${f.y}%`,
-                width: f.size,
-                height: f.size * 0.5,
-                opacity: fishOpacity,
+                top: `${round(f.y, 2)}%`,
+                width: `${round(f.size, 2)}px`,
+                height: `${round(f.size * 0.5, 2)}px`,
+                opacity: `${round(fishOpacity, 2)}`,
               }}
               animate={{
                 x: f.direction === 1 ? ["-10vw", "110vw"] : ["110vw", "-10vw"],
@@ -1003,10 +1008,10 @@ export function OceanCanvas() {
               key={`shark-${shark.id}`}
               className="absolute"
               style={{
-                top: `${shark.y}%`,
-                width: shark.size,
-                height: shark.size * 0.4,
-                opacity: deepVisibility * 0.6,
+                top: `${round(shark.y, 2)}%`,
+                width: `${round(shark.size, 2)}px`,
+                height: `${round(shark.size * 0.4, 2)}px`,
+                opacity: `${round(deepVisibility * 0.6, 2)}`,
               }}
               animate={{
                 x: shark.direction === 1 ? ["-20vw", "120vw"] : ["120vw", "-20vw"],
@@ -1033,12 +1038,12 @@ export function OceanCanvas() {
               key={`abyssal-${af.id}`}
               className="absolute"
               style={{
-                left: `${af.x}%`,
-                top: `${parallaxY}%`,
-                width: af.size,
-                height: af.size * 0.66,
-                opacity: deepVisibility * 0.8,
-                filter: `drop-shadow(0 0 ${af.size}px ${af.glowColor})`,
+                left: `${round(af.x, 2)}%`,
+                top: `${round(parallaxY, 2)}%`,
+                width: `${round(af.size, 2)}px`,
+                height: `${round(af.size * 0.66, 2)}px`,
+                opacity: `${round(deepVisibility * 0.8, 2)}`,
+                filter: `drop-shadow(0 0 ${round(af.size, 2)}px ${af.glowColor})`,
               }}
               animate={{
                 x: [0, 20, -20, 0],
@@ -1066,11 +1071,11 @@ export function OceanCanvas() {
               key={`anemone-${anemone.id}`}
               className="absolute"
               style={{
-                left: `${anemone.x}%`,
-                top: `${anemone.y}%`,
-                width: anemone.size,
-                height: anemone.size,
-                opacity: deepVisibility * 0.7,
+                left: `${round(anemone.x, 2)}%`,
+                top: `${round(anemone.y, 2)}%`,
+                width: `${round(anemone.size, 2)}px`,
+                height: `${round(anemone.size, 2)}px`,
+                opacity: `${round(deepVisibility * 0.7, 2)}`,
               }}
               animate={{
                 scale: [1, 1.05, 1],

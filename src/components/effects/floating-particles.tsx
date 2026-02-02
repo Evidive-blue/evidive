@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 interface Particle {
@@ -46,13 +46,18 @@ export function FloatingParticles({
   variant = "mixed",
 }: FloatingParticlesProps) {
   const prefersReducedMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   const particles = useMemo(
-    () => generateParticles(count, variant),
-    [count, variant]
+    () => mounted ? generateParticles(count, variant) : [],
+    [count, variant, mounted]
   );
 
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion || !mounted) {
     return null;
   }
 
@@ -61,6 +66,7 @@ export function FloatingParticles({
       className={`pointer-events-none fixed inset-0 overflow-hidden ${className}`}
       style={{ zIndex: 1 }}
       aria-hidden="true"
+      suppressHydrationWarning
     >
       {particles.map((particle) => (
         <motion.div
@@ -68,8 +74,8 @@ export function FloatingParticles({
           className="absolute rounded-full"
           style={{
             left: `${particle.x}%`,
-            width: particle.size,
-            height: particle.size,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
             background:
               particle.type === "bubble"
                 ? "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.05))"
@@ -133,10 +139,10 @@ export function SectionBubbles({ className = "" }: { className?: string }) {
           key={bubble.id}
           className="absolute rounded-full border border-white/10 bg-gradient-to-br from-white/5 to-transparent"
           style={{
-            width: bubble.size,
-            height: bubble.size,
+            width: `${bubble.size}px`,
+            height: `${bubble.size}px`,
             left: `${bubble.left}%`,
-            bottom: -bubble.size,
+            bottom: `-${bubble.size}px`,
           }}
           animate={{
             y: [0, "-120vh"],

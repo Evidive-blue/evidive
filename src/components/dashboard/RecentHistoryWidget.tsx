@@ -47,7 +47,6 @@ interface RecentHistoryWidgetProps {
     emptyTitle: string;
     emptyDesc: string;
     leaveReview: string;
-    rating: string;
   };
 }
 
@@ -122,7 +121,7 @@ export function RecentHistoryWidget({
                         <div className="flex items-center gap-1 rounded-full bg-amber-500/20 px-2.5 py-1">
                           <Star className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
                           <span className="text-sm font-medium text-amber-400">
-                            {t.rating.replace("{rating}", String(booking.review.rating))}
+                            {booking.review.rating}/5
                           </span>
                         </div>
                       ) : (

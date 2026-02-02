@@ -209,7 +209,6 @@ export default async function DiverDashboardPage({
     emptyTitle: t("history.emptyTitle"),
     emptyDesc: t("history.emptyDesc"),
     leaveReview: t("history.leaveReview"),
-    rating: t("history.rating"),
   };
 
   const quickActionsTranslations = {
