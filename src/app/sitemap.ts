@@ -1,11 +1,7 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/i18n/config";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL;
-
-if (!baseUrl) {
-  throw new Error("NEXT_PUBLIC_BASE_URL (or NEXT_PUBLIC_SITE_URL) is required for sitemap");
-}
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Pages statiques principales

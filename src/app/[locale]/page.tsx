@@ -8,7 +8,7 @@ import {
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export async function generateMetadata({
   params,
@@ -19,7 +19,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
-    metadataBase: new URL(baseUrl!),
+    metadataBase: new URL(baseUrl),
     title: t("home.title"),
     description: t("home.description"),
     openGraph: {
