@@ -848,7 +848,42 @@
       "viewCenters": "Vedi centri",
       "viewPublicCenter": "Vedi pagina pubblica",
       "statusVerified": "Verificato",
-      "pendingDesc": "Il tuo centro è in attesa di validazione da parte di un amministratore."
+      "pendingDesc": "Il tuo centro è in attesa di validazione da parte di un amministratore.",
+      "create": {
+        "title": "Crea un nuovo centro",
+        "subtitle": "Aggiungi un nuovo centro immersioni al tuo account",
+        "sections": {
+          "info": "Informazioni del centro",
+          "location": "Posizione"
+        },
+        "fields": {
+          "centerName": "Nome del centro",
+          "description": "Descrizione",
+          "phone": "Telefono del centro",
+          "website": "Sito web",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "address": "Indirizzo",
+          "city": "Città",
+          "postalCode": "Codice postale",
+          "country": "Paese",
+          "latitude": "Latitudine",
+          "longitude": "Longitudine"
+        },
+        "errors": {
+          "centerNameRequired": "Il nome del centro è obbligatorio (min 2 caratteri)",
+          "descriptionTooShort": "La descrizione deve contenere almeno 20 caratteri",
+          "addressRequired": "Indirizzo completo richiesto",
+          "locationRequired": "Si prega di geolocalizzare l'indirizzo",
+          "geocodeFailed": "Impossibile trovare questo indirizzo",
+          "genericError": "Si è verificato un errore"
+        },
+        "geocodeSuccess": "Indirizzo geolocalizzato con successo",
+        "cancel": "Annulla",
+        "create": "Crea centro",
+        "creating": "Creazione in corso...",
+        "success": "Centro creato con successo! In attesa di validazione."
+      }
     },
     "admin": {
       "users": {
@@ -1135,51 +1170,6 @@
       "description": "Verifica il tuo indirizzo email per attivare il tuo account EviDive e accedere a tutte le funzionalità."
     }
   },
-  "adminDashboard": {
-    "meta": {
-      "title": "Dashboard Admin - EviDive",
-      "description": "Gestione della piattaforma e panoramica delle statistiche."
-    },
-    "title": "Dashboard Admin",
-    "subtitle": "Panoramica della piattaforma e statistiche",
-    "backToDashboard": "Torna alla dashboard",
-    "stats": {
-      "totalUsers": "Utenti totali",
-      "totalCenters": "Centri totali",
-      "totalBookings": "Prenotazioni totali",
-      "platformRevenue": "Entrate della piattaforma",
-      "thisMonth": "questo mese",
-      "pending": "in sospeso",
-      "approved": "approvato"
-    },
-    "quickActions": {
-      "title": "Azioni rapide",
-      "users": "Utenti",
-      "centers": "Centri",
-      "bookings": "Prenotazioni",
-      "reviews": "Recensioni",
-      "commissions": "Commissioni",
-      "explorer": "Esploratore"
-    },
-    "recentUsers": {
-      "title": "Utenti recenti",
-      "empty": "Nessun utente ancora."
-    },
-    "recentCenters": {
-      "title": "Centri recenti",
-      "empty": "Nessun centro ancora."
-    },
-    "viewAll": "Vedi tutti",
-    "alerts": {
-      "title": "Richiede attenzione",
-      "pendingCenters": "centri in sospeso",
-      "pendingBookings": "prenotazioni in sospeso",
-      "pendingReviews": "recensioni in sospeso",
-      "needsValidation": "Richiede validazione",
-      "awaitingConfirmation": "In attesa di conferma",
-      "needsModeration": "Richiede moderazione"
-    }
-  },
   "adminCenters": {
     "title": "Admin · Centri",
     "subtitle": "Validare le iscrizioni dei centri (PENDING → APPROVED/REJECTED).",
@@ -1194,65 +1184,6 @@
     "phone": "Telefono",
     "approve": "Approva",
     "reject": "Rifiuta"
-  },
-  "adminBookings": {
-    "meta": {
-      "title": "Admin · Prenotazioni - EviDive",
-      "description": "Visualizza e gestisci tutte le prenotazioni della piattaforma."
-    },
-    "title": "Admin · Prenotazioni",
-    "subtitle": "Visualizza tutte le prenotazioni di tutti i centri",
-    "backToAdmin": "Torna all'admin",
-    "results": "{count, plural, =0 {Nessuna prenotazione} one {# prenotazione} other {# prenotazioni}}",
-    "status": {
-      "ALL": "Tutte",
-      "PENDING": "In attesa",
-      "CONFIRMED": "Confermata",
-      "PAID": "Pagata",
-      "RUNNING": "In corso",
-      "COMPLETED": "Completata",
-      "CANCELLED": "Cancellata",
-      "NOSHOW": "Assente"
-    },
-    "client": "Cliente",
-    "center": "Centro",
-    "service": "Servizio",
-    "participants": "partecipanti",
-    "noBookings": "Nessuna prenotazione trovata.",
-    "previous": "Precedente",
-    "next": "Successivo",
-    "pageInfo": "Pagina {current} di {total}"
-  },
-  "adminCommissions": {
-    "meta": {
-      "title": "Admin · Commissioni - EviDive",
-      "description": "Panoramica finanziaria della piattaforma."
-    },
-    "title": "Admin · Commissioni",
-    "subtitle": "Panoramica finanziaria e tracciamento commissioni",
-    "backToAdmin": "Torna all'admin",
-    "stats": {
-      "totalRevenue": "Entrate totali della piattaforma",
-      "pendingPayouts": "Pagamenti in sospeso",
-      "paidOut": "Pagato ai centri",
-      "thisMonth": "Questo mese"
-    },
-    "results": "{count, plural, =0 {Nessuna commissione} one {# commissione} other {# commissioni}}",
-    "status": {
-      "ALL": "Tutte",
-      "PENDING": "In sospeso",
-      "PAID": "Pagate",
-      "CANCELLED": "Cancellate"
-    },
-    "booking": "Prenotazione",
-    "center": "Centro",
-    "amount": "Importo",
-    "platformFee": "Commissione piattaforma",
-    "centerAmount": "Importo centro",
-    "noCommissions": "Nessuna commissione trovata.",
-    "previous": "Precedente",
-    "next": "Successivo",
-    "pageInfo": "Pagina {current} di {total}"
   },
   "onboard": {
     "meta": {

@@ -883,7 +883,42 @@
    "viewCenters": "View centers",
    "viewPublicCenter": "View public page",
    "statusVerified": "Verified",
-   "pendingDesc": "Your center is pending validation by an administrator."
+   "pendingDesc": "Your center is pending validation by an administrator.",
+   "create": {
+    "title": "Create a new center",
+    "subtitle": "Add a new dive center to your account",
+    "sections": {
+      "info": "Center information",
+      "location": "Location"
+    },
+    "fields": {
+      "centerName": "Center name",
+      "description": "Description",
+      "phone": "Center phone",
+      "website": "Website",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "address": "Address",
+      "city": "City",
+      "postalCode": "Postal code",
+      "country": "Country",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
+    },
+    "errors": {
+      "centerNameRequired": "Center name is required (min 2 characters)",
+      "descriptionTooShort": "Description must be at least 20 characters",
+      "addressRequired": "Complete address is required",
+      "locationRequired": "Please geolocate the address",
+      "geocodeFailed": "Unable to find this address",
+      "genericError": "An error occurred"
+    },
+    "geocodeSuccess": "Address geolocated successfully",
+    "cancel": "Cancel",
+    "create": "Create center",
+    "creating": "Creating...",
+    "success": "Center created successfully! Pending validation."
+   }
   },
   "admin": {
    "users": {

@@ -883,7 +883,42 @@
       "viewCenters": "Voir les centres",
       "viewPublicCenter": "Voir la page publique",
       "statusVerified": "Vérifié",
-      "pendingDesc": "Votre centre est en attente de validation par un administrateur."
+      "pendingDesc": "Votre centre est en attente de validation par un administrateur.",
+      "create": {
+        "title": "Créer un nouveau centre",
+        "subtitle": "Ajoutez un nouveau centre de plongée à votre compte",
+        "sections": {
+          "info": "Informations du centre",
+          "location": "Localisation"
+        },
+        "fields": {
+          "centerName": "Nom du centre",
+          "description": "Description",
+          "phone": "Téléphone du centre",
+          "website": "Site web",
+          "facebook": "Facebook",
+          "instagram": "Instagram",
+          "address": "Adresse",
+          "city": "Ville",
+          "postalCode": "Code postal",
+          "country": "Pays",
+          "latitude": "Latitude",
+          "longitude": "Longitude"
+        },
+        "errors": {
+          "centerNameRequired": "Le nom du centre est requis (min 2 caractères)",
+          "descriptionTooShort": "La description doit contenir au moins 20 caractères",
+          "addressRequired": "L'adresse complète est requise",
+          "locationRequired": "Veuillez géolocaliser l'adresse",
+          "geocodeFailed": "Impossible de trouver cette adresse",
+          "genericError": "Une erreur est survenue"
+        },
+        "geocodeSuccess": "Adresse géolocalisée avec succès",
+        "cancel": "Annuler",
+        "create": "Créer le centre",
+        "creating": "Création...",
+        "success": "Centre créé avec succès ! En attente de validation."
+      }
     },
     "admin": {
       "users": {

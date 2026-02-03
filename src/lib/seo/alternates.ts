@@ -41,11 +41,6 @@ export function getOgLocale(locale: string): string {
     es: "es_ES",
     it: "it_IT",
     pt: "pt_PT",
-    nl: "nl_NL",
-    pl: "pl_PL",
-    sv: "sv_SE",
-    el: "el_GR",
-    ru: "ru_RU",
   };
   return localeMap[locale] || "en_GB";
 }

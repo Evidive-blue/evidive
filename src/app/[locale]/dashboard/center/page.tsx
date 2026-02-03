@@ -218,7 +218,7 @@ export default async function CenterDashboardPage({
           <div className="flex flex-wrap items-center gap-2">
             {userType === "CENTER_OWNER" ? (
               <Link
-                href="/onboard/center"
+                href="/dashboard/center/create"
                 className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white/90 backdrop-blur-xl transition hover:bg-white/10"
               >
                 {t("createCenter")}
