@@ -30,7 +30,6 @@ export default async function PaymentsPage({ params }: Props) {
       ownerId: true,
       name: true,
       stripeAccountId: true,
-      currency: true,
       bookings: {
         where: {
           paymentStatus: 'PAID',
@@ -41,6 +40,7 @@ export default async function PaymentsPage({ params }: Props) {
         select: {
           totalPrice: true,
           createdAt: true,
+          currency: true,
         },
       },
       _count: {
@@ -65,6 +65,9 @@ export default async function PaymentsPage({ params }: Props) {
   const totalRevenue = center.bookings.reduce((sum, b) => sum + Number(b.totalPrice), 0);
   const totalPaidBookings = center._count.bookings;
 
+  // Get currency from first booking or default to EUR
+  const currency = center.bookings[0]?.currency || 'EUR';
+
   return (
     <PaymentsManageClient
       center={{
@@ -72,7 +75,7 @@ export default async function PaymentsPage({ params }: Props) {
         slug: center.slug,
         name: center.name,
         stripeAccountId: center.stripeAccountId,
-        currency: center.currency,
+        currency,
       }}
       stats={{
         totalRevenue,

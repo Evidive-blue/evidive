@@ -202,7 +202,7 @@ export function CentersSection() {
                     className="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25 transition-all hover:shadow-cyan-500/40"
                     asChild
                   >
-                    <Link href="/contact">
+                    <Link href="/onboard/center">
                       {/* Shine effect */}
                       <motion.span
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"

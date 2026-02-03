@@ -1162,39 +1162,39 @@ function WhytCardFishSVG({ direction, variant = "classic" }: { direction: number
       className="h-full w-full"
       style={{ transform: direction === -1 ? "scaleX(-1)" : "none" }}
     >
-      {/* Fish body shape behind text */}
-      <ellipse cx="55" cy="20" rx="45" ry="14" fill={colors.body} fillOpacity="0.15" />
+      {/* Fish body shape behind text - PLUS VISIBLE */}
+      <ellipse cx="55" cy="20" rx="45" ry="14" fill={colors.body} fillOpacity="0.5" />
       
       {/* Tail fin */}
-      <polygon points="100,20 118,8 118,32" fill={colors.body} fillOpacity="0.2" />
+      <polygon points="100,20 118,8 118,32" fill={colors.body} fillOpacity="0.6" />
       
       {/* Dorsal fin */}
-      <path d="M40,6 Q55,0 70,6" fill={colors.body} fillOpacity="0.15" />
+      <path d="M40,6 Q55,0 70,6" fill={colors.body} fillOpacity="0.5" />
       
       {/* Pectoral fin */}
-      <ellipse cx="45" cy="28" rx="8" ry="4" fill={colors.body} fillOpacity="0.12" />
+      <ellipse cx="45" cy="28" rx="8" ry="4" fill={colors.body} fillOpacity="0.4" />
       
-      {/* WhytCard text as the fish pattern */}
+      {/* WhytCard text as the fish pattern - BIEN VISIBLE */}
       <text 
         x="55" 
         y="24" 
         textAnchor="middle" 
         fill={colors.text} 
-        fillOpacity="0.4"
+        fillOpacity="0.9"
         fontFamily="system-ui, sans-serif"
         fontSize="14"
-        fontWeight="600"
+        fontWeight="700"
         letterSpacing="1"
       >
         WhytCard
       </text>
       
-      {/* Eye */}
-      <circle cx="18" cy="18" r="4" fill={colors.eye} fillOpacity="0.3" />
-      <circle cx="17" cy="17" r="1.5" fill={colors.glow} fillOpacity="0.5" />
+      {/* Eye - plus gros et visible */}
+      <circle cx="18" cy="18" r="5" fill={colors.eye} fillOpacity="0.7" />
+      <circle cx="17" cy="17" r="2" fill={colors.glow} fillOpacity="0.9" />
       
-      {/* Subtle glow effect */}
-      <ellipse cx="55" cy="20" rx="40" ry="10" fill="none" stroke={colors.glow} strokeWidth="0.5" strokeOpacity="0.2" />
+      {/* Glow effect around body */}
+      <ellipse cx="55" cy="20" rx="46" ry="15" fill="none" stroke={colors.glow} strokeWidth="2" strokeOpacity="0.4" />
       
       {/* Rainbow variant has special gradient stripe */}
       {variant === "rainbow" && (
@@ -1250,14 +1250,14 @@ type WhytCardFishData = {
 };
 
 const WHYTCARD_FISH: WhytCardFishData[] = [
-  { id: 0, variant: "classic", y: 25, size: 70, speed: 50, delay: 0, direction: -1 },
-  { id: 1, variant: "golden", y: 15, size: 55, speed: 65, delay: 20, direction: 1 },
-  { id: 2, variant: "neon", y: 55, size: 60, speed: 55, delay: 35, direction: -1 },
-  { id: 3, variant: "ghost", y: 70, size: 50, speed: 70, delay: 10, direction: 1 },
-  { id: 4, variant: "rainbow", y: 10, size: 65, speed: 45, delay: 25, direction: -1 },
-  { id: 5, variant: "deep", y: 80, size: 55, speed: 60, delay: 40, direction: 1 },
-  { id: 6, variant: "classic", y: 40, size: 45, speed: 75, delay: 55, direction: 1 },
-  { id: 7, variant: "golden", y: 60, size: 50, speed: 58, delay: 15, direction: -1 },
+  { id: 0, variant: "classic", y: 30, size: 120, speed: 25, delay: 0, direction: -1 },    // Visible immédiatement!
+  { id: 1, variant: "golden", y: 18, size: 100, speed: 30, delay: 8, direction: 1 },
+  { id: 2, variant: "neon", y: 50, size: 110, speed: 22, delay: 3, direction: -1 },
+  { id: 3, variant: "ghost", y: 65, size: 90, speed: 28, delay: 12, direction: 1 },
+  { id: 4, variant: "rainbow", y: 12, size: 130, speed: 20, delay: 5, direction: -1 },    // Le plus gros!
+  { id: 5, variant: "deep", y: 75, size: 95, speed: 26, delay: 15, direction: 1 },
+  { id: 6, variant: "classic", y: 42, size: 85, speed: 32, delay: 10, direction: 1 },
+  { id: 7, variant: "golden", y: 55, size: 105, speed: 24, delay: 2, direction: -1 },
 ];
 
 // ===========================================
@@ -2120,11 +2120,6 @@ export function OceanCanvas() {
         {/* WhytCard Fish School - Easter eggs! Clickable links to whytcard.ai */}
         {WHYTCARD_FISH.map((fish) => {
           const colors = WHYTCARD_FISH_COLORS[fish.variant];
-          // Adjust visibility based on depth - deep variants more visible at depth
-          const isDeepVariant = fish.variant === "deep" || fish.variant === "ghost" || fish.variant === "neon";
-          const baseOpacity = isDeepVariant 
-            ? 0.4 + effectiveScrollProgress * 0.3 
-            : 0.5 - effectiveScrollProgress * 0.2;
           
           return (
             <motion.a
@@ -2137,23 +2132,23 @@ export function OceanCanvas() {
                 top: `${fish.y}%`,
                 width: fish.size,
                 height: fish.size * 0.35,
-                opacity: Math.max(0.25, Math.min(0.7, baseOpacity)),
+                opacity: 0.85, // Beaucoup plus visible!
                 zIndex: 10,
               }}
               animate={{
                 x: fish.direction === 1 
                   ? ["-15vw", "115vw"] 
                   : ["115vw", "-15vw"],
-                y: [0, -15 - fish.id * 2, 0, 12 + fish.id * 2, 0],
+                y: [0, -20 - fish.id * 3, 0, 18 + fish.id * 3, 0],
               }}
               transition={{
                 x: { duration: fish.speed, repeat: Infinity, ease: "linear", delay: fish.delay },
-                y: { duration: 6 + fish.id, repeat: Infinity, ease: "easeInOut" },
+                y: { duration: 5 + fish.id * 0.5, repeat: Infinity, ease: "easeInOut" },
               }}
               whileHover={{ 
-                scale: 1.4, 
+                scale: 1.5, 
                 opacity: 1,
-                filter: `drop-shadow(0 0 15px ${colors.glow})`,
+                filter: `drop-shadow(0 0 20px ${colors.glow}) drop-shadow(0 0 40px ${colors.glow})`,
               }}
               title="Made with ❤️ by WhytCard"
             >

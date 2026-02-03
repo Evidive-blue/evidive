@@ -490,11 +490,11 @@ export function BookingFormClient({ service }: BookingFormClientProps) {
                                           </span>
                                         )}
                                       </p>
-                                      {extra.description && (
+                                      {extra.description ? (
                                         <p className="text-sm text-white/60">
                                           {getLocalized(extra.description)}
                                         </p>
-                                      )}
+                                      ) : null}
                                       <p className="mt-1 text-sm text-cyan-400">
                                         {formatPrice(extra.price)}
                                         {extra.multiplyByPax && ' / person'}
