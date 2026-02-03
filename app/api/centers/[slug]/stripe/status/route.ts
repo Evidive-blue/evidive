@@ -59,12 +59,6 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
       status = 'RESTRICTED';
     }
 
-    // Update status in database
-    await prisma.center.update({
-      where: { id: center.id },
-      data: { stripeAccountStatus: status },
-    });
-
     return NextResponse.json({
       status,
       chargesEnabled: account.charges_enabled,

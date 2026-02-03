@@ -30,7 +30,6 @@ export default async function PaymentsPage({ params }: Props) {
       ownerId: true,
       name: true,
       stripeAccountId: true,
-      stripeAccountStatus: true,
       currency: true,
       bookings: {
         where: {
@@ -73,7 +72,6 @@ export default async function PaymentsPage({ params }: Props) {
         slug: center.slug,
         name: center.name,
         stripeAccountId: center.stripeAccountId,
-        stripeAccountStatus: center.stripeAccountStatus,
         currency: center.currency,
       }}
       stats={{

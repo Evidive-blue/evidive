@@ -83,7 +83,6 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
         where: { id: center.id },
         data: {
           stripeAccountId: accountId,
-          stripeAccountStatus: 'PENDING',
         },
       });
     }

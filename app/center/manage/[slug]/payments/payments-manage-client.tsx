@@ -28,7 +28,6 @@ interface Center {
   slug: string;
   name: unknown;
   stripeAccountId: string | null;
-  stripeAccountStatus: string | null;
   currency: string;
 }
 
@@ -74,6 +73,9 @@ export function PaymentsManageClient({ center, stats }: PaymentsManageClientProp
   const { locale } = useLocale();
   const [isConnecting, setIsConnecting] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [stripeStatus, setStripeStatus] = useState<keyof typeof STATUS_CONFIG>(
+    center.stripeAccountId ? 'PENDING' : 'NOT_CONNECTED'
+  );
 
   const getLocalized = (value: unknown): string => {
     if (!value) return '';
@@ -92,9 +94,7 @@ export function PaymentsManageClient({ center, stats }: PaymentsManageClientProp
     }).format(price);
   };
 
-  const status = center.stripeAccountId
-    ? (center.stripeAccountStatus as keyof typeof STATUS_CONFIG) || 'PENDING'
-    : 'NOT_CONNECTED';
+  const status = stripeStatus;
 
   const statusConfig = STATUS_CONFIG[status] || STATUS_CONFIG.NOT_CONNECTED;
   const StatusIcon = statusConfig.icon;
@@ -151,8 +151,9 @@ export function PaymentsManageClient({ center, stats }: PaymentsManageClientProp
         throw new Error('Failed to refresh status');
       }
 
+      const data = await response.json();
+      setStripeStatus(data.status as keyof typeof STATUS_CONFIG);
       toast.success('Statut mis à jour');
-      window.location.reload();
     } catch (error) {
       toast.error('Erreur lors de la mise à jour');
     } finally {
