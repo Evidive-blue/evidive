@@ -4,6 +4,7 @@ import {
   passwordSchema,
   firstNameSchema,
   lastNameSchema,
+  isValidPhone,
 } from "./auth";
 
 // Multilingual text schema
@@ -21,7 +22,7 @@ export const step1PersonalInfoSchema = z
     password: passwordSchema,
     confirmPassword: z.string().min(1, "La confirmation est requise"),
     phone: z.string().min(1, "Le téléphone est requis").refine(
-      (val) => /^\+?[1-9]\d{6,14}$/.test(val.replace(/\s/g, "")),
+      isValidPhone,
       "Numéro de téléphone invalide"
     ),
   })

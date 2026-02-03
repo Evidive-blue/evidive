@@ -1,23 +1,28 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import { useEffect, useState, useCallback, useRef, useMemo, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 
-// NOTE: Avoid useSyncExternalStore here because differing server/client
-// snapshots can change hook counts during hydration. Use a simple
-// isMounted flag initialized in useEffect.
+// Hydration-safe mounting check using useSyncExternalStore
+const emptySubscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
-// DEPTH ZONES:
-// - Surface (0-15%): Tropical fish schools, bubbles, intense sun rays
-// - Middle (15-50%): Sea turtles, manta rays, bioluminescent jellyfish
-// - Deep (50-100%): Shark silhouettes, abyssal fish, marine snow, anemones
-
-// CAMERA MOVEMENT:
-// - Pages ordered left to right according to navbar
-// - Navigate right → camera moves right
-// - Navigate left → camera moves left
-// - Page change → automatic rise to surface
+/**
+ * Ocean Background - Enhanced Marine Life Edition
+ * 
+ * DEPTH ZONES:
+ * - Surface (0-15%): Tropical fish schools, bubbles, intense sun rays
+ * - Middle (15-50%): Sea turtles, manta rays, bioluminescent jellyfish
+ * - Deep (50-100%): Shark silhouettes, abyssal fish, marine snow, anemones
+ * 
+ * CAMERA MOVEMENT:
+ * - Pages ordered left to right according to navbar
+ * - Navigate right → camera moves right
+ * - Navigate left → camera moves left
+ * - Page change → automatic rise to surface
+ */
 
 // Page order in navbar (left to right)
 const PAGE_ORDER = [
@@ -547,8 +552,8 @@ export function OceanCanvas() {
   const prefersReducedMotion = useReducedMotion();
   const pathname = usePathname();
   const [scrollProgress, setScrollProgress] = useState(0);
-  // Hydration-safe mount check
-  const [isMounted, setIsMounted] = useState(false);
+  // Prevent hydration mismatch - only render on client
+  const isMounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
   const previousPageIndex = useRef<number>(0);
 
   const handleScroll = useCallback(() => {
@@ -649,10 +654,6 @@ export function OceanCanvas() {
   const deepVisibility = effectiveScrollProgress > 0.4 
     ? Math.min(1, (effectiveScrollProgress - 0.4) * 2) 
     : 0;
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-50 overflow-hidden" aria-hidden="true">

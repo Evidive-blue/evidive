@@ -43,7 +43,7 @@ export async function generateMetadata({
       siteName: "EviDive",
       title: t("home.title"),
       description: t("home.description"),
-      locale: locale === "fr" ? "fr_FR" : locale === "de" ? "de_DE" : locale === "es" ? "es_ES" : locale === "it" ? "it_IT" : locale === "pt" ? "pt_PT" : "en_GB",
+      locale: locale === "fr" ? "fr_FR" : locale === "de" ? "de_DE" : locale === "es" ? "es_ES" : locale === "it" ? "it_IT" : locale === "pt" ? "pt_PT" : locale === "nl" ? "nl_NL" : locale === "pl" ? "pl_PL" : locale === "sv" ? "sv_SE" : locale === "el" ? "el_GR" : locale === "ru" ? "ru_RU" : "en_GB",
       images: [
         {
           url: `${baseUrl}/og-image.png`,

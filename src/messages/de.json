@@ -821,42 +821,7 @@
       "pendingRequests": "Derzeit keine ausstehenden Anfragen.",
       "viewCenters": "Zentren anzeigen",
       "statusVerified": "Verifiziert",
-      "pendingDesc": "Ihr Zentrum wartet auf Validierung durch einen Administrator.",
-      "create": {
-        "title": "Neues Zentrum erstellen",
-        "subtitle": "Fügen Sie ein neues Tauchzentrum zu Ihrem Konto hinzu",
-        "sections": {
-          "info": "Zentrum-Informationen",
-          "location": "Standort"
-        },
-        "fields": {
-          "centerName": "Zentrumsname",
-          "description": "Beschreibung",
-          "phone": "Telefon des Zentrums",
-          "website": "Webseite",
-          "facebook": "Facebook",
-          "instagram": "Instagram",
-          "address": "Adresse",
-          "city": "Stadt",
-          "postalCode": "Postleitzahl",
-          "country": "Land",
-          "latitude": "Breitengrad",
-          "longitude": "Längengrad"
-        },
-        "errors": {
-          "centerNameRequired": "Zentrumsname ist erforderlich (mind. 2 Zeichen)",
-          "descriptionTooShort": "Beschreibung muss mindestens 20 Zeichen enthalten",
-          "addressRequired": "Vollständige Adresse ist erforderlich",
-          "locationRequired": "Bitte lokalisieren Sie die Adresse",
-          "geocodeFailed": "Diese Adresse konnte nicht gefunden werden",
-          "genericError": "Ein Fehler ist aufgetreten"
-        },
-        "geocodeSuccess": "Adresse erfolgreich lokalisiert",
-        "cancel": "Abbrechen",
-        "create": "Zentrum erstellen",
-        "creating": "Erstellen...",
-        "success": "Zentrum erfolgreich erstellt! Wartet auf Validierung."
-      }
+      "pendingDesc": "Ihr Zentrum wartet auf Validierung durch einen Administrator."
     },
     "admin": {
       "users": {

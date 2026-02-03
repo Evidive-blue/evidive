@@ -848,42 +848,7 @@
       "viewCenters": "Ver centros",
       "viewPublicCenter": "Ver página pública",
       "statusVerified": "Verificado",
-      "pendingDesc": "Tu centro está pendiente de validación por un administrador.",
-      "create": {
-        "title": "Crear un nuevo centro",
-        "subtitle": "Añade un nuevo centro de buceo a tu cuenta",
-        "sections": {
-          "info": "Información del centro",
-          "location": "Ubicación"
-        },
-        "fields": {
-          "centerName": "Nombre del centro",
-          "description": "Descripción",
-          "phone": "Teléfono del centro",
-          "website": "Sitio web",
-          "facebook": "Facebook",
-          "instagram": "Instagram",
-          "address": "Dirección",
-          "city": "Ciudad",
-          "postalCode": "Código postal",
-          "country": "País",
-          "latitude": "Latitud",
-          "longitude": "Longitud"
-        },
-        "errors": {
-          "centerNameRequired": "El nombre del centro es obligatorio (mín 2 caracteres)",
-          "descriptionTooShort": "La descripción debe tener al menos 20 caracteres",
-          "addressRequired": "Se requiere dirección completa",
-          "locationRequired": "Por favor geolocaliza la dirección",
-          "geocodeFailed": "No se pudo encontrar esta dirección",
-          "genericError": "Ocurrió un error"
-        },
-        "geocodeSuccess": "Dirección geolocalizada correctamente",
-        "cancel": "Cancelar",
-        "create": "Crear centro",
-        "creating": "Creando...",
-        "success": "¡Centro creado con éxito! Pendiente de validación."
-      }
+      "pendingDesc": "Tu centro está pendiente de validación por un administrador."
     },
     "admin": {
       "users": {

@@ -1,17 +1,12 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 // Hydration-safe mounting check using useSyncExternalStore
-// const emptySubscribe = () => () => {};
-// const getClientSnapshot = () => true;
-// const getServerSnapshot = () => false;
-
-// NOTE: useSyncExternalStore with differing server/client snapshots can
-// cause "Rendered more hooks than during the previous render" during
-// hydration because the client may call additional hooks that the server
-// didn't. Use a simple isMounted flag set in useEffect instead.
+const emptySubscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 interface Particle {
   id: number;
@@ -62,11 +57,7 @@ export function FloatingParticles({
   variant = "mixed",
 }: FloatingParticlesProps) {
   const prefersReducedMotion = useReducedMotion();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
 
   const particles = useMemo(
     () => generateParticles(count, variant),

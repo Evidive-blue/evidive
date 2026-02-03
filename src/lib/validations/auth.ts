@@ -13,11 +13,16 @@ export const passwordSchema = z
   .regex(/[a-z]/, "Password must contain at least one lowercase letter")
   .regex(/[0-9]/, "Password must contain at least one number");
 
+// Phone validation regex - accepts national (0xx) and international (+xx) formats
+export const PHONE_REGEX = /^\+?[0-9]{7,15}$/;
+export const normalizePhone = (val: string) => val.replace(/[\s\-().]/g, "");
+export const isValidPhone = (val: string) => PHONE_REGEX.test(normalizePhone(val));
+
 export const phoneSchema = z
   .string()
   .optional()
   .refine(
-    (val) => !val || /^\+?[1-9]\d{6,14}$/.test(val.replace(/\s/g, "")),
+    (val) => !val || isValidPhone(val),
     "Invalid phone number"
   );
 

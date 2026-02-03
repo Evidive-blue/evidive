@@ -23,13 +23,19 @@ export default defineConfig({
   ],
   outputDir: "test-results",
 
+  /* Increase global timeout for slow dev server */
+  timeout: 60000,
+  expect: {
+    timeout: 10000,
+  },
+
   use: {
     baseURL: process.env.TEST_BASE_URL || "http://localhost:3000",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
-    actionTimeout: 15000,
-    navigationTimeout: 30000,
+    actionTimeout: 20000,
+    navigationTimeout: 60000,
   },
 
   projects: [
@@ -61,11 +67,13 @@ export default defineConfig({
     },
   ],
 
-  // Run local dev server before tests
-  webServer: {
-    command: "pnpm dev",
-    url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
-    timeout: 120000,
-  },
+  // Run local dev server before tests (skip if SKIP_WEB_SERVER is set)
+  webServer: process.env.SKIP_WEB_SERVER
+    ? undefined
+    : {
+        command: "pnpm dev",
+        url: "http://localhost:3000",
+        reuseExistingServer: !process.env.CI,
+        timeout: 120000,
+      },
 });

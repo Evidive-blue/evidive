@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isValidPhone } from "./auth";
 
 // Multilingual text schema (flexible, accepts any language keys)
 export const multilingualSchema = z.record(z.string(), z.string().optional().default(""));
@@ -10,7 +11,7 @@ const urlSchema = z.string().url("URL invalide").optional().or(z.literal(""));
 
 // Phone validation
 const phoneSchema = z.string().refine(
-  (val) => !val || /^\+?[1-9]\d{6,14}$/.test(val.replace(/\s/g, "")),
+  (val) => !val || isValidPhone(val),
   "Numéro de téléphone invalide"
 ).optional().or(z.literal(""));
 
@@ -71,6 +72,11 @@ export const languageOptions = [
   { code: "es", label: "Español" },
   { code: "it", label: "Italiano" },
   { code: "pt", label: "Português" },
+  { code: "nl", label: "Nederlands" },
+  { code: "ru", label: "Русский" },
+  { code: "zh", label: "中文" },
+  { code: "ja", label: "日本語" },
+  { code: "ar", label: "العربية" },
 ] as const;
 
 // ============================================

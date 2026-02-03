@@ -848,42 +848,7 @@
       "viewCenters": "Vedi centri",
       "viewPublicCenter": "Vedi pagina pubblica",
       "statusVerified": "Verificato",
-      "pendingDesc": "Il tuo centro è in attesa di validazione da parte di un amministratore.",
-      "create": {
-        "title": "Crea un nuovo centro",
-        "subtitle": "Aggiungi un nuovo centro immersioni al tuo account",
-        "sections": {
-          "info": "Informazioni del centro",
-          "location": "Posizione"
-        },
-        "fields": {
-          "centerName": "Nome del centro",
-          "description": "Descrizione",
-          "phone": "Telefono del centro",
-          "website": "Sito web",
-          "facebook": "Facebook",
-          "instagram": "Instagram",
-          "address": "Indirizzo",
-          "city": "Città",
-          "postalCode": "Codice postale",
-          "country": "Paese",
-          "latitude": "Latitudine",
-          "longitude": "Longitudine"
-        },
-        "errors": {
-          "centerNameRequired": "Il nome del centro è obbligatorio (min 2 caratteri)",
-          "descriptionTooShort": "La descrizione deve contenere almeno 20 caratteri",
-          "addressRequired": "Indirizzo completo richiesto",
-          "locationRequired": "Si prega di geolocalizzare l'indirizzo",
-          "geocodeFailed": "Impossibile trovare questo indirizzo",
-          "genericError": "Si è verificato un errore"
-        },
-        "geocodeSuccess": "Indirizzo geolocalizzato con successo",
-        "cancel": "Annulla",
-        "create": "Crea centro",
-        "creating": "Creazione in corso...",
-        "success": "Centro creato con successo! In attesa di validazione."
-      }
+      "pendingDesc": "Il tuo centro è in attesa di validazione da parte di un amministratore."
     },
     "admin": {
       "users": {
