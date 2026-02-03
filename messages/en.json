@@ -2087,6 +2087,20 @@
       "unauthorized": "Unauthorized",
       "not_found": "Service not found",
       "server_error": "Server error"
+    },
+    "new": {
+      "backToCenter": "Back to center",
+      "title": "Create new service",
+      "subtitle": "Add a new dive service that customers can book.",
+      "pricePerPersonRequired": "Price (per person)",
+      "toggleHint": "Click to toggle. You can add custom times by editing after creation.",
+      "createCta": "Create service",
+      "examples": {
+        "nameEnPlaceholder": "e.g., Discovery Dive",
+        "nameFrPlaceholder": "e.g., Plongée Découverte",
+        "descriptionEnPlaceholder": "Describe your service...",
+        "descriptionFrPlaceholder": "Décrivez votre service..."
+      }
     }
   },
   "centerReviews": {
@@ -2662,7 +2676,145 @@
     "verifyEmail": {
       "title": "Email Verification | EviDive",
       "description": "Verify your email address to activate your EviDive account."
+    },
+    "bookingSuccess": {
+      "title": "Booking confirmed | EviDive",
+      "description": "Your dive booking has been confirmed."
+    },
+    "bookingCancel": {
+      "title": "Booking cancelled | EviDive",
+      "description": "Your booking process was cancelled."
     }
+  },
+  "booking": {
+    "success": {
+      "title": "Booking confirmed!",
+      "subtitle": "Your dive experience is booked. Check your email for confirmation.",
+      "referenceLabel": "Booking reference",
+      "referenceHelp": "Save this reference for your records",
+      "detailsTitle": "Booking details",
+      "serviceDuration": "{minutes} min duration",
+      "dateLabel": "Date",
+      "timeLabel": "Time",
+      "participantsLabel": "Participants",
+      "participants": {
+        "one": "{count} person",
+        "other": "{count} people"
+      },
+      "totalPaid": "Total paid",
+      "paymentSuccessful": "Payment successful",
+      "actions": {
+        "share": "Share",
+        "viewCenter": "View center",
+        "home": "Home"
+      },
+      "nextSteps": {
+        "title": "What's next?",
+        "step1": "Check your email for the confirmation and e-ticket",
+        "step2": "Arrive at the center 15 minutes before your dive time",
+        "step3": "Bring your certification card and photo ID",
+        "step4": "Enjoy your dive adventure!"
+      },
+      "share": {
+        "title": "Dive booking - {serviceName}",
+        "text": "I just booked a dive at {centerName}! Reference: {reference}",
+        "copied": "Booking details copied to clipboard!"
+      }
+    },
+    "successPage": {
+      "invalidTitle": "Invalid booking",
+      "invalidDescription": "No booking reference provided.",
+      "notFoundTitle": "Booking not found",
+      "notFoundDescription": "The booking reference is invalid or has been removed."
+    },
+    "cancelPage": {
+      "title": "Payment cancelled",
+      "subtitle": "Your payment was cancelled. No charges have been made.",
+      "referenceLabel": "Booking reference",
+      "pendingPaymentHint": "This booking is pending payment. You can complete the payment later.",
+      "actions": {
+        "tryAgain": "Try payment again",
+        "backToCenters": "Back to centers",
+        "needHelp": "Need help?"
+      }
+    },
+    "form": {
+      "backToCenter": "Back to {centerName}",
+      "title": "Book: {serviceName}",
+      "date": {
+        "label": "Date",
+        "placeholder": "Select date"
+      },
+      "time": {
+        "label": "Time",
+        "placeholder": "Select time"
+      },
+      "participantsLabel": "Participants ({min}-{max})",
+      "contact": {
+        "title": "Contact information",
+        "firstName": "First name",
+        "firstNamePlaceholder": "John",
+        "lastName": "Last name",
+        "lastNamePlaceholder": "Doe",
+        "email": "Email",
+        "emailPlaceholder": "john@example.com",
+        "phoneOptional": "Phone (optional)",
+        "phonePlaceholder": "+33 6 12 34 56 78",
+        "specialRequestsOptional": "Special requests (optional)",
+        "specialRequestsPlaceholder": "Any dietary requirements, equipment needs, or other requests..."
+      },
+      "extras": {
+        "title": "Extras & add-ons",
+        "requiredBadge": "Required",
+        "perPersonSuffix": " / person"
+      },
+      "coupon": {
+        "labelOptional": "Coupon code (optional)",
+        "placeholder": "SUMMER2026"
+      },
+      "terms": {
+        "acceptPrefix": "I accept the",
+        "termsLink": "Terms & Conditions",
+        "acceptMiddle": "and the center's",
+        "cancellationPolicySuffix": "cancellation policy",
+        "noticeRequired": "({hours}h notice required).",
+        "mustAccept": "You must accept the terms"
+      },
+      "submit": {
+        "processing": "Processing...",
+        "pay": "Pay {amount}"
+      },
+      "summary": {
+        "title": "Order summary",
+        "participantOne": "{count} participant ×",
+        "participantOther": "{count} participants ×",
+        "perPerson": "/person",
+        "totalLabel": "Total"
+      },
+      "paymentInfo": {
+        "title": "Secure payment",
+        "description": "Powered by Stripe. Your card details are never stored on our servers."
+      },
+      "features": {
+        "instantConfirmation": "Instant confirmation",
+        "freeCancellation": "Free cancellation ({hours}h notice)",
+        "duration": "{minutes} min duration",
+        "equipmentIncluded": "Equipment included"
+      },
+      "cancellationPolicy": {
+        "flexible": "Flexible",
+        "moderate": "Moderate",
+        "strict": "Strict"
+      },
+      "errors": {
+        "createBookingFailed": "Failed to create booking",
+        "createCheckoutFailed": "Failed to create checkout session",
+        "generic": "An error occurred"
+      }
+    }
+  },
+  "oceanCanvas": {
+    "whytcardFishTitle": "Made with ❤️ by WhytCard"
   },
   "common": {
     "loading": "Loading...",

@@ -5,3 +5,5 @@ export * from './card';
 export * from './badge';
 export * from './separator';
 export * from './dropdown-menu';
+export * from './label';
+export * from './checkbox';

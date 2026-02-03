@@ -98,7 +98,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     data: {
       bookingId: booking.id,
       centerId: booking.centerId,
-      totalAmount: booking.totalPrice,
+      bookingAmount: booking.totalPrice,
       commissionRate: booking.center.commissionRate,
       commissionAmount,
       centerAmount,

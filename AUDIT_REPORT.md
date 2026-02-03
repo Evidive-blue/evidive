@@ -128,7 +128,7 @@ export const metadata = {
 | Test | Status | Détails |
 |------|--------|---------|
 | Homepage | ✅ | 2.4s de chargement |
-| Centres | ✅ | 45 centres affichés |
+| Centres | ✅ | 3 centres affichés |
 | Contact | ✅ | Formulaire présent |
 | Carrières | ✅ | Page fonctionnelle |
 | CGV | ✅ | Page fonctionnelle |

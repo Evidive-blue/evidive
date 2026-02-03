@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import Stripe from 'stripe';
 import { stripe, isStripeConfigured } from '@/lib/stripe';
 import { prisma } from '@/lib/db/prisma';
 

@@ -140,7 +140,7 @@ export async function POST(request: NextRequest) {
         });
 
         if (!coupon.maxUses || usageCount < coupon.maxUses) {
-          if (coupon.discountType === 'PERCENTAGE') {
+          if (coupon.discountType === 'PERCENT') {
             discountAmount = ((basePrice + extrasPrice) * Number(coupon.discountValue)) / 100;
             if (coupon.maxDiscount) {
               discountAmount = Math.min(discountAmount, Number(coupon.maxDiscount));
@@ -200,12 +200,13 @@ export async function POST(request: NextRequest) {
     });
 
     // Record coupon usage if applied
-    if (couponId) {
+    if (couponId && discountAmount > 0) {
       await prisma.couponUse.create({
         data: {
-          couponId,
-          bookingId: booking.id,
+          coupon: { connect: { id: couponId } },
+          booking: { connect: { id: booking.id } },
           diverId: session?.user?.id || null,
+          discountApplied: discountAmount,
         },
       });
     }

@@ -2079,14 +2079,28 @@
     },
     "errors": {
       "unauthorized": "Non autorisé",
-      "name_required": "Name is required",
-      "price_required": "Price is required",
-      "price_positive": "Price must be greater than 0",
-      "duration_required": "Duration is required",
-      "duration_positive": "Duration must be greater than 0",
-      "participants_invalid": "Minimum must be less than or equal to maximum",
-      "not_found": "Service not found",
-      "server_error": "Server error"
+      "name_required": "Le nom est requis",
+      "price_required": "Le prix est requis",
+      "price_positive": "Le prix doit être supérieur à 0",
+      "duration_required": "La durée est requise",
+      "duration_positive": "La durée doit être supérieure à 0",
+      "participants_invalid": "Le minimum doit être inférieur ou égal au maximum",
+      "not_found": "Service introuvable",
+      "server_error": "Erreur serveur"
+    },
+    "new": {
+      "backToCenter": "Retour au centre",
+      "title": "Créer un nouveau service",
+      "subtitle": "Ajoutez un nouveau service de plongée que les clients peuvent réserver.",
+      "pricePerPersonRequired": "Prix (par personne)",
+      "toggleHint": "Cliquez pour activer/désactiver. Vous pourrez ajouter des horaires personnalisés après la création.",
+      "createCta": "Créer le service",
+      "examples": {
+        "nameEnPlaceholder": "Ex : Discovery Dive",
+        "nameFrPlaceholder": "Ex : Plongée Découverte",
+        "descriptionEnPlaceholder": "Describe your service...",
+        "descriptionFrPlaceholder": "Décrivez votre service..."
+      }
     }
   },
   "centerReviews": {
@@ -2662,7 +2676,145 @@
     "verifyEmail": {
       "title": "Vérification email | EviDive",
       "description": "Vérifiez votre adresse email pour activer votre compte EviDive."
+    },
+    "bookingSuccess": {
+      "title": "Réservation confirmée | EviDive",
+      "description": "Votre réservation de plongée a été confirmée."
+    },
+    "bookingCancel": {
+      "title": "Réservation annulée | EviDive",
+      "description": "Votre processus de réservation a été annulé."
     }
+  },
+  "booking": {
+    "success": {
+      "title": "Réservation confirmée !",
+      "subtitle": "Votre expérience de plongée est réservée. Vérifiez votre email pour la confirmation.",
+      "referenceLabel": "Référence de réservation",
+      "referenceHelp": "Conservez cette référence pour vos archives",
+      "detailsTitle": "Détails de la réservation",
+      "serviceDuration": "Durée : {minutes} min",
+      "dateLabel": "Date",
+      "timeLabel": "Heure",
+      "participantsLabel": "Participants",
+      "participants": {
+        "one": "{count} personne",
+        "other": "{count} personnes"
+      },
+      "totalPaid": "Total payé",
+      "paymentSuccessful": "Paiement réussi",
+      "actions": {
+        "share": "Partager",
+        "viewCenter": "Voir le centre",
+        "home": "Accueil"
+      },
+      "nextSteps": {
+        "title": "Et ensuite ?",
+        "step1": "Consultez votre email pour la confirmation et le e-ticket",
+        "step2": "Arrivez au centre 15 minutes avant l’heure de plongée",
+        "step3": "Apportez votre carte de certification et une pièce d’identité",
+        "step4": "Profitez de votre aventure !"
+      },
+      "share": {
+        "title": "Réservation plongée - {serviceName}",
+        "text": "Je viens de réserver une plongée chez {centerName} ! Référence : {reference}",
+        "copied": "Détails de réservation copiés dans le presse-papiers !"
+      }
+    },
+    "successPage": {
+      "invalidTitle": "Réservation invalide",
+      "invalidDescription": "Aucune référence de réservation n’a été fournie.",
+      "notFoundTitle": "Réservation introuvable",
+      "notFoundDescription": "La référence de réservation est invalide ou a été supprimée."
+    },
+    "cancelPage": {
+      "title": "Paiement annulé",
+      "subtitle": "Votre paiement a été annulé. Aucun prélèvement n’a été effectué.",
+      "referenceLabel": "Référence de réservation",
+      "pendingPaymentHint": "Cette réservation est en attente de paiement. Vous pouvez finaliser le paiement plus tard.",
+      "actions": {
+        "tryAgain": "Réessayer le paiement",
+        "backToCenters": "Retour aux centres",
+        "needHelp": "Besoin d’aide ?"
+      }
+    },
+    "form": {
+      "backToCenter": "Retour à {centerName}",
+      "title": "Réserver : {serviceName}",
+      "date": {
+        "label": "Date",
+        "placeholder": "Sélectionner une date"
+      },
+      "time": {
+        "label": "Heure",
+        "placeholder": "Sélectionner une heure"
+      },
+      "participantsLabel": "Participants ({min}-{max})",
+      "contact": {
+        "title": "Informations de contact",
+        "firstName": "Prénom",
+        "firstNamePlaceholder": "John",
+        "lastName": "Nom",
+        "lastNamePlaceholder": "Doe",
+        "email": "Email",
+        "emailPlaceholder": "john@example.com",
+        "phoneOptional": "Téléphone (optionnel)",
+        "phonePlaceholder": "+33 6 12 34 56 78",
+        "specialRequestsOptional": "Demandes particulières (optionnel)",
+        "specialRequestsPlaceholder": "Régime alimentaire, besoins en équipement, ou toute autre demande..."
+      },
+      "extras": {
+        "title": "Extras et options",
+        "requiredBadge": "Obligatoire",
+        "perPersonSuffix": " / personne"
+      },
+      "coupon": {
+        "labelOptional": "Code promo (optionnel)",
+        "placeholder": "SUMMER2026"
+      },
+      "terms": {
+        "acceptPrefix": "J’accepte les",
+        "termsLink": "Conditions générales",
+        "acceptMiddle": "et la",
+        "cancellationPolicySuffix": "politique d’annulation du centre",
+        "noticeRequired": "({hours}h de préavis requis).",
+        "mustAccept": "Vous devez accepter les conditions"
+      },
+      "submit": {
+        "processing": "Traitement...",
+        "pay": "Payer {amount}"
+      },
+      "summary": {
+        "title": "Récapitulatif",
+        "participantOne": "{count} participant ×",
+        "participantOther": "{count} participants ×",
+        "perPerson": "/personne",
+        "totalLabel": "Total"
+      },
+      "paymentInfo": {
+        "title": "Paiement sécurisé",
+        "description": "Propulsé par Stripe. Les détails de votre carte ne sont jamais stockés sur nos serveurs."
+      },
+      "features": {
+        "instantConfirmation": "Confirmation instantanée",
+        "freeCancellation": "Annulation gratuite ({hours}h de préavis)",
+        "duration": "Durée : {minutes} min",
+        "equipmentIncluded": "Équipement inclus"
+      },
+      "cancellationPolicy": {
+        "flexible": "Flexible",
+        "moderate": "Modérée",
+        "strict": "Stricte"
+      },
+      "errors": {
+        "createBookingFailed": "Impossible de créer la réservation",
+        "createCheckoutFailed": "Impossible de créer la session de paiement",
+        "generic": "Une erreur est survenue"
+      }
+    }
+  },
+  "oceanCanvas": {
+    "whytcardFishTitle": "Fait avec ❤️ par WhytCard"
   },
   "common": {
     "loading": "Chargement...",

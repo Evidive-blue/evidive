@@ -818,24 +818,47 @@ test.describe("🔍 AUDIT COMPLET DU SITE EVIDIVE", () => {
   // ============================================
   test("🏢 Page Centres (Liste)", async ({ page }) => {
     await setupConsoleListener(page, "Centres");
-    await page.goto(`${BASE_URL}/centers`, { waitUntil: "networkidle" });
+    await page.goto(`${BASE_URL}/centers`, { waitUntil: "domcontentloaded" });
 
-    // Attendre le chargement
-    await page.waitForTimeout(2000);
+    // Attendre le chargement du globe 3D
+    await page.waitForTimeout(3000);
 
-    // Vérifier la présence de centres ou d'un message "pas de centres"
-    const centerCards = await page.locator('[class*="card"], [class*="center"]').count();
-    const noCentersMessage = page.locator('text="aucun", text="no center"').first();
+    // Compter les vraies cartes de centres (h3 dans les cartes)
+    const centerHeadings = await page.locator('h3').all();
+    let centerCount = 0;
+    for (const h of centerHeadings) {
+      const text = await h.textContent().catch(() => "");
+      // Exclure les titres de section (Découvrir, Entreprise, Légal)
+      if (text && !["Découvrir", "Entreprise", "Légal"].includes(text)) {
+        centerCount++;
+      }
+    }
 
-    if (centerCards === 0 && !(await noCentersMessage.isVisible().catch(() => false))) {
+    // Vérifier aussi le compteur affiché "Dive Centers X"
+    const counterText = await page.locator('h2:has-text("Dive Centers")').textContent().catch(() => "");
+    const displayedCount = counterText?.match(/\d+/)?.[0] || "0";
+
+    if (centerCount === 0) {
       logIssue({
         type: "warning",
         category: "Contenu",
         page: "Centres",
-        message: "Aucun centre affiché et pas de message approprié",
+        message: "Aucun centre de plongée affiché",
       });
     } else {
-      console.log(`ℹ️ ${centerCards} carte(s) de centre trouvée(s)`);
+      console.log(`ℹ️ ${centerCount} centre(s) de plongée trouvé(s) (affiché: ${displayedCount})`);
+    }
+
+    // Vérifier le globe 3D
+    const canvas = page.locator("canvas").first();
+    const hasGlobe = await canvas.isVisible().catch(() => false);
+    if (!hasGlobe) {
+      logIssue({
+        type: "warning",
+        category: "Feature",
+        page: "Centres",
+        message: "Globe 3D non visible",
+      });
     }
 
     await page.screenshot({ path: "tests/screenshots/audit/centers-list.png", fullPage: true });
