@@ -1,13 +1,8 @@
 import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
-
-const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
-  // TODO: Fix TypeScript errors and remove this
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   images: {
     remotePatterns: [
@@ -15,8 +10,12 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "**.neon.tech",
+      },
     ],
   },
 };
 
-export default withNextIntl(nextConfig);
+export default nextConfig;

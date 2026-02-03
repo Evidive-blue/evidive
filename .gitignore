@@ -1,95 +1,38 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+.pnp.js
+.yarn/install-state.gz
 
 # testing
 /coverage
-/test-results
-/playwright-report
-/playwright/.cache
-*.test.js.snap
 
 # next.js
 /.next/
 /out/
-.swc/
 
 # production
 /build
-/dist
 
 # misc
 .DS_Store
 *.pem
-Thumbs.db
-*.log
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
-# env files
+# local env files
 .env
-.env.*
-!.env.example
+.env*.local
 
 # vercel
 .vercel
-
-# AI/IDE agent directories
-.agents/
-.claude/
-.continue/
-.cursor/
-.gemini/
-.roo/
-.zencoder/
-.windsurf/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
 # prisma
-/src/generated/prisma
-/prisma/*.db
-/prisma/*.db-journal
-
-# IDE and editor directories
-.idea/
-.vscode/
-*.swp
-*.swo
-.claude/
-.cursor/
-.playwright-mcp/
-.windsurf/
-
-# OS files
-.DS_Store
-Thumbs.db
-Desktop.ini
-
-# Temp files
-*.tmp
-*.temp
-.cache/
-
-# Logs
-logs/
-*.log
-
-# Secrets (never commit)
-*.key
-*.secret
-credentials.json
+prisma/migrations/

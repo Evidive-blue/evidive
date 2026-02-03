@@ -1,0 +1,228 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+    - generic:
+      - generic: "0"
+      - generic: m
+      - img
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e5]:
+        - link "Home" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "EviDive logo" [ref=e8]
+        - navigation [ref=e9]:
+          - link "Home" [ref=e10] [cursor=pointer]:
+            - /url: /
+            - text: Home
+          - link "About" [ref=e11] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - link "Explore" [ref=e12] [cursor=pointer]:
+            - /url: /explorer
+            - text: Explore
+          - link "Centers" [ref=e13] [cursor=pointer]:
+            - /url: /centers
+            - text: Centers
+        - generic [ref=e15]:
+          - button "🇬🇧 English" [ref=e16]:
+            - img
+            - text: 🇬🇧 English
+          - link "Login" [ref=e17] [cursor=pointer]:
+            - /url: /login
+          - link "Sign up" [ref=e18] [cursor=pointer]:
+            - /url: /register
+    - main [ref=e19]:
+      - generic [ref=e25]:
+        - img [ref=e27]
+        - generic [ref=e31]:
+          - heading "Create your account" [level=1] [ref=e32]
+          - paragraph [ref=e33]:
+            - text: Already have an account?
+            - link "Sign in" [ref=e34] [cursor=pointer]:
+              - /url: /login
+        - button "Continue with Google" [ref=e36]:
+          - img
+          - text: Continue with Google
+        - generic [ref=e39]: or sign up with email
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e44]:
+              - img [ref=e45]
+              - textbox "First name" [ref=e48]
+            - textbox "Last name" [ref=e50]
+          - generic [ref=e52]:
+            - img [ref=e53]
+            - textbox "Email" [ref=e56]
+          - generic [ref=e58]:
+            - img [ref=e59]
+            - textbox "Password" [ref=e62]
+          - generic [ref=e64]:
+            - img [ref=e65]
+            - textbox "Confirm password" [ref=e68]
+          - generic [ref=e70] [cursor=pointer]:
+            - checkbox "I accept the Terms of Service and Privacy Policy" [ref=e71]
+            - generic [ref=e72]:
+              - text: I accept the
+              - link "Terms of Service" [ref=e73]:
+                - /url: /terms
+              - text: and
+              - link "Privacy Policy" [ref=e74]:
+                - /url: /privacy
+          - button "Create account" [ref=e75]
+    - contentinfo [ref=e76]:
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - link "EviDive logo" [ref=e80] [cursor=pointer]:
+              - /url: /
+              - img "EviDive logo" [ref=e81]
+            - paragraph [ref=e82]: The reference platform for booking your dives at the best centers in the world.
+          - generic [ref=e83]:
+            - heading "Discover" [level=3] [ref=e84]
+            - list [ref=e85]:
+              - listitem [ref=e86]:
+                - link "Destinations" [ref=e87] [cursor=pointer]:
+                  - /url: /centers
+              - listitem [ref=e88]:
+                - link "Special offers" [ref=e89] [cursor=pointer]:
+                  - /url: /explorer
+          - generic [ref=e90]:
+            - heading "Company" [level=3] [ref=e91]
+            - list [ref=e92]:
+              - listitem [ref=e93]:
+                - link "About" [ref=e94] [cursor=pointer]:
+                  - /url: /about
+              - listitem [ref=e95]:
+                - link "Contact" [ref=e96] [cursor=pointer]:
+                  - /url: /contact
+              - listitem [ref=e97]:
+                - link "Careers" [ref=e98] [cursor=pointer]:
+                  - /url: /careers
+          - generic [ref=e99]:
+            - heading "Legal" [level=3] [ref=e100]
+            - list [ref=e101]:
+              - listitem [ref=e102]:
+                - link "Terms" [ref=e103] [cursor=pointer]:
+                  - /url: /terms
+              - listitem [ref=e104]:
+                - link "Privacy" [ref=e105] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e106]:
+                - link "Sitemap" [ref=e107] [cursor=pointer]:
+                  - /url: /sitemap
+        - generic [ref=e109]:
+          - paragraph [ref=e110]: © 2026 EviDive. All rights reserved.
+          - paragraph [ref=e111]:
+            - text: Designed by
+            - link "WhytCard" [ref=e112] [cursor=pointer]:
+              - /url: https://whytcard.com
+  - alert [ref=e113]
+```

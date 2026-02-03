@@ -1,0 +1,135 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e5]:
+      - link "Home" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "EviDive logo" [ref=e8]
+      - navigation [ref=e9]:
+        - link "Home" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - text: Home
+        - link "About" [ref=e11] [cursor=pointer]:
+          - /url: /about
+          - text: About
+        - link "Explore" [ref=e13] [cursor=pointer]:
+          - /url: /explorer
+          - text: Explore
+        - link "Centers" [ref=e14] [cursor=pointer]:
+          - /url: /centers
+          - text: Centers
+      - generic [ref=e16]:
+        - button "🇬🇧 English" [ref=e17]:
+          - img
+          - text: 🇬🇧 English
+        - link "Login" [ref=e18] [cursor=pointer]:
+          - /url: /login
+        - link "Sign up" [ref=e19] [cursor=pointer]:
+          - /url: /register
+  - main [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e24]:
+        - heading "About EviDive" [level=1] [ref=e25]
+        - paragraph [ref=e26]: Connecting divers to the best underwater experiences
+      - generic [ref=e30]:
+        - heading "Our mission" [level=2] [ref=e31]
+        - paragraph [ref=e32]: EviDive was born from a shared passion for diving and technology. Our mission is to connect divers worldwide to the best underwater experiences while simplifying life for dive centers.
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - heading "Our values" [level=2] [ref=e36]
+          - paragraph [ref=e37]: The principles that guide every decision we make
+        - generic [ref=e38]:
+          - generic [ref=e41]:
+            - img [ref=e43]
+            - heading "Trust" [level=3] [ref=e45]
+            - paragraph [ref=e46]: Verified centers and authentic reviews for peaceful booking.
+          - generic [ref=e49]:
+            - img [ref=e51]
+            - heading "Safety" [level=3] [ref=e53]
+            - paragraph [ref=e54]: Strict standards and clear prerequisites for every dive.
+          - generic [ref=e57]:
+            - img [ref=e59]
+            - heading "Experience" [level=3] [ref=e61]
+            - paragraph [ref=e62]: Immersive design and seamless booking for a premium experience.
+          - generic [ref=e65]:
+            - img [ref=e67]
+            - heading "Community" [level=3] [ref=e72]
+            - paragraph [ref=e73]: A community of enthusiasts sharing their discoveries.
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - heading "Our story" [level=2] [ref=e77]
+          - paragraph [ref=e78]: Our journey to revolutionize scuba diving
+        - generic [ref=e80]:
+          - generic [ref=e82]:
+            - generic [ref=e84]: "23"
+            - generic [ref=e85]:
+              - text: "2023"
+              - paragraph [ref=e86]: The idea was born from the frustration of booking dives abroad
+          - generic [ref=e87]:
+            - generic [ref=e89]: "24"
+            - generic [ref=e90]:
+              - text: "2024"
+              - paragraph [ref=e91]: Launch of the first version of the platform
+          - generic [ref=e92]:
+            - generic [ref=e94]: "25"
+            - generic [ref=e95]:
+              - text: "2025"
+              - paragraph [ref=e96]: International expansion with 100+ partner centers
+          - generic [ref=e97]:
+            - generic [ref=e99]: "26"
+            - generic [ref=e100]:
+              - text: "2026"
+              - paragraph [ref=e101]: Strategic partnerships and new features
+      - generic [ref=e104]:
+        - heading "Our team" [level=2] [ref=e105]
+        - paragraph [ref=e106]: A team of diving and technology enthusiasts based in Switzerland.
+  - contentinfo [ref=e107]:
+    - generic [ref=e108]:
+      - generic [ref=e109]:
+        - generic [ref=e110]:
+          - link "EviDive logo" [ref=e111] [cursor=pointer]:
+            - /url: /
+            - img "EviDive logo" [ref=e112]
+          - paragraph [ref=e113]: The reference platform for booking your dives at the best centers in the world.
+        - generic [ref=e114]:
+          - heading "Discover" [level=3] [ref=e115]
+          - list [ref=e116]:
+            - listitem [ref=e117]:
+              - link "Destinations" [ref=e118] [cursor=pointer]:
+                - /url: /centers
+            - listitem [ref=e119]:
+              - link "Special offers" [ref=e120] [cursor=pointer]:
+                - /url: /explorer
+        - generic [ref=e121]:
+          - heading "Company" [level=3] [ref=e122]
+          - list [ref=e123]:
+            - listitem [ref=e124]:
+              - link "About" [ref=e125] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e126]:
+              - link "Contact" [ref=e127] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e128]:
+              - link "Careers" [ref=e129] [cursor=pointer]:
+                - /url: /careers
+        - generic [ref=e130]:
+          - heading "Legal" [level=3] [ref=e131]
+          - list [ref=e132]:
+            - listitem [ref=e133]:
+              - link "Terms" [ref=e134] [cursor=pointer]:
+                - /url: /terms
+            - listitem [ref=e135]:
+              - link "Privacy" [ref=e136] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e137]:
+              - link "Sitemap" [ref=e138] [cursor=pointer]:
+                - /url: /sitemap
+      - generic [ref=e140]:
+        - paragraph [ref=e141]: © 2026 EviDive. All rights reserved.
+        - paragraph [ref=e142]:
+          - text: Designed by
+          - link "WhytCard" [ref=e143] [cursor=pointer]:
+            - /url: https://whytcard.com
+```
