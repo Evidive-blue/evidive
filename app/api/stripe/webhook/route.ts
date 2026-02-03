@@ -123,11 +123,8 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         type: 'BOOKING',
         title: 'New Booking Confirmed',
         message: `New booking ${booking.reference} for ${centerName} has been paid.`,
-        data: {
-          bookingId: booking.id,
-          bookingReference: booking.reference,
-          centerId: booking.centerId,
-        },
+        bookingId: booking.id,
+        centerId: booking.centerId,
       },
     });
   }
