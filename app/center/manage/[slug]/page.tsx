@@ -105,7 +105,6 @@ export default async function CenterManagePage({ params }: Props) {
     services: center.services.map(service => ({
       ...service,
       price: Number(service.price),
-      duration: Number(service.duration),
       minParticipants: Number(service.minParticipants),
       maxParticipants: Number(service.maxParticipants),
     })),
