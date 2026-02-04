@@ -102,13 +102,13 @@ export default async function CenterManagePage({ params }: Props) {
     rating: Number(center.rating),
     commissionRate: Number(center.commissionRate),
     partialRefundPercent: center.partialRefundPercent ? Number(center.partialRefundPercent) : null,
-    services: center.services.map(service => ({
+    services: center.services.map((service: any) => ({
       ...service,
       price: Number(service.price),
       minParticipants: Number(service.minParticipants),
       maxParticipants: Number(service.maxParticipants),
     })),
-    bookings: center.bookings.map(booking => ({
+    bookings: center.bookings.map((booking: any) => ({
       ...booking,
       totalPrice: Number(booking.totalPrice),
     })),
