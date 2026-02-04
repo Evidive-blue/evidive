@@ -94,5 +94,26 @@ export default async function CenterManagePage({ params }: Props) {
     rating: Number(center.rating),
   };
 
-  return <CenterManageClient center={center} stats={stats} />;
+  // Convert Decimal fields to numbers for Client Component
+  const serializedCenter = {
+    ...center,
+    latitude: Number(center.latitude),
+    longitude: Number(center.longitude),
+    rating: Number(center.rating),
+    commissionRate: Number(center.commissionRate),
+    partialRefundPercent: center.partialRefundPercent ? Number(center.partialRefundPercent) : null,
+    services: center.services.map(service => ({
+      ...service,
+      price: Number(service.price),
+      duration: Number(service.duration),
+      minParticipants: Number(service.minParticipants),
+      maxParticipants: Number(service.maxParticipants),
+    })),
+    bookings: center.bookings.map(booking => ({
+      ...booking,
+      totalPrice: Number(booking.totalPrice),
+    })),
+  };
+
+  return <CenterManageClient center={serializedCenter} stats={stats} />;
 }

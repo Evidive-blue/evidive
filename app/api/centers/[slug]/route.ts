@@ -22,6 +22,8 @@ const updateCenterSchema = z.object({
   region: z.string().optional().nullable(),
   country: z.string().min(2).optional(),
   zip: z.string().optional().nullable(),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
   email: z.string().email().optional(),
   phone: z.string().min(8).optional(),
   website: z.string().url().or(z.literal('')).optional().nullable(),
@@ -34,6 +36,8 @@ const updateCenterSchema = z.object({
   ecoCommitment: z.string().optional().nullable(),
   cancellationHours: z.number().min(0).optional(),
   cancellationPolicy: z.enum(['FLEXIBLE', 'MODERATE', 'STRICT']).optional(),
+  featuredImage: z.string().optional().nullable(),
+  photos: z.array(z.string()).optional(),
 });
 
 interface RouteParams {
@@ -136,6 +140,8 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
     if (data.region !== undefined) updateData.region = data.region || null;
     if (data.country) updateData.country = data.country;
     if (data.zip !== undefined) updateData.zip = data.zip || null;
+    if (data.latitude !== undefined) updateData.latitude = data.latitude;
+    if (data.longitude !== undefined) updateData.longitude = data.longitude;
     if (data.email) updateData.email = data.email;
     if (data.phone) updateData.phone = data.phone;
     if (data.website !== undefined) updateData.website = data.website || null;
@@ -148,6 +154,8 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
     if (data.ecoCommitment !== undefined) updateData.ecoCommitment = data.ecoCommitment || null;
     if (data.cancellationHours !== undefined) updateData.cancellationHours = data.cancellationHours;
     if (data.cancellationPolicy) updateData.cancellationPolicy = data.cancellationPolicy;
+    if (data.featuredImage !== undefined) updateData.featuredImage = data.featuredImage || null;
+    if (data.photos !== undefined) updateData.photos = data.photos;
 
     const updatedCenter = await prisma.center.update({
       where: { id: center.id },

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,6 +24,7 @@ import {
   Languages,
   Clock,
   Leaf,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -32,6 +34,13 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { useLocale } from '@/lib/i18n/locale-provider';
 import { toast } from 'sonner';
+import { ImageUpload } from '@/components/upload/image-upload';
+
+// Dynamic import for the map to avoid SSR issues
+const LocationMap = dynamic(
+  () => import('@/components/centers/location-map').then((mod) => mod.LocationMap),
+  { ssr: false, loading: () => <div className="h-[300px] w-full rounded-xl bg-white/5 animate-pulse" /> }
+);
 
 const editCenterSchema = z.object({
   name: z.object({
@@ -110,7 +119,11 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
   const router = useRouter();
   useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGeocoding, setIsGeocoding] = useState(false);
   const [activeSection, setActiveSection] = useState<'info' | 'location' | 'contact' | 'services' | 'media'>('info');
+  const [mapCoordinates, setMapCoordinates] = useState({ lat: center.latitude, lng: center.longitude });
+  const [featuredImage, setFeaturedImage] = useState(center.featuredImage || '');
+  const [photos, setPhotos] = useState<string[]>(center.photos || []);
 
   const getLocalized = (value: unknown): Record<string, string> => {
     if (!value) return { fr: '', en: '' };
@@ -174,13 +187,85 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
     }
   };
 
+  const geocodeAddress = async () => {
+    setIsGeocoding(true);
+    try {
+      const address = watch('address');
+      const city = watch('city');
+      const country = watch('country');
+      const zip = watch('zip');
+
+      if (!address || !city || !country) {
+        toast.error('Veuillez remplir au minimum l\'adresse, la ville et le pays');
+        return;
+      }
+
+      // Build full address string
+      const fullAddress = [address, city, zip, country].filter(Boolean).join(', ');
+
+      // Call Nominatim API (OpenStreetMap)
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?` +
+        `q=${encodeURIComponent(fullAddress)}` +
+        `&format=json` +
+        `&limit=1` +
+        `&addressdetails=1`,
+        {
+          headers: {
+            'User-Agent': 'EviDive/1.0 (contact@evidive.blue)',
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Geocoding failed');
+      }
+
+      const data = await response.json();
+
+      if (data.length === 0) {
+        toast.error('Adresse non trouvée. Vérifiez les informations saisies.');
+        return;
+      }
+
+      const location = data[0];
+      
+      // Update latitude and longitude in the API
+      const updateResponse = await fetch(`/api/centers/${center.slug}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          latitude: parseFloat(location.lat),
+          longitude: parseFloat(location.lon),
+        }),
+      });
+
+      if (updateResponse.ok) {
+        toast.success(`Localisation trouvée: ${location.display_name}`);
+        setMapCoordinates({ lat: parseFloat(location.lat), lng: parseFloat(location.lon) });
+        router.refresh();
+      } else {
+        throw new Error('Failed to update coordinates');
+      }
+    } catch (error) {
+      console.error('Geocoding error:', error);
+      toast.error('Erreur lors de la géolocalisation. Réessayez plus tard.');
+    } finally {
+      setIsGeocoding(false);
+    }
+  };
+
   const onSubmit = async (data: EditCenterFormData) => {
     setIsSubmitting(true);
     try {
       const response = await fetch(`/api/centers/${center.slug}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          featuredImage,
+          photos,
+        }),
       });
 
       if (!response.ok) {
@@ -203,6 +288,7 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
     { id: 'location', label: 'Localisation', icon: MapPin },
     { id: 'contact', label: 'Contact', icon: Mail },
     { id: 'services', label: 'Services', icon: Award },
+    { id: 'media', label: 'Médias', icon: ImageIcon },
   ] as const;
 
   return (
@@ -430,6 +516,52 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
                       />
                     </div>
                   </div>
+                  {/* Geocoding Button */}
+                  <div className="pt-4">
+                    <Button
+                      type="button"
+                      onClick={geocodeAddress}
+                      disabled={isGeocoding}
+                      className="w-full rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 text-cyan-400"
+                    >
+                      {isGeocoding ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Localisation en cours...
+                        </>
+                      ) : (
+                        <>
+                          <MapPin className="mr-2 h-4 w-4" />
+                          📍 Localiser automatiquement sur la carte
+                        </>
+                      )}
+                    </Button>
+                    <p className="mt-2 text-xs text-white/50 text-center">
+                      Coordonnées actuelles: {mapCoordinates.lat.toFixed(6)}, {mapCoordinates.lng.toFixed(6)}
+                    </p>
+                  </div>                </CardContent>
+              </Card>
+
+              {/* Map Display */}
+              <Card className="bg-white/5 border-white/10">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <MapPin className="h-5 w-5 text-cyan-400" />
+                    Carte de localisation
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <LocationMap
+                    key={`${mapCoordinates.lat}-${mapCoordinates.lng}`}
+                    latitude={mapCoordinates.lat}
+                    longitude={mapCoordinates.lng}
+                    centerSlug={center.slug}
+                    centerName={typeof center.name === 'string' ? center.name : (center.name as any)?.fr || (center.name as any)?.en || 'Centre'}
+                    onPositionChange={(lat, lng) => setMapCoordinates({ lat, lng })}
+                  />
+                  <p className="mt-3 text-xs text-white/60 text-center">
+                    La carte se mettra à jour automatiquement après la géolocalisation
+                  </p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -640,6 +772,53 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
                     />
                     <span className="text-white">Location d'équipement disponible</span>
                   </label>
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
+
+          {/* Médias */}
+          {activeSection === 'media' && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-6"
+            >
+              <Card className="bg-white/5 border-white/10">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <ImageIcon className="h-5 w-5 text-cyan-400" />
+                    Image de couverture
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-white/60 mb-4">
+                    Image principale affichée sur la page du centre (recommandé: 1920x1080px)
+                  </p>
+                  <ImageUpload
+                    value={featuredImage}
+                    onChange={setFeaturedImage}
+                    maxFiles={1}
+                  />
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/5 border-white/10">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <ImageIcon className="h-5 w-5 text-cyan-400" />
+                    Galerie photos
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-white/60 mb-4">
+                    Photos de votre centre, équipements et sites de plongée (max 10 images)
+                  </p>
+                  <ImageUpload
+                    value={photos}
+                    onChange={setPhotos}
+                    maxFiles={10}
+                  />
                 </CardContent>
               </Card>
             </motion.div>
