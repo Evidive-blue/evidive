@@ -816,7 +816,7 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
                   </p>
                   <ImageUpload
                     value={photos}
-                    onChange={setPhotos}
+                    onChange={(value) => setPhotos(Array.isArray(value) ? value : [])}
                     maxFiles={10}
                   />
                 </CardContent>
