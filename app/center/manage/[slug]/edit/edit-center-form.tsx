@@ -797,7 +797,7 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
                   </p>
                   <ImageUpload
                     value={featuredImage}
-                    onChange={setFeaturedImage}
+                    onChange={(value) => setFeaturedImage(typeof value === 'string' ? value : '')}
                     maxFiles={1}
                   />
                 </CardContent>
