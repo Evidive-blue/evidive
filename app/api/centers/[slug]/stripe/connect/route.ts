@@ -53,6 +53,11 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
       return 'Dive Center';
     };
 
+    const baseUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      process.env.NEXT_PUBLIC_BASE_URL ||
+      request.nextUrl.origin;
+
     let accountId = center.stripeAccountId;
 
     // Create Stripe Connect account if not exists
@@ -69,7 +74,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
         business_profile: {
           name: getLocalizedName(center.name),
           mcc: '7941', // Sports and recreation camps
-          url: process.env.NEXT_PUBLIC_BASE_URL ? `${process.env.NEXT_PUBLIC_BASE_URL}/centers/${slug}` : `https://evidive.blue/centers/${slug}`,
+          url: `${baseUrl}/centers/${slug}`,
         },
         metadata: {
           centerId: center.id,
@@ -88,7 +93,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     }
 
     // Create account link for onboarding
-    const origin = request.headers.get('origin') || 'https://evidive.whytcard.ai';
+    const origin = request.headers.get('origin') || baseUrl;
     const accountLink = await stripe.accountLinks.create({
       account: accountId,
       refresh_url: `${origin}/center/manage/${slug}/payments?refresh=true`,

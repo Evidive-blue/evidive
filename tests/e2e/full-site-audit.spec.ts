@@ -17,7 +17,10 @@ import { test, expect, Page, BrowserContext } from "@playwright/test";
  * - API endpoints
  */
 
-const BASE_URL = "https://evidive.whytcard.ai";
+const BASE_URL =
+  process.env.BASE_URL ||
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://evidive.blue";
 
 // Credentials de test
 const TEST_USER = {

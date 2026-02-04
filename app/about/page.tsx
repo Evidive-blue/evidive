@@ -74,6 +74,12 @@ export default function AboutPage() {
     return Array.isArray(items) ? items as Array<{ title: string; description: string }> : [];
   })();
 
+  // Get mission points array safely
+  const missionPoints = (() => {
+    const points = getNestedValue(messages, 'about.mission.points');
+    return Array.isArray(points) ? points as string[] : [];
+  })();
+
   const values = [
     {
       key: 'trust',
@@ -222,7 +228,7 @@ export default function AboutPage() {
                 {t('mission.description')}
               </p>
               <ul className="space-y-3">
-                {(t('mission.points') as unknown as string[]).map((item: string, i: number) => (
+                {missionPoints.map((item, i) => (
                   <motion.li
                     key={i}
                     initial={{ opacity: 0, x: 20 }}
@@ -317,7 +323,7 @@ export default function AboutPage() {
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-cyan-500/50 via-blue-500/50 to-transparent" />
+            <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-cyan-500/50 via-blue-500/50 to-transparent md:block" />
 
             {/* Timeline items */}
             {timeline.map((item, index) => (
@@ -327,12 +333,16 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15 }}
-                className={`relative mb-12 flex items-center ${
-                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                className={`relative mb-12 flex flex-col items-center md:items-stretch ${
+                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
                 {/* Content */}
-                <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                <div
+                  className={`w-full text-center md:w-5/12 ${
+                    index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left'
+                  }`}
+                >
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
@@ -345,7 +355,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Center dot */}
-                <div className="absolute left-1/2 flex -translate-x-1/2 items-center justify-center">
+                <div className="mb-6 flex w-full items-center justify-center md:absolute md:left-1/2 md:mb-0 md:w-auto md:-translate-x-1/2">
                   <motion.div
                     whileHover={{ scale: 1.2 }}
                     className="flex h-12 w-12 items-center justify-center rounded-full border-4 border-slate-900 bg-gradient-to-br from-cyan-500 to-blue-600"
@@ -355,7 +365,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Empty space */}
-                <div className="w-5/12" />
+                <div className="hidden md:block md:w-5/12" />
               </motion.div>
             ))}
           </div>

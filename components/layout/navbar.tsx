@@ -68,6 +68,7 @@ export function Navbar() {
                 alt={tImages("evidiveLogo")}
                 width={120}
                 height={36}
+                sizes="(max-width: 640px) 96px, 120px"
                 className="h-8 w-auto"
                 priority
               />

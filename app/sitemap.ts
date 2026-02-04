@@ -1,8 +1,28 @@
 import { MetadataRoute } from 'next';
+import { headers } from 'next/headers';
 import { locales } from '@/lib/i18n/config';
+import { prisma } from '@/lib/db/prisma';
+
+async function getBaseUrl() {
+  const envUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  if (envUrl) return envUrl;
+
+  const vercelUrl = process.env.VERCEL_URL;
+  if (vercelUrl) return `https://${vercelUrl}`;
+
+  const headerList = await headers();
+  const host = headerList.get('x-forwarded-host') ?? headerList.get('host');
+  const protocol = headerList.get('x-forwarded-proto') ?? 'https';
+
+  if (!host) {
+    throw new Error('Missing host for sitemap base URL.');
+  }
+
+  return `${protocol}://${host}`;
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://evidive.blue';
+  const baseUrl = await getBaseUrl();
 
   // Static pages that should be indexed
   const staticPages = [
@@ -38,24 +58,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     };
   });
 
-  // TODO: Fetch dynamic dive center slugs from database
-  // This is a placeholder - in production, query your database for all center slugs
   let centerEntries: MetadataRoute.Sitemap = [];
-  
+
   try {
-    // Example: const centers = await prisma.diveCenter.findMany({ select: { slug: true } });
-    // For now, we'll leave this as a placeholder that can be populated later
-    const centerSlugs: string[] = []; // Replace with actual DB query
-    
-    centerEntries = centerSlugs.map((slug) => {
+    const centers = await prisma.center.findMany({
+      where: { status: 'APPROVED' },
+      select: { slug: true, updatedAt: true },
+    });
+
+    centerEntries = centers.map((center) => {
       const languages: Record<string, string> = {};
       locales.forEach((locale) => {
-        languages[locale] = `${baseUrl}/${locale}/centers/${slug}`;
+        languages[locale] = `${baseUrl}/${locale}/centers/${center.slug}`;
       });
 
       return {
-        url: `${baseUrl}/centers/${slug}`,
-        lastModified: new Date(),
+        url: `${baseUrl}/centers/${center.slug}`,
+        lastModified: center.updatedAt,
         changeFrequency: 'weekly' as const,
         priority: 0.7,
         alternates: {
@@ -63,8 +82,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       };
     });
-  } catch (error) {
-    console.error('Error fetching center slugs for sitemap:', error);
+  } catch {
+    return staticEntries;
   }
 
   return [...staticEntries, ...centerEntries];

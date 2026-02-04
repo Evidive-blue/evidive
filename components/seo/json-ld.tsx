@@ -148,8 +148,12 @@ export function WebsiteJsonLd({
   name,
   url,
   description,
-  searchUrl = 'https://evidive.blue/explorer?q={search_term_string}',
+  searchUrl,
 }: WebsiteJsonLdProps) {
+  const normalizedUrl = url.endsWith('/') ? url.slice(0, -1) : url;
+  const resolvedSearchUrl =
+    searchUrl ?? `${normalizedUrl}/explorer?q={search_term_string}`;
+
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -160,7 +164,7 @@ export function WebsiteJsonLd({
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: searchUrl,
+        urlTemplate: resolvedSearchUrl,
       },
       'query-input': 'required name=search_term_string',
     },

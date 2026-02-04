@@ -2,7 +2,10 @@ import { defineConfig, devices } from "@playwright/test";
 
 // Utiliser la variable d'env ou la prod par défaut pour les audits
 const isAudit = process.env.TEST_AUDIT === "true";
-const baseURL = process.env.BASE_URL || (isAudit ? "https://evidive.whytcard.ai" : "http://localhost:3000");
+const baseURL =
+  process.env.BASE_URL ||
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (isAudit ? "https://evidive.blue" : "http://localhost:3000");
 
 export default defineConfig({
   testDir: "./tests/e2e",

@@ -161,8 +161,10 @@ export function HeroSection() {
               alt={tImages("evidiveLogo")}
               width={400}
               height={120}
+              sizes="(max-width: 640px) 256px, (max-width: 768px) 320px, 384px"
               className="h-auto w-64 sm:w-80 md:w-96"
               priority
+              fetchPriority="high"
             />
           </motion.div>
         </motion.div>

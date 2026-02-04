@@ -32,8 +32,9 @@ export function LoginForm() {
     setError(null);
 
     try {
+      const normalizedEmail = formData.email.trim().toLowerCase();
       const result = await signIn("credentials", {
-        email: formData.email,
+        email: normalizedEmail,
         password: formData.password,
         redirect: false,
       });

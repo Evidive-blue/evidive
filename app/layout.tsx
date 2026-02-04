@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { getLocale } from '@/lib/i18n/get-locale-server';
 import { getMessages } from '@/lib/i18n/get-messages';
@@ -8,18 +9,20 @@ import { getOpenGraphLocale } from '@/lib/i18n/config';
 import { AuthProvider } from '@/components/providers/auth-provider';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
-import { OceanCanvas } from '@/components/effects/ocean-canvas';
 import { ZenModeOverlay, ZenFab } from '@/components/zen';
+import { OceanCanvasWrapper } from '@/components/effects/ocean-canvas-wrapper';
 import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
 });
 
 function requireString(messages: Record<string, unknown>, path: string): string {
@@ -28,6 +31,24 @@ function requireString(messages: Record<string, unknown>, path: string): string 
     throw new Error(`Missing i18n string: ${path}`);
   }
   return value;
+}
+
+async function getBaseUrl() {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.NEXT_PUBLIC_BASE_URL;
+  if (envUrl) return envUrl;
+
+  const vercelUrl = process.env.VERCEL_URL;
+  if (vercelUrl) return `https://${vercelUrl}`;
+
+  const headerList = await headers();
+  const host = headerList.get('x-forwarded-host') ?? headerList.get('host');
+  const protocol = headerList.get('x-forwarded-proto') ?? 'https';
+
+  if (!host) {
+    throw new Error('Missing host for metadata base URL.');
+  }
+
+  return `${protocol}://${host}`;
 }
 
 
@@ -46,7 +67,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ? (keywords as string[])
       : undefined;
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://evidive.blue';
+  const baseUrl = await getBaseUrl();
 
   return {
     metadataBase: new URL(baseUrl),
@@ -67,9 +88,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       images: [
         {
-          url: '/og-image.jpg',
-          width: 1200,
-          height: 630,
+          url: '/evidive-logo.png',
           alt: ogImageAlt,
         },
       ],
@@ -78,7 +97,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
       title: titleDefault,
       description,
-      images: ['/og-image.jpg'],
+      images: ['/evidive-logo.png'],
     },
     robots: {
       index: true,
@@ -111,7 +130,7 @@ export default async function RootLayout({
         <AuthProvider>
           <LocaleProvider initialLocale={locale} initialMessages={messages}>
             {/* Ocean Background Animation */}
-            <OceanCanvas />
+            <OceanCanvasWrapper />
             
             {/* Zen Mode Overlay */}
             <ZenModeOverlay />

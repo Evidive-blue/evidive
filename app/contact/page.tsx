@@ -58,28 +58,41 @@ export default function ContactPage() {
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div>
-                        <label className="block text-sm font-medium mb-2">
+                        <label htmlFor="contact-name" className="block text-sm font-medium mb-2">
                           {t('name')}
                         </label>
-                        <Input required placeholder={t('placeholders.name')} />
+                        <Input id="contact-name" name="name" required placeholder={t('placeholders.name')} />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">
+                        <label htmlFor="contact-email" className="block text-sm font-medium mb-2">
                           {t('email')}
                         </label>
-                        <Input type="email" required placeholder={t('placeholders.email')} />
+                        <Input
+                          id="contact-email"
+                          name="email"
+                          type="email"
+                          required
+                          placeholder={t('placeholders.email')}
+                        />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">
+                        <label htmlFor="contact-subject" className="block text-sm font-medium mb-2">
                           {t('subject')}
                         </label>
-                        <Input required placeholder={t('placeholders.subject')} />
+                        <Input
+                          id="contact-subject"
+                          name="subject"
+                          required
+                          placeholder={t('placeholders.subject')}
+                        />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">
+                        <label htmlFor="contact-message" className="block text-sm font-medium mb-2">
                           {t('message')}
                         </label>
                         <textarea
+                          id="contact-message"
+                          name="message"
                           required
                           rows={5}
                           className="flex w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"

@@ -49,7 +49,7 @@ export function DestinationsSection() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <section ref={sectionRef} className="relative py-32">
+    <section ref={sectionRef} className="relative py-32 cv-auto">
       {/* Ambient glow */}
       <motion.div
         className="absolute left-1/4 top-1/3 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl"
@@ -108,6 +108,7 @@ export function DestinationsSection() {
                       src={destination.image}
                       alt={t(`${destination.key}.name`)}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     

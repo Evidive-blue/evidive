@@ -44,7 +44,7 @@ export function CentersSection() {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-32">
+    <section ref={sectionRef} className="relative py-32 cv-auto">
       {/* Ambient effects */}
       <motion.div
         className="absolute left-1/4 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-cyan-500/10 blur-3xl"

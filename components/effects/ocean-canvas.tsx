@@ -1582,8 +1582,7 @@ export function OceanCanvas() {
     <div className="pointer-events-none fixed inset-0 -z-50 overflow-hidden" aria-hidden="true">
       {/* Camera container with horizontal movement */}
       <motion.div
-        className="absolute inset-0"
-        style={{ width: "500vw", height: "100%" }}
+        className="absolute inset-y-0 left-0 h-full w-[500vw]"
         animate={{ x: cameraX + "vw" }}
         transition={{
           type: "spring",

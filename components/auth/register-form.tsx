@@ -31,6 +31,7 @@ export function RegisterForm() {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
+    const normalizedEmail = formData.email.trim().toLowerCase();
 
     if (!formData.firstName.trim()) {
       newErrors.firstName = t("errors.firstNameRequired");
@@ -38,9 +39,9 @@ export function RegisterForm() {
     if (!formData.lastName.trim()) {
       newErrors.lastName = t("errors.lastNameRequired");
     }
-    if (!formData.email.trim()) {
+    if (!normalizedEmail) {
       newErrors.email = t("errors.emailRequired");
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       newErrors.email = t("errors.emailInvalid");
     }
     if (formData.password.length < 8) {
@@ -65,11 +66,12 @@ export function RegisterForm() {
     setError(null);
 
     try {
+      const normalizedEmail = formData.email.trim().toLowerCase();
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: formData.email,
+          email: normalizedEmail,
           password: formData.password,
           confirmPassword: formData.confirmPassword,
           firstName: formData.firstName,

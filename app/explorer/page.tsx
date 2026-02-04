@@ -12,8 +12,7 @@ export default function ExplorerPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass rounded-2xl overflow-hidden shadow-2xl shadow-cyan-500/10"
-            style={{ height: 'calc(100vh - 180px)', minHeight: '500px' }}
+            className="glass rounded-2xl overflow-hidden shadow-2xl shadow-cyan-500/10 min-h-[500px] h-[calc(100dvh-180px)]"
           >
             <DiveGuideChat />
           </motion.div>

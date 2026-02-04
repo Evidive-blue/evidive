@@ -353,6 +353,23 @@
   );
 }
 
+.ocean-fallback {
+  background: linear-gradient(
+    180deg,
+    #0b3a4a 0%,
+    #075985 35%,
+    #0b2a3c 65%,
+    #020617 100%
+  );
+}
+
+@supports (content-visibility: auto) {
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
+  }
+}
+
 /* Light rays overlay */
 .light-rays {
   background: linear-gradient(

@@ -135,12 +135,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       profile(profile) {
+        const normalizedEmail = profile.email?.toLowerCase();
+        const email = normalizedEmail ?? profile.email;
         return {
           id: profile.sub,
-          email: profile.email,
+          email,
           name: profile.name,
           image: profile.picture,
-          role: isAdminEmail(profile.email) ? "ADMIN" : "DIVER",
+          role: isAdminEmail(email) ? "ADMIN" : "DIVER",
           isEmailVerified: profile.email_verified,
           hasCenters: false, // Will be updated in signIn callback
         };

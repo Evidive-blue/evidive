@@ -31,7 +31,7 @@ export function FeaturesSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-32"
+      className="relative overflow-hidden py-32 cv-auto"
     >
       {/* Decorative elements - subtle glow effects */}
       <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
