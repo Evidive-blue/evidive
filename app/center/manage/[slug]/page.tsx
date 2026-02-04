@@ -112,7 +112,7 @@ export default async function CenterManagePage({ params }: Props) {
       ...booking,
       totalPrice: Number(booking.totalPrice),
     })),
-  };
+  } as any;
 
   return <CenterManageClient center={serializedCenter} stats={stats} />;
 }
