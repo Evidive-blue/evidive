@@ -21,12 +21,16 @@ import {
   Trash2,
   Clock,
   Package,
+  Percent,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import type { Decimal } from '@prisma/client/runtime/library';
+import { toast } from 'sonner';
 
 interface Owner {
   id: string;
@@ -91,6 +95,7 @@ interface Center {
   viewCount: number;
   createdAt: Date;
   approvedAt: Date | null;
+  commissionRate: Decimal;
   owner: Owner;
   services: Service[];
   bookings: Booking[];
@@ -120,6 +125,8 @@ const STATUS_COLORS: Record<string, string> = {
 export function AdminCenterDetailClient({ center, totalRevenue }: AdminCenterDetailClientProps) {
   const router = useRouter();
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [commissionRate, setCommissionRate] = useState(Number(center.commissionRate));
+  const [isEditingCommission, setIsEditingCommission] = useState(false);
 
   const getLocalized = (value: unknown): string => {
     if (!value) return '';
@@ -200,6 +207,35 @@ export function AdminCenterDetailClient({ center, totalRevenue }: AdminCenterDet
       }
     } catch (error) {
       console.error('Error deleting center:', error);
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const updateCommissionRate = async () => {
+    if (commissionRate < 0 || commissionRate > 100) {
+      toast.error('Le taux de commission doit être entre 0 et 100%');
+      return;
+    }
+
+    setActionLoading('commission');
+    try {
+      const response = await fetch(`/api/admin/centers/${center.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ commissionRate }),
+      });
+
+      if (response.ok) {
+        toast.success('Taux de commission mis à jour');
+        setIsEditingCommission(false);
+        router.refresh();
+      } else {
+        toast.error('Erreur lors de la mise à jour');
+      }
+    } catch (error) {
+      console.error('Error updating commission rate:', error);
+      toast.error('Erreur lors de la mise à jour');
     } finally {
       setActionLoading(null);
     }
@@ -573,6 +609,95 @@ export function AdminCenterDetailClient({ center, totalRevenue }: AdminCenterDet
                     {center.city}, {center.region && `${center.region}, `}{center.country}
                   </p>
                 </div>
+              </CardContent>
+            </Card>
+
+            {/* Commission Rate */}
+            <Card className="bg-white/5 border-white/10">
+              <CardHeader>
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Percent className="w-5 h-5 text-green-400" />
+                  Commission
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {!isEditingCommission ? (
+                  <>
+                    <div className="rounded-xl bg-green-500/10 border border-green-500/30 p-4">
+                      <p className="text-sm text-white/60 mb-1">Taux de commission</p>
+                      <div className="flex items-baseline gap-1">
+                        <p className="text-3xl font-bold text-green-400">{commissionRate}%</p>
+                      </div>
+                      <p className="text-xs text-white/40 mt-2">
+                        Sur chaque réservation payée
+                      </p>
+                    </div>
+                    <Button
+                      onClick={() => setIsEditingCommission(true)}
+                      variant="outline"
+                      className="w-full rounded-xl border-white/10 bg-white/5"
+                    >
+                      Modifier le taux
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <div className="space-y-3">
+                      <div>
+                        <Label className="text-white mb-2 block text-sm">
+                          Nouveau taux (%)
+                        </Label>
+                        <div className="relative">
+                          <Percent className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+                          <Input
+                            type="number"
+                            min={0}
+                            max={100}
+                            step={0.1}
+                            value={commissionRate}
+                            onChange={(e) => setCommissionRate(parseFloat(e.target.value) || 0)}
+                            className="h-11 bg-white/5 border-white/10 text-white pl-10 pr-12"
+                          />
+                          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 text-sm">
+                            %
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="rounded-lg bg-cyan-500/10 border border-cyan-500/30 p-3">
+                        <p className="text-xs text-cyan-300 font-medium mb-1">Exemple</p>
+                        <p className="text-sm text-cyan-200/80">
+                          Réservation 100€ = {(100 * commissionRate / 100).toFixed(2)}€ commission
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <Button
+                        onClick={() => {
+                          setCommissionRate(Number(center.commissionRate));
+                          setIsEditingCommission(false);
+                        }}
+                        variant="outline"
+                        className="flex-1 rounded-xl border-white/10 bg-white/5"
+                        disabled={actionLoading === 'commission'}
+                      >
+                        Annuler
+                      </Button>
+                      <Button
+                        onClick={updateCommissionRate}
+                        disabled={actionLoading === 'commission'}
+                        className="flex-1 rounded-xl bg-green-500 hover:bg-green-600"
+                      >
+                        {actionLoading === 'commission' ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          'Enregistrer'
+                        )}
+                      </Button>
+                    </div>
+                  </>
+                )}
               </CardContent>
             </Card>
 

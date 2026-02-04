@@ -2506,5 +2506,30 @@
     "switchCenter": "Switch center",
     "noCenters": "You don't have any center yet",
     "createFirst": "Create my first center"
+  },
+  "whytcard": {
+    "title": "Beyond Code",
+    "subtitle": "We Architect your Dreams",
+    "aiDev": "Ανάπτυξη AI",
+    "fullDev": "Πλήρης ανάπτυξη",
+    "webProject": "Web έργο",
+    "webService": "Web υπηρεσία",
+    "cloudProject": "Cloud κοινωνικό δίκτυο",
+    "footer": "Κάντε κλικ σε μια υπηρεσία για περισσότερες πληροφορίες"
+  },
+  "zen": {
+    "zenMode": "Λειτουργία Zen",
+    "inhale": "Εισπνεύστε",
+    "hold": "Κρατήστε",
+    "exhale": "Εκπνεύστε",
+    "minutes": " λεπ",
+    "pause": "Παύση",
+    "play": "Συνέχεια",
+    "close": "Κλείσιμο",
+    "mute": "Σίγαση",
+    "unmute": "Ενεργοποίηση ήχου",
+    "waves": "Κύματα",
+    "bubbles": "Φυσαλίδες",
+    "underwater": "Υποβρύχιο"
   }
 }

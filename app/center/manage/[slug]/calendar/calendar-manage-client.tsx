@@ -9,8 +9,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock,
-  Users,
-  Settings,
   Save,
   Loader2,
 } from 'lucide-react';
@@ -80,7 +78,7 @@ interface DayHours {
 
 type OpeningHoursState = Record<string, DayHours>;
 
-export function CalendarManageClient({ center, bookings, services }: CalendarManageClientProps) {
+export function CalendarManageClient({ center, bookings, services: _services }: CalendarManageClientProps) {
   const { locale } = useLocale();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [activeTab, setActiveTab] = useState<'calendar' | 'hours'>('calendar');
@@ -183,7 +181,7 @@ export function CalendarManageClient({ center, bookings, services }: CalendarMan
       }
 
       toast.success('Horaires enregistrés');
-    } catch (error) {
+    } catch {
       toast.error('Erreur lors de la sauvegarde');
     } finally {
       setIsSaving(false);

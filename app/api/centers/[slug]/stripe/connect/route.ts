@@ -69,7 +69,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
         business_profile: {
           name: getLocalizedName(center.name),
           mcc: '7941', // Sports and recreation camps
-          url: `https://evidive.whytcard.ai/centers/${slug}`,
+          url: process.env.NEXT_PUBLIC_BASE_URL ? `${process.env.NEXT_PUBLIC_BASE_URL}/centers/${slug}` : `https://evidive.blue/centers/${slug}`,
         },
         metadata: {
           centerId: center.id,

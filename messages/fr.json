@@ -496,52 +496,111 @@
   },
   "about": {
     "meta": {
-      "title": "À propos",
-      "description": "Découvrez l'histoire d'EviDive, notre mission et nos valeurs. Une équipe passionnée de plongée et de technologie basée en Suisse."
+      "title": "À propos - EviDive",
+      "description": "Découvrez EviDive, la plateforme 100% plongée née à Genève. Réservez vos cours, formations et vacances plongée avec des centres certifiés."
     },
     "hero": {
-      "title": "À propos d'EviDive",
-      "subtitle": "Connecter les plongeurs aux meilleures expériences sous-marines"
+      "badge": "Née à Genève",
+      "title": "Votre portail vers les profondeurs",
+      "subtitle": "EviDive est né d'une passion pour le monde sous-marin et d'une volonté de rendre la plongée accessible et sécurisée pour tous."
     },
     "story": {
-      "title": "Notre histoire",
-      "subtitle": "Notre voyage pour révolutionner la plongée sous-marine",
+      "title": "Notre parcours",
+      "subtitle": "De Genève au monde entier",
       "timeline": {
-        "idea": "L'idée naît de la frustration de réserver des plongées à l'étranger",
-        "launch": "Lancement de la première version de la plateforme",
-        "expansion": "Expansion internationale avec 100+ centres partenaires",
-        "partners": "Partenariats stratégiques et nouvelles fonctionnalités"
+        "idea": "L'idée naît à Genève : simplifier la réservation de plongées",
+        "launch": "Lancement d'EviDive.blue - plateforme dédiée aux passionnés",
+        "expansion": "Partenariats avec des centres en Méditerranée et au-delà",
+        "partners": "Blog voyage, conseils et destinations (Sicile, Sardaigne, Toscane...)"
       }
     },
     "mission": {
-      "title": "Notre mission",
-      "description": "EviDive est né d'une passion partagée pour la plongée et la technologie. Notre mission est de connecter les plongeurs du monde entier aux meilleures expériences sous-marines tout en simplifiant la vie des centres de plongée."
+      "badge": "Notre Mission",
+      "title": "Rendre la plongée accessible à tous",
+      "description": "Chez EviDive, nous croyons que la plongée ne devrait jamais être laissée au hasard. Notre plateforme connecte les plongeurs du monde entier avec des centres certifiés, sélectionnés pour leur professionnalisme, leur passion et leur respect de l'environnement marin.",
+      "points": [
+        "Disponibilité en temps réel et prix transparents",
+        "Centres certifiés PADI, SSI, CMAS",
+        "Inscription gratuite pour les centres partenaires"
+      ]
     },
     "values": {
       "title": "Nos valeurs",
-      "subtitle": "Les principes qui guident chacune de nos décisions",
+      "subtitle": "Ce qui nous guide au quotidien",
       "items": {
         "trust": {
           "title": "Confiance",
-          "description": "Des centres vérifiés et des avis authentiques pour une réservation sereine."
+          "description": "Centres vérifiés et avis authentiques de la communauté pour des choix éclairés."
         },
         "safety": {
           "title": "Sécurité",
-          "description": "Des standards stricts et des prérequis clairs pour chaque plongée."
+          "description": "Équipements conformes, encadrement professionnel et protocoles stricts."
         },
         "experience": {
-          "title": "Expérience",
-          "description": "Un design immersif et une réservation fluide pour une expérience premium."
+          "title": "Passion",
+          "description": "Chaque immersion est une aventure. Cours, formations et vacances plongée inoubliables."
         },
         "community": {
           "title": "Communauté",
-          "description": "Une communauté de passionnés qui partagent leurs découvertes."
+          "description": "Partagez vos spots favoris, conseils et plus belles plongées avec d'autres passionnés."
         }
       }
     },
+    "vision": {
+      "badge": "Notre Vision",
+      "title": "Une aventure connectée et éthique",
+      "description": "EviDive, c'est aussi une communauté de passionnés. Notre vision : faire de la plongée un voyage intérieur et extérieur, connecté, éthique et inoubliable."
+    },
     "team": {
-      "title": "Notre équipe",
-      "description": "Une équipe de passionnés de plongée et de technologie basée en Suisse."
+      "title": "Rejoignez l'aventure",
+      "description": "Que vous soyez curieux débutant ou plongeur expérimenté, EviDive vous accompagne dans toutes vos explorations sous-marines."
+    },
+    "founders": {
+      "badge": "L'équipe fondatrice",
+      "title": "Les passionnés derrière EviDive",
+      "members": [
+        { "name": "Armando", "role": "Co-fondateur" },
+        { "name": "Leti", "role": "Co-fondatrice" },
+        { "name": "Mathieu", "role": "Co-fondateur" },
+        { "name": "Marjo", "role": "Co-fondatrice" }
+      ]
+    },
+    "stats": {
+      "centers": "Centres partenaires",
+      "countries": "Pays",
+      "divers": "Plongeurs",
+      "dives": "Plongées réservées",
+      "languages": "Langues"
+    },
+    "features": {
+      "title": "Pourquoi EviDive ?",
+      "items": [
+        {
+          "title": "Réservation instantanée",
+          "description": "Vérifiez la disponibilité en temps réel et réservez en quelques clics."
+        },
+        {
+          "title": "100% gratuit pour les centres",
+          "description": "Aucun frais d'inscription ni d'abonnement pour les centres partenaires."
+        },
+        {
+          "title": "Avis vérifiés",
+          "description": "Construisez votre réputation avec des avis authentiques de vrais plongeurs."
+        },
+        {
+          "title": "Visibilité mondiale",
+          "description": "Faites-vous connaître par des plongeurs du monde entier."
+        }
+      ]
+    },
+    "cta": {
+      "explore": "Explorer les centres",
+      "contact": "Nous contacter",
+      "partner": "Devenir partenaire"
+    },
+    "social": {
+      "title": "Suivez-nous",
+      "instagram": "@evidive.blue"
     }
   },
   "depth": {
@@ -1119,44 +1178,6 @@
       "privacy": "Protection de vos données"
     },
     "lastUpdated": "Dernière mise à jour"
-  },
-  "metadata": {
-    "home": {
-      "title": "EviDive - Explorez les fonds marins avec des centres vérifiés",
-      "description": "Découvrez les meilleurs spots de plongée avec EviDive. Réservez auprès de centres certifiés PADI et explorez les merveilles sous-marines en toute sécurité."
-    },
-    "careers": {
-      "title": "Carrières - Rejoignez l'équipe EviDive",
-      "description": "Opportunités d'emploi chez EviDive. Rejoignez notre équipe passionnée pour révolutionner l'expérience de plongée sous-marine."
-    },
-    "contact": {
-      "title": "Contact - EviDive",
-      "description": "Contactez l'équipe EviDive. Notre équipe est là pour répondre à vos questions sur la plongée et nos services."
-    },
-    "explorer": {
-      "title": "Explorateur - Carte interactive des sites de plongée",
-      "description": "Découvrez les meilleurs sites de plongée avec notre carte interactive. Explorez les fonds marins près de chez vous."
-    },
-    "login": {
-      "title": "Connexion - EviDive",
-      "description": "Connectez-vous à votre compte EviDive pour gérer vos réservations et accéder à votre tableau de bord."
-    },
-    "register": {
-      "title": "Inscription - EviDive",
-      "description": "Créez votre compte EviDive et commencez à explorer les merveilles sous-marines avec des centres certifiés."
-    },
-    "resetPassword": {
-      "title": "Réinitialiser le mot de passe - EviDive",
-      "description": "Réinitialisez votre mot de passe EviDive pour retrouver l'accès à votre compte."
-    },
-    "forgotPassword": {
-      "title": "Mot de passe oublié - EviDive",
-      "description": "Demandez un lien de réinitialisation de mot de passe pour votre compte EviDive."
-    },
-    "verifyEmail": {
-      "title": "Vérification email - EviDive",
-      "description": "Vérifiez votre adresse email pour activer votre compte EviDive et accéder à toutes les fonctionnalités."
-    }
   },
   "adminDashboard": {
     "meta": {
@@ -2888,58 +2909,6 @@
       "preferences": "Préférences"
     }
   },
-  "adminDashboard": {
-    "title": "Administration",
-    "description": "Gérez les centres de plongée, utilisateurs et paramètres de la plateforme.",
-    "stats": {
-      "totalCenters": "Total centres",
-      "pendingApproval": "En attente d'approbation",
-      "totalUsers": "Total utilisateurs",
-      "totalBookings": "Total réservations"
-    },
-    "pendingCenters": {
-      "title": "Centres en attente",
-      "viewAll": "Voir tout",
-      "status": "En attente",
-      "noPending": "Aucun centre en attente"
-    },
-    "quickActions": {
-      "title": "Actions rapides",
-      "manageCenters": "Gérer les centres",
-      "centersCount": "{approved} approuvés, {pending} en attente",
-      "manageUsers": "Gérer les utilisateurs",
-      "usersCount": "{count} utilisateurs au total",
-      "viewBookings": "Voir les réservations",
-      "bookingsCount": "{count} réservations au total"
-    }
-  },
-  "adminCenters": {
-    "backToAdmin": "Retour à l'administration",
-    "title": "Gérer les centres",
-    "description": "Examinez et gérez les demandes des centres de plongée.",
-    "searchPlaceholder": "Rechercher des centres...",
-    "status": {
-      "all": "Tous les centres",
-      "pending": "En attente",
-      "approved": "Approuvés",
-      "rejected": "Rejetés",
-      "suspended": "Suspendus"
-    },
-    "noResults": "Aucun centre trouvé",
-    "card": {
-      "owner": "Propriétaire :",
-      "services": "services",
-      "bookings": "réservations",
-      "reviews": "avis",
-      "created": "Créé le"
-    },
-    "actions": {
-      "view": "Voir",
-      "approve": "Approuver",
-      "reject": "Rejeter",
-      "suspend": "Suspendre"
-    }
-  },
   "onboardWelcome": {
     "title": "Bienvenue sur EviDive",
     "question": "Que souhaitez-vous faire ?",
@@ -3187,5 +3156,30 @@
     "description": "La page que vous cherchez semble avoir plongé trop profond. Revenons à la surface.",
     "backHome": "Retour à l'accueil",
     "goBack": "Retour"
+  },
+  "whytcard": {
+    "title": "Beyond Code",
+    "subtitle": "We Architect your Dreams",
+    "aiDev": "Développement IA",
+    "fullDev": "Développement complet",
+    "webProject": "Projet web",
+    "webService": "Service web",
+    "cloudProject": "Réseau social cloud",
+    "footer": "Cliquez sur un service pour en savoir plus"
+  },
+  "zen": {
+    "zenMode": "Mode Zen",
+    "inhale": "Inspirez",
+    "hold": "Retenez",
+    "exhale": "Expirez",
+    "minutes": " min",
+    "pause": "Pause",
+    "play": "Reprendre",
+    "close": "Fermer",
+    "mute": "Couper le son",
+    "unmute": "Activer le son",
+    "waves": "Vagues",
+    "bubbles": "Bulles",
+    "underwater": "Sous-marin"
   }
 }

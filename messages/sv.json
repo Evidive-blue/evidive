@@ -2506,5 +2506,30 @@
     "switchCenter": "Switch center",
     "noCenters": "You don't have any center yet",
     "createFirst": "Create my first center"
+  },
+  "whytcard": {
+    "title": "Beyond Code",
+    "subtitle": "We Architect your Dreams",
+    "aiDev": "AI-utveckling",
+    "fullDev": "Fullständig utveckling",
+    "webProject": "Webbprojekt",
+    "webService": "Webbtjänst",
+    "cloudProject": "Molnbaserat socialt nätverk",
+    "footer": "Klicka på en tjänst för att lära dig mer"
+  },
+  "zen": {
+    "zenMode": "Zen-läge",
+    "inhale": "Andas in",
+    "hold": "Håll",
+    "exhale": "Andas ut",
+    "minutes": " min",
+    "pause": "Paus",
+    "play": "Återuppta",
+    "close": "Stäng",
+    "mute": "Tyst",
+    "unmute": "Ljud på",
+    "waves": "Vågor",
+    "bubbles": "Bubblor",
+    "underwater": "Undervattens"
   }
 }

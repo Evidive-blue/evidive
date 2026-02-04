@@ -17,7 +17,30 @@ export default async function AdminCenterDetailPage({ params }: Props) {
 
   const center = await prisma.center.findUnique({
     where: { id },
-    include: {
+    select: {
+      id: true,
+      slug: true,
+      name: true,
+      description: true,
+      shortDescription: true,
+      address: true,
+      city: true,
+      region: true,
+      country: true,
+      email: true,
+      phone: true,
+      website: true,
+      certifications: true,
+      languagesSpoken: true,
+      status: true,
+      verified: true,
+      rating: true,
+      reviewCount: true,
+      bookingCount: true,
+      viewCount: true,
+      createdAt: true,
+      approvedAt: true,
+      commissionRate: true,
       owner: {
         select: {
           id: true,

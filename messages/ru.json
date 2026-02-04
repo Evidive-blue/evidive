@@ -2506,5 +2506,30 @@
     "switchCenter": "Switch center",
     "noCenters": "You don't have any center yet",
     "createFirst": "Create my first center"
+  },
+  "whytcard": {
+    "title": "Beyond Code",
+    "subtitle": "We Architect your Dreams",
+    "aiDev": "ИИ-разработка",
+    "fullDev": "Полная разработка",
+    "webProject": "Веб-проект",
+    "webService": "Веб-сервис",
+    "cloudProject": "Облачная соцсеть",
+    "footer": "Нажмите на услугу, чтобы узнать больше"
+  },
+  "zen": {
+    "zenMode": "Режим Дзен",
+    "inhale": "Вдох",
+    "hold": "Задержка",
+    "exhale": "Выдох",
+    "minutes": " мин",
+    "pause": "Пауза",
+    "play": "Продолжить",
+    "close": "Закрыть",
+    "mute": "Выключить звук",
+    "unmute": "Включить звук",
+    "waves": "Волны",
+    "bubbles": "Пузырьки",
+    "underwater": "Подводный"
   }
 }

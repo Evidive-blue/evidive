@@ -2,7 +2,9 @@
 
 import { useEffect, useState, useCallback, useRef, useMemo, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { X, Sparkles, Code, Globe, Cloud, Laptop, Bot } from "lucide-react";
+import { useTranslations } from "@/lib/i18n/use-translations";
 
 // Hydration-safe mounting check using useSyncExternalStore
 const emptySubscribe = () => () => {};
@@ -1154,42 +1156,48 @@ const WHYTCARD_FISH_COLORS: Record<WhytCardFishVariant, { body: string; text: st
 
 function WhytCardFishSVG({ direction, variant = "classic" }: { direction: number; variant?: WhytCardFishVariant }) {
   const colors = WHYTCARD_FISH_COLORS[variant];
+  // Le poisson nage vers la gauche (direction -1) ou vers la droite (direction 1)
+  // Le texte doit toujours être lisible dans le sens de la nage
+  const isSwimmingLeft = direction === -1;
   
   return (
     <svg 
       viewBox="0 0 120 40" 
       fill="none" 
       className="h-full w-full"
-      style={{ transform: direction === -1 ? "scaleX(-1)" : "none" }}
+      style={{ transform: isSwimmingLeft ? "scaleX(1)" : "scaleX(-1)" }}
     >
       {/* Fish body shape behind text - PLUS VISIBLE */}
       <ellipse cx="55" cy="20" rx="45" ry="14" fill={colors.body} fillOpacity="0.5" />
       
-      {/* Tail fin */}
+      {/* Tail fin - à droite (arrière du poisson) */}
       <polygon points="100,20 118,8 118,32" fill={colors.body} fillOpacity="0.6" />
       
       {/* Dorsal fin */}
       <path d="M40,6 Q55,0 70,6" fill={colors.body} fillOpacity="0.5" />
       
       {/* Pectoral fin */}
-      <ellipse cx="45" cy="28" rx="8" ry="4" fill={colors.body} fillOpacity="0.4" />
+      <ellipse cx="35" cy="28" rx="8" ry="4" fill={colors.body} fillOpacity="0.4" />
       
       {/* WhytCard text as the fish pattern - BIEN VISIBLE */}
-      <text 
-        x="55" 
-        y="24" 
-        textAnchor="middle" 
-        fill={colors.text} 
-        fillOpacity="0.9"
-        fontFamily="system-ui, sans-serif"
-        fontSize="14"
-        fontWeight="700"
-        letterSpacing="1"
-      >
-        WhytCard
-      </text>
+      {/* Le texte est toujours dans le bon sens grâce au double flip */}
+      <g transform={isSwimmingLeft ? "" : "scale(-1,1) translate(-110,0)"}>
+        <text 
+          x="55" 
+          y="24" 
+          textAnchor="middle" 
+          fill={colors.text} 
+          fillOpacity="0.9"
+          fontFamily="system-ui, sans-serif"
+          fontSize="14"
+          fontWeight="700"
+          letterSpacing="1"
+        >
+          WhytCard
+        </text>
+      </g>
       
-      {/* Eye - plus gros et visible */}
+      {/* Eye - à gauche (tête du poisson) */}
       <circle cx="18" cy="18" r="5" fill={colors.eye} fillOpacity="0.7" />
       <circle cx="17" cy="17" r="2" fill={colors.glow} fillOpacity="0.9" />
       
@@ -1238,6 +1246,162 @@ function WhytCardFishSVG({ direction, variant = "classic" }: { direction: number
   );
 }
 
+// WhytCard Modal Component
+function WhytCardModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const t = useTranslations("whytcard");
+  
+  const services = [
+    { 
+      url: "https://whytcard.ai", 
+      icon: Bot,
+      labelKey: "aiDev",
+      gradient: "from-purple-500 to-pink-500",
+    },
+    { 
+      url: "https://whytcard.dev", 
+      icon: Code,
+      labelKey: "fullDev",
+      gradient: "from-cyan-500 to-blue-500",
+    },
+    { 
+      url: "https://whytcard.website", 
+      icon: Globe,
+      labelKey: "webProject",
+      gradient: "from-emerald-500 to-teal-500",
+    },
+    { 
+      url: "https://whytweb.ch", 
+      icon: Laptop,
+      labelKey: "webService",
+      gradient: "from-orange-500 to-amber-500",
+    },
+    { 
+      url: "https://whytcard.cloud", 
+      icon: Cloud,
+      labelKey: "cloudProject",
+      gradient: "from-indigo-500 to-violet-500",
+    },
+  ];
+
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pointer-events-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          {/* Backdrop */}
+          <motion.div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+          
+          {/* Modal */}
+          <motion.div
+            className="relative w-full max-w-md overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95 p-6 shadow-2xl backdrop-blur-xl"
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Glow effects */}
+            <div className="absolute -left-20 -top-20 h-40 w-40 rounded-full bg-cyan-500/20 blur-3xl" />
+            <div className="absolute -bottom-20 -right-20 h-40 w-40 rounded-full bg-purple-500/20 blur-3xl" />
+            
+            {/* Close button */}
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 rounded-full p-2 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            
+            {/* Header */}
+            <div className="relative mb-6 text-center">
+              <motion.div
+                className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <Sparkles className="h-4 w-4 text-cyan-400" />
+                <span className="text-sm font-medium text-cyan-300">WhytCard</span>
+              </motion.div>
+              
+              <motion.h2
+                className="text-2xl font-bold text-white"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+              >
+                {t("title")}
+              </motion.h2>
+              
+              <motion.p
+                className="mt-2 text-sm text-white/60"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                {t("subtitle")}
+              </motion.p>
+            </div>
+            
+            {/* Services */}
+            <div className="relative space-y-3">
+              {services.map((service, index) => (
+                <motion.a
+                  key={service.url}
+                  href={service.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4 transition-all hover:border-white/20 hover:bg-white/10`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.25 + index * 0.05 }}
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${service.gradient} text-white shadow-lg`}>
+                    <service.icon className="h-5 w-5" />
+                  </div>
+                  <span className="flex-1 font-medium text-white">
+                    {t(service.labelKey)}
+                  </span>
+                  <motion.span
+                    className="text-white/40 transition-transform group-hover:translate-x-1 group-hover:text-white/60"
+                    initial={{ x: 0 }}
+                  >
+                    →
+                  </motion.span>
+                </motion.a>
+              ))}
+            </div>
+            
+            {/* Footer */}
+            <motion.p
+              className="mt-6 text-center text-xs text-white/40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              {t("footer")}
+            </motion.p>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 // WhytCard fish data for multiple instances
 type WhytCardFishData = {
   id: number;
@@ -1268,6 +1432,7 @@ export function OceanCanvas() {
   const prefersReducedMotion = useReducedMotion();
   const pathname = usePathname();
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [whytCardModalOpen, setWhytCardModalOpen] = useState(false);
   // Prevent hydration mismatch - only render on client
   const isMounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
   const previousPageIndex = useRef<number>(0);
@@ -1935,7 +2100,7 @@ export function OceanCanvas() {
                 viewBox="0 0 40 20"
                 fill="none"
                 className="h-full w-full"
-                style={{ transform: f.direction === 1 ? "scaleX(-1)" : "none" }}
+                style={{ transform: f.direction === -1 ? "scaleX(-1)" : "none" }}
               >
                 <ellipse cx="18" cy="10" rx="14" ry="8" fill={f.color} fillOpacity="0.7" />
                 <polygon points="32,10 40,2 40,18" fill={f.color} fillOpacity="0.6" />
@@ -2117,22 +2282,20 @@ export function OceanCanvas() {
           );
         })}
 
-        {/* WhytCard Fish School - Easter eggs! Clickable links to whytcard.ai */}
+        {/* WhytCard Fish School - Easter eggs! Click to open modal */}
         {WHYTCARD_FISH.map((fish) => {
           const colors = WHYTCARD_FISH_COLORS[fish.variant];
           
           return (
-            <motion.a
+            <motion.button
               key={`whytcard-fish-${fish.id}`}
-              href="https://whytcard.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute pointer-events-auto cursor-pointer"
+              onClick={() => setWhytCardModalOpen(true)}
+              className="absolute pointer-events-auto cursor-pointer border-0 bg-transparent p-0"
               style={{
                 top: `${fish.y}%`,
                 width: fish.size,
                 height: fish.size * 0.35,
-                opacity: 0.85, // Beaucoup plus visible!
+                opacity: 0.85,
                 zIndex: 10,
               }}
               animate={{
@@ -2153,7 +2316,7 @@ export function OceanCanvas() {
               title="Made with ❤️ by WhytCard"
             >
               <WhytCardFishSVG direction={fish.direction} variant={fish.variant} />
-            </motion.a>
+            </motion.button>
           );
         })}
 
@@ -2210,6 +2373,12 @@ export function OceanCanvas() {
           background: "radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.4) 100%)",
           opacity: 0.3 + effectiveScrollProgress * 0.5,
         }}
+      />
+
+      {/* WhytCard Modal */}
+      <WhytCardModal 
+        isOpen={whytCardModalOpen} 
+        onClose={() => setWhytCardModalOpen(false)} 
       />
     </div>
   );

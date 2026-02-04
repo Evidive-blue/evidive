@@ -496,52 +496,111 @@
  },
  "about": {
   "meta": {
-   "title": "About",
-   "description": "Discover the story of EviDive, our mission and values. A passionate team of diving and technology enthusiasts based in Switzerland."
+   "title": "About - EviDive",
+   "description": "Discover EviDive, the 100% diving platform born in Geneva. Book your courses, training and diving holidays with certified centers."
   },
   "hero": {
-   "title": "About EviDive",
-   "subtitle": "Connecting divers to the best underwater experiences"
+   "badge": "Born in Geneva",
+   "title": "Your portal to the depths",
+   "subtitle": "EviDive was born from a passion for the underwater world and a desire to make diving accessible and safe for everyone."
   },
   "story": {
-   "title": "Our story",
-   "subtitle": "Our journey to revolutionize scuba diving",
+   "title": "Our journey",
+   "subtitle": "From Geneva to the world",
    "timeline": {
-    "idea": "The idea was born from the frustration of booking dives abroad",
-    "launch": "Launch of the first version of the platform",
-    "expansion": "International expansion with 100+ partner centers",
-    "partners": "Strategic partnerships and new features"
+    "idea": "The idea was born in Geneva: simplify dive bookings",
+    "launch": "Launch of EviDive.blue - a platform dedicated to enthusiasts",
+    "expansion": "Partnerships with centers in the Mediterranean and beyond",
+    "partners": "Travel blog, tips and destinations (Sicily, Sardinia, Tuscany...)"
    }
   },
   "mission": {
-   "title": "Our mission",
-   "description": "EviDive was born from a shared passion for diving and technology. Our mission is to connect divers worldwide to the best underwater experiences while simplifying life for dive centers."
+   "badge": "Our Mission",
+   "title": "Making diving accessible to all",
+   "description": "At EviDive, we believe diving should never be left to chance. Our platform connects divers worldwide with certified centers, selected for their professionalism, passion and respect for the marine environment.",
+   "points": [
+    "Real-time availability and transparent pricing",
+    "PADI, SSI, CMAS certified centers",
+    "Free registration for partner centers"
+   ]
   },
   "values": {
    "title": "Our values",
-   "subtitle": "The principles that guide every decision we make",
+   "subtitle": "What guides us every day",
    "items": {
     "trust": {
      "title": "Trust",
-     "description": "Verified centers and authentic reviews for peaceful booking."
+     "description": "Verified centers and authentic community reviews for informed choices."
     },
     "safety": {
      "title": "Safety",
-     "description": "Strict standards and clear prerequisites for every dive."
+     "description": "Compliant equipment, professional supervision and strict protocols."
     },
     "experience": {
-     "title": "Experience",
-     "description": "Immersive design and seamless booking for a premium experience."
+     "title": "Passion",
+     "description": "Every dive is an adventure. Courses, training and unforgettable diving holidays."
     },
     "community": {
      "title": "Community",
-     "description": "A community of enthusiasts sharing their discoveries."
+     "description": "Share your favorite spots, tips and best dives with fellow enthusiasts."
     }
    }
   },
+  "vision": {
+   "badge": "Our Vision",
+   "title": "A connected and ethical adventure",
+   "description": "EviDive is also a community of enthusiasts. Our vision: to make diving an inner and outer journey that is connected, ethical and unforgettable."
+  },
   "team": {
-   "title": "Our team",
-   "description": "A team of diving and technology enthusiasts based in Switzerland."
+   "title": "Join the adventure",
+   "description": "Whether you're a curious beginner or an experienced diver, EviDive accompanies you in all your underwater explorations."
+  },
+  "founders": {
+   "badge": "The founding team",
+   "title": "The passionate people behind EviDive",
+   "members": [
+    { "name": "Armando", "role": "Co-founder" },
+    { "name": "Leti", "role": "Co-founder" },
+    { "name": "Mathieu", "role": "Co-founder" },
+    { "name": "Marjo", "role": "Co-founder" }
+   ]
+  },
+  "stats": {
+   "centers": "Partner centers",
+   "countries": "Countries",
+   "divers": "Divers",
+   "dives": "Dives booked",
+   "languages": "Languages"
+  },
+  "features": {
+   "title": "Why EviDive?",
+   "items": [
+    {
+     "title": "Instant booking",
+     "description": "Check real-time availability and book in just a few clicks."
+    },
+    {
+     "title": "100% free for centers",
+     "description": "No registration or subscription fees for partner centers."
+    },
+    {
+     "title": "Verified reviews",
+     "description": "Build your reputation with authentic reviews from real divers."
+    },
+    {
+     "title": "Global visibility",
+     "description": "Get known by divers from around the world."
+    }
+   ]
+  },
+  "cta": {
+   "explore": "Explore centers",
+   "contact": "Contact us",
+   "partner": "Become a partner"
+  },
+  "social": {
+   "title": "Follow us",
+   "instagram": "@evidive.blue"
   }
  },
  "depth": {
@@ -1119,44 +1178,6 @@
    "privacy": "Data protection"
   },
   "lastUpdated": "Last updated"
- },
- "metadata": {
-  "home": {
-   "title": "EviDive - Explore the ocean depths with verified centers",
-   "description": "Discover the best diving spots with EviDive. Book with PADI-certified centers and explore underwater wonders safely."
-  },
-  "careers": {
-   "title": "Careers - Join the EviDive team",
-   "description": "Job opportunities at EviDive. Join our passionate team to revolutionize the underwater diving experience."
-  },
-  "contact": {
-   "title": "Contact - EviDive",
-   "description": "Contact the EviDive team. Our team is here to answer your questions about diving and our services."
-  },
-  "explorer": {
-   "title": "Explorer - Interactive map of diving sites",
-   "description": "Discover the best diving sites with our interactive map. Explore the ocean depths near you."
-  },
-  "login": {
-   "title": "Login - EviDive",
-   "description": "Log in to your EviDive account to manage your bookings and access your dashboard."
-  },
-  "register": {
-   "title": "Register - EviDive",
-   "description": "Create your EviDive account and start exploring underwater wonders with certified centers."
-  },
-  "resetPassword": {
-   "title": "Reset password - EviDive",
-   "description": "Reset your EviDive password to regain access to your account."
-  },
-  "forgotPassword": {
-   "title": "Forgot password - EviDive",
-   "description": "Request a password reset link for your EviDive account."
-  },
-  "verifyEmail": {
-   "title": "Email verification - EviDive",
-   "description": "Verify your email address to activate your EviDive account and access all features."
-  }
  },
  "adminDashboard": {
   "meta": {
@@ -2888,58 +2909,6 @@
       "preferences": "Preferences"
     }
   },
-  "adminDashboard": {
-    "title": "Admin Dashboard",
-    "description": "Manage dive centers, users, and platform settings.",
-    "stats": {
-      "totalCenters": "Total Centers",
-      "pendingApproval": "Pending Approval",
-      "totalUsers": "Total Users",
-      "totalBookings": "Total Bookings"
-    },
-    "pendingCenters": {
-      "title": "Pending Centers",
-      "viewAll": "View all",
-      "status": "Pending",
-      "noPending": "No pending centers"
-    },
-    "quickActions": {
-      "title": "Quick Actions",
-      "manageCenters": "Manage Centers",
-      "centersCount": "{approved} approved, {pending} pending",
-      "manageUsers": "Manage Users",
-      "usersCount": "{count} total users",
-      "viewBookings": "View Bookings",
-      "bookingsCount": "{count} total bookings"
-    }
-  },
-  "adminCenters": {
-    "backToAdmin": "Back to Admin",
-    "title": "Manage Centers",
-    "description": "Review and manage dive center applications.",
-    "searchPlaceholder": "Search centers...",
-    "status": {
-      "all": "All Centers",
-      "pending": "Pending",
-      "approved": "Approved",
-      "rejected": "Rejected",
-      "suspended": "Suspended"
-    },
-    "noResults": "No centers found",
-    "card": {
-      "owner": "Owner:",
-      "services": "services",
-      "bookings": "bookings",
-      "reviews": "reviews",
-      "created": "Created"
-    },
-    "actions": {
-      "view": "View",
-      "approve": "Approve",
-      "reject": "Reject",
-      "suspend": "Suspend"
-    }
-  },
   "onboardWelcome": {
     "title": "Welcome to EviDive",
     "question": "What would you like to do?",
@@ -3187,5 +3156,30 @@
     "description": "The page you're looking for seems to have dived too deep. Let's get you back to the surface.",
     "backHome": "Back to home",
     "goBack": "Go back"
+  },
+  "whytcard": {
+    "title": "Beyond Code",
+    "subtitle": "We Architect your Dreams",
+    "aiDev": "AI Development",
+    "fullDev": "Full Development",
+    "webProject": "Web Project",
+    "webService": "Web Service",
+    "cloudProject": "Cloud Social Network",
+    "footer": "Click on a service to learn more"
+  },
+  "zen": {
+    "zenMode": "Zen Mode",
+    "inhale": "Inhale",
+    "hold": "Hold",
+    "exhale": "Exhale",
+    "minutes": " min",
+    "pause": "Pause",
+    "play": "Resume",
+    "close": "Close",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "waves": "Waves",
+    "bubbles": "Bubbles",
+    "underwater": "Underwater"
   }
 }

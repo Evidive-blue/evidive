@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { locales, defaultLocale, isValidLocale } from '@/lib/i18n/config';
+import { defaultLocale, isValidLocale } from '@/lib/i18n/config';
 
 // Paths that should not be processed by the middleware
 const publicPaths = [

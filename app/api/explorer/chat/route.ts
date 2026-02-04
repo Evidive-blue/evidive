@@ -1,6 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+// Simple in-memory rate limiting (for production, use Redis)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX = 10; // 10 requests per minute
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return true;
+  }
+  
+  if (record.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+  
+  record.count++;
+  return true;
+}
+
+// Input validation schema
+const chatSchema = z.object({
+  messages: z.array(z.object({
+    role: z.enum(['user', 'assistant']),
+    content: z.string().max(2000),
+  })).min(1).max(50),
+});
 
 const SYSTEM_PROMPT = `Tu es DiveGuide, un assistant expert en plongée sous-marine pour EviDive. Tu aides les utilisateurs à découvrir le monde sous-marin et à trouver leurs prochaines aventures de plongée.
 
@@ -39,14 +70,30 @@ IMPORTANT :
 
 export async function POST(request: NextRequest) {
   try {
-    const { messages } = await request.json();
-
-    if (!messages || !Array.isArray(messages)) {
+    // Rate limiting check
+    const clientIp = request.headers.get('x-forwarded-for')?.split(',')[0] || 
+                     request.headers.get('x-real-ip') || 
+                     'unknown';
+    
+    if (!checkRateLimit(clientIp)) {
       return NextResponse.json(
-        { error: 'Messages requis' },
+        { error: 'Trop de requêtes. Veuillez réessayer dans une minute.' },
+        { status: 429 }
+      );
+    }
+
+    const body = await request.json();
+    
+    // Validate input
+    const validation = chatSchema.safeParse(body);
+    if (!validation.success) {
+      return NextResponse.json(
+        { error: 'Messages invalides', details: validation.error.flatten() },
         { status: 400 }
       );
     }
+
+    const { messages } = validation.data;
 
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {

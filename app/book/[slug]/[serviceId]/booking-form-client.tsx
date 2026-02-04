@@ -91,7 +91,7 @@ const bookingSchema = z.object({
 type BookingFormData = z.infer<typeof bookingSchema>;
 
 export function BookingFormClient({ service }: BookingFormClientProps) {
-  const router = useRouter();
+  const _router = useRouter();
   const { locale } = useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedExtras, setSelectedExtras] = useState<Record<string, number>>({});
@@ -169,7 +169,7 @@ export function BookingFormClient({ service }: BookingFormClientProps) {
       if (current === 0) {
         return { ...prev, [extraId]: 1 };
       }
-      const { [extraId]: _, ...rest } = prev;
+      const { [extraId]: _removed, ...rest } = prev;
       return rest;
     });
   };
@@ -179,7 +179,7 @@ export function BookingFormClient({ service }: BookingFormClientProps) {
       const current = prev[extraId] || 0;
       const newQty = Math.max(0, current + delta);
       if (newQty === 0) {
-        const { [extraId]: _, ...rest } = prev;
+        const { [extraId]: _removed, ...rest } = prev;
         return rest;
       }
       return { ...prev, [extraId]: newQty };

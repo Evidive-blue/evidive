@@ -15,7 +15,6 @@ import {
   Anchor,
   X,
   Search,
-  Filter,
   Globe2,
   List
 } from 'lucide-react';
@@ -247,7 +246,7 @@ export function DeepDiveExplorer({ centers }: DeepDiveExplorerProps) {
     if (!name || typeof name !== 'object') return tCommon('unnamed');
     const obj = name as Record<string, string>;
     return String(obj[locale] || obj['en'] || obj['fr'] || Object.values(obj)[0] || tCommon('unnamed'));
-  }, [locale]);
+  }, [locale, tCommon]);
 
   const getLocalizedDescription = useCallback((desc: JsonValue): string => {
     if (!desc || typeof desc !== 'object') return '';

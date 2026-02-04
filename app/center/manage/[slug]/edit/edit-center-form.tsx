@@ -14,7 +14,6 @@ import {
   Mail,
   Phone,
   Globe,
-  Camera,
   Save,
   Loader2,
   Facebook,
@@ -109,7 +108,7 @@ const LANGUAGES = ['English', 'French', 'Spanish', 'German', 'Italian', 'Portugu
 
 export function EditCenterForm({ center }: EditCenterFormProps) {
   const router = useRouter();
-  const { locale } = useLocale();
+  useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeSection, setActiveSection] = useState<'info' | 'location' | 'contact' | 'services' | 'media'>('info');
 

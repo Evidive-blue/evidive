@@ -10,7 +10,6 @@ import {
   Users,
   Mail,
   Phone,
-  Download,
   Share2,
   Home,
 } from 'lucide-react';

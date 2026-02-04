@@ -154,7 +154,7 @@ export function PaymentsManageClient({ center, stats }: PaymentsManageClientProp
       const data = await response.json();
       setStripeStatus(data.status as keyof typeof STATUS_CONFIG);
       toast.success('Statut mis à jour');
-    } catch (error) {
+    } catch {
       toast.error('Erreur lors de la mise à jour');
     } finally {
       setIsRefreshing(false);

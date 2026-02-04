@@ -19,7 +19,6 @@ import {
   Star,
   X,
   Save,
-  Camera,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -205,7 +204,7 @@ export function TeamManageClient({ center }: TeamManageClientProps) {
       setWorkers((prev) => prev.filter((w) => w.id !== workerId));
       toast.success('Membre supprimé');
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.error('Erreur lors de la suppression');
     } finally {
       setDeletingId(null);

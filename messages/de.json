@@ -2506,5 +2506,30 @@
     "switchCenter": "Switch center",
     "noCenters": "You don't have any center yet",
     "createFirst": "Create my first center"
+  },
+  "whytcard": {
+    "title": "Beyond Code",
+    "subtitle": "We Architect your Dreams",
+    "aiDev": "KI-Entwicklung",
+    "fullDev": "Vollständige Entwicklung",
+    "webProject": "Webprojekt",
+    "webService": "Webdienst",
+    "cloudProject": "Cloud Soziales Netzwerk",
+    "footer": "Klicken Sie auf einen Service, um mehr zu erfahren"
+  },
+  "zen": {
+    "zenMode": "Zen-Modus",
+    "inhale": "Einatmen",
+    "hold": "Halten",
+    "exhale": "Ausatmen",
+    "minutes": " Min",
+    "pause": "Pause",
+    "play": "Fortsetzen",
+    "close": "Schließen",
+    "mute": "Stumm",
+    "unmute": "Ton an",
+    "waves": "Wellen",
+    "bubbles": "Blasen",
+    "underwater": "Unterwasser"
   }
 }

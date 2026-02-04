@@ -14,10 +14,18 @@ import {
   Award,
   ArrowRight,
   MapPin,
+  Zap,
+  Check,
+  Eye,
+  MessageCircle,
+  Instagram,
+  Handshake,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LightRays } from '@/components/effects/floating-particles';
 import { useTranslations } from '@/lib/i18n/use-translations';
+import { useLocale } from '@/lib/i18n/locale-provider';
+import { getNestedValue } from '@/lib/i18n/get-messages';
 
 // Floating bubbles effect
 function FloatingBubbles() {
@@ -52,6 +60,19 @@ function FloatingBubbles() {
 
 export default function AboutPage() {
   const t = useTranslations('about');
+  const { messages } = useLocale();
+  
+  // Get founders array safely
+  const founders = (() => {
+    const members = getNestedValue(messages, 'about.founders.members');
+    return Array.isArray(members) ? members as Array<{ name: string; role: string }> : [];
+  })();
+  
+  // Get features array safely
+  const featuresItems = (() => {
+    const items = getNestedValue(messages, 'about.features.items');
+    return Array.isArray(items) ? items as Array<{ title: string; description: string }> : [];
+  })();
 
   const values = [
     {
@@ -110,7 +131,7 @@ export default function AboutPage() {
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 backdrop-blur-sm"
           >
             <Waves className="h-4 w-4 text-cyan-400" />
-            <span className="text-sm font-medium text-cyan-300">Notre Histoire</span>
+            <span className="text-sm font-medium text-cyan-300">{t('hero.badge')}</span>
           </motion.div>
 
           <motion.h1
@@ -133,24 +154,7 @@ export default function AboutPage() {
 
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-xs text-white/40">Scroll</span>
-            <div className="h-8 w-5 rounded-full border-2 border-white/20 p-1">
-              <motion.div
-                className="h-2 w-1.5 rounded-full bg-cyan-400"
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </div>
-          </div>
-        </motion.div>
-      </section>
+        </section>
 
       {/* Mission Section */}
       <section className="relative py-24 lg:py-32">
@@ -195,8 +199,8 @@ export default function AboutPage() {
                     <Waves className="h-5 w-5 text-cyan-400" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white">Worldwide</p>
-                    <p className="text-xs text-white/60">25+ countries</p>
+                    <p className="text-sm font-medium text-white">{t('stats.countries')}</p>
+                    <p className="text-xs text-white/60">25+</p>
                   </div>
                 </div>
               </motion.div>
@@ -209,7 +213,7 @@ export default function AboutPage() {
               viewport={{ once: true }}
             >
               <span className="mb-4 inline-block rounded-full bg-cyan-500/10 px-3 py-1 text-sm text-cyan-400">
-                Notre Mission
+                {t('mission.badge')}
               </span>
               <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
                 {t('mission.title')}
@@ -218,7 +222,7 @@ export default function AboutPage() {
                 {t('mission.description')}
               </p>
               <ul className="space-y-3">
-                {['Simplifier la réservation de plongées', 'Connecter plongeurs et centres', 'Promouvoir la plongée responsable'].map((item, i) => (
+                {(t('mission.points') as unknown as string[]).map((item: string, i: number) => (
                   <motion.li
                     key={i}
                     initial={{ opacity: 0, x: 20 }}
@@ -251,7 +255,7 @@ export default function AboutPage() {
             className="mb-16 text-center"
           >
             <span className="mb-4 inline-block rounded-full bg-cyan-500/10 px-3 py-1 text-sm text-cyan-400">
-              Nos Valeurs
+              {t('values.title')}
             </span>
             <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
               {t('values.title')}
@@ -301,7 +305,7 @@ export default function AboutPage() {
             className="mb-16 text-center"
           >
             <span className="mb-4 inline-block rounded-full bg-cyan-500/10 px-3 py-1 text-sm text-cyan-400">
-              Notre Parcours
+              {t('story.title')}
             </span>
             <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
               {t('story.title')}
@@ -358,6 +362,114 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Founders Section */}
+      <section className="relative py-24 lg:py-32">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
+        
+        <div className="container relative mx-auto max-w-4xl px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12 text-center"
+          >
+            <span className="mb-4 inline-block rounded-full bg-purple-500/10 px-3 py-1 text-sm text-purple-400">
+              {t('founders.badge')}
+            </span>
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+              {t('founders.title')}
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            {founders.map((member, index) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="text-center"
+              >
+                <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 text-3xl font-bold text-purple-300">
+                  {member.name.charAt(0)}
+                </div>
+                <h3 className="text-lg font-semibold text-white">{member.name}</h3>
+                <p className="text-sm text-white/60">{member.role}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Vision Section */}
+      <section className="relative py-24 lg:py-32">
+        <div className="container mx-auto max-w-4xl px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="mb-4 inline-block rounded-full bg-emerald-500/10 px-3 py-1 text-sm text-emerald-400">
+              {t('vision.badge')}
+            </span>
+            <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
+              {t('vision.title')}
+            </h2>
+            <p className="mx-auto max-w-2xl text-lg text-white/70">
+              {t('vision.description')}
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="relative py-24 lg:py-32">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" />
+        
+        <div className="container relative mx-auto max-w-6xl px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 text-center"
+          >
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+              {t('features.title')}
+            </h2>
+          </motion.div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { icon: Zap, color: 'text-amber-400', bg: 'bg-amber-500/20' },
+              { icon: Check, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+              { icon: MessageCircle, color: 'text-blue-400', bg: 'bg-blue-500/20' },
+              { icon: Eye, color: 'text-purple-400', bg: 'bg-purple-500/20' },
+            ].map((feature, index) => {
+              const item = featuresItems[index];
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                >
+                  <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${feature.bg}`}>
+                    <feature.icon className={`h-6 w-6 ${feature.color}`} />
+                  </div>
+                  <h3 className="mb-2 text-lg font-semibold text-white">{item?.title}</h3>
+                  <p className="text-sm text-white/60">{item?.description}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-24 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 to-transparent" />
@@ -382,7 +494,17 @@ export default function AboutPage() {
                   className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
                 >
                   <Compass className="mr-2 h-5 w-5" />
-                  Explorer les centres
+                  {t('cta.explore')}
+                </Button>
+              </Link>
+              <Link href="/become-partner">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="rounded-xl border-emerald-500/30 bg-emerald-500/10 px-8 text-emerald-400 hover:bg-emerald-500/20"
+                >
+                  <Handshake className="mr-2 h-5 w-5" />
+                  {t('cta.partner')}
                 </Button>
               </Link>
               <Link href="/contact">
@@ -391,10 +513,30 @@ export default function AboutPage() {
                   variant="outline"
                   className="rounded-xl border-white/20 bg-white/5 px-8 text-white hover:bg-white/10"
                 >
-                  Nous contacter
+                  {t('cta.contact')}
                 </Button>
               </Link>
             </div>
+
+            {/* Social */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="mt-12 flex items-center justify-center gap-2"
+            >
+              <span className="text-sm text-white/50">{t('social.title')}</span>
+              <a
+                href="https://www.instagram.com/evidive.blue/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 px-3 py-1 text-sm text-pink-400 transition-colors hover:bg-pink-500/20"
+              >
+                <Instagram className="h-4 w-4" />
+                {t('social.instagram')}
+              </a>
+            </motion.div>
           </motion.div>
         </div>
       </section>

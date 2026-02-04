@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Building2, Users, Calendar, AlertTriangle, ArrowRight } from "lucide-react";
+import { Building2, Users, Calendar, AlertTriangle, ArrowRight, Settings } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
 import { getLocale } from "@/lib/i18n/get-locale-server";
@@ -250,6 +250,22 @@ export default async function AdminPage() {
                   <div>
                     <p className="font-medium text-white">{t("quickActions.viewBookings")}</p>
                     <p className="text-sm text-white/60">{t("quickActions.bookingsCount", { count: totalBookings })}</p>
+                  </div>
+                </div>
+                <ArrowRight className="h-5 w-5 text-white/40" />
+              </Link>
+
+              <Link
+                href="/admin/settings"
+                className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 p-4 transition-all hover:bg-white/10"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
+                    <Settings className="h-5 w-5 text-purple-400" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-white">Paramètres globaux</p>
+                    <p className="text-sm text-white/60">Commission, tarifs, options</p>
                   </div>
                 </div>
                 <ArrowRight className="h-5 w-5 text-white/40" />

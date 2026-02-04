@@ -2,11 +2,15 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { Waves } from 'lucide-react';
 import { useTranslations } from '@/lib/i18n/use-translations';
+import { useZenStore } from '@/stores';
 
 export function Footer() {
   const t = useTranslations('footer');
   const tImages = useTranslations('images');
+  const tZen = useTranslations('zen');
+  const openZen = useZenStore((state) => state.openZen);
 
   const footerLinks = {
     discover: [
@@ -103,17 +107,28 @@ export function Footer() {
             <p className="text-sm text-muted-foreground">
               &copy; {new Date().getFullYear()} {t('brandName')}. {t('rights')}
             </p>
-            <p className="text-sm text-muted-foreground">
-              Designed by{' '}
-              <a
-                href="https://whytcard.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
+            <div className="flex items-center gap-4">
+              <button
+                onClick={openZen}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-cyan-400 transition-colors group"
+                aria-label={tZen('zenMode')}
               >
-                WhytCard
-              </a>
-            </p>
+                <Waves className="w-4 h-4 group-hover:animate-pulse" />
+                <span>{tZen('zenMode')}</span>
+              </button>
+              <span className="text-muted-foreground/50">|</span>
+              <p className="text-sm text-muted-foreground">
+                Designed by{' '}
+                <a
+                  href="https://whytcard.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  WhytCard
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ const updateSchema = z.object({
   verified: z.boolean().optional(),
   featured: z.boolean().optional(),
   reason: z.string().optional(),
+  commissionRate: z.number().min(0).max(100).optional(),
 });
 
 // GET - Get center details (admin only)
@@ -101,7 +102,7 @@ export async function PATCH(
       );
     }
 
-    const { status, verified, featured } = parsed.data;
+    const { status, verified, featured, commissionRate } = parsed.data;
 
     // Check if center exists
     const existingCenter = await prisma.center.findUnique({
@@ -132,6 +133,10 @@ export async function PATCH(
     
     if (featured !== undefined) {
       updateData.featured = featured;
+    }
+    
+    if (commissionRate !== undefined) {
+      updateData.commissionRate = commissionRate;
     }
 
     // Update center

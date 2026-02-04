@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { useLocale } from './locale-provider';
 import { getNestedValue } from './get-messages';
 
@@ -38,8 +38,3 @@ export function useTranslations(namespace?: string) {
 
   return t;
 }
-
-/**
- * Alias pour compatibilité
- */
-export const useT = useTranslations;

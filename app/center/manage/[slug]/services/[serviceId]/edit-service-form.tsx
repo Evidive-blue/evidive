@@ -64,7 +64,7 @@ const CERTIFICATION_OPTIONS = [
 
 export function EditServiceForm({ center, service }: EditServiceFormProps) {
   const router = useRouter();
-  const { locale } = useLocale();
+  const { locale: _locale } = useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});

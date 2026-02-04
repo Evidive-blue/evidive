@@ -4,10 +4,12 @@ import { getLocale } from '@/lib/i18n/get-locale-server';
 import { getMessages } from '@/lib/i18n/get-messages';
 import { getNestedValue } from '@/lib/i18n/get-messages';
 import { LocaleProvider } from '@/lib/i18n/locale-provider';
+import { getOpenGraphLocale } from '@/lib/i18n/config';
 import { AuthProvider } from '@/components/providers/auth-provider';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { OceanCanvas } from '@/components/effects/ocean-canvas';
+import { ZenModeOverlay, ZenFab } from '@/components/zen';
 import './globals.css';
 
 const geistSans = Geist({
@@ -28,18 +30,6 @@ function requireString(messages: Record<string, unknown>, path: string): string 
   return value;
 }
 
-function getOpenGraphLocale(locale: string): string {
-  // Open Graph expects locales like fr_FR, en_US, etc.
-  // Keep this mapping config-only (not a translation concern).
-  switch (locale) {
-    case 'fr':
-      return 'fr_FR';
-    case 'en':
-      return 'en_US';
-    default:
-      return 'fr_FR';
-  }
-}
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -122,6 +112,12 @@ export default async function RootLayout({
           <LocaleProvider initialLocale={locale} initialMessages={messages}>
             {/* Ocean Background Animation */}
             <OceanCanvas />
+            
+            {/* Zen Mode Overlay */}
+            <ZenModeOverlay />
+            
+            {/* Zen Mode Floating Button */}
+            <ZenFab />
             
             <div className="relative min-h-screen flex flex-col">
               <Navbar />

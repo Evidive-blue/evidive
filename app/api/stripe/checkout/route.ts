@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { stripe, isStripeConfigured } from '@/lib/stripe';
 import { prisma } from '@/lib/db/prisma';
+import { z } from 'zod';
+
+// Validation schema
+const checkoutSchema = z.object({
+  bookingId: z.string().min(1),
+  email: z.string().email().optional(),
+});
 
 export async function POST(request: NextRequest) {
   // Check if Stripe is configured
@@ -14,11 +21,17 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { bookingId } = body;
-
-    if (!bookingId) {
-      return NextResponse.json({ error: 'Booking ID required' }, { status: 400 });
+    
+    // Validate input
+    const validation = checkoutSchema.safeParse(body);
+    if (!validation.success) {
+      return NextResponse.json(
+        { error: 'Invalid input', details: validation.error.flatten() },
+        { status: 400 }
+      );
     }
+
+    const { bookingId, email } = validation.data;
 
     // Fetch booking with related data
     const booking = await prisma.booking.findUnique({
@@ -42,6 +55,12 @@ export async function POST(request: NextRequest) {
 
     if (!booking) {
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
+    }
+
+    // Security: Verify the requester owns this booking (by email match)
+    // This prevents arbitrary checkout creation for any bookingId
+    if (email && booking.guestEmail.toLowerCase() !== email.toLowerCase()) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
     if (booking.paymentStatus !== 'UNPAID') {
@@ -139,14 +158,16 @@ export async function POST(request: NextRequest) {
       sessionParams.discounts = discounts;
     }
 
-    // If center has Stripe Connect, use destination charges
+    // If center has Stripe Connect, use destination charges with application fee
     if (booking.center.stripeAccountId) {
       const commissionRate = Number(booking.center.commissionRate) / 100;
       const applicationFee = Math.round(totalAmount * commissionRate);
 
+      // Express Connect: Destination charge with application fee
       sessionParams.payment_intent_data = {
         ...sessionParams.payment_intent_data,
         application_fee_amount: applicationFee,
+        on_behalf_of: booking.center.stripeAccountId,
         transfer_data: {
           destination: booking.center.stripeAccountId,
         },
