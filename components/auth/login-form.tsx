@@ -67,7 +67,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="relative flex items-center justify-center px-4 py-8">
+    <div className="relative flex min-h-screen items-center justify-center px-4 pb-8 pt-24">
       {/* Background Effects */}
       <div className="absolute inset-0 z-0">
         <motion.div

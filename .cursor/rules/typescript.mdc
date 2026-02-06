@@ -1,0 +1,330 @@
+---
+description: "TypeScript v5 - Type system rules. Source: https://www.typescriptlang.org/docs"
+globs: ["**/*.ts", "**/*.tsx", "tsconfig.json"]
+alwaysApply: true
+---
+
+# TypeScript v5 - Official Rules
+
+> Source: https://www.typescriptlang.org/docs
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`
+- NO commented-out code blocks
+- NO magic numbers without constants
+
+### TypeScript Specific
+- NO `any` type - use `unknown` and narrow
+- NO `@ts-ignore` - fix the error instead
+- NO `@ts-expect-error` without explanation
+- NO `as any` type assertions
+- NO `!` non-null assertion without clear justification
+- NO `// @ts-nocheck`
+- NO `eval()` or `Function()` constructor
+- NO implicit `any` (strict mode enforced)
+
+## REQUIRED Patterns
+
+### Strict TypeScript Config
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx"
+  }
+}
+```
+
+### Type Inference
+
+```typescript
+// Let TypeScript infer when possible
+const name = 'John' // string
+const count = 42 // number
+const items = [1, 2, 3] // number[]
+
+// Explicit types when needed
+const user: User = await getUser(id)
+const config: Config = { debug: true }
+```
+
+### Interface vs Type
+
+```typescript
+// Use interface for objects that can be extended
+interface User {
+  id: string
+  email: string
+  name: string
+}
+
+interface AdminUser extends User {
+  role: 'ADMIN'
+  permissions: string[]
+}
+
+// Use type for unions, primitives, mapped types
+type Role = 'DIVER' | 'ADMIN'
+type Nullable<T> = T | null
+type UserWithoutId = Omit<User, 'id'>
+```
+
+### Function Types
+
+```typescript
+// Parameter and return types
+function createUser(email: string, name: string): User {
+  return { id: generateId(), email, name }
+}
+
+// Arrow functions
+const formatPrice = (amount: number, currency: string = 'EUR'): string => {
+  return new Intl.NumberFormat('fr-FR', { 
+    style: 'currency', 
+    currency 
+  }).format(amount)
+}
+
+// Async functions
+async function fetchUser(id: string): Promise<User | null> {
+  const user = await prisma.diver.findUnique({ where: { id } })
+  return user
+}
+```
+
+### Generics
+
+```typescript
+// Generic function
+function getFirst<T>(items: T[]): T | undefined {
+  return items[0]
+}
+
+// Generic with constraints
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key]
+}
+
+// Generic interface
+interface ApiResponse<T> {
+  data: T
+  error: string | null
+  status: number
+}
+
+// Generic component
+interface ListProps<T> {
+  items: T[]
+  renderItem: (item: T) => React.ReactNode
+  keyExtractor: (item: T) => string
+}
+
+function List<T>({ items, renderItem, keyExtractor }: ListProps<T>) {
+  return (
+    <ul>
+      {items.map(item => (
+        <li key={keyExtractor(item)}>{renderItem(item)}</li>
+      ))}
+    </ul>
+  )
+}
+```
+
+### Union Types
+
+```typescript
+// Discriminated unions
+type Result<T> = 
+  | { success: true; data: T }
+  | { success: false; error: string }
+
+function handleResult<T>(result: Result<T>) {
+  if (result.success) {
+    // TypeScript knows result.data exists
+    console.log(result.data)
+  } else {
+    // TypeScript knows result.error exists
+    console.error(result.error)
+  }
+}
+```
+
+### Utility Types
+
+```typescript
+// Partial - all properties optional
+function updateUser(id: string, updates: Partial<User>) {
+  return prisma.diver.update({ where: { id }, data: updates })
+}
+
+// Pick - select specific properties
+type UserPreview = Pick<User, 'id' | 'name' | 'avatarUrl'>
+
+// Omit - exclude properties
+type CreateUserInput = Omit<User, 'id' | 'createdAt'>
+
+// Record - key-value mapping
+type Translations = Record<Locale, string>
+
+// Required - make all properties required
+type RequiredUser = Required<Partial<User>>
+
+// Readonly - immutable object
+type ReadonlyUser = Readonly<User>
+```
+
+### Type Guards
+
+```typescript
+// Type predicate
+function isUser(value: unknown): value is User {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'id' in value &&
+    'email' in value
+  )
+}
+
+// Usage
+function processData(data: unknown) {
+  if (isUser(data)) {
+    // TypeScript knows data is User
+    console.log(data.email)
+  }
+}
+
+// Narrowing with in
+function handlePayment(payment: CashPayment | CardPayment) {
+  if ('cardNumber' in payment) {
+    // CardPayment
+    processCard(payment.cardNumber)
+  } else {
+    // CashPayment
+    processCash(payment.amount)
+  }
+}
+```
+
+### Handling unknown
+
+```typescript
+// CORRECT: Narrow unknown before use
+async function parseJSON(text: string): Promise<unknown> {
+  return JSON.parse(text)
+}
+
+async function getUser(text: string): Promise<User> {
+  const data = await parseJSON(text)
+  
+  if (!isUser(data)) {
+    throw new Error('Invalid user data')
+  }
+  
+  return data
+}
+```
+
+### const Assertions
+
+```typescript
+// As const for literal types
+const ROLES = ['DIVER', 'ADMIN'] as const
+type Role = typeof ROLES[number] // 'DIVER' | 'ADMIN'
+
+const CONFIG = {
+  apiUrl: 'https://api.evidive.com',
+  timeout: 5000,
+} as const
+// CONFIG.apiUrl is 'https://api.evidive.com', not string
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Using any
+```typescript
+// WRONG
+function process(data: any) {
+  return data.value
+}
+
+// CORRECT
+function process(data: unknown) {
+  if (typeof data === 'object' && data !== null && 'value' in data) {
+    return data.value
+  }
+  throw new Error('Invalid data')
+}
+```
+
+### Wrong: Type assertion to any
+```typescript
+// WRONG
+const value = someValue as any as TargetType
+
+// CORRECT - Fix the actual type issue
+const value: TargetType = validateAndConvert(someValue)
+```
+
+### Wrong: Non-null assertion without justification
+```typescript
+// WRONG
+const user = users.find(u => u.id === id)!
+
+// CORRECT
+const user = users.find(u => u.id === id)
+if (!user) {
+  throw new Error(`User ${id} not found`)
+}
+```
+
+### Wrong: Ignoring Promise
+```typescript
+// WRONG - Unhandled promise
+async function save() {
+  await saveData()
+}
+save() // Promise ignored!
+
+// CORRECT
+save().catch(console.error)
+// or
+void save()
+// or
+await save()
+```
+
+## Null Handling
+
+```typescript
+// Optional chaining
+const name = user?.profile?.name
+
+// Nullish coalescing
+const displayName = user.name ?? 'Anonymous'
+
+// Optional function call
+user.callback?.()
+
+// Null assertion (only when CERTAIN)
+const definitelyExists = array.find(x => x.id === knownId)!
+// Add comment explaining why it's safe
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

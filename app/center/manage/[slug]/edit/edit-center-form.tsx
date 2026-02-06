@@ -21,10 +21,11 @@ import {
   Instagram,
   MessageCircle,
   Award,
-  Languages,
+  Languages as LanguagesIcon,
   Clock,
   Leaf,
   Image as ImageIcon,
+  Sparkles,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,6 +36,7 @@ import { Separator } from '@/components/ui/separator';
 import { useLocale } from '@/lib/i18n/locale-provider';
 import { toast } from 'sonner';
 import { ImageUpload } from '@/components/upload/image-upload';
+import { useAutoTranslate } from '@/hooks/use-auto-translate';
 
 // Dynamic import for the map to avoid SSR issues
 const LocationMap = dynamic(
@@ -124,6 +126,9 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
   const [mapCoordinates, setMapCoordinates] = useState({ lat: center.latitude, lng: center.longitude });
   const [featuredImage, setFeaturedImage] = useState(center.featuredImage || '');
   const [photos, setPhotos] = useState<string[]>(center.photos || []);
+  
+  // Auto-translate hook
+  const { translate, isTranslating } = useAutoTranslate();
 
   const getLocalized = (value: unknown): Record<string, string> => {
     if (!value) return { fr: '', en: '' };
@@ -184,6 +189,26 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
       setValue('languagesSpoken', current.filter((l) => l !== lang));
     } else {
       setValue('languagesSpoken', [...current, lang]);
+    }
+  };
+
+  // Auto-translate a field from French to all other languages
+  const handleAutoTranslate = async (
+    field: 'name' | 'description' | 'shortDescription',
+    sourceText: string
+  ) => {
+    if (!sourceText?.trim()) {
+      toast.error('Veuillez d\'abord remplir le champ en français');
+      return;
+    }
+
+    const result = await translate(sourceText, 'fr');
+    if (result?.translations) {
+      // Update the EN field (we only have fr/en in the form for now)
+      if (result.translations.en) {
+        setValue(`${field}.en` as any, result.translations.en);
+      }
+      toast.success(`${field === 'name' ? 'Nom' : field === 'description' ? 'Description' : 'Slogan'} traduit automatiquement`);
     }
   };
 
@@ -347,7 +372,24 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
                 <CardContent className="space-y-6">
                   {/* Name */}
                   <div className="space-y-4">
-                    <Label className="text-white">Nom du centre *</Label>
+                    <div className="flex items-center justify-between">
+                      <Label className="text-white">Nom du centre *</Label>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleAutoTranslate('name', watch('name.fr'))}
+                        disabled={isTranslating || !watch('name.fr')}
+                        className="text-xs text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10"
+                      >
+                        {isTranslating ? (
+                          <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                        ) : (
+                          <Sparkles className="mr-1 h-3 w-3" />
+                        )}
+                        Traduire auto
+                      </Button>
+                    </div>
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div>
                         <Label className="text-xs text-white/60">Français</Label>
@@ -373,7 +415,24 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
 
                   {/* Short Description */}
                   <div className="space-y-4">
-                    <Label className="text-white">Tagline / Slogan</Label>
+                    <div className="flex items-center justify-between">
+                      <Label className="text-white">Tagline / Slogan</Label>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleAutoTranslate('shortDescription', watch('shortDescription.fr') || '')}
+                        disabled={isTranslating || !watch('shortDescription.fr')}
+                        className="text-xs text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10"
+                      >
+                        {isTranslating ? (
+                          <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                        ) : (
+                          <Sparkles className="mr-1 h-3 w-3" />
+                        )}
+                        Traduire auto
+                      </Button>
+                    </div>
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div>
                         <Label className="text-xs text-white/60">Français</Label>
@@ -396,7 +455,24 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
 
                   {/* Description */}
                   <div className="space-y-4">
-                    <Label className="text-white">Description *</Label>
+                    <div className="flex items-center justify-between">
+                      <Label className="text-white">Description *</Label>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleAutoTranslate('description', watch('description.fr'))}
+                        disabled={isTranslating || !watch('description.fr')}
+                        className="text-xs text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10"
+                      >
+                        {isTranslating ? (
+                          <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                        ) : (
+                          <Sparkles className="mr-1 h-3 w-3" />
+                        )}
+                        Traduire auto
+                      </Button>
+                    </div>
                     <div className="grid gap-4">
                       <div>
                         <Label className="text-xs text-white/60">Français</Label>
@@ -733,7 +809,7 @@ export function EditCenterForm({ center }: EditCenterFormProps) {
               <Card className="bg-white/5 border-white/10">
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
-                    <Languages className="h-5 w-5 text-cyan-400" />
+                    <LanguagesIcon className="h-5 w-5 text-cyan-400" />
                     Langues parlées
                   </CardTitle>
                 </CardHeader>

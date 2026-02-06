@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX, Waves, Droplets, Fish } from "lucide-react";
 import { useZenStore } from "@/stores";
@@ -23,39 +23,41 @@ const SOUNDS: SoundConfig[] = [
 
 export function SoundMixer() {
   const t = useTranslations("zen");
-  const { volumes, isMuted, isOpen, setVolume, toggleMute } = useZenStore();
+  const { volumes, isMuted, isOpen, isSoundOnly, setVolume, toggleMute } = useZenStore();
+  const isPlaying = isOpen || isSoundOnly;
 
   const audioRefs = useRef<Record<SoundKey, HTMLAudioElement | null>>({
     waves: null,
     bubbles: null,
     underwater: null,
   });
+  const isInitialized = useRef(false);
 
-  const initAudio = useCallback(() => {
-    SOUNDS.forEach(({ key, src }) => {
-      if (!audioRefs.current[key]) {
-        const audio = new Audio(src);
-        audio.loop = true;
-        audio.volume = volumes[key];
-        audioRefs.current[key] = audio;
-      }
-    });
-  }, [volumes]);
-
+  // Initialize audio elements only once on mount
   useEffect(() => {
-    initAudio();
-    const refs = audioRefs.current;
+    if (isInitialized.current) return;
+    
+    SOUNDS.forEach(({ key, src }) => {
+      const audio = new Audio(src);
+      audio.loop = true;
+      audio.volume = 0.5; // Default volume, will be synced by next effect
+      audioRefs.current[key] = audio;
+    });
+    isInitialized.current = true;
 
     return () => {
-      Object.values(refs).forEach((audio) => {
+      Object.values(audioRefs.current).forEach((audio) => {
         if (audio) {
           audio.pause();
           audio.src = "";
         }
       });
+      audioRefs.current = { waves: null, bubbles: null, underwater: null };
+      isInitialized.current = false;
     };
-  }, [initAudio]);
+  }, []);
 
+  // Sync volume changes to audio elements
   useEffect(() => {
     Object.entries(audioRefs.current).forEach(([key, audio]) => {
       if (audio) {
@@ -64,8 +66,9 @@ export function SoundMixer() {
     });
   }, [volumes, isMuted]);
 
+  // Play/pause based on zen mode or sound-only mode
   useEffect(() => {
-    if (isOpen) {
+    if (isPlaying) {
       Object.values(audioRefs.current).forEach((audio) => {
         audio?.play().catch(() => {});
       });
@@ -77,7 +80,7 @@ export function SoundMixer() {
         }
       });
     }
-  }, [isOpen]);
+  }, [isPlaying]);
 
   const handleVolumeChange = (key: SoundKey, value: number) => {
     setVolume(key, value);

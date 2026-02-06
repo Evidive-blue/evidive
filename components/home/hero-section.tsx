@@ -109,7 +109,7 @@ export function HeroSection() {
   const tImages = useTranslations("images");
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-20">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-24">
       {/* Light rays effect */}
       <LightRays className="opacity-25" />
       
@@ -118,6 +118,9 @@ export function HeroSection() {
 
       {/* Hero Content */}
       <div className="relative z-10 mx-auto max-w-5xl text-center">
+        {/* SEO H1 - visually hidden but accessible */}
+        <h1 className="sr-only">{t("seoTitle")}</h1>
+        
         {/* Badge */}
         <motion.div
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 backdrop-blur-sm"

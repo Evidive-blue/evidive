@@ -1,0 +1,226 @@
+---
+description: "Next.js v16.1.6 - Frontend/Full-stack rules. Source: https://nextjs.org/docs"
+globs: ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}", "lib/**/*.ts", "next.config.ts", "middleware.ts"]
+alwaysApply: true
+---
+
+# Next.js v16.1.6 - Official Rules
+
+> Source: https://nextjs.org/docs (vercel/next.js v16.1.5)
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`, `implement later`
+- NO mock data in production code
+- NO hardcoded secrets, API keys, passwords
+- NO `console.log` statements in production
+- NO empty catch blocks
+- NO magic numbers without constants
+
+### TypeScript/JavaScript
+- NO `any` type
+- NO `@ts-ignore` or `@ts-expect-error`
+- NO `// eslint-disable`
+- NO `as any` type assertions
+- NO `!` non-null assertion without justification
+- NO `eval()` or `Function()` constructor
+
+### Next.js Specific
+- NO `dangerouslySetInnerHTML` without sanitization
+- NO inline styles (`style={{...}}`) - use Tailwind CSS
+- NO hardcoded URLs/domains in metadata or sitemap
+- NO missing `key` prop in lists
+- NO `useEffect` with missing dependencies
+- NO `getServerSideProps` or `getStaticProps` in App Router (use Server Components)
+- NO client-side data fetching for initial page data (use Server Components)
+
+## REQUIRED Patterns
+
+### App Router Architecture
+
+```tsx
+// Server Component (default) - no 'use client' directive
+export default async function Page() {
+  const data = await fetchData() // Direct async/await
+  return <div>{data.title}</div>
+}
+
+// Client Component - only when needed
+'use client'
+export function InteractiveComponent() {
+  const [state, setState] = useState()
+  return <button onClick={() => setState(!state)}>Toggle</button>
+}
+```
+
+### Data Fetching with Caching
+
+```tsx
+// Static data (cached until revalidation)
+const staticData = await fetch('https://...', { cache: 'force-cache' })
+
+// Dynamic data (no cache)
+const dynamicData = await fetch('https://...', { cache: 'no-store' })
+
+// Time-based revalidation
+const revalidatedData = await fetch('https://...', {
+  next: { revalidate: 60 } // Revalidate every 60 seconds
+})
+```
+
+### Server Actions
+
+```tsx
+// actions.ts
+'use server'
+
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+
+export async function createItem(formData: FormData) {
+  const title = formData.get('title') as string
+  
+  // Validate with Zod
+  const parsed = schema.safeParse({ title })
+  if (!parsed.success) {
+    return { error: parsed.error.flatten() }
+  }
+  
+  await db.item.create({ data: parsed.data })
+  
+  revalidatePath('/items')
+  redirect('/items')
+}
+```
+
+### Forms with Server Actions
+
+```tsx
+import Form from 'next/form'
+import { createItem } from '@/actions'
+
+export default function Page() {
+  return (
+    <Form action={createItem}>
+      <input name="title" required />
+      <button type="submit">Create</button>
+    </Form>
+  )
+}
+```
+
+### Cache Tags and Revalidation
+
+```tsx
+import { cacheTag, updateTag } from 'next/cache'
+
+// Tag data in Server Component
+export async function getCart() {
+  'use cache'
+  cacheTag('cart')
+  return await fetchCart()
+}
+
+// Revalidate in Server Action
+export async function updateCart(itemId: string) {
+  'use server'
+  await updateCartItem(itemId)
+  updateTag('cart')
+}
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Using getServerSideProps in App Router
+```tsx
+// WRONG - Pages Router pattern
+export async function getServerSideProps() {
+  const data = await fetchData()
+  return { props: { data } }
+}
+```
+
+### Wrong: Client-side fetching for initial data
+```tsx
+// WRONG
+'use client'
+export function Page() {
+  const [data, setData] = useState(null)
+  useEffect(() => {
+    fetch('/api/data').then(r => r.json()).then(setData)
+  }, [])
+  return <div>{data?.title}</div>
+}
+```
+
+### Correct: Server Component with direct fetch
+```tsx
+// CORRECT
+export default async function Page() {
+  const data = await fetch('https://api.example.com/data')
+  return <div>{data.title}</div>
+}
+```
+
+## Image Optimization
+
+```tsx
+import Image from 'next/image'
+
+// CORRECT
+<Image
+  src="/photo.jpg"
+  alt="Description"
+  width={800}
+  height={600}
+  priority // For above-the-fold images
+/>
+
+// WRONG
+<img src="/photo.jpg" alt="Description" />
+```
+
+## Metadata Configuration
+
+```tsx
+// app/layout.tsx
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: {
+    default: 'EviDive',
+    template: '%s | EviDive'
+  },
+  description: 'Dive center booking platform',
+  openGraph: {
+    type: 'website',
+    locale: 'fr_FR',
+  },
+}
+```
+
+## Route Protection with Middleware
+
+```tsx
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  // Check auth, locale, etc.
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+}
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

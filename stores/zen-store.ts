@@ -11,6 +11,7 @@ interface SoundVolumes {
 
 interface ZenState {
   isOpen: boolean;
+  isSoundOnly: boolean; // Ambient sound mode - sounds play while navigating
   timerMinutes: TimerOption;
   timerSecondsLeft: number | null;
   isTimerRunning: boolean;
@@ -22,6 +23,8 @@ interface ZenState {
 interface ZenActions {
   openZen: () => void;
   closeZen: () => void;
+  enableSoundOnly: () => void;
+  disableSoundOnly: () => void;
   setTimer: (minutes: TimerOption) => void;
   startTimer: () => void;
   pauseTimer: () => void;
@@ -34,6 +37,7 @@ interface ZenActions {
 
 const initialState: ZenState = {
   isOpen: false,
+  isSoundOnly: false,
   timerMinutes: 5,
   timerSecondsLeft: null,
   isTimerRunning: false,
@@ -53,6 +57,7 @@ export const useZenStore = create<ZenState & ZenActions>((set, get) => ({
     const { timerMinutes } = get();
     set({
       isOpen: true,
+      isSoundOnly: false,
       timerSecondsLeft: timerMinutes ? timerMinutes * 60 : null,
       isTimerRunning: true,
       breathingPhase: "inhale",
@@ -63,6 +68,20 @@ export const useZenStore = create<ZenState & ZenActions>((set, get) => ({
     set({
       isOpen: false,
       isTimerRunning: false,
+    });
+  },
+
+  enableSoundOnly: () => {
+    set({
+      isSoundOnly: true,
+      isOpen: false,
+      isMuted: false,
+    });
+  },
+
+  disableSoundOnly: () => {
+    set({
+      isSoundOnly: false,
     });
   },
 

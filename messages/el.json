@@ -194,7 +194,13 @@
     "error": "Κάτι πήγε στραβά. Δοκιμάστε ξανά.",
     "info_title": "Information",
     "info_email": "info@evidive.blue",
-    "info_address": "Geneva, Switzerland"
+    "info_address": "Geneva, Switzerland",
+    "placeholders": {
+      "name": "Το πλήρες όνομά σας",
+      "email": "email@example.gr",
+      "subject": "Πώς μπορούμε να βοηθήσουμε;",
+      "message": "Περιγράψτε το αίτημά σας..."
+    }
   },
   "explorer": {
     "meta": {
@@ -218,7 +224,51 @@
     "dashboard": "Πίνακας",
     "explore": "Εξερεύνηση",
     "contact": "Επικοινωνία",
-    "learnMore": "Μάθετε περισσότερα"
+    "learnMore": "Μάθετε περισσότερα",
+    "loading": "Φόρτωση...",
+    "noResults": "Κανένα αποτέλεσμα",
+    "unnamed": "Χωρίς όνομα",
+    "where": "Πού",
+    "when": "Πότε",
+    "divers": "Δύτες",
+    "diver": "δύτης",
+    "diversPlural": "δύτες",
+    "searchDestination": "Αναζήτηση προορισμού...",
+    "countryOrCity": "Χώρα, πόλη ή όνομα κέντρου",
+    "selectDates": "Επιλέξτε ημερομηνίες",
+    "select": "Επιλέξτε...",
+    "numberOfParticipants": "Αριθμός συμμετεχόντων",
+    "countries": "Χώρες",
+    "viewAll": "Δείτε όλα",
+    "noReviews": "Δεν υπάρχουν κριτικές",
+    "dragToRotate": "Σύρετε για περιστροφή",
+    "scrollToZoom": "Κύλιση για ζουμ",
+    "clickOnCenter": "Κάντε κλικ σε ένα κέντρο",
+    "close": "Κλείσιμο",
+    "user": "User",
+    "reset": "Reset",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "services": "services",
+    "bookings": "bookings",
+    "reviews": "reviews",
+    "filter": "Filter",
+    "all": "All",
+    "yes": "Yes",
+    "no": "No",
+    "or": "or",
+    "and": "and",
+    "globe": "Globe",
+    "seeMore": "See more",
+    "viewDetails": "View details"
   },
   "hero": {
     "tagline": "Βυθιστείτε στην περιπέτεια",
@@ -229,7 +279,8 @@
     "depth": "{depth}μ βάθος",
     "scroll": "Κυλήστε προς τα κάτω",
     "badge": "Discover the depths",
-    "depthLabel": "Depth"
+    "depthLabel": "Depth",
+    "seoTitle": "EviDive - Book Your Scuba Diving Experiences Worldwide"
   },
   "worldExplorer": {
     "title": "Εξερευνήστε τα βάθη του κόσμου",
@@ -297,7 +348,7 @@
         "description": "Ανακαλύψτε εγκεκριμένα καταδυτικά κέντρα στο EviDive."
       },
       "title": "Κέντρα",
-      "subtitle": "Περιστρέψτε τον γήινο σφαίρα και ανακαλύψτε εγκεκριμένα καταδυτικά κέντρα.",
+      "subtitle": "Εξερευνήστε καταδυτικά κέντρα σε όλο τον κόσμο",
       "listTitle": "Εγγεγραμμένα κέντρα",
       "emptyTitle": "Δεν υπάρχουν διαθέσιμα κέντρα",
       "emptyDescription": "Τα κέντρα θα εμφανιστούν εδώ μόλις εγκριθούν από διαχειριστή.",
@@ -306,9 +357,13 @@
       "backToCenters": "Επιστροφή στα κέντρα",
       "rating": "{rating} ★ ({count} κριτικές)",
       "globeHint": "Συμβουλή: κάντε δεξί κλικ σε ένα σημείο για να ανοίξετε το κέντρο.",
-      "services": "Υπηρεσίες",
+      "services": "υπηρεσίες",
       "minutes": "λεπτά",
-      "maxParticipants": "μέγ. {count} άτομα"
+      "maxParticipants": "μέγ. {count} άτομα",
+      "centersLabel": "Κέντρα",
+      "popularCenters": "Δημοφιλή κέντρα",
+      "rotateGlobe": "Rotate the globe to discover centers",
+      "noSearchResults": "No centers found for this search"
     },
     "benefits": {
       "visibility": "Διεθνής ορατότητα",
@@ -321,7 +376,28 @@
       "destinations": "Προορισμοί",
       "rating": "Μέση βαθμολογία"
     },
-    "badge": "For professionals"
+    "badge": "For professionals",
+    "detail": {
+      "sections": {
+        "about": "About",
+        "services": "Services",
+        "reviews": "Reviews",
+        "contact": "Contact",
+        "certifications": "Certifications",
+        "languages": "Languages",
+        "team": "Our team"
+      },
+      "empty": {
+        "services": "No services available yet.",
+        "reviews": "No reviews yet. Be the first to review!"
+      },
+      "equipmentIncluded": "Equipment included",
+      "perPerson": "per person",
+      "bookNow": "Book now",
+      "anonymous": "Anonymous",
+      "website": "Website",
+      "address": "Address"
+    }
   },
   "footer": {
     "description": "Η πλατφόρμα αναφοράς για κράτηση καταδύσεων στα καλύτερα κέντρα του κόσμου.",
@@ -336,7 +412,8 @@
     "terms": "Όροι",
     "privacy": "Απόρρητο",
     "sitemap": "Χάρτης ιστότοπου",
-    "rights": "Με επιφύλαξη παντός δικαιώματος."
+    "rights": "Με επιφύλαξη παντός δικαιώματος.",
+    "brandName": "EviDive"
   },
   "nav": {
     "home": "Αρχική",
@@ -353,7 +430,11 @@
     "myBookings": "Οι κρατήσεις μου",
     "myProfile": "Το προφίλ μου",
     "settings": "Ρυθμίσεις",
-    "logout": "Αποσύνδεση"
+    "logout": "Αποσύνδεση",
+    "profile": "Profile",
+    "myCenters": "My Centers",
+    "adminPanel": "Admin Panel",
+    "toggleMobileMenu": "Toggle mobile menu"
   },
   "userTypes": {
     "diver": "Δύτης",
@@ -534,7 +615,9 @@
     "sections": {
       "personal": "Προσωπικά στοιχεία",
       "diving": "Πληροφορίες κατάδυσης",
-      "account": "Λογαριασμός"
+      "account": "Λογαριασμός",
+      "address": "Address",
+      "notifications": "Notification preferences"
     },
     "fields": {
       "firstName": "Όνομα",
@@ -544,7 +627,13 @@
       "bio": "Βιογραφικό",
       "certificationLevel": "Επίπεδο πιστοποίησης",
       "certificationOrg": "Οργανισμός",
-      "totalDives": "Σύνολο καταδύσεων"
+      "totalDives": "Σύνολο καταδύσεων",
+      "displayName": "Display name",
+      "email": "Email",
+      "address": "Street address",
+      "city": "City",
+      "zip": "Postal code",
+      "country": "Country"
     },
     "placeholders": {
       "firstName": "Το όνομά σας",
@@ -552,7 +641,12 @@
       "phone": "+30 690 123 4567",
       "city": "Πόλη",
       "country": "Χώρα",
-      "bio": "Πείτε μας για εσάς και το πάθος σας για την κατάδυση..."
+      "bio": "Πείτε μας για εσάς και το πάθος σας για την κατάδυση...",
+      "displayName": "Your display name",
+      "address": "123 Ocean Drive",
+      "zip": "12345",
+      "certificationLevel": "Select your level",
+      "certificationOrg": "Select organization"
     },
     "divingStats": {
       "title": "Στατιστικά",
@@ -563,7 +657,29 @@
       "email": "Email",
       "type": "Τύπος λογαριασμού",
       "status": "Κατάσταση",
-      "active": "Ενεργός"
+      "active": "Ενεργός",
+      "memberSince": "Member since",
+      "emailVerified": "Email verified",
+      "role": "Account type",
+      "centers": "Centers owned"
+    },
+    "title": "My Profile",
+    "subtitle": "Manage your personal information",
+    "description": "View and edit your profile settings",
+    "edit": "Edit",
+    "save": "Save",
+    "saveSuccess": "Profile updated successfully",
+    "saveError": "Failed to save profile",
+    "stats": {
+      "totalDives": "Total dives",
+      "bookings": "Bookings",
+      "reviews": "Reviews"
+    },
+    "notifications": {
+      "email": "Email notifications",
+      "emailDesc": "Receive booking confirmations and updates by email",
+      "sms": "SMS notifications",
+      "smsDesc": "Receive important reminders by SMS"
     }
   },
   "settings": {
@@ -653,7 +769,8 @@
     },
     "hero": {
       "title": "Σχετικά με το EviDive",
-      "subtitle": "Συνδέοντας τους δύτες με τις καλύτερες υποβρύχιες εμπειρίες"
+      "subtitle": "Συνδέοντας τους δύτες με τις καλύτερες υποβρύχιες εμπειρίες",
+      "badge": "Born in Geneva"
     },
     "story": {
       "title": "Η ιστορία μας",
@@ -667,7 +784,13 @@
     },
     "mission": {
       "title": "Η αποστολή μας",
-      "description": "Το EviDive γεννήθηκε από ένα κοινό πάθος για την κατάδυση και την τεχνολογία. Η αποστολή μας είναι να συνδέσουμε τους δύτες σε όλο τον κόσμο με τις καλύτερες υποβρύχιες εμπειρίες."
+      "description": "Το EviDive γεννήθηκε από ένα κοινό πάθος για την κατάδυση και την τεχνολογία. Η αποστολή μας είναι να συνδέσουμε τους δύτες σε όλο τον κόσμο με τις καλύτερες υποβρύχιες εμπειρίες.",
+      "badge": "Our Mission",
+      "points": [
+        "Real-time availability and transparent pricing",
+        "PADI, SSI, CMAS certified centers",
+        "Free registration for partner centers"
+      ]
     },
     "values": {
       "title": "Οι αξίες μας",
@@ -694,6 +817,70 @@
     "team": {
       "title": "Η ομάδα μας",
       "description": "Μια ομάδα ενθουσιωδών της κατάδυσης και της τεχνολογίας με έδρα την Ελβετία."
+    },
+    "vision": {
+      "badge": "Our Vision",
+      "title": "A connected and ethical adventure",
+      "description": "EviDive is also a community of enthusiasts. Our vision: to make diving an inner and outer journey that is connected, ethical and unforgettable."
+    },
+    "founders": {
+      "badge": "The founding team",
+      "title": "The passionate people behind EviDive",
+      "members": [
+        {
+          "name": "Armando",
+          "role": "Co-founder"
+        },
+        {
+          "name": "Leti",
+          "role": "Co-founder"
+        },
+        {
+          "name": "Mathieu",
+          "role": "Co-founder"
+        },
+        {
+          "name": "Marjo",
+          "role": "Co-founder"
+        }
+      ]
+    },
+    "stats": {
+      "centers": "Partner centers",
+      "countries": "Countries",
+      "divers": "Divers",
+      "dives": "Dives booked",
+      "languages": "Languages"
+    },
+    "features": {
+      "title": "Why EviDive?",
+      "items": [
+        {
+          "title": "Instant booking",
+          "description": "Check real-time availability and book in just a few clicks."
+        },
+        {
+          "title": "100% free for centers",
+          "description": "No registration or subscription fees for partner centers."
+        },
+        {
+          "title": "Verified reviews",
+          "description": "Build your reputation with authentic reviews from real divers."
+        },
+        {
+          "title": "Global visibility",
+          "description": "Get known by divers from around the world."
+        }
+      ]
+    },
+    "cta": {
+      "explore": "Explore centers",
+      "contact": "Contact us",
+      "partner": "Become a partner"
+    },
+    "social": {
+      "title": "Follow us",
+      "instagram": "@evidive.blue"
     }
   },
   "legal": {
@@ -737,7 +924,16 @@
   "metadata": {
     "home": {
       "title": "EviDive - Εξερευνήστε τα βάθη του ωκεανού με επαληθευμένα κέντρα",
-      "description": "Ανακαλύψτε τις καλύτερες τοποθεσίες κατάδυσης με το EviDive."
+      "description": "Ανακαλύψτε τις καλύτερες τοποθεσίες κατάδυσης με το EviDive.",
+      "keywords": [
+        "diving",
+        "scuba diving",
+        "dive centers",
+        "book dive",
+        "PADI",
+        "underwater",
+        "ocean"
+      ]
     },
     "careers": {
       "title": "Καριέρα - Γίνετε μέλος της ομάδας EviDive",
@@ -752,11 +948,11 @@
       "description": "Ανακαλύψτε τις καλύτερες τοποθεσίες κατάδυσης με τον διαδραστικό μας χάρτη."
     },
     "login": {
-      "title": "Σύνδεση - EviDive",
+      "title": "Σύνδεση",
       "description": "Συνδεθείτε στον λογαριασμό σας EviDive."
     },
     "register": {
-      "title": "Εγγραφή - EviDive",
+      "title": "Εγγραφή",
       "description": "Δημιουργήστε τον λογαριασμό σας EviDive."
     },
     "resetPassword": {
@@ -770,6 +966,50 @@
     "verifyEmail": {
       "title": "Επαλήθευση email - EviDive",
       "description": "Επαληθεύστε τη διεύθυνση email σας."
+    },
+    "about": {
+      "title": "About | EviDive",
+      "description": "Discover EviDive's mission: connecting passionate divers with the best certified dive centers around the world."
+    },
+    "dashboard": {
+      "title": "Dashboard | EviDive",
+      "description": "Manage your dives, bookings, and dive centers."
+    },
+    "admin": {
+      "title": "Admin Dashboard | EviDive",
+      "description": "Admin dashboard for managing EviDive platform."
+    },
+    "centers": {
+      "title": "Dive Centers | EviDive",
+      "description": "Discover and book from hundreds of certified dive centers around the world."
+    },
+    "centerDetail": {
+      "title": "{centerName} - {city}, {country} | {brandName}",
+      "description": "Book dives at {centerName} in {city}, {country}"
+    },
+    "privacy": {
+      "title": "Privacy Policy | EviDive",
+      "description": "Learn how EviDive protects your personal data."
+    },
+    "terms": {
+      "title": "Terms of Service | EviDive",
+      "description": "View the general terms and conditions of the EviDive platform."
+    },
+    "onboard": {
+      "title": "Καλώς ήρθατε",
+      "description": "Συμπληρώστε το προφίλ σας για να ξεκινήσετε να κλείνετε καταδύσεις ή να εγγράψετε το κέντρο σας."
+    },
+    "bookingSuccess": {
+      "title": "Booking confirmed | EviDive",
+      "description": "Your dive booking has been confirmed."
+    },
+    "bookingCancel": {
+      "title": "Booking cancelled | EviDive",
+      "description": "Your booking process was cancelled."
+    },
+    "sitemap": {
+      "title": "Site Map | EviDive",
+      "description": "Navigate the EviDive platform with our complete site map."
     }
   },
   "sitemap": {
@@ -1247,7 +1487,8 @@
     "suspend": "Αναστολή",
     "unsuspend": "Επαναφορά",
     "delete": "Διαγραφή",
-    "confirmDelete": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το κέντρο; Αυτή η ενέργεια είναι μη αναστρέψιμη και θα διαγράψει όλες τις σχετικές κρατήσεις, κριτικές και υπηρεσίες."
+    "confirmDelete": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το κέντρο; Αυτή η ενέργεια είναι μη αναστρέψιμη και θα διαγράψει όλες τις σχετικές κρατήσεις, κριτικές και υπηρεσίες.",
+    "createdBy": "Owner:"
   },
   "bookings": {
     "meta": {
@@ -1717,7 +1958,8 @@
       "RUNNING": "In progress",
       "COMPLETED": "Completed",
       "CANCELLED": "Cancelled",
-      "NOSHOW": "No-show"
+      "NOSHOW": "No-show",
+      "REMOVED": "Removed"
     },
     "client": "Client",
     "center": "Center",
@@ -1726,7 +1968,11 @@
     "noBookings": "No bookings found.",
     "previous": "Previous",
     "next": "Next",
-    "pageInfo": "Page {current} of {total}"
+    "pageInfo": "Page {current} of {total}",
+    "pagination": "Page {current} of {total}",
+    "totalRevenue": "Total revenue",
+    "unknown": "Unknown",
+    "guest": "Guest"
   },
   "adminReviews": {
     "meta": {
@@ -2070,6 +2316,20 @@
       "unauthorized": "Unauthorized",
       "not_found": "Service not found",
       "server_error": "Server error"
+    },
+    "new": {
+      "backToCenter": "Back to center",
+      "title": "Create new service",
+      "subtitle": "Add a new dive service that customers can book.",
+      "pricePerPersonRequired": "Price (per person)",
+      "toggleHint": "Click to toggle. You can add custom times by editing after creation.",
+      "createCta": "Create service",
+      "examples": {
+        "nameEnPlaceholder": "e.g., Discovery Dive",
+        "nameFrPlaceholder": "e.g., Plongée Découverte",
+        "descriptionEnPlaceholder": "Describe your service...",
+        "descriptionFrPlaceholder": "Décrivez votre service..."
+      }
     }
   },
   "centerReviews": {
@@ -2505,7 +2765,68 @@
     },
     "switchCenter": "Switch center",
     "noCenters": "You don't have any center yet",
-    "createFirst": "Create my first center"
+    "createFirst": "Create my first center",
+    "tabs": {
+      "overview": "Overview",
+      "services": "Services",
+      "bookings": "Bookings",
+      "reviews": "Reviews",
+      "settings": "Settings"
+    },
+    "viewPublicPage": "View public page",
+    "stats": {
+      "totalBookings": "Total bookings",
+      "revenue30d": "Revenue (30d)",
+      "bookings30d": "Bookings (30d)",
+      "reviews": "{count} reviews"
+    },
+    "upcomingBookings": {
+      "title": "Upcoming bookings",
+      "viewAll": "View all",
+      "empty": "No upcoming bookings"
+    },
+    "servicesSection": {
+      "addService": "Add service",
+      "emptyTitle": "No services yet",
+      "emptyCta": "Create your first service",
+      "active": "Active",
+      "inactive": "Inactive",
+      "perPerson": "/person",
+      "edit": "Edit"
+    },
+    "bookingsSection": {
+      "title": "Upcoming bookings"
+    },
+    "reviewsSection": {
+      "title": "Recent reviews",
+      "empty": "No reviews yet",
+      "anonymous": "Anonymous"
+    },
+    "settingsTitle": "Center settings",
+    "mapIcon": {
+      "title": "Map icon",
+      "description": "Choose the icon that represents your center on the interactive globe.",
+      "saving": "Saving..."
+    },
+    "mapIcons": {
+      "diver": "Diver",
+      "mask": "Mask",
+      "fins": "Fins",
+      "tank": "Tank",
+      "anchor": "Anchor",
+      "wave": "Wave"
+    },
+    "quickLinks": {
+      "editCenterInfo": "Edit center info",
+      "editCenterInfoDesc": "Update name, description, contact details, and more.",
+      "manageTeam": "Manage team",
+      "manageTeamDesc": "Add and manage dive instructors and staff.",
+      "availability": "Availability",
+      "availabilityDesc": "Set opening hours and block specific dates.",
+      "payments": "Payments",
+      "paymentsDesc": "Configure Stripe and payment settings."
+    },
+    "confirmDeleteService": "Are you sure you want to delete this service?"
   },
   "whytcard": {
     "title": "Beyond Code",
@@ -2519,6 +2840,8 @@
   },
   "zen": {
     "zenMode": "Λειτουργία Zen",
+    "fullZenMode": "Πλήρης λειτουργία Zen",
+    "ambientSounds": "Ήχοι περιβάλλοντος",
     "inhale": "Εισπνεύστε",
     "hold": "Κρατήστε",
     "exhale": "Εκπνεύστε",
@@ -2526,10 +2849,480 @@
     "pause": "Παύση",
     "play": "Συνέχεια",
     "close": "Κλείσιμο",
+    "expand": "Ανάπτυξη",
+    "collapse": "Σύμπτυξη",
     "mute": "Σίγαση",
     "unmute": "Ενεργοποίηση ήχου",
     "waves": "Κύματα",
     "bubbles": "Φυσαλίδες",
-    "underwater": "Υποβρύχιο"
+    "underwater": "Υποβρύχιο",
+    "soundMixer": "Sound Mixer",
+    "volume": "Volume"
+  },
+  "adminUsers": {
+    "meta": {
+      "title": "Admin · Users - EviDive",
+      "description": "Manage platform users."
+    },
+    "title": "Admin · Users",
+    "subtitle": "Manage all platform users",
+    "backToAdmin": "Back to admin",
+    "results": "{count, plural, =0 {No users} one {# user} other {# users}}",
+    "searchPlaceholder": "Search by email, name...",
+    "allRoles": "All roles",
+    "roles": {
+      "DIVER": "Divers",
+      "ADMIN": "Admins"
+    },
+    "noUsers": "No users found.",
+    "blacklisted": "Blacklisted",
+    "inactive": "Inactive",
+    "centersCount": "{count, plural, one {# center} other {# centers}}",
+    "bookingsCount": "{count, plural, one {# booking} other {# bookings}}",
+    "reviewsCount": "{count, plural, one {# review} other {# reviews}}",
+    "demote": "Demote",
+    "promote": "Promote to admin",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "removeBlacklist": "Remove from blacklist",
+    "addBlacklist": "Blacklist",
+    "details": "Details",
+    "pagination": "Page {current} of {total}"
+  },
+  "booking": {
+    "success": {
+      "title": "Booking confirmed!",
+      "subtitle": "Your dive experience is booked. Check your email for confirmation.",
+      "referenceLabel": "Booking reference",
+      "referenceHelp": "Save this reference for your records",
+      "detailsTitle": "Booking details",
+      "serviceDuration": "{minutes} min duration",
+      "dateLabel": "Date",
+      "timeLabel": "Time",
+      "participantsLabel": "Participants",
+      "participants": {
+        "one": "{count} person",
+        "other": "{count} people"
+      },
+      "totalPaid": "Total paid",
+      "paymentSuccessful": "Payment successful",
+      "actions": {
+        "share": "Share",
+        "viewCenter": "View center",
+        "home": "Home"
+      },
+      "nextSteps": {
+        "title": "What's next?",
+        "step1": "Check your email for the confirmation and e-ticket",
+        "step2": "Arrive at the center 15 minutes before your dive time",
+        "step3": "Bring your certification card and photo ID",
+        "step4": "Enjoy your dive adventure!"
+      },
+      "share": {
+        "title": "Dive booking - {serviceName}",
+        "text": "I just booked a dive at {centerName}! Reference: {reference}",
+        "copied": "Booking details copied to clipboard!"
+      }
+    },
+    "successPage": {
+      "invalidTitle": "Invalid booking",
+      "invalidDescription": "No booking reference provided.",
+      "notFoundTitle": "Booking not found",
+      "notFoundDescription": "The booking reference is invalid or has been removed."
+    },
+    "cancelPage": {
+      "title": "Payment cancelled",
+      "subtitle": "Your payment was cancelled. No charges have been made.",
+      "referenceLabel": "Booking reference",
+      "pendingPaymentHint": "This booking is pending payment. You can complete the payment later.",
+      "actions": {
+        "tryAgain": "Try payment again",
+        "backToCenters": "Back to centers",
+        "needHelp": "Need help?"
+      }
+    },
+    "form": {
+      "backToCenter": "Back to {centerName}",
+      "title": "Book: {serviceName}",
+      "date": {
+        "label": "Date",
+        "placeholder": "Select date"
+      },
+      "time": {
+        "label": "Time",
+        "placeholder": "Select time"
+      },
+      "participantsLabel": "Participants ({min}-{max})",
+      "contact": {
+        "title": "Contact information",
+        "firstName": "First name",
+        "firstNamePlaceholder": "John",
+        "lastName": "Last name",
+        "lastNamePlaceholder": "Doe",
+        "email": "Email",
+        "emailPlaceholder": "john@example.com",
+        "phoneOptional": "Phone (optional)",
+        "phonePlaceholder": "+33 6 12 34 56 78",
+        "specialRequestsOptional": "Special requests (optional)",
+        "specialRequestsPlaceholder": "Any dietary requirements, equipment needs, or other requests..."
+      },
+      "extras": {
+        "title": "Extras & add-ons",
+        "requiredBadge": "Required",
+        "perPersonSuffix": " / person"
+      },
+      "coupon": {
+        "labelOptional": "Coupon code (optional)",
+        "placeholder": "SUMMER2026"
+      },
+      "terms": {
+        "acceptPrefix": "I accept the",
+        "termsLink": "Terms & Conditions",
+        "acceptMiddle": "and the center's",
+        "cancellationPolicySuffix": "cancellation policy",
+        "noticeRequired": "({hours}h notice required).",
+        "mustAccept": "You must accept the terms"
+      },
+      "submit": {
+        "processing": "Processing...",
+        "pay": "Pay {amount}"
+      },
+      "summary": {
+        "title": "Order summary",
+        "participantOne": "{count} participant ×",
+        "participantOther": "{count} participants ×",
+        "perPerson": "/person",
+        "totalLabel": "Total"
+      },
+      "paymentInfo": {
+        "title": "Secure payment",
+        "description": "Powered by Stripe. Your card details are never stored on our servers."
+      },
+      "features": {
+        "instantConfirmation": "Instant confirmation",
+        "freeCancellation": "Free cancellation ({hours}h notice)",
+        "duration": "{minutes} min duration",
+        "equipmentIncluded": "Equipment included"
+      },
+      "cancellationPolicy": {
+        "flexible": "Flexible",
+        "moderate": "Moderate",
+        "strict": "Strict"
+      },
+      "errors": {
+        "createBookingFailed": "Failed to create booking",
+        "createCheckoutFailed": "Failed to create checkout session",
+        "generic": "An error occurred"
+      }
+    }
+  },
+  "oceanCanvas": {
+    "whytcardFishTitle": "Made with ❤️ by WhytCard"
+  },
+  "userDashboard": {
+    "greeting": "Welcome, {name}",
+    "defaultGreeting": "Diver",
+    "overview": "Here's an overview of your diving activity.",
+    "stats": {
+      "totalDives": "Total Dives",
+      "bookings": "Bookings",
+      "reviews": "Reviews",
+      "myCenters": "My Centers"
+    },
+    "upcoming": {
+      "title": "Upcoming Dives",
+      "viewAll": "View all",
+      "noUpcoming": "No upcoming dives",
+      "browse": "Browse dive centers",
+      "divers": "{count, plural, =1 {# diver} other {# divers}}",
+      "service": "Service"
+    },
+    "myCenters": {
+      "title": "My Dive Centers",
+      "addCenter": "Add center",
+      "bookings": "bookings",
+      "reviews": "reviews",
+      "noCenters": "No dive centers yet",
+      "register": "Register your center",
+      "status": {
+        "approved": "Approved",
+        "pending": "Pending",
+        "rejected": "Rejected"
+      }
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "findDives": "Find Dives",
+      "browseCenters": "Browse centers",
+      "myBookings": "My Bookings",
+      "viewHistory": "View history",
+      "editProfile": "Edit Profile",
+      "updateInfo": "Update info",
+      "settings": "Settings",
+      "preferences": "Preferences"
+    }
+  },
+  "onboardWelcome": {
+    "title": "Welcome to EviDive",
+    "question": "What would you like to do?",
+    "laterNote": "You can always add a dive center later from your dashboard.",
+    "diver": {
+      "title": "I'm a diver",
+      "description": "Find and book dives around the world",
+      "features": {
+        "discover": "Discover diving spots",
+        "book": "Book with certified centers",
+        "track": "Track your dive history"
+      }
+    },
+    "center": {
+      "title": "I manage a center",
+      "description": "Register your center and grow your business",
+      "features": {
+        "reach": "Reach divers worldwide",
+        "manage": "Manage your bookings easily",
+        "grow": "Build your reputation"
+      }
+    }
+  },
+  "onboardDiver": {
+    "steps": {
+      "profile": "Profile",
+      "preferences": "Preferences",
+      "finish": "Finish"
+    },
+    "certificationLevels": {
+      "none": "No certification",
+      "openWater": "Open Water",
+      "advancedOpenWater": "Advanced Open Water",
+      "rescueDiver": "Rescue Diver",
+      "divemaster": "Divemaster",
+      "instructor": "Instructor"
+    },
+    "certificationOrgs": {
+      "padi": "PADI",
+      "ssi": "SSI",
+      "naui": "NAUI",
+      "cmas": "CMAS",
+      "bsac": "BSAC",
+      "other": "Other"
+    },
+    "diveTypes": {
+      "reef": "Reef",
+      "wreck": "Wreck",
+      "drift": "Drift",
+      "night": "Night",
+      "cave": "Cave",
+      "deep": "Deep",
+      "technical": "Technical",
+      "photography": "Photography"
+    },
+    "form": {
+      "displayName": "Display Name",
+      "displayNameHint": "How should we call you?",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us about yourself and your diving experience...",
+      "certificationLevel": "Certification Level",
+      "selectLevel": "Select level",
+      "organization": "Organization",
+      "selectOrg": "Select org",
+      "totalDives": "Total Dives (approximate)",
+      "totalDivesPlaceholder": "e.g., 50",
+      "diveTypesQuestion": "What types of diving do you enjoy?",
+      "notifications": "Notification Preferences",
+      "emailNotifications": "Email notifications",
+      "pushNotifications": "Push notifications",
+      "smsNotifications": "SMS notifications"
+    },
+    "review": {
+      "title": "All set!",
+      "description": "Your profile is ready. You can now browse dive centers and book your next adventure.",
+      "summaryTitle": "Profile Summary",
+      "displayName": "Display Name",
+      "certification": "Certification",
+      "totalDives": "Total Dives",
+      "interests": "Interests"
+    },
+    "navigation": {
+      "back": "Back",
+      "continue": "Continue",
+      "complete": "Complete Setup",
+      "skip": "Skip for now",
+      "skipNote": "- you can complete your profile later"
+    }
+  },
+  "onboardCenter": {
+    "steps": {
+      "basicInfo": "Basic Info",
+      "location": "Location",
+      "services": "Services",
+      "legal": "Legal",
+      "review": "Review"
+    },
+    "diveTypes": {
+      "reef": "Reef Diving",
+      "wreck": "Wreck Diving",
+      "drift": "Drift Diving",
+      "night": "Night Diving",
+      "cave": "Cave Diving",
+      "deep": "Deep Diving",
+      "technical": "Technical Diving",
+      "beginner": "Beginner Course"
+    },
+    "certifications": {
+      "padi": "PADI",
+      "ssi": "SSI",
+      "naui": "NAUI",
+      "cmas": "CMAS",
+      "bsac": "BSAC",
+      "raid": "RAID",
+      "sdi": "SDI/TDI"
+    },
+    "languages": {
+      "en": "English",
+      "fr": "French",
+      "de": "German",
+      "es": "Spanish",
+      "it": "Italian",
+      "pt": "Portuguese",
+      "nl": "Dutch",
+      "ru": "Russian",
+      "zh": "Chinese",
+      "ja": "Japanese",
+      "ar": "Arabic"
+    },
+    "errors": {
+      "nameRequired": "Center name is required",
+      "emailRequired": "Email is required",
+      "cityRequired": "City is required",
+      "countryRequired": "Country is required",
+      "diveTypesRequired": "Select at least one dive type",
+      "termsRequired": "You must accept the terms"
+    },
+    "basicInfo": {
+      "title": "Basic Information",
+      "description": "Tell us about your dive center. This information will be visible to divers.",
+      "name": "Center Name *",
+      "namePlaceholder": "e.g., Blue Ocean Diving",
+      "shortDescription": "Short Description",
+      "shortDescriptionHint": "A brief tagline for your center",
+      "fullDescription": "Full Description",
+      "fullDescriptionPlaceholder": "Describe your center, facilities, and what makes you unique...",
+      "email": "Contact Email *",
+      "emailPlaceholder": "contact@divecenter.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+1 234 567 890",
+      "website": "Website",
+      "websitePlaceholder": "https://www.divecenter.com"
+    },
+    "location": {
+      "title": "Location",
+      "description": "Where is your dive center located? This helps divers find you.",
+      "address": "Address",
+      "addressPlaceholder": "123 Ocean Boulevard",
+      "city": "City *",
+      "cityPlaceholder": "Sharm El Sheikh",
+      "region": "Region/State",
+      "regionPlaceholder": "South Sinai",
+      "country": "Country *",
+      "countryPlaceholder": "Egypt",
+      "postalCode": "Postal Code",
+      "postalCodePlaceholder": "12345"
+    },
+    "services": {
+      "title": "Services & Offerings",
+      "description": "What do you offer? Select all that apply.",
+      "diveTypes": "Dive Types Offered *",
+      "certifications": "Certifications Offered",
+      "languagesSpoken": "Languages Spoken",
+      "additionalServices": "Additional Services",
+      "equipmentRental": "Equipment Rental Available",
+      "accommodationPartners": "Accommodation Partners",
+      "transportIncluded": "Transport Included"
+    },
+    "legal": {
+      "title": "Legal Information",
+      "description": "This information is required for payments and compliance.",
+      "businessName": "Legal Business Name",
+      "businessNamePlaceholder": "Blue Ocean Diving LLC",
+      "registrationNumber": "Registration Number",
+      "registrationPlaceholder": "Company reg. number",
+      "vatNumber": "VAT Number",
+      "vatPlaceholder": "VAT/Tax ID",
+      "insuranceProvider": "Insurance Provider",
+      "insurancePlaceholder": "Insurance company name",
+      "policyNumber": "Policy Number",
+      "policyPlaceholder": "Insurance policy #",
+      "termsAccept": "I confirm that all information provided is accurate and I agree to EviDive's",
+      "termsLink": "Terms of Service",
+      "and": "and",
+      "privacyLink": "Privacy Policy"
+    },
+    "review": {
+      "title": "Ready to Submit!",
+      "description": "Your dive center application will be reviewed by our team. This usually takes 1-2 business days.",
+      "summaryTitle": "Summary",
+      "centerName": "Center Name",
+      "location": "Location",
+      "servicesLabel": "Services",
+      "services": "{count} dive types",
+      "contact": "Contact",
+      "afterApproval": "After approval, you'll be able to set up Stripe payments and start accepting bookings."
+    },
+    "navigation": {
+      "back": "Back",
+      "continue": "Continue",
+      "submit": "Submit Application"
+    }
+  },
+  "contactPage": {
+    "placeholders": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "subject": "How can we help?",
+      "message": "Your message..."
+    }
+  },
+  "globe": {
+    "loading": "Loading Earth...",
+    "instructions": "Drag to rotate • Scroll to zoom • Click pins to select",
+    "utc": "UTC",
+    "now": "Now",
+    "centerCount": "{count} dive centers"
+  },
+  "explorerPage": {
+    "title": "Deep Dive Explorer",
+    "loadingGlobe": "Loading globe...",
+    "noResults": "No centers found",
+    "chatTitle": "DiveGuide AI",
+    "chatSubtitle": "Your underwater guide",
+    "chatIntro": "I’m your personal guide to discover underwater wonders. Let’s find your next dive adventure together.",
+    "startChat": "Start exploring",
+    "inputPlaceholder": "Type your message..."
+  },
+  "imageAlt": {
+    "evidiveLogo": "EviDive Logo",
+    "ogImage": "EviDive - Diving platform"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for seems to have dived too deep. Let's get you back to the surface.",
+    "backHome": "Back to home",
+    "goBack": "Go back"
+  },
+  "weather": {
+    "regionWeather": "Region Weather",
+    "feelsLike": "Feels like",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "unknownLocation": "Unknown location",
+    "fetchError": "Unable to load weather",
+    "rotateToSeeWeather": "Explore the globe to see weather",
+    "divingConditions": "Diving conditions",
+    "conditions": {
+      "good": "Good",
+      "moderate": "Moderate",
+      "poor": "Poor"
+    }
   }
 }

@@ -1,0 +1,316 @@
+---
+description: "Stripe Node.js SDK v20.3.0 - Payment rules. Source: https://stripe.com/docs"
+globs: ["lib/stripe.ts", "app/api/stripe/**/*.ts", "app/api/webhooks/**/*.ts"]
+alwaysApply: true
+---
+
+# Stripe Node.js SDK v20.3.0 - Official Rules
+
+> Source: https://stripe.com/docs / https://github.com/stripe/stripe-node
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`
+- NO hardcoded API keys or secrets
+- NO logging full card numbers or CVVs
+- NO storing sensitive payment data in your database
+
+### Stripe Specific
+- NO using test keys in production
+- NO skipping webhook signature verification
+- NO trusting client-side payment amounts
+- NO exposing Stripe secret key to client
+- NO handling card details on your server (use Stripe.js)
+
+## REQUIRED Patterns
+
+### Stripe Client Initialization
+
+```typescript
+// lib/stripe.ts
+import Stripe from 'stripe'
+
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY
+
+if (!stripeSecretKey && process.env.NODE_ENV === 'production') {
+  throw new Error('STRIPE_SECRET_KEY is required in production')
+}
+
+export const stripe = stripeSecretKey 
+  ? new Stripe(stripeSecretKey, {
+      apiVersion: '2026-01-28.clover',
+      typescript: true,
+    })
+  : null
+
+export function isStripeConfigured(): boolean {
+  return !!process.env.STRIPE_SECRET_KEY
+}
+```
+
+### Checkout Session Creation
+
+```typescript
+// app/api/checkout/route.ts
+import { stripe } from '@/lib/stripe'
+import { auth } from '@/lib/auth'
+
+export async function POST(request: Request) {
+  const session = await auth()
+  const { serviceId, participants } = await request.json()
+  
+  // Fetch price from database - NEVER trust client
+  const service = await prisma.service.findUnique({
+    where: { id: serviceId },
+    include: { center: true }
+  })
+  
+  if (!service) {
+    return Response.json({ error: 'Service not found' }, { status: 404 })
+  }
+  
+  const totalAmount = Number(service.price) * participants * 100 // cents
+  
+  const checkoutSession = await stripe!.checkout.sessions.create({
+    line_items: [
+      {
+        price_data: {
+          currency: 'eur',
+          unit_amount: Number(service.price) * 100,
+          product_data: {
+            name: service.name.fr || service.name.en,
+            description: `${service.center.name.fr} - ${participants} participant(s)`,
+          },
+        },
+        quantity: participants,
+      },
+    ],
+    mode: 'payment',
+    success_url: `${process.env.NEXT_PUBLIC_URL}/booking/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_URL}/book/${service.center.slug}/${serviceId}`,
+    customer_email: session?.user.email,
+    metadata: {
+      serviceId,
+      centerId: service.centerId,
+      participants: String(participants),
+      userId: session?.user.id || '',
+    },
+    billing_address_collection: 'required',
+    phone_number_collection: { enabled: true },
+  })
+  
+  return Response.json({ url: checkoutSession.url })
+}
+```
+
+### Webhook Handling
+
+```typescript
+// app/api/webhooks/stripe/route.ts
+import { stripe, STRIPE_WEBHOOK_SECRET } from '@/lib/stripe'
+import { headers } from 'next/headers'
+
+export async function POST(request: Request) {
+  const body = await request.text()
+  const headersList = await headers()
+  const signature = headersList.get('stripe-signature')
+  
+  if (!signature || !STRIPE_WEBHOOK_SECRET) {
+    return Response.json(
+      { error: 'Missing signature or webhook secret' },
+      { status: 400 }
+    )
+  }
+  
+  let event: Stripe.Event
+  
+  try {
+    event = stripe!.webhooks.constructEvent(
+      body,
+      signature,
+      STRIPE_WEBHOOK_SECRET
+    )
+  } catch (err) {
+    console.error('Webhook signature verification failed:', err)
+    return Response.json(
+      { error: 'Invalid signature' },
+      { status: 400 }
+    )
+  }
+  
+  try {
+    switch (event.type) {
+      case 'checkout.session.completed':
+        await handleCheckoutCompleted(event.data.object)
+        break
+        
+      case 'payment_intent.succeeded':
+        await handlePaymentSucceeded(event.data.object)
+        break
+        
+      case 'payment_intent.payment_failed':
+        await handlePaymentFailed(event.data.object)
+        break
+        
+      default:
+        console.log(`Unhandled event type: ${event.type}`)
+    }
+    
+    return Response.json({ received: true })
+  } catch (error) {
+    console.error('Webhook handler error:', error)
+    return Response.json(
+      { error: 'Webhook handler failed' },
+      { status: 500 }
+    )
+  }
+}
+
+async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+  const { serviceId, centerId, participants, userId } = session.metadata!
+  
+  await prisma.booking.update({
+    where: { stripeCheckoutSessionId: session.id },
+    data: {
+      status: 'PAID',
+      paymentStatus: 'PAID',
+      paidAt: new Date(),
+    },
+  })
+}
+```
+
+### Payment Intent Creation
+
+```typescript
+const paymentIntent = await stripe!.paymentIntents.create({
+  amount: totalAmount, // in cents
+  currency: 'eur',
+  customer: stripeCustomerId,
+  metadata: {
+    bookingId,
+    centerId,
+  },
+  receipt_email: customerEmail,
+  statement_descriptor: 'EVIDIVE BOOKING',
+})
+```
+
+### Refund Processing
+
+```typescript
+async function processRefund(bookingId: string, reason: string) {
+  const booking = await prisma.booking.findUnique({
+    where: { id: bookingId },
+  })
+  
+  if (!booking?.stripePaymentIntentId) {
+    throw new Error('No payment intent found')
+  }
+  
+  const refund = await stripe!.refunds.create({
+    payment_intent: booking.stripePaymentIntentId,
+    reason: 'requested_by_customer',
+    metadata: {
+      bookingId,
+      reason,
+    },
+  })
+  
+  await prisma.booking.update({
+    where: { id: bookingId },
+    data: {
+      status: 'CANCELLED',
+      paymentStatus: 'REFUNDED',
+      refundedAt: new Date(),
+      refundAmount: refund.amount / 100,
+    },
+  })
+  
+  return refund
+}
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Trusting client amount
+```typescript
+// WRONG - Client can modify amount!
+const { amount } = await request.json()
+await stripe.paymentIntents.create({ amount })
+
+// CORRECT - Calculate on server
+const service = await prisma.service.findUnique({ where: { id: serviceId } })
+const amount = Number(service.price) * 100
+await stripe.paymentIntents.create({ amount })
+```
+
+### Wrong: Skipping webhook verification
+```typescript
+// WRONG - No signature verification!
+export async function POST(request: Request) {
+  const event = await request.json()
+  if (event.type === 'payment_intent.succeeded') {
+    // Process payment...
+  }
+}
+
+// CORRECT - Always verify signature
+const event = stripe.webhooks.constructEvent(body, signature, webhookSecret)
+```
+
+### Wrong: Exposing secret key
+```typescript
+// WRONG - Client-side exposure
+'use client'
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY) // Exposed!
+
+// CORRECT - Use Stripe.js on client
+'use client'
+import { loadStripe } from '@stripe/stripe-js'
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+```
+
+### Wrong: Logging sensitive data
+```typescript
+// WRONG
+console.log('Card:', paymentMethod.card)
+
+// CORRECT - Log only safe identifiers
+console.log('PaymentMethod ID:', paymentMethod.id)
+```
+
+## Environment Variables
+
+```env
+# Server-side only
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+# Client-side (safe to expose)
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
+```
+
+## Idempotency Keys
+
+```typescript
+// For retryable operations, use idempotency keys
+const paymentIntent = await stripe.paymentIntents.create(
+  {
+    amount: 1000,
+    currency: 'eur',
+  },
+  {
+    idempotencyKey: `booking_${bookingId}_${Date.now()}`,
+  }
+)
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

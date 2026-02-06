@@ -1,0 +1,341 @@
+---
+description: "React Hook Form v7.54.2 - Forms rules. Source: https://react-hook-form.com"
+globs: ["app/**/*form*.tsx", "components/auth/**/*.tsx", "components/**/*form*.tsx"]
+alwaysApply: true
+---
+
+# React Hook Form v7.54.2 - Official Rules
+
+> Source: https://react-hook-form.com / https://github.com/react-hook-form/react-hook-form
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`
+- NO hardcoded error messages (use i18n translations)
+
+### React Hook Form Specific
+- NO using `useState` for form state (use `useForm`)
+- NO manual input onChange handlers for controlled inputs
+- NO submitting forms without validation
+- NO ignoring form errors
+
+## REQUIRED Patterns
+
+### Basic Form with useForm
+
+```typescript
+'use client'
+
+import { useForm } from 'react-hook-form'
+
+interface FormData {
+  firstName: string
+  lastName: string
+  email: string
+}
+
+export function ContactForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<FormData>({
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+    },
+    mode: 'onBlur', // Validate on blur
+  })
+
+  const onSubmit = async (data: FormData) => {
+    try {
+      await submitToAPI(data)
+      reset()
+    } catch (error) {
+      // Handle error
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <input
+          {...register('firstName', {
+            required: 'First name is required',
+            minLength: { value: 2, message: 'Minimum 2 characters' },
+          })}
+          placeholder="First Name"
+        />
+        {errors.firstName && (
+          <span className="text-red-500">{errors.firstName.message}</span>
+        )}
+      </div>
+
+      <div>
+        <input
+          {...register('email', {
+            required: 'Email is required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'Invalid email address',
+            },
+          })}
+          type="email"
+          placeholder="Email"
+        />
+        {errors.email && (
+          <span className="text-red-500">{errors.email.message}</span>
+        )}
+      </div>
+
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Submitting...' : 'Submit'}
+      </button>
+    </form>
+  )
+}
+```
+
+### Integration with Zod Resolver
+
+```typescript
+'use client'
+
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+const registerSchema = z.object({
+  email: z.string().email('Invalid email'),
+  password: z.string()
+    .min(8, 'Minimum 8 characters')
+    .regex(/[A-Z]/, 'Must contain uppercase'),
+  confirmPassword: z.string(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: 'Passwords do not match',
+  path: ['confirmPassword'],
+})
+
+type RegisterFormData = z.infer<typeof registerSchema>
+
+export function RegisterForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+  })
+
+  const onSubmit = async (data: RegisterFormData) => {
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+    // Handle response
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('email')} type="email" />
+      {errors.email && <span>{errors.email.message}</span>}
+
+      <input {...register('password')} type="password" />
+      {errors.password && <span>{errors.password.message}</span>}
+
+      <input {...register('confirmPassword')} type="password" />
+      {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
+
+      <button type="submit" disabled={isSubmitting}>
+        Register
+      </button>
+    </form>
+  )
+}
+```
+
+### Number Inputs
+
+```typescript
+<input
+  type="number"
+  {...register('participants', {
+    required: 'Number of participants required',
+    min: { value: 1, message: 'Minimum 1 participant' },
+    max: { value: 20, message: 'Maximum 20 participants' },
+    valueAsNumber: true, // IMPORTANT: Convert to number
+  })}
+/>
+```
+
+### Select Fields
+
+```typescript
+<select {...register('certificationLevel', { required: 'Please select' })}>
+  <option value="">Select level...</option>
+  <option value="OWD">Open Water Diver</option>
+  <option value="AOWD">Advanced Open Water</option>
+  <option value="RESCUE">Rescue Diver</option>
+</select>
+```
+
+### Watch Values
+
+```typescript
+const {
+  register,
+  watch,
+  formState: { errors },
+} = useForm<FormData>()
+
+// Watch a single field
+const email = watch('email')
+
+// Watch multiple fields
+const [firstName, lastName] = watch(['firstName', 'lastName'])
+
+// Watch all fields
+const allValues = watch()
+
+// Watch with callback
+useEffect(() => {
+  const subscription = watch((value, { name, type }) => {
+    console.log(value, name, type)
+  })
+  return () => subscription.unsubscribe()
+}, [watch])
+```
+
+### Controlled Components
+
+```typescript
+import { Controller } from 'react-hook-form'
+
+<Controller
+  name="diveDate"
+  control={control}
+  rules={{ required: 'Date is required' }}
+  render={({ field, fieldState: { error } }) => (
+    <DatePicker
+      selected={field.value}
+      onChange={field.onChange}
+      onBlur={field.onBlur}
+      className={error ? 'border-red-500' : ''}
+    />
+  )}
+/>
+```
+
+### Form with Server Action
+
+```typescript
+'use client'
+
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useActionState } from 'react'
+import { createBooking } from '@/actions/bookings'
+
+export function BookingForm({ serviceId }: { serviceId: string }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<BookingFormData>({
+    resolver: zodResolver(bookingSchema),
+  })
+
+  const [state, formAction, isPending] = useActionState(createBooking, null)
+
+  const onSubmit = (data: BookingFormData) => {
+    const formData = new FormData()
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, String(value))
+    })
+    formData.append('serviceId', serviceId)
+    formAction(formData)
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* Form fields */}
+      
+      {state?.error && (
+        <div className="text-red-500">{state.error}</div>
+      )}
+      
+      <button type="submit" disabled={isPending}>
+        {isPending ? 'Booking...' : 'Book Now'}
+      </button>
+    </form>
+  )
+}
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Using useState for form state
+```typescript
+// WRONG
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+
+<input value={email} onChange={(e) => setEmail(e.target.value)} />
+
+// CORRECT
+const { register } = useForm()
+
+<input {...register('email')} />
+```
+
+### Wrong: Manual validation
+```typescript
+// WRONG
+const handleSubmit = () => {
+  if (!email.includes('@')) {
+    setError('Invalid email')
+    return
+  }
+}
+
+// CORRECT
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(schema)
+})
+```
+
+### Wrong: Ignoring errors
+```typescript
+// WRONG - No error display
+<input {...register('email', { required: true })} />
+
+// CORRECT - Show errors
+<input {...register('email', { required: 'Email required' })} />
+{errors.email && <span>{errors.email.message}</span>}
+```
+
+## Validation Modes
+
+| Mode | Trigger | Use Case |
+|------|---------|----------|
+| `onSubmit` | On submit only | Default, simple forms |
+| `onBlur` | On blur | Recommended for UX |
+| `onChange` | On every change | Real-time validation |
+| `onTouched` | On first blur, then onChange | Balanced approach |
+| `all` | All triggers | Maximum feedback |
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

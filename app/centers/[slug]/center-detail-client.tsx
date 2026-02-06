@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   MapPin,
@@ -122,7 +123,7 @@ export function CenterDetailClient({ center }: CenterDetailClientProps) {
   const rating = Number(center.rating);
 
   return (
-    <div className="min-h-screen bg-background pb-16 pt-20">
+    <div className="min-h-screen bg-background pb-16 pt-24">
       {/* Hero Section */}
       <section className="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-ocean-surface to-ocean-deep">
@@ -163,9 +164,9 @@ export function CenterDetailClient({ center }: CenterDetailClientProps) {
                 <CardContent className="p-6">
                   <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                     {/* Logo */}
-                    <div className="w-20 h-20 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    <div className="relative w-20 h-20 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
                       {center.logoUrl ? (
-                        <img src={center.logoUrl} alt="" className="w-full h-full object-cover" />
+                        <Image src={center.logoUrl} alt="" fill className="object-cover" sizes="80px" />
                       ) : (
                         <span className="text-4xl">🏊</span>
                       )}
@@ -345,9 +346,9 @@ export function CenterDetailClient({ center }: CenterDetailClientProps) {
                     center.reviews.map((review) => (
                       <div key={review.id} className="p-4 rounded-xl bg-muted/30">
                         <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center overflow-hidden">
+                          <div className="relative w-10 h-10 rounded-full bg-muted flex items-center justify-center overflow-hidden">
                             {review.diver.avatarUrl ? (
-                              <img src={review.diver.avatarUrl} alt="" className="w-full h-full object-cover" />
+                              <Image src={review.diver.avatarUrl} alt="" fill className="object-cover" sizes="40px" />
                             ) : (
                               <span className="text-lg">👤</span>
                             )}
@@ -512,9 +513,9 @@ export function CenterDetailClient({ center }: CenterDetailClientProps) {
                   <CardContent className="space-y-3">
                     {center.workers.map((worker) => (
                       <div key={worker.id} className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center overflow-hidden">
+                        <div className="relative w-10 h-10 rounded-full bg-muted flex items-center justify-center overflow-hidden">
                           {worker.photoUrl ? (
-                            <img src={worker.photoUrl} alt="" className="w-full h-full object-cover" />
+                            <Image src={worker.photoUrl} alt="" fill className="object-cover" sizes="40px" />
                           ) : (
                             <span>👤</span>
                           )}

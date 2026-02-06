@@ -1,0 +1,223 @@
+---
+description: "Tailwind CSS v4.0.0 - Responsive styling rules. Source: https://tailwindcss.com/docs"
+globs: ["app/**/*.tsx", "components/**/*.tsx", "tailwind.config.ts", "app/globals.css"]
+alwaysApply: true
+---
+
+# Tailwind CSS v4.0.0 - Official Rules
+
+> Source: https://tailwindcss.com/docs
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`
+- NO hardcoded colors - use design tokens (`ocean-deep`, `ocean-glow`, etc.)
+- NO magic numbers for spacing - use Tailwind scale
+
+### Tailwind Specific
+- NO inline styles (`style={{...}}`) - use Tailwind utilities
+- NO custom CSS unless absolutely necessary
+- NO `!important` overrides
+- NO hardcoded pixel values - use Tailwind spacing scale
+- NO color values outside the design system
+- NO z-index values outside defined scale
+
+## REQUIRED Patterns
+
+### Mobile-First Responsive Design
+
+```tsx
+// CORRECT: Mobile-first approach
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  {items.map(item => (
+    <Card key={item.id} />
+  ))}
+</div>
+
+// WRONG: Desktop-first
+<div className="grid grid-cols-4 sm:grid-cols-1"> {/* Wrong order! */}
+```
+
+### Breakpoint System
+
+| Breakpoint | Min Width | Usage |
+|------------|-----------|-------|
+| `sm:` | 640px | Small tablets |
+| `md:` | 768px | Tablets |
+| `lg:` | 1024px | Laptops |
+| `xl:` | 1280px | Desktops |
+| `2xl:` | 1536px | Large screens |
+
+```tsx
+// Responsive text sizing
+<h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+  Title
+</h1>
+
+// Responsive padding
+<section className="px-4 sm:px-6 lg:px-8">
+  Content
+</section>
+```
+
+### Dark Mode Support
+
+```tsx
+// Dark mode with class strategy
+<div className="bg-white dark:bg-ocean-abyss text-gray-900 dark:text-gray-100">
+  <button className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600">
+    Click me
+  </button>
+</div>
+
+// Complex dark mode combinations
+<button className="dark:lg:hover:bg-indigo-600">
+  Dark mode + large screen + hover
+</button>
+```
+
+### Project Design Tokens
+
+Use the custom ocean-themed color palette defined in `tailwind.config.ts`:
+
+```tsx
+// Custom project colors
+<div className="bg-ocean-surface">    {/* Light surface */}
+<div className="bg-ocean-shallow">    {/* Shallow water */}
+<div className="bg-ocean-medium">     {/* Medium depth */}
+<div className="bg-ocean-deep">       {/* Deep ocean */}
+<div className="bg-ocean-abyss">      {/* Darkest */}
+<div className="text-ocean-glow">     {/* Accent/glow */}
+```
+
+### Custom Animations
+
+```tsx
+// Use project animations
+<div className="animate-float">        {/* Floating effect */}
+<div className="animate-bubble">       {/* Bubble rising */}
+<div className="animate-light-ray">    {/* Light ray effect */}
+```
+
+### Component Styling Pattern
+
+```tsx
+import { cn } from '@/lib/utils'
+
+interface CardProps {
+  className?: string
+  variant?: 'default' | 'outlined' | 'elevated'
+}
+
+export function Card({ className, variant = 'default' }: CardProps) {
+  return (
+    <div className={cn(
+      // Base styles
+      'rounded-lg p-4',
+      // Variant styles
+      variant === 'default' && 'bg-white dark:bg-ocean-deep',
+      variant === 'outlined' && 'border border-gray-200 dark:border-gray-700',
+      variant === 'elevated' && 'shadow-lg',
+      // Allow overrides
+      className
+    )}>
+      {children}
+    </div>
+  )
+}
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Inline styles
+```tsx
+// WRONG
+<div style={{ padding: '16px', marginTop: '20px' }}>
+
+// CORRECT
+<div className="p-4 mt-5">
+```
+
+### Wrong: Hardcoded colors
+```tsx
+// WRONG
+<div className="bg-[#1a365d]">
+
+// CORRECT
+<div className="bg-ocean-deep">
+```
+
+### Wrong: Desktop-first responsive
+```tsx
+// WRONG
+<div className="hidden sm:block md:hidden lg:block">
+
+// CORRECT - Mobile first
+<div className="block sm:hidden md:block lg:hidden">
+```
+
+### Wrong: Using px values
+```tsx
+// WRONG
+<div className="p-[17px] mt-[23px]">
+
+// CORRECT - Use spacing scale
+<div className="p-4 mt-6">
+```
+
+## Spacing Scale Reference
+
+| Class | Size |
+|-------|------|
+| `p-1` | 0.25rem (4px) |
+| `p-2` | 0.5rem (8px) |
+| `p-3` | 0.75rem (12px) |
+| `p-4` | 1rem (16px) |
+| `p-5` | 1.25rem (20px) |
+| `p-6` | 1.5rem (24px) |
+| `p-8` | 2rem (32px) |
+| `p-10` | 2.5rem (40px) |
+| `p-12` | 3rem (48px) |
+
+## Flexbox & Grid Patterns
+
+```tsx
+// Centered container
+<div className="flex items-center justify-center min-h-screen">
+
+// Responsive grid
+<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+// Sidebar layout
+<div className="flex flex-col lg:flex-row">
+  <aside className="w-full lg:w-64 shrink-0" />
+  <main className="flex-1" />
+</div>
+```
+
+## Hover, Focus & State Modifiers
+
+```tsx
+<button className="
+  bg-blue-500 
+  hover:bg-blue-600 
+  focus:ring-2 
+  focus:ring-blue-500 
+  focus:ring-offset-2
+  active:bg-blue-700
+  disabled:opacity-50 
+  disabled:cursor-not-allowed
+  transition-colors
+">
+  Button
+</button>
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

@@ -41,10 +41,8 @@ export default function NewServicePage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const [form, setForm] = useState({
-    nameEn: '',
-    nameFr: '',
-    descriptionEn: '',
-    descriptionFr: '',
+    name: '',
+    description: '',
     price: '',
     currency: 'EUR',
     durationMinutes: '60',
@@ -69,7 +67,7 @@ export default function NewServicePage() {
   const validate = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!form.nameEn.trim()) newErrors.nameEn = tErr('name_required');
+    if (!form.name.trim()) newErrors.name = tErr('name_required');
 
     if (!form.price) newErrors.price = tErr('price_required');
     else if (parseFloat(form.price) <= 0) newErrors.price = tErr('price_positive');
@@ -91,8 +89,8 @@ export default function NewServicePage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: { en: form.nameEn, fr: form.nameFr || form.nameEn },
-          description: form.descriptionEn ? { en: form.descriptionEn, fr: form.descriptionFr || form.descriptionEn } : null,
+          name: { en: form.name, fr: form.name },
+          description: form.description ? { en: form.description, fr: form.description } : null,
           price: parseFloat(form.price),
           currency: form.currency,
           durationMinutes: parseInt(form.durationMinutes),
@@ -169,56 +167,30 @@ export default function NewServicePage() {
                 <CardTitle className="text-white">{tForm('basicInfo')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white/70">
-                      {tForm('nameEn')} *
-                    </label>
-                    <Input
-                      value={form.nameEn}
-                      onChange={(e) => setForm(prev => ({ ...prev, nameEn: e.target.value }))}
-                      placeholder={t('examples.nameEnPlaceholder')}
-                      className={cn(
-                        'h-12 rounded-xl border-white/10 bg-white/5 text-white',
-                        errors.nameEn && 'border-red-500'
-                      )}
-                    />
-                    {errors.nameEn && <p className="mt-1 text-xs text-red-400">{errors.nameEn}</p>}
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white/70">
-                      {tForm('nameFr')}
-                    </label>
-                    <Input
-                      value={form.nameFr}
-                      onChange={(e) => setForm(prev => ({ ...prev, nameFr: e.target.value }))}
-                      placeholder={t('examples.nameFrPlaceholder')}
-                      className="h-12 rounded-xl border-white/10 bg-white/5 text-white"
-                    />
-                  </div>
-                </div>
-
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white/70">
-                    {tForm('descriptionEn')}
+                    {tForm('name')} *
                   </label>
-                  <textarea
-                    value={form.descriptionEn}
-                    onChange={(e) => setForm(prev => ({ ...prev, descriptionEn: e.target.value }))}
-                    placeholder={t('examples.descriptionEnPlaceholder')}
-                    rows={3}
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-cyan-500/50 focus:outline-none"
+                  <Input
+                    value={form.name}
+                    onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))}
+                    placeholder={t('examples.namePlaceholder')}
+                    className={cn(
+                      'h-12 rounded-xl border-white/10 bg-white/5 text-white',
+                      errors.name && 'border-red-500'
+                    )}
                   />
+                  {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
                 </div>
 
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white/70">
-                    {tForm('descriptionFr')}
+                    {tForm('description')}
                   </label>
                   <textarea
-                    value={form.descriptionFr}
-                    onChange={(e) => setForm(prev => ({ ...prev, descriptionFr: e.target.value }))}
-                    placeholder={t('examples.descriptionFrPlaceholder')}
+                    value={form.description}
+                    onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder={t('examples.descriptionPlaceholder')}
                     rows={3}
                     className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-cyan-500/50 focus:outline-none"
                   />

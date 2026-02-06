@@ -1,6 +1,9 @@
 // i18n Configuration - SANS préfixes URL
 export const locales = ['fr', 'en', 'de', 'es', 'it', 'pt', 'nl', 'pl', 'el', 'ru', 'sv'] as const;
 
+// Alias for compatibility
+export const supportedLocales = locales;
+
 export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = 'fr';

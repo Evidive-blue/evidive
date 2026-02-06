@@ -69,21 +69,19 @@ export function EditServiceForm({ center, service }: EditServiceFormProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const getLocalizedValue = (value: unknown, lang: 'en' | 'fr'): string => {
+  const getLocalizedValue = (value: unknown): string => {
     if (!value) return '';
     if (typeof value === 'string') return value;
     if (typeof value === 'object' && !Array.isArray(value)) {
       const obj = value as Record<string, string>;
-      return obj[lang] || '';
+      return obj.en || obj.fr || Object.values(obj)[0] || '';
     }
     return '';
   };
 
   const [form, setForm] = useState({
-    nameEn: getLocalizedValue(service.name, 'en'),
-    nameFr: getLocalizedValue(service.name, 'fr'),
-    descriptionEn: getLocalizedValue(service.description, 'en'),
-    descriptionFr: getLocalizedValue(service.description, 'fr'),
+    name: getLocalizedValue(service.name),
+    description: getLocalizedValue(service.description),
     price: service.price.toString(),
     currency: service.currency,
     durationMinutes: service.durationMinutes.toString(),
@@ -101,7 +99,7 @@ export function EditServiceForm({ center, service }: EditServiceFormProps) {
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    if (!form.nameEn.trim()) newErrors.nameEn = 'Le nom est requis';
+    if (!form.name.trim()) newErrors.name = 'Le nom est requis';
     if (!form.price) newErrors.price = 'Le prix est requis';
     else if (parseFloat(form.price) <= 0) newErrors.price = 'Le prix doit être positif';
     if (!form.durationMinutes || parseInt(form.durationMinutes) <= 0) {
@@ -121,9 +119,9 @@ export function EditServiceForm({ center, service }: EditServiceFormProps) {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: { en: form.nameEn, fr: form.nameFr || form.nameEn },
-          description: form.descriptionEn 
-            ? { en: form.descriptionEn, fr: form.descriptionFr || form.descriptionEn } 
+          name: { en: form.name, fr: form.name },
+          description: form.description 
+            ? { en: form.description, fr: form.description } 
             : null,
           price: parseFloat(form.price),
           currency: form.currency,
@@ -212,7 +210,7 @@ export function EditServiceForm({ center, service }: EditServiceFormProps) {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-white">Modifier le service</h1>
-              <p className="mt-2 text-white/60">{form.nameEn || 'Service'}</p>
+              <p className="mt-2 text-white/60">{form.name || 'Service'}</p>
             </div>
             <Button
               type="button"
@@ -261,55 +259,31 @@ export function EditServiceForm({ center, service }: EditServiceFormProps) {
                 <CardTitle className="text-white">Informations de base</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white/70">
-                      Nom (EN) *
-                    </label>
-                    <Input
-                      value={form.nameEn}
-                      onChange={(e) => setForm((prev) => ({ ...prev, nameEn: e.target.value }))}
-                      placeholder="Discovery Dive"
-                      className={cn(
-                        'h-12 rounded-xl border-white/10 bg-white/5 text-white',
-                        errors.nameEn && 'border-red-500'
-                      )}
-                    />
-                    {errors.nameEn && <p className="mt-1 text-xs text-red-400">{errors.nameEn}</p>}
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-medium text-white/70">
-                      Nom (FR)
-                    </label>
-                    <Input
-                      value={form.nameFr}
-                      onChange={(e) => setForm((prev) => ({ ...prev, nameFr: e.target.value }))}
-                      placeholder="Baptême de plongée"
-                      className="h-12 rounded-xl border-white/10 bg-white/5 text-white"
-                    />
-                  </div>
-                </div>
-
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white/70">
-                    Description (EN)
+                    Nom *
                   </label>
-                  <textarea
-                    value={form.descriptionEn}
-                    onChange={(e) => setForm((prev) => ({ ...prev, descriptionEn: e.target.value }))}
-                    rows={3}
-                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-cyan-500/50 focus:outline-none"
+                  <Input
+                    value={form.name}
+                    onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
+                    placeholder="Baptême de plongée"
+                    className={cn(
+                      'h-12 rounded-xl border-white/10 bg-white/5 text-white',
+                      errors.name && 'border-red-500'
+                    )}
                   />
+                  {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
                 </div>
 
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white/70">
-                    Description (FR)
+                    Description
                   </label>
                   <textarea
-                    value={form.descriptionFr}
-                    onChange={(e) => setForm((prev) => ({ ...prev, descriptionFr: e.target.value }))}
+                    value={form.description}
+                    onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
                     rows={3}
+                    placeholder="Décrivez ce service..."
                     className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:border-cyan-500/50 focus:outline-none"
                   />
                 </div>

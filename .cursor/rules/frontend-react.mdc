@@ -1,0 +1,275 @@
+---
+description: "React v19.2.3 - Frontend component rules. Source: https://react.dev"
+globs: ["app/**/*.tsx", "components/**/*.tsx"]
+alwaysApply: true
+---
+
+# React v19.2.3 - Official Rules
+
+> Source: https://react.dev
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`, `implement later`
+- NO mock data in production code
+- NO hardcoded secrets, API keys, passwords
+- NO `console.log` statements in production
+- NO empty catch blocks
+- NO magic numbers without constants
+
+### TypeScript/JavaScript
+- NO `any` type
+- NO `@ts-ignore` or `@ts-expect-error`
+- NO `// eslint-disable`
+- NO `as any` type assertions
+- NO `eval()` or `Function()` constructor
+
+### React Specific
+- NO missing `key` prop in lists
+- NO `useEffect` with missing dependencies
+- NO state updates inside render (causes infinite loops)
+- NO direct DOM manipulation (`document.getElementById`, etc.)
+- NO class components (use functional components)
+- NO `forceUpdate` or manual re-renders
+- NO mutating state directly (`state.push()`, etc.)
+
+## REQUIRED Patterns
+
+### Server Components (Default in Next.js App Router)
+
+```tsx
+// Server Component - NO 'use client' directive
+// Can use async/await directly
+export default async function UserProfile({ userId }: { userId: string }) {
+  const user = await getUser(userId)
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  )
+}
+```
+
+### Client Components (When Interactivity Needed)
+
+```tsx
+'use client'
+
+import { useState, useCallback } from 'react'
+
+export function Counter() {
+  const [count, setCount] = useState(0)
+  
+  const increment = useCallback(() => {
+    setCount(prev => prev + 1)
+  }, [])
+  
+  return (
+    <button onClick={increment}>
+      Count: {count}
+    </button>
+  )
+}
+```
+
+### Forms with useActionState (React 19)
+
+```tsx
+'use client'
+
+import { useActionState } from 'react'
+import { submitForm } from '@/actions'
+
+export function ContactForm() {
+  const [state, formAction] = useActionState(submitForm, null)
+  
+  return (
+    <form action={formAction}>
+      <input name="email" type="email" required />
+      <button type="submit">Submit</button>
+      {state?.error && <p className="text-red-500">{state.error}</p>}
+      {state?.success && <p className="text-green-500">Success!</p>}
+    </form>
+  )
+}
+```
+
+### Server Actions with 'use server'
+
+```tsx
+'use server'
+
+export async function submitForm(prevState: unknown, formData: FormData) {
+  const email = formData.get('email') as string
+  
+  try {
+    await saveToDatabase(email)
+    return { success: true }
+  } catch (error) {
+    return { error: 'Failed to submit' }
+  }
+}
+```
+
+### Hooks Best Practices
+
+```tsx
+'use client'
+
+import { useState, useEffect, useCallback, useMemo } from 'react'
+
+export function UserList({ filter }: { filter: string }) {
+  const [users, setUsers] = useState<User[]>([])
+  
+  // Memoize expensive computations
+  const filteredUsers = useMemo(() => 
+    users.filter(u => u.name.includes(filter)),
+    [users, filter]
+  )
+  
+  // Memoize callbacks passed to children
+  const handleSelect = useCallback((userId: string) => {
+    // Handle selection
+  }, [])
+  
+  // useEffect with proper dependencies
+  useEffect(() => {
+    const controller = new AbortController()
+    
+    fetchUsers(controller.signal).then(setUsers)
+    
+    return () => controller.abort() // Cleanup
+  }, []) // Empty array = run once on mount
+  
+  return (
+    <ul>
+      {filteredUsers.map(user => (
+        <li key={user.id} onClick={() => handleSelect(user.id)}>
+          {user.name}
+        </li>
+      ))}
+    </ul>
+  )
+}
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Missing key in list
+```tsx
+// WRONG
+{items.map(item => <div>{item.name}</div>)}
+
+// CORRECT
+{items.map(item => <div key={item.id}>{item.name}</div>)}
+```
+
+### Wrong: useEffect with missing dependencies
+```tsx
+// WRONG
+useEffect(() => {
+  fetchData(userId)
+}, []) // Missing userId
+
+// CORRECT
+useEffect(() => {
+  fetchData(userId)
+}, [userId])
+```
+
+### Wrong: Mutating state directly
+```tsx
+// WRONG
+const [items, setItems] = useState([])
+items.push(newItem) // Direct mutation!
+setItems(items)
+
+// CORRECT
+setItems(prev => [...prev, newItem])
+```
+
+### Wrong: State update in render
+```tsx
+// WRONG
+function Component({ value }) {
+  const [state, setState] = useState(value)
+  if (value !== state) {
+    setState(value) // State update during render!
+  }
+}
+
+// CORRECT - use useEffect or derive state
+function Component({ value }) {
+  const [state, setState] = useState(value)
+  useEffect(() => {
+    setState(value)
+  }, [value])
+}
+```
+
+## Component Patterns
+
+### Props Interface
+
+```tsx
+interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'ghost'
+  size?: 'sm' | 'md' | 'lg'
+  disabled?: boolean
+  onClick?: () => void
+  children: React.ReactNode
+}
+
+export function Button({
+  variant = 'primary',
+  size = 'md',
+  disabled = false,
+  onClick,
+  children
+}: ButtonProps) {
+  return (
+    <button
+      className={cn(buttonVariants({ variant, size }))}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  )
+}
+```
+
+### Compound Components
+
+```tsx
+interface TabsContextValue {
+  activeTab: string
+  setActiveTab: (tab: string) => void
+}
+
+const TabsContext = createContext<TabsContextValue | null>(null)
+
+export function Tabs({ children, defaultTab }: TabsProps) {
+  const [activeTab, setActiveTab] = useState(defaultTab)
+  
+  return (
+    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+      {children}
+    </TabsContext.Provider>
+  )
+}
+
+Tabs.List = TabsList
+Tabs.Tab = Tab
+Tabs.Panel = TabPanel
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

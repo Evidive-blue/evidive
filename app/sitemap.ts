@@ -3,22 +3,28 @@ import { headers } from 'next/headers';
 import { locales } from '@/lib/i18n/config';
 import { prisma } from '@/lib/db/prisma';
 
+// Force dynamic rendering to use request headers for base URL
+export const dynamic = 'force-dynamic';
+
 async function getBaseUrl() {
-  const envUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  // Priority: explicit config > headers > Vercel URL > fallback
+  const envUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL;
   if (envUrl) return envUrl;
 
+  // Use headers to get the current host (forces dynamic rendering)
+  const headerList = await headers();
+  const host = headerList.get('x-forwarded-host') ?? headerList.get('host');
+  if (host) {
+    const protocol = headerList.get('x-forwarded-proto') ?? 'https';
+    return `${protocol}://${host}`;
+  }
+
+  // Vercel URL fallback (deployment-specific URL)
   const vercelUrl = process.env.VERCEL_URL;
   if (vercelUrl) return `https://${vercelUrl}`;
 
-  const headerList = await headers();
-  const host = headerList.get('x-forwarded-host') ?? headerList.get('host');
-  const protocol = headerList.get('x-forwarded-proto') ?? 'https';
-
-  if (!host) {
-    throw new Error('Missing host for sitemap base URL.');
-  }
-
-  return `${protocol}://${host}`;
+  // Fallback for local development
+  return 'http://localhost:3000';
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

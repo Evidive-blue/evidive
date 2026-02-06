@@ -454,7 +454,13 @@
   "error": "Something went wrong. Please try again.",
   "info_title": "Information",
   "info_email": "info@evidive.blue",
-  "info_address": "Geneva, Switzerland"
+  "info_address": "Geneva, Switzerland",
+  "placeholders": {
+    "name": "Your full name",
+    "email": "email@example.com",
+    "subject": "How can we help?",
+    "message": "Tell us more about your inquiry..."
+  }
  },
  "explorer": {
   "meta": {
@@ -614,6 +620,7 @@
   "badge": "Discover the depths",
   "tagline": "Dive into Adventure",
   "title": "Explore the Depths",
+  "seoTitle": "EviDive - Book Your Scuba Diving Experiences Worldwide",
   "subtitle": "Book your dives at the world's most beautiful sites. Unique experiences, certified centers, unforgettable memories.",
   "discover": "Discover",
   "cta": "Explore destinations",
@@ -696,7 +703,7 @@
     "description": "Discover approved dive centers on EviDive and explore them on the globe."
    },
    "title": "Centers",
-   "subtitle": "Rotate the globe and discover approved dive centers.",
+   "subtitle": "Explore dive centers around the world",
    "listTitle": "Registered centers",
    "emptyTitle": "No centers available yet",
    "emptyDescription": "Centers will appear here as soon as they are approved by an administrator.",
@@ -705,9 +712,13 @@
    "backToCenters": "Back to centers",
    "rating": "{rating} ★ ({count} reviews)",
    "globeHint": "Tip: right-click on a point to open the center.",
-   "services": "Services",
+   "services": "services",
    "minutes": "min",
-   "maxParticipants": "Max {count} participants"
+   "maxParticipants": "Max {count} participants",
+   "centersLabel": "Centers",
+   "popularCenters": "Popular Centers",
+   "rotateGlobe": "Rotate the globe to discover centers",
+   "noSearchResults": "No centers found for this search"
   },
   "detail": {
     "sections": {
@@ -956,45 +967,80 @@
   }
  },
  "profile": {
+  "title": "My Profile",
+  "subtitle": "Manage your personal information",
+  "description": "View and edit your profile settings",
   "backToDashboard": "Back to dashboard",
   "defaultName": "User",
   "emailVerified": "Email verified",
   "editProfile": "Edit profile",
+  "edit": "Edit",
+  "save": "Save",
   "saveChanges": "Save",
   "saving": "Saving...",
+  "saveSuccess": "Profile updated successfully",
+  "saveError": "Failed to save profile",
   "sections": {
    "personal": "Personal information",
    "diving": "Diving information",
+   "address": "Address",
+   "notifications": "Notification preferences",
    "account": "Account"
   },
   "fields": {
+   "displayName": "Display name",
    "firstName": "First name",
    "lastName": "Last name",
+   "email": "Email",
    "phone": "Phone",
    "location": "Location",
    "bio": "Bio",
+   "address": "Street address",
+   "city": "City",
+   "zip": "Postal code",
+   "country": "Country",
    "certificationLevel": "Certification level",
    "certificationOrg": "Organization",
    "totalDives": "Total dives"
   },
   "placeholders": {
+   "displayName": "Your display name",
    "firstName": "Your first name",
    "lastName": "Your last name",
    "phone": "+1 234 567 8900",
+   "address": "123 Ocean Drive",
    "city": "City",
+   "zip": "12345",
    "country": "Country",
-   "bio": "Tell us about yourself and your passion for diving..."
+   "bio": "Tell us about yourself and your passion for diving...",
+   "certificationLevel": "Select your level",
+   "certificationOrg": "Select organization"
+  },
+  "stats": {
+   "totalDives": "Total dives",
+   "bookings": "Bookings",
+   "reviews": "Reviews"
   },
   "divingStats": {
    "title": "Statistics",
    "bookings": "Bookings",
    "reviews": "Reviews"
   },
+  "notifications": {
+   "email": "Email notifications",
+   "emailDesc": "Receive booking confirmations and updates by email",
+   "sms": "SMS notifications",
+   "smsDesc": "Receive important reminders by SMS"
+  },
   "account": {
    "email": "Email",
    "type": "Account type",
    "status": "Status",
-   "active": "Active"
+   "active": "Active",
+   "memberSince": "Member since",
+   "emailVerified": "Email verified",
+   "role": "Account type",
+   "centers": "Centers owned"
   }
  },
   "settings": {
@@ -1275,16 +1321,51 @@
    "RUNNING": "In progress",
    "COMPLETED": "Completed",
    "CANCELLED": "Cancelled",
-   "NOSHOW": "No-show"
+   "NOSHOW": "No-show",
+   "REMOVED": "Removed"
   },
   "client": "Client",
   "center": "Center",
   "service": "Service",
-  "participants": "participants",
+  "participants": "{count, plural, one {# participant} other {# participants}}",
   "noBookings": "No bookings found.",
   "previous": "Previous",
   "next": "Next",
-  "pageInfo": "Page {current} of {total}"
+  "pageInfo": "Page {current} of {total}",
+  "pagination": "Page {current} of {total}",
+  "totalRevenue": "Total revenue",
+  "unknown": "Unknown",
+  "guest": "Guest"
+ },
+ "adminUsers": {
+  "meta": {
+   "title": "Admin · Users - EviDive",
+   "description": "Manage platform users."
+  },
+  "title": "Admin · Users",
+  "subtitle": "Manage all platform users",
+  "backToAdmin": "Back to admin",
+  "results": "{count, plural, =0 {No users} one {# user} other {# users}}",
+  "searchPlaceholder": "Search by email, name...",
+  "allRoles": "All roles",
+  "roles": {
+   "DIVER": "Divers",
+   "ADMIN": "Admins"
+  },
+  "noUsers": "No users found.",
+  "blacklisted": "Blacklisted",
+  "inactive": "Inactive",
+  "centersCount": "{count, plural, one {# center} other {# centers}}",
+  "bookingsCount": "{count, plural, one {# booking} other {# bookings}}",
+  "reviewsCount": "{count, plural, one {# review} other {# reviews}}",
+  "demote": "Demote",
+  "promote": "Promote to admin",
+  "deactivate": "Deactivate",
+  "activate": "Activate",
+  "removeBlacklist": "Remove from blacklist",
+  "addBlacklist": "Blacklist",
+  "details": "Details",
+  "pagination": "Page {current} of {total}"
  },
  "adminReviews": {
   "meta": {
@@ -2639,11 +2720,11 @@
       "description": "Discover EviDive's mission: connecting passionate divers with the best certified dive centers around the world."
     },
     "login": {
-      "title": "Login | EviDive",
+      "title": "Login",
       "description": "Sign in to your EviDive account to book dives and manage your profile."
     },
     "register": {
-      "title": "Create Account | EviDive",
+      "title": "Create Account",
       "description": "Create your EviDive account to start booking dives at the world's best dive centers."
     },
     "dashboard": {
@@ -2683,7 +2764,7 @@
       "description": "View the general terms and conditions of the EviDive platform."
     },
     "onboard": {
-      "title": "Welcome | EviDive",
+      "title": "Welcome",
       "description": "Complete your profile to start booking dives or register your center."
     },
     "forgotPassword": {
@@ -2705,6 +2786,10 @@
     "bookingCancel": {
       "title": "Booking cancelled | EviDive",
       "description": "Your booking process was cancelled."
+    },
+    "sitemap": {
+      "title": "Site Map | EviDive",
+      "description": "Navigate the EviDive platform with our complete site map."
     }
   },
   "booking": {
@@ -2869,7 +2954,27 @@
     "dashboard": "Dashboard",
     "explore": "Explore",
     "contact": "Contact",
-    "learnMore": "Learn more"
+    "learnMore": "Learn more",
+    "where": "Where",
+    "when": "When",
+    "divers": "Divers",
+    "diver": "diver",
+    "diversPlural": "divers",
+    "searchDestination": "Search destination...",
+    "countryOrCity": "Country, city or center name",
+    "selectDates": "Select your travel dates",
+    "select": "Select...",
+    "numberOfParticipants": "Number of participants",
+    "countries": "Countries",
+    "viewAll": "View all",
+    "noReviews": "No reviews yet",
+    "dragToRotate": "Drag to rotate",
+    "scrollToZoom": "Scroll to zoom",
+    "clickOnCenter": "Click on a center",
+    "close": "Close",
+    "globe": "Globe",
+    "seeMore": "See more",
+    "viewDetails": "View details"
   },
   "userDashboard": {
     "greeting": "Welcome, {name}",
@@ -2895,7 +3000,12 @@
       "bookings": "bookings",
       "reviews": "reviews",
       "noCenters": "No dive centers yet",
-      "register": "Register your center"
+      "register": "Register your center",
+      "status": {
+        "approved": "Approved",
+        "pending": "Pending",
+        "rejected": "Rejected"
+      }
     },
     "quickActions": {
       "title": "Quick Actions",
@@ -3169,6 +3279,10 @@
   },
   "zen": {
     "zenMode": "Zen Mode",
+    "fullZenMode": "Full Zen Mode",
+    "ambientSounds": "Ambient Sounds",
+    "soundMixer": "Sound Mixer",
+    "volume": "Volume",
     "inhale": "Inhale",
     "hold": "Hold",
     "exhale": "Exhale",
@@ -3176,10 +3290,27 @@
     "pause": "Pause",
     "play": "Resume",
     "close": "Close",
+    "expand": "Expand",
+    "collapse": "Collapse",
     "mute": "Mute",
     "unmute": "Unmute",
     "waves": "Waves",
     "bubbles": "Bubbles",
     "underwater": "Underwater"
+  },
+  "weather": {
+    "regionWeather": "Region Weather",
+    "feelsLike": "Feels like",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "unknownLocation": "Unknown location",
+    "fetchError": "Unable to load weather",
+    "rotateToSeeWeather": "Explore the globe to see weather",
+    "divingConditions": "Diving conditions",
+    "conditions": {
+      "good": "Good",
+      "moderate": "Moderate",
+      "poor": "Poor"
+    }
   }
 }

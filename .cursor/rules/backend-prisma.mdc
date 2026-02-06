@@ -1,0 +1,336 @@
+---
+description: "Prisma ORM v6.19.2 - Database rules. Source: https://www.prisma.io/docs"
+globs: ["prisma/**/*.prisma", "lib/db/**/*.ts", "app/api/**/*.ts"]
+alwaysApply: true
+---
+
+# Prisma ORM v6.19.2 - Official Rules
+
+> Source: https://www.prisma.io/docs
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`
+- NO hardcoded secrets or database URLs
+- NO mock data in production queries
+
+### Database/SQL
+- NO string concatenation in queries (SQL injection risk)
+- NO `SELECT *` equivalent - always use `select` clause
+- NO missing indexes on foreign keys
+- NO N+1 query patterns (use `include` or batch queries)
+- NO raw SQL without parameterization
+- NO transactions without error handling
+
+### Prisma Specific
+- NO forgetting to disconnect client in scripts
+- NO creating new PrismaClient instances per request
+- NO ignoring relation constraints
+- NO skipping migrations in production
+
+## REQUIRED Patterns
+
+### Singleton Prisma Client
+
+```typescript
+// lib/db/prisma.ts
+import { PrismaClient } from '@prisma/client'
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined
+}
+
+export const prisma = globalForPrisma.prisma ?? new PrismaClient({
+  log: process.env.NODE_ENV === 'development' 
+    ? ['query', 'error', 'warn'] 
+    : ['error'],
+})
+
+if (process.env.NODE_ENV !== 'production') {
+  globalForPrisma.prisma = prisma
+}
+```
+
+### CRUD Operations
+
+```typescript
+// CORRECT: Find with select (no SELECT *)
+const user = await prisma.diver.findUnique({
+  where: { id: userId },
+  select: {
+    id: true,
+    email: true,
+    displayName: true,
+    role: true,
+  }
+})
+
+// CORRECT: Create with data validation
+const center = await prisma.center.create({
+  data: {
+    slug: generateSlug(name),
+    name: { fr: name, en: nameEn },
+    ownerId: userId,
+    // ... other required fields
+  }
+})
+
+// CORRECT: Update with where clause
+const updated = await prisma.diver.update({
+  where: { id: diverId },
+  data: { displayName: newName }
+})
+
+// CORRECT: Delete with cascade awareness
+await prisma.booking.delete({
+  where: { id: bookingId }
+})
+```
+
+### Relations with Include
+
+```typescript
+// CORRECT: Eager loading to avoid N+1
+const centerWithServices = await prisma.center.findUnique({
+  where: { slug },
+  include: {
+    services: {
+      where: { isActive: true },
+      orderBy: { price: 'asc' }
+    },
+    owner: {
+      select: { displayName: true, email: true }
+    }
+  }
+})
+
+// CORRECT: Nested includes
+const booking = await prisma.booking.findUnique({
+  where: { reference },
+  include: {
+    service: true,
+    center: {
+      include: { owner: true }
+    },
+    diver: true,
+    extras: {
+      include: { extra: true }
+    }
+  }
+})
+```
+
+### Nested Writes (Transactions)
+
+```typescript
+// CORRECT: Atomic creation with relations
+const booking = await prisma.booking.create({
+  data: {
+    reference: generateReference(),
+    guestEmail: email,
+    participants: 2,
+    totalPrice: 150,
+    center: { connect: { id: centerId } },
+    service: { connect: { id: serviceId } },
+    diver: userId ? { connect: { id: userId } } : undefined,
+    extras: {
+      create: selectedExtras.map(extra => ({
+        extraId: extra.id,
+        quantity: extra.quantity,
+        unitPrice: extra.price,
+        totalPrice: extra.price * extra.quantity
+      }))
+    }
+  },
+  include: { extras: true }
+})
+```
+
+### Explicit Transactions
+
+```typescript
+// CORRECT: Multi-operation transaction
+const [deletedBookings, deletedUser] = await prisma.$transaction([
+  prisma.booking.deleteMany({
+    where: { diverId: userId }
+  }),
+  prisma.diver.delete({
+    where: { id: userId }
+  })
+])
+
+// CORRECT: Interactive transaction
+const result = await prisma.$transaction(async (tx) => {
+  const booking = await tx.booking.update({
+    where: { id: bookingId },
+    data: { status: 'PAID', paidAt: new Date() }
+  })
+  
+  await tx.center.update({
+    where: { id: booking.centerId },
+    data: { bookingCount: { increment: 1 } }
+  })
+  
+  await tx.commission.create({
+    data: {
+      bookingId: booking.id,
+      centerId: booking.centerId,
+      bookingAmount: booking.totalPrice,
+      commissionRate: 15,
+      commissionAmount: booking.totalPrice * 0.15,
+      centerAmount: booking.totalPrice * 0.85
+    }
+  })
+  
+  return booking
+})
+```
+
+### Filtering & Pagination
+
+```typescript
+// CORRECT: Complex filtering
+const centers = await prisma.center.findMany({
+  where: {
+    status: 'APPROVED',
+    country: { in: ['FR', 'ES', 'IT'] },
+    rating: { gte: 4 },
+    OR: [
+      { name: { path: ['en'], string_contains: query } },
+      { city: { contains: query, mode: 'insensitive' } }
+    ]
+  },
+  orderBy: [
+    { featured: 'desc' },
+    { rating: 'desc' }
+  ],
+  skip: (page - 1) * pageSize,
+  take: pageSize,
+  select: {
+    id: true,
+    slug: true,
+    name: true,
+    city: true,
+    rating: true,
+    featuredImage: true
+  }
+})
+```
+
+### Upsert Pattern
+
+```typescript
+// CORRECT: Create or update
+const diver = await prisma.diver.upsert({
+  where: { email: normalizedEmail },
+  create: {
+    email: normalizedEmail,
+    displayName: name,
+    emailVerified: true,
+    role: 'DIVER'
+  },
+  update: {
+    displayName: name,
+    emailVerified: true
+  }
+})
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: N+1 Query
+```typescript
+// WRONG - N+1 queries
+const centers = await prisma.center.findMany()
+for (const center of centers) {
+  center.services = await prisma.service.findMany({
+    where: { centerId: center.id }
+  })
+}
+
+// CORRECT
+const centers = await prisma.center.findMany({
+  include: { services: true }
+})
+```
+
+### Wrong: Raw SQL without parameters
+```typescript
+// WRONG - SQL injection risk!
+await prisma.$queryRaw`SELECT * FROM users WHERE email = ${email}`
+// This is actually safe, but be careful with:
+
+// WRONG
+const query = `SELECT * FROM users WHERE email = '${email}'`
+await prisma.$executeRawUnsafe(query)
+
+// CORRECT
+await prisma.$queryRaw`SELECT * FROM divers WHERE email = ${email}`
+```
+
+### Wrong: Missing error handling in transactions
+```typescript
+// WRONG
+await prisma.$transaction([
+  prisma.booking.delete({ where: { id } }),
+  prisma.commission.delete({ where: { bookingId: id } })
+])
+
+// CORRECT
+try {
+  await prisma.$transaction([
+    prisma.commission.delete({ where: { bookingId: id } }),
+    prisma.booking.delete({ where: { id } })
+  ])
+} catch (error) {
+  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    if (error.code === 'P2025') {
+      throw new Error('Record not found')
+    }
+  }
+  throw error
+}
+```
+
+## Schema Best Practices
+
+```prisma
+// Always use @map for table names
+model Diver {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Index foreign keys
+  bookings  Booking[]
+  
+  @@map("divers")
+}
+
+// Use enums for fixed values
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+// Add indexes for frequently queried fields
+model Booking {
+  id        String        @id @default(cuid())
+  reference String        @unique
+  status    BookingStatus @default(PENDING)
+  
+  @@index([status, createdAt])
+  @@map("bookings")
+}
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

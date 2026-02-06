@@ -1,0 +1,257 @@
+---
+description: "Custom i18n - Internationalization rules for Evidive (11 languages). Based on project implementation."
+globs: ["lib/i18n/**/*.ts", "messages/**/*.json", "app/**/*.tsx", "components/**/*.tsx"]
+alwaysApply: true
+---
+
+# Custom i18n System - Evidive Rules
+
+> Based on project implementation in lib/i18n/
+> Supports 11 languages: fr, en, de, es, it, pt, nl, pl, el, ru, sv
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`
+- NO hardcoded user-facing strings
+- NO missing translations in any of the 11 languages
+
+### i18n Specific
+- NO using URL-based locale prefixes (project uses cookie-based)
+- NO hardcoded locale strings - use `Locale` type
+- NO skipping translation for new features
+- NO incomplete message files
+
+## SUPPORTED LOCALES
+
+```typescript
+export const locales = ['fr', 'en', 'de', 'es', 'it', 'pt', 'nl', 'pl', 'el', 'ru', 'sv'] as const
+
+export type Locale = (typeof locales)[number]
+
+export const defaultLocale: Locale = 'fr'
+```
+
+## REQUIRED Patterns
+
+### Server Component Translation
+
+```typescript
+// In Server Components
+import { getTranslations } from '@/lib/i18n/get-translations-server'
+
+export default async function Page() {
+  const t = await getTranslations('home')
+  
+  return (
+    <div>
+      <h1>{t.hero.title}</h1>
+      <p>{t.hero.subtitle}</p>
+    </div>
+  )
+}
+```
+
+### Client Component Translation
+
+```typescript
+'use client'
+
+import { useTranslations } from '@/lib/i18n/use-translations'
+
+export function ClientComponent() {
+  const { t, locale } = useTranslations('common')
+  
+  return (
+    <button>
+      {t.buttons.submit}
+    </button>
+  )
+}
+```
+
+### Message File Structure
+
+```json
+// messages/fr.json
+{
+  "common": {
+    "buttons": {
+      "submit": "Soumettre",
+      "cancel": "Annuler",
+      "save": "Enregistrer"
+    },
+    "errors": {
+      "required": "Ce champ est requis",
+      "email": "Adresse email invalide"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Découvrez les meilleurs centres de plongée",
+      "subtitle": "Réservez votre prochaine aventure sous-marine"
+    }
+  }
+}
+```
+
+### Adding New Translations
+
+When adding new features, you MUST:
+
+1. Add keys to ALL 11 message files:
+```bash
+# Check completeness with script
+npm run check:i18n
+```
+
+2. Structure translations by feature:
+```json
+{
+  "booking": {
+    "form": {
+      "title": "Réserver une plongée",
+      "date": "Date de la plongée",
+      "participants": "Nombre de participants"
+    },
+    "confirmation": {
+      "title": "Réservation confirmée",
+      "reference": "Référence"
+    }
+  }
+}
+```
+
+### Multilingual Database Content
+
+For user-generated content (center names, descriptions), use JSON columns:
+
+```typescript
+// Prisma schema
+model Center {
+  name        Json // { fr: "...", en: "...", es: "..." }
+  description Json
+}
+
+// Usage
+function getLocalizedName(center: Center, locale: Locale): string {
+  const names = center.name as Record<string, string>
+  return names[locale] || names['en'] || names['fr'] || ''
+}
+```
+
+### Locale Detection Flow
+
+1. Check `NEXT_LOCALE` cookie
+2. Parse `Accept-Language` header
+3. Default to `fr`
+
+```typescript
+// middleware.ts already handles this
+// DO NOT add locale prefixes to URLs
+```
+
+### OpenGraph Locale Mapping
+
+```typescript
+import { getOpenGraphLocale } from '@/lib/i18n/config'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
+  
+  return {
+    openGraph: {
+      locale: getOpenGraphLocale(locale), // e.g., 'fr_FR'
+    }
+  }
+}
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Hardcoded strings
+```tsx
+// WRONG
+<button>Submit</button>
+
+// CORRECT
+<button>{t.buttons.submit}</button>
+```
+
+### Wrong: URL-based locale
+```tsx
+// WRONG - Project doesn't use URL prefixes
+<Link href="/fr/about">About</Link>
+
+// CORRECT - Clean URLs
+<Link href="/about">About</Link>
+// Locale is in cookie, not URL
+```
+
+### Wrong: Incomplete translations
+```json
+// WRONG - Missing in other languages
+// Only in messages/fr.json, not in en.json, de.json, etc.
+{
+  "newFeature": {
+    "title": "Nouvelle fonctionnalité"
+  }
+}
+
+// CORRECT - Add to ALL 11 files
+```
+
+### Wrong: Inline locale switch
+```tsx
+// WRONG - Hardcoded locale
+const name = center.name['fr']
+
+// CORRECT - Use current locale
+const name = getLocalizedName(center, locale)
+```
+
+## Language Switcher
+
+```tsx
+'use client'
+
+import { useLocale, setLocale } from '@/lib/i18n'
+import { locales, localeNames, localeFlags } from '@/lib/i18n/config'
+
+export function LanguageSwitcher() {
+  const currentLocale = useLocale()
+  
+  return (
+    <select 
+      value={currentLocale}
+      onChange={(e) => setLocale(e.target.value as Locale)}
+    >
+      {locales.map(locale => (
+        <option key={locale} value={locale}>
+          {localeFlags[locale]} {localeNames[locale]}
+        </option>
+      ))}
+    </select>
+  )
+}
+```
+
+## Verification Script
+
+Run before commits to ensure all translations are complete:
+
+```bash
+npm run check:i18n
+```
+
+This will flag:
+- Missing keys in any language file
+- Keys present in some files but not others
+- Empty translation values
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

@@ -146,9 +146,13 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
+    /* Fix horizontal scroll on mobile caused by 3D elements */
+    overflow-x: hidden;
   }
   html {
     scroll-behavior: smooth;
+    /* Prevent horizontal scroll at document level */
+    overflow-x: hidden;
   }
 }
 

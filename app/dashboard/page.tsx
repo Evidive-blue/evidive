@@ -10,13 +10,13 @@ import { getMessages, getNestedValue } from "@/lib/i18n/get-messages";
 import { getTranslationsServer } from "@/lib/i18n/get-translations-server";
 
 // Helper to extract name from JSON (multilingual)
-function getName(name: JsonValue, locale = "en"): string {
+function getName(name: JsonValue, locale = "en", fallback = "Unnamed"): string {
   if (typeof name === "string") return name;
   if (name && typeof name === "object" && !Array.isArray(name)) {
     const obj = name as Record<string, unknown>;
-    return (obj[locale] as string) || (obj.en as string) || (obj.fr as string) || "Unnamed";
+    return (obj[locale] as string) || (obj.en as string) || (obj.fr as string) || fallback;
   }
-  return "Unnamed";
+  return fallback;
 }
 
 function requireString(messages: Record<string, unknown>, path: string): string {
@@ -187,7 +187,7 @@ export default async function DashboardPage() {
                         <p className="font-medium text-white">
                           {booking.service ? getName(booking.service.name, locale) : tCommon("unnamed")}
                         </p>
-                        <p className="text-sm text-white/60">{getName(booking.center.name)}</p>
+                        <p className="text-sm text-white/60">{getName(booking.center.name, locale, tCommon("unnamed"))}</p>
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-medium text-cyan-400">
@@ -239,7 +239,7 @@ export default async function DashboardPage() {
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-white">{getName(center.name)}</p>
+                        <p className="font-medium text-white">{getName(center.name, locale, tCommon("unnamed"))}</p>
                         <div className="mt-1 flex items-center gap-4 text-sm text-white/60">
                           <span>{t("myCenters.bookings", { count: center._count.bookings })}</span>
                           <span>{t("myCenters.reviews", { count: center._count.reviews })}</span>
@@ -254,7 +254,7 @@ export default async function DashboardPage() {
                               : "bg-red-500/20 text-red-400"
                         }`}
                       >
-                        {center.status}
+                        {t(`myCenters.status.${center.status.toLowerCase()}`)}
                       </span>
                     </div>
                   </Link>

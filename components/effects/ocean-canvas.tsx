@@ -1413,15 +1413,12 @@ type WhytCardFishData = {
   direction: 1 | -1;
 };
 
+// PERFORMANCE: Reduced from 8 to 4 fish
 const WHYTCARD_FISH: WhytCardFishData[] = [
-  { id: 0, variant: "classic", y: 30, size: 120, speed: 25, delay: 0, direction: -1 },    // Visible immédiatement!
-  { id: 1, variant: "golden", y: 18, size: 100, speed: 30, delay: 8, direction: 1 },
+  { id: 0, variant: "classic", y: 30, size: 120, speed: 25, delay: 0, direction: -1 },
+  { id: 1, variant: "rainbow", y: 12, size: 130, speed: 20, delay: 5, direction: -1 },
   { id: 2, variant: "neon", y: 50, size: 110, speed: 22, delay: 3, direction: -1 },
-  { id: 3, variant: "ghost", y: 65, size: 90, speed: 28, delay: 12, direction: 1 },
-  { id: 4, variant: "rainbow", y: 12, size: 130, speed: 20, delay: 5, direction: -1 },    // Le plus gros!
-  { id: 5, variant: "deep", y: 75, size: 95, speed: 26, delay: 15, direction: 1 },
-  { id: 6, variant: "classic", y: 42, size: 85, speed: 32, delay: 10, direction: 1 },
-  { id: 7, variant: "golden", y: 55, size: 105, speed: 24, delay: 2, direction: -1 },
+  { id: 3, variant: "deep", y: 75, size: 95, speed: 26, delay: 15, direction: 1 },
 ];
 
 // ===========================================
@@ -1433,10 +1430,26 @@ export function OceanCanvas() {
   const pathname = usePathname();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [whytCardModalOpen, setWhytCardModalOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // PERFORMANCE: Track visibility
   // Prevent hydration mismatch - only render on client
   const isMounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
   const previousPageIndex = useRef<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // PERFORMANCE: Pause animations when tab is not visible
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsVisible(!document.hidden);
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
+  // PERFORMANCE: If tab is not visible, render only static background
+  const shouldAnimate = isVisible && !prefersReducedMotion;
+
+  // ALL HOOKS MUST BE CALLED BEFORE ANY CONDITIONAL RETURNS (React Rules of Hooks)
+  
   const handleScroll = useCallback(() => {
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
@@ -1467,60 +1480,90 @@ export function OceanCanvas() {
   }, [pathname]);
 
   // Generate all marine life with useMemo for SSR compatibility
-  const particles = useMemo(() => generateParticles(100), []);
-  const jellyfish = useMemo(() => generateJellyfish(10), []);
-  const fish = useMemo(() => generateFish(12), []);
+  // PERFORMANCE: Reduced counts by ~50% for better FPS
+  const particles = useMemo(() => generateParticles(40), []);
+  const jellyfish = useMemo(() => generateJellyfish(5), []);
+  const fish = useMemo(() => generateFish(6), []);
   
   // Surface zone
-  const tropicalFish = useMemo(() => generateTropicalFish(20), []);
-  const bubbles = useMemo(() => generateBubbles(25), []);
+  const tropicalFish = useMemo(() => generateTropicalFish(10), []);
+  const bubbles = useMemo(() => generateBubbles(12), []);
   
   // Middle zone
-  const seaTurtles = useMemo(() => generateSeaTurtles(3), []);
-  const mantaRays = useMemo(() => generateMantaRays(2), []);
+  const seaTurtles = useMemo(() => generateSeaTurtles(2), []);
+  const mantaRays = useMemo(() => generateMantaRays(1), []);
   
   // Deep zone
-  const sharks = useMemo(() => generateSharks(4), []);
-  const abyssalFish = useMemo(() => generateAbyssalFish(15), []);
-  const marineSnow = useMemo(() => generateMarineSnow(50), []);
-  const seaAnemones = useMemo(() => generateSeaAnemones(6), []);
+  const sharks = useMemo(() => generateSharks(2), []);
+  const abyssalFish = useMemo(() => generateAbyssalFish(6), []);
+  const marineSnow = useMemo(() => generateMarineSnow(20), []);
+  const seaAnemones = useMemo(() => generateSeaAnemones(3), []);
   
   // New marine life - Surface
-  const seahorses = useMemo(() => generateSeahorses(5), []);
-  const clownfish = useMemo(() => generateClownfish(12), []);
+  const seahorses = useMemo(() => generateSeahorses(3), []);
+  const clownfish = useMemo(() => generateClownfish(6), []);
   
   // New marine life - Middle
-  const dolphins = useMemo(() => generateDolphins(4), []);
-  const whales = useMemo(() => generateWhales(2), []);
-  const schoolFish = useMemo(() => generateSchoolFish(5), []);
+  const dolphins = useMemo(() => generateDolphins(2), []);
+  const whales = useMemo(() => generateWhales(1), []);
+  const schoolFish = useMemo(() => generateSchoolFish(3), []);
   
   // New marine life - Deep
-  const octopuses = useMemo(() => generateOctopuses(4), []);
-  const giantSquids = useMemo(() => generateGiantSquids(3), []);
-  const corals = useMemo(() => generateCorals(8), []);
+  const octopuses = useMemo(() => generateOctopuses(2), []);
+  const giantSquids = useMemo(() => generateGiantSquids(2), []);
+  const corals = useMemo(() => generateCorals(4), []);
 
   useEffect(() => {
+    // Only attach scroll listener when animating
+    if (!shouldAnimate) return;
+    
     window.addEventListener("scroll", handleScroll, { passive: true });
     requestAnimationFrame(() => {
       handleScroll();
     });
     
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, [handleScroll, shouldAnimate]);
 
   // Use 0 as base until mounted to prevent hydration mismatch (flash of different colors)
   const effectiveScrollProgress = isMounted ? scrollProgress : 0;
   
   const depth = Math.round(effectiveScrollProgress * 40);
 
-  // Reduced motion fallback or not yet mounted (prevent hydration mismatch)
-  if (prefersReducedMotion || !isMounted) {
+  // CONDITIONAL RETURNS - All hooks have been called above
+  
+  // Not mounted yet - prevent hydration mismatch
+  if (!isMounted) {
     return (
       <div className="pointer-events-none fixed inset-0 -z-50" aria-hidden="true">
         <div
           className="absolute inset-0"
           style={{
             background: "linear-gradient(180deg, #0b3a4a 0%, #075985 35%, #0b2a3c 65%, #020617 100%)",
+          }}
+        />
+      </div>
+    );
+  }
+
+  // PERFORMANCE: Static-only render when animations are paused (tab hidden or reduced motion)
+  if (!shouldAnimate) {
+    return (
+      <div 
+        ref={containerRef}
+        className="pointer-events-none fixed inset-0 -z-50 overflow-hidden" 
+        aria-hidden="true"
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(180deg, 
+              hsl(182, 58%, 28%) 0%,
+              hsl(187, 55%, 24%) 25%,
+              hsl(194, 50%, 20%) 50%,
+              hsl(200, 44%, 16%) 75%,
+              hsl(204, 40%, 12%) 100%
+            )`,
           }}
         />
       </div>
@@ -1552,43 +1595,31 @@ export function OceanCanvas() {
   
   // Sunlight Zone (0-20%) - Most life, colorful
   const sunlightZone = Math.max(0, 1 - effectiveScrollProgress * 5); // Fades by 20%
-  
-  // Twilight Zone (10-40%) - Transition zone
-  const twilightZone = effectiveScrollProgress > 0.08 && effectiveScrollProgress < 0.45 
-    ? Math.min(1, Math.min((effectiveScrollProgress - 0.08) * 6, (0.45 - effectiveScrollProgress) * 4)) 
-    : 0;
-  
-  // Midnight Zone (25-60%) - Large creatures, less diversity
-  const midnightZone = effectiveScrollProgress > 0.2 && effectiveScrollProgress < 0.65 
-    ? Math.min(0.85, Math.min((effectiveScrollProgress - 0.2) * 3, (0.65 - effectiveScrollProgress) * 3)) 
-    : 0;
-  
-  // Abyssal Zone (50-85%) - Sparse, bioluminescent
-  const abyssalZone = effectiveScrollProgress > 0.45 && effectiveScrollProgress < 0.9 
-    ? Math.min(0.7, Math.min((effectiveScrollProgress - 0.45) * 2, (0.9 - effectiveScrollProgress) * 2.5)) 
-    : 0;
-  
-  // Hadal Zone (75-100%) - Extremely sparse, only specialized creatures
-  const hadalZone = effectiveScrollProgress > 0.7 
-    ? Math.min(0.5, (effectiveScrollProgress - 0.7) * 1.5) 
-    : 0;
-  
-  // Legacy mappings for backward compatibility
-  const surfaceVisibility = sunlightZone;
-  const middleVisibility = twilightZone;
-  const deepVisibility = abyssalZone;
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-50 overflow-hidden" aria-hidden="true">
+    <div 
+      ref={containerRef}
+      className="pointer-events-none fixed inset-0 -z-50 overflow-hidden" 
+      aria-hidden="true"
+      style={{ 
+        // PERFORMANCE: GPU acceleration
+        willChange: 'transform',
+        transform: 'translate3d(0, 0, 0)',
+        backfaceVisibility: 'hidden',
+      }}
+    >
       {/* Camera container with horizontal movement */}
       <motion.div
         className="absolute inset-y-0 left-0 h-full w-[500vw]"
-        animate={{ x: cameraX + "vw" }}
+        animate={isVisible ? { x: cameraX + "vw" } : undefined}
         transition={{
           type: "spring",
           stiffness: 30,
           damping: 25,
           mass: 1.2,
+        }}
+        style={{
+          willChange: isVisible ? 'transform' : 'auto',
         }}
       >
         {/* Main background gradient - Fixed with scroll progress adjusting view */}

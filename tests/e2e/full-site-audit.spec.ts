@@ -1,4 +1,4 @@
-import { test, expect, Page, BrowserContext } from "@playwright/test";
+import { test, expect, Page } from "@playwright/test";
 
 /**
  * SCRIPT DE TEST EXHAUSTIF - EviDive
@@ -146,7 +146,7 @@ async function checkBrokenImages(page: Page, pageName: string) {
 }
 
 // Helper pour vérifier les liens cassés (internes)
-async function checkInternalLinks(page: Page, pageName: string) {
+async function _checkInternalLinks(page: Page, _pageName: string) {
   const links = await page.locator('a[href^="/"], a[href^="' + BASE_URL + '"]').all();
   const brokenLinks: string[] = [];
 
@@ -228,7 +228,7 @@ async function checkBasicAccessibility(page: Page, pageName: string) {
 }
 
 // Helper pour mesurer la performance
-async function measurePerformance(page: Page, pageName: string) {
+async function _measurePerformance(page: Page, pageName: string) {
   const performanceMetrics = await page.evaluate(() => {
     const navigation = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
     return {
@@ -969,7 +969,7 @@ test.describe("🔍 AUDIT COMPLET DU SITE EVIDIVE", () => {
   // ============================================
   // TEST 13: API Endpoints (Health Check)
   // ============================================
-  test("🔌 API Endpoints", async ({ page, request }) => {
+  test("🔌 API Endpoints", async ({ request }) => {
     const endpoints = [
       { path: "/api/centers", method: "GET", name: "Liste centres" },
       { path: "/api/auth/session", method: "GET", name: "Session" },
@@ -1188,7 +1188,7 @@ test.describe("🔍 AUDIT COMPLET DU SITE EVIDIVE", () => {
     console.log("═══════════════════════════════════════════════════════════════");
 
     // Sauvegarder le rapport en JSON
-    const report = {
+    const _report = {
       timestamp: new Date().toISOString(),
       baseUrl: BASE_URL,
       summary: {

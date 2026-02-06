@@ -3,9 +3,13 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+package-lock.json
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
+/tests/screenshots/
 
 # next.js
 /.next/
@@ -36,3 +40,13 @@ next-env.d.ts
 
 # prisma
 prisma/migrations/
+
+# reports
+*.report.json
+lighthouse-report.json
+AUDIT_REPORT.md
+CORRECTIONS_SUMMARY.md
+
+# other editors
+.windsurf/
+.idea/

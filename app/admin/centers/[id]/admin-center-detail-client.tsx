@@ -560,23 +560,29 @@ export function AdminCenterDetailClient({ center, totalRevenue }: AdminCenterDet
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div>
-                  <p className="font-medium text-white">
-                    {center.owner.displayName ||
-                      `${center.owner.firstName || ''} ${center.owner.lastName || ''}`.trim() ||
-                      'No name'}
-                  </p>
-                  <p className="text-sm text-white/60">{center.owner.email}</p>
-                </div>
-                {center.owner.phone && (
-                  <p className="text-sm text-white/60 flex items-center gap-2">
-                    <Phone className="w-4 h-4" />
-                    {center.owner.phone}
-                  </p>
+                {center.owner ? (
+                  <>
+                    <div>
+                      <p className="font-medium text-white">
+                        {center.owner.displayName ||
+                          `${center.owner.firstName || ''} ${center.owner.lastName || ''}`.trim() ||
+                          'No name'}
+                      </p>
+                      <p className="text-sm text-white/60">{center.owner.email}</p>
+                    </div>
+                    {center.owner.phone && (
+                      <p className="text-sm text-white/60 flex items-center gap-2">
+                        <Phone className="w-4 h-4" />
+                        {center.owner.phone}
+                      </p>
+                    )}
+                    <p className="text-xs text-white/40">
+                      Member since {formatDate(center.owner.createdAt)}
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-sm text-white/40">Owner information unavailable</p>
                 )}
-                <p className="text-xs text-white/40">
-                  Member since {formatDate(center.owner.createdAt)}
-                </p>
               </CardContent>
             </Card>
 

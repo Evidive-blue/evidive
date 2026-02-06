@@ -454,7 +454,13 @@
     "error": "Une erreur est survenue. Veuillez réessayer.",
     "info_title": "Information",
     "info_email": "info@evidive.blue",
-    "info_address": "Geneva, Switzerland"
+    "info_address": "Geneva, Switzerland",
+    "placeholders": {
+      "name": "Votre nom complet",
+      "email": "email@exemple.com",
+      "subject": "Comment pouvons-nous vous aider ?",
+      "message": "Décrivez votre demande..."
+    }
   },
   "explorer": {
     "meta": {
@@ -614,6 +620,7 @@
     "badge": "Découvrez les profondeurs",
     "tagline": "Plongez dans l'aventure",
     "title": "Explorez les Profondeurs",
+    "seoTitle": "EviDive - Réservez vos Expériences de Plongée dans le Monde Entier",
     "subtitle": "Réservez vos plongées dans les plus beaux sites du monde. Des expériences uniques, des centres certifiés, des souvenirs inoubliables.",
     "discover": "Découvrir",
     "cta": "Explorer les destinations",
@@ -696,7 +703,7 @@
         "description": "Découvrez les centres de plongée approuvés sur EviDive et explorez-les sur le globe."
       },
       "title": "Centres",
-      "subtitle": "Tournez le globe et découvrez les centres de plongée approuvés.",
+      "subtitle": "Explorez les centres de plongée à travers le monde",
       "listTitle": "Centres enregistrés",
       "emptyTitle": "Aucun centre disponible pour le moment",
       "emptyDescription": "Les centres apparaîtront ici dès qu'ils seront approuvés par un administrateur.",
@@ -705,9 +712,13 @@
       "backToCenters": "Retour aux centres",
       "rating": "{rating} ★ ({count} avis)",
       "globeHint": "Astuce: clic droit sur un point pour ouvrir le centre.",
-      "services": "Services",
+      "services": "services",
       "minutes": "min",
-      "maxParticipants": "Max {count} participants"
+      "maxParticipants": "Max {count} participants",
+      "centersLabel": "Centres",
+      "popularCenters": "Centres populaires",
+      "rotateGlobe": "Faites pivoter le globe pour découvrir les centres",
+      "noSearchResults": "Aucun centre trouvé pour cette recherche"
     },
   "detail": {
     "sections": {
@@ -956,45 +967,80 @@
     }
   },
   "profile": {
+    "title": "Mon Profil",
+    "subtitle": "Gérez vos informations personnelles",
+    "description": "Consultez et modifiez vos paramètres de profil",
     "backToDashboard": "Retour au tableau de bord",
     "defaultName": "Utilisateur",
     "emailVerified": "Email vérifié",
     "editProfile": "Modifier le profil",
+    "edit": "Modifier",
+    "save": "Enregistrer",
     "saveChanges": "Enregistrer",
     "saving": "Enregistrement...",
+    "saveSuccess": "Profil mis à jour avec succès",
+    "saveError": "Échec de la sauvegarde du profil",
     "sections": {
       "personal": "Informations personnelles",
       "diving": "Informations de plongée",
+      "address": "Adresse",
+      "notifications": "Préférences de notification",
       "account": "Compte"
     },
     "fields": {
+      "displayName": "Nom affiché",
       "firstName": "Prénom",
       "lastName": "Nom",
+      "email": "Email",
       "phone": "Téléphone",
       "location": "Localisation",
       "bio": "Biographie",
+      "address": "Adresse",
+      "city": "Ville",
+      "zip": "Code postal",
+      "country": "Pays",
       "certificationLevel": "Niveau de certification",
       "certificationOrg": "Organisation",
       "totalDives": "Nombre de plongées"
     },
     "placeholders": {
+      "displayName": "Votre nom affiché",
       "firstName": "Votre prénom",
       "lastName": "Votre nom",
       "phone": "+33 6 12 34 56 78",
+      "address": "123 Avenue de l'Océan",
       "city": "Ville",
+      "zip": "75001",
       "country": "Pays",
-      "bio": "Parlez-nous de vous et de votre passion pour la plongée..."
+      "bio": "Parlez-nous de vous et de votre passion pour la plongée...",
+      "certificationLevel": "Sélectionnez votre niveau",
+      "certificationOrg": "Sélectionnez l'organisation"
+    },
+    "stats": {
+      "totalDives": "Plongées totales",
+      "bookings": "Réservations",
+      "reviews": "Avis"
     },
     "divingStats": {
       "title": "Statistiques",
       "bookings": "Réservations",
       "reviews": "Avis"
     },
+    "notifications": {
+      "email": "Notifications par email",
+      "emailDesc": "Recevez les confirmations de réservation et mises à jour par email",
+      "sms": "Notifications SMS",
+      "smsDesc": "Recevez les rappels importants par SMS"
+    },
     "account": {
       "email": "Email",
       "type": "Type de compte",
       "status": "Statut",
-      "active": "Actif"
+      "active": "Actif",
+      "memberSince": "Membre depuis",
+      "emailVerified": "Email vérifié",
+      "role": "Type de compte",
+      "centers": "Centres possédés"
     }
   },
   "settings": {
@@ -1270,21 +1316,56 @@
     "status": {
       "ALL": "Toutes",
       "PENDING": "En attente",
-      "CONFIRMED": "Confirmées",
-      "PAID": "Payées",
+      "CONFIRMED": "Confirmée",
+      "PAID": "Payée",
       "RUNNING": "En cours",
-      "COMPLETED": "Terminées",
-      "CANCELLED": "Annulées",
-      "NOSHOW": "No-show"
+      "COMPLETED": "Terminée",
+      "CANCELLED": "Annulée",
+      "NOSHOW": "No-show",
+      "REMOVED": "Supprimée"
     },
     "client": "Client",
     "center": "Centre",
     "service": "Service",
-    "participants": "participants",
+    "participants": "{count, plural, one {# participant} other {# participants}}",
     "noBookings": "Aucune réservation trouvée.",
     "previous": "Précédent",
     "next": "Suivant",
-    "pageInfo": "Page {current} sur {total}"
+    "pageInfo": "Page {current} sur {total}",
+    "pagination": "Page {current} sur {total}",
+    "totalRevenue": "Revenu total",
+    "unknown": "Inconnu",
+    "guest": "Invité"
+  },
+  "adminUsers": {
+    "meta": {
+      "title": "Admin · Utilisateurs - EviDive",
+      "description": "Gérer les utilisateurs de la plateforme."
+    },
+    "title": "Admin · Utilisateurs",
+    "subtitle": "Gérer tous les utilisateurs de la plateforme",
+    "backToAdmin": "Retour admin",
+    "results": "{count, plural, =0 {Aucun utilisateur} one {# utilisateur} other {# utilisateurs}}",
+    "searchPlaceholder": "Rechercher par email, nom...",
+    "allRoles": "Tous les rôles",
+    "roles": {
+      "DIVER": "Plongeurs",
+      "ADMIN": "Admins"
+    },
+    "noUsers": "Aucun utilisateur trouvé.",
+    "blacklisted": "Blacklisté",
+    "inactive": "Inactif",
+    "centersCount": "{count, plural, one {# centre} other {# centres}}",
+    "bookingsCount": "{count, plural, one {# réservation} other {# réservations}}",
+    "reviewsCount": "{count, plural, one {# avis} other {# avis}}",
+    "demote": "Rétrograder",
+    "promote": "Promouvoir admin",
+    "deactivate": "Désactiver",
+    "activate": "Activer",
+    "removeBlacklist": "Retirer de la blacklist",
+    "addBlacklist": "Blacklister",
+    "details": "Détails",
+    "pagination": "Page {current} sur {total}"
   },
   "adminReviews": {
     "meta": {
@@ -2639,11 +2720,11 @@
       "description": "Découvrez la mission d'EviDive : connecter les plongeurs passionnés avec les meilleurs centres de plongée certifiés à travers le monde."
     },
     "login": {
-      "title": "Connexion | EviDive",
+      "title": "Connexion",
       "description": "Connectez-vous à votre compte EviDive pour réserver des plongées et gérer votre profil."
     },
     "register": {
-      "title": "Créer un compte | EviDive",
+      "title": "Créer un compte",
       "description": "Créez votre compte EviDive pour commencer à réserver des plongées dans les meilleurs centres du monde."
     },
     "dashboard": {
@@ -2683,7 +2764,7 @@
       "description": "Consultez les conditions générales d'utilisation de la plateforme EviDive."
     },
     "onboard": {
-      "title": "Bienvenue | EviDive",
+      "title": "Bienvenue",
       "description": "Complétez votre profil pour commencer à réserver des plongées ou inscrire votre centre."
     },
     "forgotPassword": {
@@ -2705,6 +2786,10 @@
     "bookingCancel": {
       "title": "Réservation annulée | EviDive",
       "description": "Votre processus de réservation a été annulé."
+    },
+    "sitemap": {
+      "title": "Plan du site | EviDive",
+      "description": "Naviguez sur la plateforme EviDive avec notre plan du site complet."
     }
   },
   "booking": {
@@ -2869,7 +2954,27 @@
     "dashboard": "Tableau de bord",
     "explore": "Explorer",
     "contact": "Contact",
-    "learnMore": "En savoir plus"
+    "learnMore": "En savoir plus",
+    "where": "Où",
+    "when": "Quand",
+    "divers": "Plongeurs",
+    "diver": "plongeur",
+    "diversPlural": "plongeurs",
+    "searchDestination": "Rechercher une destination...",
+    "countryOrCity": "Pays, ville ou nom du centre",
+    "selectDates": "Sélectionnez vos dates",
+    "select": "Sélectionner...",
+    "numberOfParticipants": "Nombre de participants",
+    "countries": "Pays",
+    "viewAll": "Voir tout",
+    "noReviews": "Pas encore d'avis",
+    "dragToRotate": "Glissez pour tourner",
+    "scrollToZoom": "Scrollez pour zoomer",
+    "clickOnCenter": "Cliquez sur un centre",
+    "close": "Fermer",
+    "globe": "Globe",
+    "seeMore": "Voir plus",
+    "viewDetails": "Voir détails"
   },
   "userDashboard": {
     "greeting": "Bienvenue, {name}",
@@ -2895,7 +3000,12 @@
       "bookings": "réservations",
       "reviews": "avis",
       "noCenters": "Aucun centre de plongée encore",
-      "register": "Enregistrer votre centre"
+      "register": "Enregistrer votre centre",
+      "status": {
+        "approved": "Approuvé",
+        "pending": "En attente",
+        "rejected": "Refusé"
+      }
     },
     "quickActions": {
       "title": "Actions rapides",
@@ -3169,6 +3279,10 @@
   },
   "zen": {
     "zenMode": "Mode Zen",
+    "fullZenMode": "Mode Zen complet",
+    "ambientSounds": "Sons ambiants",
+    "soundMixer": "Mixeur audio",
+    "volume": "Volume",
     "inhale": "Inspirez",
     "hold": "Retenez",
     "exhale": "Expirez",
@@ -3176,10 +3290,27 @@
     "pause": "Pause",
     "play": "Reprendre",
     "close": "Fermer",
+    "expand": "Agrandir",
+    "collapse": "Réduire",
     "mute": "Couper le son",
     "unmute": "Activer le son",
     "waves": "Vagues",
     "bubbles": "Bulles",
     "underwater": "Sous-marin"
+  },
+  "weather": {
+    "regionWeather": "Météo de la région",
+    "feelsLike": "Ressenti",
+    "humidity": "Humidité",
+    "wind": "Vent",
+    "unknownLocation": "Lieu inconnu",
+    "fetchError": "Impossible de charger la météo",
+    "rotateToSeeWeather": "Explorez le globe pour voir la météo",
+    "divingConditions": "Conditions de plongée",
+    "conditions": {
+      "good": "Bonnes",
+      "moderate": "Modérées",
+      "poor": "Mauvaises"
+    }
   }
 }

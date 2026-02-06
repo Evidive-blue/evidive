@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db/prisma";
 import { hashPassword, registerSchema } from "@/lib/auth";
 import { randomBytes } from "crypto";
+import { sendVerificationEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -59,8 +60,16 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // TODO: Send verification email
-    // await sendVerificationEmail(user.email, verificationToken);
+    // Send verification email
+    const emailResult = await sendVerificationEmail(
+      user.email,
+      user.firstName || "there",
+      verificationToken
+    );
+
+    if (!emailResult.success) {
+      console.warn("[Register] Failed to send verification email:", emailResult.error);
+    }
 
     return NextResponse.json({
       success: true,

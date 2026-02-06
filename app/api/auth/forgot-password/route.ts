@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db/prisma";
 import { randomBytes } from "crypto";
 import { z } from "zod";
+import { sendPasswordResetEmail } from "@/lib/email";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email(),
@@ -48,8 +49,16 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // TODO: Send password reset email
-    // await sendPasswordResetEmail(user.email, resetToken);
+    // Send password reset email
+    const emailResult = await sendPasswordResetEmail(
+      user.email,
+      user.firstName || "there",
+      resetToken
+    );
+
+    if (!emailResult.success) {
+      console.warn("[ForgotPassword] Failed to send reset email:", emailResult.error);
+    }
 
     return NextResponse.json({
       success: true,

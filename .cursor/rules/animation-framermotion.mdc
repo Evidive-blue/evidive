@@ -1,0 +1,330 @@
+---
+description: "Framer Motion v12.29.2 - Animation rules. Source: https://motion.dev"
+globs: ["components/**/*.tsx", "app/**/*.tsx"]
+alwaysApply: false
+---
+
+# Framer Motion v12.29.2 - Official Rules
+
+> Source: https://motion.dev
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`
+
+### Animation Specific
+- NO animations that cause layout thrashing
+- NO infinite loops without user control
+- NO animations that harm accessibility (respect prefers-reduced-motion)
+- NO blocking animations on critical paths
+- NO excessive animations that impact performance
+
+## REQUIRED Patterns
+
+### Basic Motion Component
+
+```tsx
+import { motion } from 'framer-motion'
+
+export function FadeIn({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+```
+
+### Animation Variants
+
+```tsx
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3 },
+  },
+}
+
+export function StaggeredList({ items }: { items: string[] }) {
+  return (
+    <motion.ul
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {items.map((item, index) => (
+        <motion.li key={index} variants={itemVariants}>
+          {item}
+        </motion.li>
+      ))}
+    </motion.ul>
+  )
+}
+```
+
+### Conditional Animations
+
+```tsx
+const buttonVariants = {
+  active: {
+    backgroundColor: '#0066ff',
+    scale: 1,
+  },
+  inactive: {
+    backgroundColor: '#cccccc',
+    scale: 0.95,
+    transition: { duration: 0.2 },
+  },
+}
+
+export function ToggleButton({ isActive }: { isActive: boolean }) {
+  return (
+    <motion.button
+      variants={buttonVariants}
+      animate={isActive ? 'active' : 'inactive'}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      Toggle
+    </motion.button>
+  )
+}
+```
+
+### Hover and Tap Interactions
+
+```tsx
+<motion.button
+  whileHover={{ 
+    scale: 1.05,
+    backgroundColor: '#0055cc',
+  }}
+  whileTap={{ scale: 0.95 }}
+  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+>
+  Click me
+</motion.button>
+```
+
+### Exit Animations with AnimatePresence
+
+```tsx
+import { motion, AnimatePresence } from 'framer-motion'
+
+export function Modal({ isOpen, onClose, children }) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="modal-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            className="modal-content"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {children}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+```
+
+### Page Transitions
+
+```tsx
+// For page transitions in Next.js
+const pageVariants = {
+  initial: { opacity: 0, x: -20 },
+  in: { opacity: 1, x: 0 },
+  out: { opacity: 0, x: 20 },
+}
+
+const pageTransition = {
+  type: 'tween',
+  ease: 'anticipate',
+  duration: 0.3,
+}
+
+export function PageWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
+      {children}
+    </motion.div>
+  )
+}
+```
+
+### Scroll Animations
+
+```tsx
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+
+export function ParallaxSection() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0])
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ y, opacity }}
+      className="parallax-content"
+    >
+      Content
+    </motion.div>
+  )
+}
+```
+
+### Respecting Reduced Motion
+
+```tsx
+import { motion, useReducedMotion } from 'framer-motion'
+
+export function AccessibleAnimation({ children }) {
+  const shouldReduceMotion = useReducedMotion()
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ 
+        duration: shouldReduceMotion ? 0 : 0.3 
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+```
+
+### Project Custom Animations
+
+Use the project's custom Tailwind animations where appropriate:
+
+```tsx
+// CSS animations defined in tailwind.config.ts
+// For simple repeating animations, prefer CSS
+<div className="animate-float">Floating element</div>
+<div className="animate-bubble">Bubble effect</div>
+<div className="animate-light-ray">Light ray effect</div>
+
+// For interactive/complex animations, use Framer Motion
+<motion.div
+  animate={{ 
+    y: [0, -20, 0],
+    rotate: [0, 2, 0],
+  }}
+  transition={{ 
+    duration: 6,
+    repeat: Infinity,
+    ease: 'easeInOut',
+  }}
+>
+  Floating with control
+</motion.div>
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Animation without exit
+```tsx
+// WRONG - No exit animation causes abrupt disappear
+{isVisible && (
+  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    Content
+  </motion.div>
+)}
+
+// CORRECT - Use AnimatePresence
+<AnimatePresence>
+  {isVisible && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      Content
+    </motion.div>
+  )}
+</AnimatePresence>
+```
+
+### Wrong: Ignoring reduced motion
+```tsx
+// WRONG - Forces animation on all users
+<motion.div
+  animate={{ scale: [1, 1.2, 1] }}
+  transition={{ repeat: Infinity, duration: 2 }}
+/>
+
+// CORRECT - Respect user preference
+const shouldReduceMotion = useReducedMotion()
+
+<motion.div
+  animate={shouldReduceMotion ? {} : { scale: [1, 1.2, 1] }}
+  transition={{ repeat: Infinity, duration: 2 }}
+/>
+```
+
+### Wrong: Layout-thrashing animations
+```tsx
+// WRONG - Animating width causes reflow
+<motion.div animate={{ width: isOpen ? 300 : 0 }} />
+
+// CORRECT - Use transform
+<motion.div animate={{ scaleX: isOpen ? 1 : 0 }} />
+```
+
+## Spring vs Tween
+
+```tsx
+// Spring (natural feel for interactive elements)
+transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+
+// Tween (precise timing for sequential animations)
+transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: false` (only applies when animation files are edited).

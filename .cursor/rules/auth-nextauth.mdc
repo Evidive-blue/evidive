@@ -1,0 +1,326 @@
+---
+description: "NextAuth.js v5 (Auth.js) - Authentication rules. Source: https://authjs.dev"
+globs: ["lib/auth.ts", "app/api/auth/**/*.ts", "middleware.ts", "app/(auth)/**/*.tsx"]
+alwaysApply: true
+---
+
+# NextAuth.js v5 (Auth.js) - Official Rules
+
+> Source: https://authjs.dev / https://github.com/nextauthjs/next-auth
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`
+- NO hardcoded secrets, API keys, passwords
+- NO storing passwords in plain text
+- NO exposing sensitive user data to client
+
+### Authentication Specific
+- NO storing JWT secrets in code
+- NO skipping email verification for sensitive actions
+- NO exposing user IDs without authorization check
+- NO trusting client-side role claims
+- NO storing sensitive data in JWT (passwords, full credit cards, etc.)
+
+## REQUIRED Patterns
+
+### Auth Configuration
+
+```typescript
+// lib/auth.ts
+import NextAuth from "next-auth"
+import Credentials from "next-auth/providers/credentials"
+import Google from "next-auth/providers/google"
+import { compare } from "bcryptjs"
+import { prisma } from "./db/prisma"
+import { z } from "zod"
+
+// Validation schema
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+})
+
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  providers: [
+    Credentials({
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const parsed = loginSchema.safeParse(credentials)
+        if (!parsed.success) return null
+
+        const { email, password } = parsed.data
+        const user = await prisma.diver.findUnique({
+          where: { email: email.toLowerCase() },
+        })
+
+        if (!user?.passwordHash) return null
+        if (!user.isActive) return null
+
+        const isValid = await compare(password, user.passwordHash)
+        if (!isValid) return null
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.displayName,
+          role: user.role,
+        }
+      },
+    }),
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+  ],
+  
+  callbacks: {
+    async jwt({ token, user, trigger }) {
+      if (user) {
+        token.id = user.id
+        token.role = user.role
+      }
+      if (trigger === "update") {
+        // Refresh from DB
+        const dbUser = await prisma.diver.findUnique({
+          where: { email: token.email! },
+          select: { role: true }
+        })
+        if (dbUser) token.role = dbUser.role
+      }
+      return token
+    },
+    
+    async session({ session, token }) {
+      session.user.id = token.id as string
+      session.user.role = token.role as string
+      return session
+    },
+  },
+  
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
+  
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+})
+```
+
+### Type Extensions
+
+```typescript
+// Extend NextAuth types
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string
+      email: string
+      name: string | null
+      role: "DIVER" | "ADMIN"
+    }
+  }
+
+  interface User {
+    role: "DIVER" | "ADMIN"
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string
+    role: "DIVER" | "ADMIN"
+  }
+}
+```
+
+### Route Protection (Server)
+
+```typescript
+// Get current user in Server Component
+import { auth } from "@/lib/auth"
+
+export default async function ProtectedPage() {
+  const session = await auth()
+  
+  if (!session?.user) {
+    redirect("/login")
+  }
+  
+  return <div>Welcome, {session.user.name}</div>
+}
+```
+
+### Route Protection (API Route)
+
+```typescript
+// app/api/protected/route.ts
+import { auth } from "@/lib/auth"
+import { NextResponse } from "next/server"
+
+export async function GET() {
+  const session = await auth()
+  
+  if (!session?.user) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      { status: 401 }
+    )
+  }
+  
+  return NextResponse.json({ data: "Protected data" })
+}
+```
+
+### Admin Protection
+
+```typescript
+// Helper function
+export async function requireAdmin() {
+  const session = await auth()
+  
+  if (!session?.user) {
+    throw new Error("Unauthorized")
+  }
+  
+  if (session.user.role !== "ADMIN") {
+    throw new Error("Forbidden")
+  }
+  
+  return session.user
+}
+
+// Usage in Server Action
+"use server"
+
+export async function deleteUser(userId: string) {
+  await requireAdmin()
+  
+  await prisma.diver.delete({
+    where: { id: userId }
+  })
+  
+  revalidatePath("/admin/users")
+}
+```
+
+### OAuth Sign-in Callback
+
+```typescript
+callbacks: {
+  async signIn({ user, account }) {
+    if (account?.provider === "google" && user.email) {
+      const existingUser = await prisma.diver.findUnique({
+        where: { email: user.email.toLowerCase() },
+      })
+
+      if (!existingUser) {
+        // Create new user
+        await prisma.diver.create({
+          data: {
+            email: user.email.toLowerCase(),
+            displayName: user.name,
+            emailVerified: true,
+            role: "DIVER",
+          },
+        })
+      }
+    }
+    return true
+  },
+}
+```
+
+### Client-Side Session
+
+```typescript
+'use client'
+
+import { useSession, signIn, signOut } from "next-auth/react"
+
+export function AuthButton() {
+  const { data: session, status } = useSession()
+
+  if (status === "loading") {
+    return <div>Loading...</div>
+  }
+
+  if (session) {
+    return (
+      <div>
+        <span>Signed in as {session.user.email}</span>
+        <button onClick={() => signOut()}>Sign out</button>
+      </div>
+    )
+  }
+
+  return <button onClick={() => signIn()}>Sign in</button>
+}
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Exposing sensitive data
+```typescript
+// WRONG - Exposing password hash
+async session({ session, token }) {
+  session.user.passwordHash = token.passwordHash // NEVER!
+  return session
+}
+```
+
+### Wrong: Trusting client role
+```typescript
+// WRONG
+'use client'
+if (session.user.role === 'ADMIN') {
+  await deleteUser(userId) // Client can modify role!
+}
+
+// CORRECT - Verify on server
+'use server'
+async function deleteUser(userId: string) {
+  const admin = await requireAdmin() // Server-side check
+  // ...
+}
+```
+
+### Wrong: No email normalization
+```typescript
+// WRONG
+const user = await prisma.diver.findUnique({
+  where: { email: email } // Case sensitive!
+})
+
+// CORRECT
+const user = await prisma.diver.findUnique({
+  where: { email: email.toLowerCase() }
+})
+```
+
+## Password Hashing
+
+```typescript
+import { hash, compare } from "bcryptjs"
+
+// Hash password (registration)
+const passwordHash = await hash(password, 12)
+
+// Verify password (login)
+const isValid = await compare(password, user.passwordHash)
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

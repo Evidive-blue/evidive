@@ -240,9 +240,11 @@ export default function AdminCentersPage() {
                     <p className="mt-1 text-sm text-white/60">
                       {center.city}, {center.country}
                     </p>
-                    <p className="mt-1 text-sm text-white/40">
-                      {t("createdBy")} {center.owner.displayName || center.owner.email}
-                    </p>
+                    {center.owner && (
+                      <p className="mt-1 text-sm text-white/40">
+                        {t("createdBy")} {center.owner.displayName || center.owner.email}
+                      </p>
+                    )}
                     <div className="mt-2 flex items-center gap-4 text-xs text-white/40">
                       <span>{center._count.services} {tCommon("services")}</span>
                       <span>{center._count.bookings} {tCommon("bookings")}</span>

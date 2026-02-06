@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
@@ -272,12 +273,14 @@ export function TeamManageClient({ center }: TeamManageClientProps) {
                   <CardContent className="p-5">
                     <div className="flex items-start gap-4">
                       {/* Avatar */}
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600">
+                      <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 overflow-hidden">
                         {worker.photoUrl ? (
-                          <img
+                          <Image
                             src={worker.photoUrl}
                             alt={worker.name}
-                            className="h-full w-full rounded-full object-cover"
+                            fill
+                            className="object-cover"
+                            sizes="56px"
                           />
                         ) : (
                           <User className="h-7 w-7 text-white" />

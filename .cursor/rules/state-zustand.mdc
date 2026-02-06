@@ -1,0 +1,320 @@
+---
+description: "Zustand v5.0.11 - State management rules. Source: https://zustand.docs.pmnd.rs"
+globs: ["stores/**/*.ts", "**/*-store.ts"]
+alwaysApply: true
+---
+
+# Zustand v5.0.11 - Official Rules
+
+> Source: https://zustand.docs.pmnd.rs / https://github.com/pmndrs/zustand
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`
+- NO storing sensitive data (passwords, tokens) in client stores
+- NO mock data in production stores
+
+### Zustand Specific
+- NO mutating state directly outside of set()
+- NO storing derived data (compute it instead)
+- NO creating stores inside components
+- NO storing server state in Zustand (use React Query or Server Components)
+
+## REQUIRED Patterns
+
+### Basic Store Creation
+
+```typescript
+// stores/auth-store.ts
+import { create } from 'zustand'
+
+interface AuthState {
+  isAuthenticated: boolean
+  user: User | null
+}
+
+interface AuthActions {
+  setUser: (user: User | null) => void
+  logout: () => void
+}
+
+type AuthStore = AuthState & AuthActions
+
+export const useAuthStore = create<AuthStore>((set) => ({
+  // State
+  isAuthenticated: false,
+  user: null,
+  
+  // Actions
+  setUser: (user) => set({ 
+    user, 
+    isAuthenticated: !!user 
+  }),
+  
+  logout: () => set({ 
+    user: null, 
+    isAuthenticated: false 
+  }),
+}))
+```
+
+### Store with Persist Middleware
+
+```typescript
+// stores/zen-store.ts
+import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
+
+interface ZenState {
+  isZenMode: boolean
+  soundEnabled: boolean
+  volume: number
+}
+
+interface ZenActions {
+  toggleZenMode: () => void
+  setSoundEnabled: (enabled: boolean) => void
+  setVolume: (volume: number) => void
+}
+
+export const useZenStore = create<ZenState & ZenActions>()(
+  persist(
+    (set) => ({
+      // State
+      isZenMode: false,
+      soundEnabled: true,
+      volume: 0.5,
+      
+      // Actions
+      toggleZenMode: () => set((state) => ({ 
+        isZenMode: !state.isZenMode 
+      })),
+      
+      setSoundEnabled: (enabled) => set({ soundEnabled: enabled }),
+      
+      setVolume: (volume) => set({ volume }),
+    }),
+    {
+      name: 'zen-storage',
+      storage: createJSONStorage(() => localStorage),
+      // Only persist these fields
+      partialize: (state) => ({ 
+        soundEnabled: state.soundEnabled,
+        volume: state.volume,
+      }),
+    }
+  )
+)
+```
+
+### Selectors for Performance
+
+```typescript
+// Component - CORRECT: Use selectors
+function ZenModeIndicator() {
+  // Only re-renders when isZenMode changes
+  const isZenMode = useZenStore((state) => state.isZenMode)
+  
+  return <div>{isZenMode ? 'Zen' : 'Normal'}</div>
+}
+
+// WRONG: Subscribes to entire store
+function ZenModeIndicator() {
+  // Re-renders on ANY state change!
+  const { isZenMode } = useZenStore()
+  
+  return <div>{isZenMode ? 'Zen' : 'Normal'}</div>
+}
+```
+
+### Multiple Selectors with shallow
+
+```typescript
+import { shallow } from 'zustand/shallow'
+
+function VolumeControls() {
+  const { volume, setVolume, soundEnabled, setSoundEnabled } = useZenStore(
+    (state) => ({
+      volume: state.volume,
+      setVolume: state.setVolume,
+      soundEnabled: state.soundEnabled,
+      setSoundEnabled: state.setSoundEnabled,
+    }),
+    shallow // Shallow comparison for objects
+  )
+  
+  return (
+    <div>
+      <input 
+        type="range" 
+        value={volume} 
+        onChange={(e) => setVolume(Number(e.target.value))} 
+      />
+    </div>
+  )
+}
+```
+
+### Async Actions
+
+```typescript
+interface OnboardState {
+  step: number
+  formData: Partial<CenterFormData>
+  isSubmitting: boolean
+  error: string | null
+}
+
+interface OnboardActions {
+  nextStep: () => void
+  prevStep: () => void
+  updateFormData: (data: Partial<CenterFormData>) => void
+  submitCenter: () => Promise<void>
+  reset: () => void
+}
+
+export const useOnboardStore = create<OnboardState & OnboardActions>((set, get) => ({
+  step: 1,
+  formData: {},
+  isSubmitting: false,
+  error: null,
+  
+  nextStep: () => set((state) => ({ step: state.step + 1 })),
+  
+  prevStep: () => set((state) => ({ step: Math.max(1, state.step - 1) })),
+  
+  updateFormData: (data) => set((state) => ({
+    formData: { ...state.formData, ...data }
+  })),
+  
+  submitCenter: async () => {
+    set({ isSubmitting: true, error: null })
+    
+    try {
+      const { formData } = get()
+      
+      const response = await fetch('/api/centers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      
+      if (!response.ok) {
+        throw new Error('Failed to create center')
+      }
+      
+      set({ step: get().step + 1, isSubmitting: false })
+    } catch (error) {
+      set({ 
+        isSubmitting: false, 
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      })
+    }
+  },
+  
+  reset: () => set({
+    step: 1,
+    formData: {},
+    isSubmitting: false,
+    error: null,
+  }),
+}))
+```
+
+### Derived State (Computed)
+
+```typescript
+// DON'T store derived state
+interface CartStore {
+  items: CartItem[]
+  // WRONG: total: number (derived data)
+  
+  addItem: (item: CartItem) => void
+}
+
+// CORRECT: Compute derived state in selectors
+export const useCartStore = create<CartStore>((set) => ({
+  items: [],
+  addItem: (item) => set((state) => ({ 
+    items: [...state.items, item] 
+  })),
+}))
+
+// Compute total in component or custom hook
+export function useCartTotal() {
+  const items = useCartStore((state) => state.items)
+  return useMemo(
+    () => items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    [items]
+  )
+}
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Direct state mutation
+```typescript
+// WRONG
+const store = useCartStore.getState()
+store.items.push(newItem) // Direct mutation!
+
+// CORRECT
+useCartStore.getState().addItem(newItem)
+
+// Or in action:
+addItem: (item) => set((state) => ({
+  items: [...state.items, item] // Create new array
+}))
+```
+
+### Wrong: Creating store in component
+```typescript
+// WRONG - New store on every render!
+function Component() {
+  const useStore = create(() => ({ count: 0 }))
+}
+
+// CORRECT - Store outside component
+const useStore = create(() => ({ count: 0 }))
+
+function Component() {
+  const count = useStore((s) => s.count)
+}
+```
+
+### Wrong: Storing server data
+```typescript
+// WRONG - Use Server Components or React Query
+const useUsersStore = create((set) => ({
+  users: [],
+  fetchUsers: async () => {
+    const users = await fetch('/api/users').then(r => r.json())
+    set({ users })
+  }
+}))
+
+// CORRECT - Server Component
+async function UsersPage() {
+  const users = await prisma.user.findMany()
+  return <UserList users={users} />
+}
+```
+
+## Store Organization
+
+```
+stores/
+  ├── index.ts          # Re-exports all stores
+  ├── auth-store.ts     # Authentication state
+  ├── onboard-store.ts  # Onboarding wizard state
+  └── zen-store.ts      # UI preferences
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

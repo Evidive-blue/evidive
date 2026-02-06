@@ -177,9 +177,11 @@ export default async function AdminPage() {
                         <p className="text-sm text-white/60">
                           {center.city}, {center.country}
                         </p>
-                        <p className="mt-1 text-xs text-white/40">
-                          by {center.owner.displayName || center.owner.email}
-                        </p>
+                        {center.owner && (
+                          <p className="mt-1 text-xs text-white/40">
+                            by {center.owner.displayName || center.owner.email}
+                          </p>
+                        )}
                       </div>
                       <div className="text-right">
                         <span className="rounded-full bg-amber-500/20 px-2 py-1 text-xs font-medium text-amber-400">

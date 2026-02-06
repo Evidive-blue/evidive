@@ -9,8 +9,9 @@ import { getOpenGraphLocale } from '@/lib/i18n/config';
 import { AuthProvider } from '@/components/providers/auth-provider';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
-import { ZenModeOverlay, ZenFab } from '@/components/zen';
+import { ZenModeOverlay, ZenFab, AmbientSoundPlayer } from '@/components/zen';
 import { OceanCanvasWrapper } from '@/components/effects/ocean-canvas-wrapper';
+import { OrganizationJsonLd, WebsiteJsonLd } from '@/components/seo/json-ld';
 import './globals.css';
 
 const geistSans = Geist({
@@ -121,9 +122,28 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale();
   const messages = await getMessages(locale);
+  const baseUrl = await getBaseUrl();
+  const brandName = requireString(messages, 'footer.brandName');
+  const description = requireString(messages, 'metadata.home.description');
 
   return (
     <html lang={locale} className="dark" suppressHydrationWarning>
+      <head>
+        <OrganizationJsonLd
+          name={brandName}
+          url={baseUrl}
+          logo={`${baseUrl}/evidive-logo.png`}
+          description={description}
+          sameAs={['https://www.instagram.com/evidive.blue/']}
+          contactType="customer service"
+          supportEmail="support@evidive.com"
+        />
+        <WebsiteJsonLd
+          name={brandName}
+          url={baseUrl}
+          description={description}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
@@ -137,6 +157,9 @@ export default async function RootLayout({
             
             {/* Zen Mode Floating Button */}
             <ZenFab />
+            
+            {/* Ambient Sound Mini Player */}
+            <AmbientSoundPlayer />
             
             <div className="relative min-h-screen flex flex-col">
               <Navbar />

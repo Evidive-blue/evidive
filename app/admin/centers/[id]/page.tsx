@@ -93,9 +93,29 @@ export default async function AdminCenterDetailPage({ params }: Props) {
     _sum: { totalPrice: true },
   });
 
+  // Serialize Decimal fields for Client Component
+  const serializedCenter = {
+    ...center,
+    rating: Number(center.rating),
+    commissionRate: Number(center.commissionRate),
+    services: center.services.map((service) => ({
+      ...service,
+      price: Number(service.price),
+    })),
+    bookings: center.bookings.map((booking) => ({
+      ...booking,
+      unitPrice: Number(booking.unitPrice),
+      extrasPrice: Number(booking.extrasPrice),
+      discountAmount: Number(booking.discountAmount),
+      totalPrice: Number(booking.totalPrice),
+      depositAmount: Number(booking.depositAmount),
+      refundAmount: booking.refundAmount ? Number(booking.refundAmount) : null,
+    })),
+  };
+
   return (
     <AdminCenterDetailClient
-      center={center}
+      center={serializedCenter as any}
       totalRevenue={Number(revenue._sum.totalPrice || 0)}
     />
   );

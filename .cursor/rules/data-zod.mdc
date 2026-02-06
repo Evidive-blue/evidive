@@ -1,0 +1,316 @@
+---
+description: "Zod v3.24.1 - Schema validation rules. Source: https://zod.dev"
+globs: ["**/*.ts", "**/*.tsx"]
+alwaysApply: true
+---
+
+# Zod v3.24.1 - Official Rules
+
+> Source: https://zod.dev / https://github.com/colinhacks/zod
+> Last fetched: 2026-02-05
+
+## ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+### Universal
+- NO placeholders: `TODO`, `FIXME`, `XXX`, `HACK`, `...`
+- NO trusting user input without validation
+- NO manual type assertions when Zod can infer
+
+### Zod Specific
+- NO using `.parse()` without error handling in API routes
+- NO duplicating validation logic (define once, reuse)
+- NO ignoring validation errors
+- NO hardcoding error messages (use i18n-compatible patterns)
+
+## REQUIRED Patterns
+
+### Basic Schema Definition
+
+```typescript
+import { z } from 'zod'
+
+// String validations
+const nameSchema = z.string()
+  .min(2, 'Name must be at least 2 characters')
+  .max(100, 'Name cannot exceed 100 characters')
+
+// Email validation
+const emailSchema = z.string()
+  .email('Invalid email address')
+  .transform(email => email.toLowerCase())
+
+// Number validations
+const ageSchema = z.number()
+  .int('Age must be an integer')
+  .min(10, 'Minimum age is 10')
+  .max(99, 'Maximum age is 99')
+
+// Enum validation
+const roleSchema = z.enum(['DIVER', 'ADMIN'])
+```
+
+### Object Schemas
+
+```typescript
+// User registration schema
+const registerSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+  confirmPassword: z.string().min(8),
+  firstName: z.string().min(2).optional(),
+  lastName: z.string().min(2).optional(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ['confirmPassword'],
+})
+
+// Extract TypeScript type
+type RegisterInput = z.infer<typeof registerSchema>
+```
+
+### API Route Validation
+
+```typescript
+// app/api/bookings/route.ts
+import { z } from 'zod'
+
+const createBookingSchema = z.object({
+  serviceId: z.string().cuid(),
+  diveDate: z.string().datetime(),
+  diveTime: z.string().regex(/^\d{2}:\d{2}$/),
+  participants: z.number().int().min(1).max(20),
+  guestEmail: z.string().email(),
+  guestPhone: z.string().optional(),
+  specialRequests: z.string().max(500).optional(),
+})
+
+export async function POST(request: Request) {
+  const body = await request.json()
+  
+  // Use safeParse for graceful error handling
+  const parsed = createBookingSchema.safeParse(body)
+  
+  if (!parsed.success) {
+    return Response.json(
+      { 
+        error: 'Validation failed',
+        issues: parsed.error.flatten().fieldErrors 
+      },
+      { status: 400 }
+    )
+  }
+  
+  // parsed.data is fully typed
+  const booking = await createBooking(parsed.data)
+  
+  return Response.json(booking, { status: 201 })
+}
+```
+
+### Server Action Validation
+
+```typescript
+'use server'
+
+import { z } from 'zod'
+import { revalidatePath } from 'next/cache'
+
+const updateProfileSchema = z.object({
+  displayName: z.string().min(2).max(50),
+  phone: z.string().regex(/^\+?[0-9]{10,15}$/).optional().nullable(),
+  bio: z.string().max(500).optional().nullable(),
+})
+
+export async function updateProfile(formData: FormData) {
+  const data = {
+    displayName: formData.get('displayName'),
+    phone: formData.get('phone') || null,
+    bio: formData.get('bio') || null,
+  }
+  
+  const parsed = updateProfileSchema.safeParse(data)
+  
+  if (!parsed.success) {
+    return { 
+      error: parsed.error.flatten().fieldErrors 
+    }
+  }
+  
+  await prisma.diver.update({
+    where: { id: userId },
+    data: parsed.data,
+  })
+  
+  revalidatePath('/profile')
+  return { success: true }
+}
+```
+
+### Array Schemas
+
+```typescript
+// Array with constraints
+const photosSchema = z.array(z.string().url())
+  .min(1, 'At least one photo required')
+  .max(10, 'Maximum 10 photos allowed')
+
+// Array of objects
+const participantsSchema = z.array(z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  certificationLevel: z.string().optional(),
+})).min(1).max(20)
+```
+
+### Optional, Nullable, Default
+
+```typescript
+const centerSchema = z.object({
+  name: z.string(), // Required
+  
+  // Optional (undefined allowed)
+  website: z.string().url().optional(),
+  
+  // Nullable (null allowed)
+  phone: z.string().nullable(),
+  
+  // Optional AND nullable
+  description: z.string().optional().nullable(),
+  
+  // With default value
+  featured: z.boolean().default(false),
+  
+  // Transform input
+  email: z.string().email().transform(e => e.toLowerCase()),
+})
+```
+
+### Custom Refinements
+
+```typescript
+const bookingSchema = z.object({
+  diveDate: z.string().datetime(),
+  endDate: z.string().datetime(),
+}).refine(
+  (data) => new Date(data.endDate) > new Date(data.diveDate),
+  {
+    message: 'End date must be after start date',
+    path: ['endDate'],
+  }
+)
+
+// Multiple refinements
+const passwordSchema = z.string()
+  .min(8, 'Minimum 8 characters')
+  .refine(
+    (password) => /[A-Z]/.test(password),
+    'Must contain uppercase letter'
+  )
+  .refine(
+    (password) => /[0-9]/.test(password),
+    'Must contain a number'
+  )
+  .refine(
+    (password) => /[^A-Za-z0-9]/.test(password),
+    'Must contain special character'
+  )
+```
+
+### Discriminated Unions
+
+```typescript
+const notificationSchema = z.discriminatedUnion('type', [
+  z.object({
+    type: z.literal('email'),
+    email: z.string().email(),
+    subject: z.string(),
+    body: z.string(),
+  }),
+  z.object({
+    type: z.literal('sms'),
+    phone: z.string(),
+    message: z.string().max(160),
+  }),
+  z.object({
+    type: z.literal('push'),
+    title: z.string(),
+    body: z.string(),
+  }),
+])
+```
+
+## FORBIDDEN Patterns
+
+### Wrong: Using parse without error handling
+```typescript
+// WRONG - Will throw on invalid input
+const data = schema.parse(input)
+
+// CORRECT - Handle errors gracefully
+const result = schema.safeParse(input)
+if (!result.success) {
+  return { error: result.error.flatten() }
+}
+const data = result.data
+```
+
+### Wrong: Duplicating validation logic
+```typescript
+// WRONG
+// file1.ts
+const emailSchema = z.string().email()
+// file2.ts
+const emailSchema = z.string().email()
+
+// CORRECT - Define once, export
+// schemas/common.ts
+export const emailSchema = z.string().email().transform(e => e.toLowerCase())
+
+// file1.ts
+import { emailSchema } from '@/schemas/common'
+```
+
+### Wrong: Manual type assertions
+```typescript
+// WRONG
+const data = schema.parse(input) as ExpectedType
+
+// CORRECT - Infer from schema
+type ExpectedType = z.infer<typeof schema>
+const data = schema.parse(input)
+```
+
+## Integration with React Hook Form
+
+```typescript
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+})
+
+type FormData = z.infer<typeof formSchema>
+
+function LoginForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  })
+  
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('email')} />
+      {errors.email && <span>{errors.email.message}</span>}
+    </form>
+  )
+}
+```
+
+## Enforcement
+
+This rule file has `alwaysApply: true`. Violations will be:
+1. Flagged immediately
+2. Blocked from generation
+3. Required to be fixed before proceeding

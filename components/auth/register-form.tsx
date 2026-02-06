@@ -121,7 +121,7 @@ export function RegisterForm() {
 
   if (success) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-4 pb-12 pt-20">
+      <div className="flex min-h-screen items-center justify-center px-4 pb-12 pt-24">
         <motion.div
           className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl text-center"
           initial={{ opacity: 0, scale: 0.9 }}
