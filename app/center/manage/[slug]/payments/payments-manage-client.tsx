@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
@@ -77,6 +77,35 @@ export function PaymentsManageClient({ center, stats }: PaymentsManageClientProp
     center.stripeAccountId ? 'PENDING' : 'NOT_CONNECTED'
   );
 
+  // Fonction pour récupérer le statut Stripe
+  const fetchStripeStatus = async () => {
+    if (!center.stripeAccountId) return;
+    
+    try {
+      const response = await fetch(`/api/centers/${center.slug}/stripe/status`, {
+        method: 'POST',
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setStripeStatus(data.status as keyof typeof STATUS_CONFIG);
+      }
+    } catch (error) {
+      console.error('Error fetching Stripe status:', error);
+    }
+  };
+
+  // Charger le statut au montage et rafraîchir toutes les 60 secondes
+  useEffect(() => {
+    fetchStripeStatus();
+
+    const interval = setInterval(() => {
+      fetchStripeStatus();
+    }, 60000); // 60 secondes
+
+    return () => clearInterval(interval);
+  }, [center.slug, center.stripeAccountId]);
+
   const getLocalized = (value: unknown): string => {
     if (!value) return '';
     if (typeof value === 'string') return value;
@@ -142,23 +171,9 @@ export function PaymentsManageClient({ center, stats }: PaymentsManageClientProp
 
   const handleRefreshStatus = async () => {
     setIsRefreshing(true);
-    try {
-      const response = await fetch(`/api/centers/${center.slug}/stripe/status`, {
-        method: 'POST',
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to refresh status');
-      }
-
-      const data = await response.json();
-      setStripeStatus(data.status as keyof typeof STATUS_CONFIG);
-      toast.success('Statut mis à jour');
-    } catch {
-      toast.error('Erreur lors de la mise à jour');
-    } finally {
-      setIsRefreshing(false);
-    }
+    await fetchStripeStatus();
+    toast.success('Statut mis à jour');
+    setIsRefreshing(false);
   };
 
   return (
