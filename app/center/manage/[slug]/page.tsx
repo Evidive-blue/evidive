@@ -110,7 +110,12 @@ export default async function CenterManagePage({ params }: Props) {
     })),
     bookings: center.bookings.map((booking: any) => ({
       ...booking,
+      unitPrice: Number(booking.unitPrice),
+      extrasPrice: Number(booking.extrasPrice),
+      discountAmount: Number(booking.discountAmount),
       totalPrice: Number(booking.totalPrice),
+      depositAmount: Number(booking.depositAmount),
+      refundAmount: booking.refundAmount ? Number(booking.refundAmount) : null,
     })),
   } as any;
 

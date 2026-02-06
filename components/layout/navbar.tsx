@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe, User, LogOut, LayoutDashboard, Building2, Settings } from "lucide-react";
@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const { data: session, status } = useSession();
   const t = useTranslations("nav");
   const tCommon = useTranslations("common");
@@ -31,6 +32,11 @@ export function Navbar() {
   
   const isAuthenticated = status === "authenticated" && session?.user;
   const isAdmin = session?.user?.role === "ADMIN";
+
+  // Éviter l'erreur d'hydratation avec les DropdownMenu
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const navItems = [
     { href: "/", label: t("home") },
@@ -105,36 +111,38 @@ export function Navbar() {
           <div className="z-50 flex shrink-0 items-center gap-2 lg:gap-3">
             <div className="hidden items-center gap-1 md:flex md:gap-2">
               {/* Language Switcher */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-8 rounded-xl text-white/80 hover:bg-white/15 hover:text-white"
-                  >
-                    <Globe className="mr-1 h-4 w-4" />
-                    {localeFlags[locale]} {localeNames[locale]}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="border-white/15 bg-slate-900/95 backdrop-blur-xl">
-                  {locales.map((loc) => (
-                    <DropdownMenuItem
-                      key={loc}
-                      onClick={() => setLocale(loc)}
-                      className={cn(
-                        "cursor-pointer text-white/80 hover:text-white",
-                        loc === locale && "font-semibold text-cyan-400"
-                      )}
+              {isMounted && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 rounded-xl text-white/80 hover:bg-white/15 hover:text-white"
                     >
-                      <span className="mr-2">{localeFlags[loc]}</span>
-                      {localeNames[loc]}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                      <Globe className="mr-1 h-4 w-4" />
+                      {localeFlags[locale]} {localeNames[locale]}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="border-white/15 bg-slate-900/95 backdrop-blur-xl">
+                    {locales.map((loc) => (
+                      <DropdownMenuItem
+                        key={loc}
+                        onClick={() => setLocale(loc)}
+                        className={cn(
+                          "cursor-pointer text-white/80 hover:text-white",
+                          loc === locale && "font-semibold text-cyan-400"
+                        )}
+                      >
+                        <span className="mr-2">{localeFlags[loc]}</span>
+                        {localeNames[loc]}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
 
               {/* Auth buttons / User menu */}
-              {isAuthenticated ? (
+              {isMounted && isAuthenticated && (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
@@ -193,7 +201,8 @@ export function Navbar() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              ) : (
+              )}
+              {isMounted && !isAuthenticated && (
                 <>
                   <Button
                     variant="ghost"
@@ -216,32 +225,34 @@ export function Navbar() {
 
             {/* Mobile Menu Toggle */}
             <div className="flex items-center gap-2 md:hidden">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-9 w-9 rounded-xl text-white hover:bg-white/10"
-                  >
-                    <Globe className="h-5 w-5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="glass border-white/10 bg-black/90 backdrop-blur-xl">
-                  {locales.map((loc) => (
-                    <DropdownMenuItem
-                      key={loc}
-                      onClick={() => setLocale(loc)}
-                      className={cn(
-                        "cursor-pointer",
-                        loc === locale && "font-semibold text-cyan-400"
-                      )}
+              {isMounted && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-9 w-9 rounded-xl text-white hover:bg-white/10"
                     >
-                      <span className="mr-2">{localeFlags[loc]}</span>
-                      {localeNames[loc]}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                      <Globe className="h-5 w-5" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="glass border-white/10 bg-black/90 backdrop-blur-xl">
+                    {locales.map((loc) => (
+                      <DropdownMenuItem
+                        key={loc}
+                        onClick={() => setLocale(loc)}
+                        className={cn(
+                          "cursor-pointer",
+                          loc === locale && "font-semibold text-cyan-400"
+                        )}
+                      >
+                        <span className="mr-2">{localeFlags[loc]}</span>
+                        {localeNames[loc]}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
               <Button
                 variant="ghost"
                 size="icon"

@@ -84,6 +84,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       paymentStatus: 'PAID',
       status: 'CONFIRMED',
       stripePaymentIntentId: session.payment_intent as string,
+      stripeCheckoutSessionId: session.id,
       paidAt: new Date(),
       confirmedAt: new Date(),
     },
@@ -137,6 +138,18 @@ async function handlePaymentSucceeded(paymentIntent: Stripe.PaymentIntent) {
 
   if (!bookingId) {
     return; // May not be a booking payment
+  }
+
+  // Vérifier si déjà traité par checkout.session.completed
+  const booking = await prisma.booking.findUnique({
+    where: { id: bookingId },
+    select: { paymentStatus: true },
+  });
+
+  // Ne pas écraser si déjà payé par le webhook checkout.session.completed
+  if (booking?.paymentStatus === 'PAID') {
+    console.log(`Booking ${bookingId} already marked as paid, skipping duplicate update`);
+    return;
   }
 
   await prisma.booking.update({
