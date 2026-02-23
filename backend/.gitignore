@@ -1,0 +1,21 @@
+# Build artifacts
+/target/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SQLx offline cache (regenerate with `cargo sqlx prepare`)
+# .sqlx/
+.vercel

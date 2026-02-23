@@ -1,0 +1,3938 @@
+@import "tailwindcss";
+
+/* ───────────────────────────────────────
+   Evidive Design Tokens — Deep Ocean
+   Tailwind v4 CSS-first configuration
+   ─────────────────────────────────────── */
+
+:root {
+  --font-geist-sans: "Geist", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+
+  --background: oklch(0.97 0.008 220);
+  --foreground: oklch(0.15 0.025 230);
+  --primary: oklch(0.62 0.19 210);
+  --primary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.93 0.012 220);
+  --muted-foreground: oklch(0.5 0.03 220);
+  --border: oklch(0.88 0.015 220);
+  --ring: oklch(0.62 0.19 210);
+
+  /* Diving accent palette */
+  --ocean-shallow: oklch(0.6 0.12 200);
+  --ocean-deep: oklch(0.2 0.06 230);
+  --ocean-abyss: oklch(0.08 0.04 240);
+  --coral: oklch(0.65 0.18 25);
+  --seafoam: oklch(0.72 0.12 175);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  --background: oklch(0.07 0.025 230);
+  --foreground: oklch(0.92 0.008 210);
+  --primary: oklch(0.68 0.18 200);
+  --primary-foreground: oklch(0.07 0 0);
+  --muted: oklch(0.14 0.025 230);
+  --muted-foreground: oklch(0.58 0.03 210);
+  --border: oklch(0.2 0.025 230);
+  --ring: oklch(0.68 0.18 200);
+
+  --ocean-shallow: oklch(0.45 0.1 200);
+  --ocean-deep: oklch(0.15 0.05 230);
+  --ocean-abyss: oklch(0.05 0.03 240);
+  --coral: oklch(0.6 0.16 25);
+  --seafoam: oklch(0.55 0.1 175);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-ocean-shallow: var(--ocean-shallow);
+  --color-ocean-deep: var(--ocean-deep);
+  --color-ocean-abyss: var(--ocean-abyss);
+  --color-coral: var(--coral);
+  --color-seafoam: var(--seafoam);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ── Smooth scrolling — anchor links only ── */
+html {
+  scroll-behavior: auto;
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1628;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0ea5e9, #06b6d4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #38bdf8, #22d3ee);
+}
+
+/* ── Scrollbar Firefox ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0ea5e9 #0a1628;
+}
+
+/* ── Dark theme defaults ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ── Ensure native date/time pickers match the dark UI ── */
+.dark input[type="date"],
+.dark input[type="time"],
+.dark input[type="datetime-local"],
+.dark input[type="month"],
+.dark input[type="week"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"] {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Selection ── */
+::selection {
+  background-color: rgba(14, 165, 233, 0.3);
+  color: inherit;
+}
+
+/* ── Focus ring ── */
+:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Reduced motion (OS preference) ──
+   Ocean/island/creature animations are exempt: they are decorative and
+   controlled by the in-app toggle (data-effects="reduced") instead.
+   This preserves WCAG compliance for UI animations while keeping the
+   ocean background alive by default. */
+@media (prefers-reduced-motion: reduce) {
+  *:not(:is(.ocean-root, .ocean-root *, .island-layer, .island-layer *, .island-card, .island-card *, .ee-creature-layer, .ee-creature-layer *)),
+  *:not(:is(.ocean-root, .ocean-root *, .island-layer, .island-layer *, .island-card, .island-card *, .ee-creature-layer, .ee-creature-layer *))::before,
+  *:not(:is(.ocean-root, .ocean-root *, .island-layer, .island-layer *, .island-card, .island-card *, .ee-creature-layer, .ee-creature-layer *))::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Reduced effects (user toggle via data attribute) ── */
+html[data-effects="reduced"] .ocean-root {
+  /* Keep the static gradient background, hide all animated children */
+  & .ocean-wave-1,
+  & .ocean-wave-2,
+  & .ocean-wave-3,
+  & .ocean-foam-1,
+  & .ocean-foam-2,
+  & .ocean-shimmer,
+  & .ocean-rays-wrap,
+  & .ocean-water-movement,
+  & .ocean-bubbles-wrap,
+  & .ocean-particles-wrap,
+  & .ocean-fish-surface,
+  & .ocean-fish-mid,
+  & .ocean-fish-deep,
+  & .ocean-fish-medium,
+  & .ocean-fish-biolum,
+  & .ocean-flora-zone,
+  & .ocean-biolum-wrap,
+  & .ocean-sun-rays,
+  & .ocean-sun-water-rays,
+  & .ocean-sun-godrays,
+  & .ocean-caustics-wrap,
+  & .ocean-depth-haze,
+  & .ocean-dust-wrap,
+  & .ocean-stars-wrap,
+  & .ocean-shooting-star,
+  & .ocean-birds-wrap,
+  & .ocean-leaping-wrap,
+  & .ocean-halo {
+    display: none !important;
+  }
+
+  /* Stop remaining CSS animations */
+  & *,
+  & *::before,
+  & *::after {
+    animation: none !important;
+  }
+}
+
+/* Navbar border animation — also paused */
+html[data-effects="reduced"] .navbar-glass::before,
+html[data-effects="reduced"] .navbar-glass::after {
+  animation: none !important;
+}
+
+/* Keep basic transitions (hover, focus) working */
+html[data-effects="reduced"] button,
+html[data-effects="reduced"] a,
+html[data-effects="reduced"] input,
+html[data-effects="reduced"] select {
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+/* =============================================
+   OCEAN BACKGROUND — GPU-ACCELERATED
+   All layers use will-change + transform for
+   compositor-only animations (no layout/paint).
+   Scroll progress is read from --p (0→1).
+   ============================================= */
+
+/* ── Root container — dynamic colors via JS-computed CSS vars ── */
+.ocean-root {
+  --sy: 0;
+  background: linear-gradient(
+    180deg,
+    var(--sky-top) 0%,
+    var(--sea-top) 32%,
+    var(--sea-mid) 65%,
+    var(--sea-bot) 100%
+  );
+  transition: background 3s ease;
+}
+
+/* ── Full-screen gradient (depth) — darkens as user scrolls ── */
+.ocean-gradient {
+  will-change: opacity;
+  /* 0px → opacity 0.3, ~2500px → opacity 0.95 */
+  opacity: clamp(0, calc(0.3 + var(--sy) * 0.00026), 0.95);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    hsla(220, 80%, 8%, 0.3) 30%,
+    hsla(230, 85%, 5%, 0.7) 60%,
+    hsl(240, 90%, 3%) 100%
+  );
+}
+
+/* ── Sky — dynamic gradient from time-based CSS vars ── */
+.ocean-sky-bg {
+  background: linear-gradient(
+    180deg,
+    var(--sky-top) 0%,
+    var(--sky-mid) 50%,
+    var(--sky-bot) 100%
+  );
+  transition: background 3s ease;
+}
+
+/* ── Sun core ── */
+.ocean-sun-core {
+  position: absolute;
+  left: var(--sun-x);
+  top: var(--sun-y);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) translateZ(0);
+  opacity: var(--sun-vis);
+  transition: opacity 2s ease;
+  background: radial-gradient(
+    circle,
+    hsl(48, 100%, 90%) 0%,
+    hsl(45, 100%, 75%) 50%,
+    hsl(40, 95%, 60%) 80%,
+    transparent 100%
+  );
+  filter: hue-rotate(calc((1 - var(--sun-warmth)) * -25deg));
+}
+
+/* ── Sun glow (atmospheric halo) ── */
+.ocean-sun-glow {
+  position: absolute;
+  left: var(--sun-x);
+  top: var(--sun-y);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) translateZ(0);
+  opacity: calc(var(--sun-vis) * 0.55);
+  transition: opacity 2s ease;
+  background: radial-gradient(
+    circle,
+    hsla(45, 100%, 80%, 0.4) 0%,
+    hsla(40, 90%, 65%, 0.15) 35%,
+    hsla(30, 80%, 50%, 0.05) 60%,
+    transparent 100%
+  );
+  filter: hue-rotate(calc((1 - var(--sun-warmth)) * -25deg));
+  animation: ocean-sun-pulse 6s ease-in-out infinite;
+}
+
+@keyframes ocean-sun-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1) translateZ(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08) translateZ(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) translateZ(0);
+  }
+}
+
+/* ── Sun rays (starburst beams from sun center) ── */
+.ocean-sun-rays {
+  position: absolute;
+  left: var(--sun-x);
+  top: var(--sun-y);
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) translateZ(0);
+  opacity: calc(var(--sun-vis) * 0.3);
+  transition: opacity 2s ease;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    hsla(48, 100%, 92%, 0.18) 2deg,
+    transparent 8deg,
+    transparent 25deg,
+    hsla(48, 100%, 90%, 0.14) 27deg,
+    transparent 33deg,
+    transparent 50deg,
+    hsla(48, 100%, 88%, 0.12) 52deg,
+    transparent 58deg,
+    transparent 75deg,
+    hsla(48, 100%, 92%, 0.16) 77deg,
+    transparent 83deg,
+    transparent 100deg,
+    hsla(48, 100%, 90%, 0.1) 102deg,
+    transparent 108deg,
+    transparent 130deg,
+    hsla(48, 100%, 88%, 0.14) 132deg,
+    transparent 138deg,
+    transparent 155deg,
+    hsla(48, 100%, 92%, 0.18) 157deg,
+    transparent 163deg,
+    transparent 180deg,
+    hsla(48, 100%, 90%, 0.12) 182deg,
+    transparent 188deg,
+    transparent 205deg,
+    hsla(48, 100%, 88%, 0.15) 207deg,
+    transparent 213deg,
+    transparent 235deg,
+    hsla(48, 100%, 92%, 0.1) 237deg,
+    transparent 243deg,
+    transparent 260deg,
+    hsla(48, 100%, 90%, 0.16) 262deg,
+    transparent 268deg,
+    transparent 290deg,
+    hsla(48, 100%, 88%, 0.13) 292deg,
+    transparent 298deg,
+    transparent 315deg,
+    hsla(48, 100%, 92%, 0.11) 317deg,
+    transparent 323deg,
+    transparent 335deg,
+    transparent 360deg
+  );
+  mask-image: radial-gradient(
+    circle,
+    transparent 5%,
+    white 12%,
+    white 55%,
+    transparent 75%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle,
+    transparent 5%,
+    white 12%,
+    white 55%,
+    transparent 75%
+  );
+  filter: hue-rotate(calc((1 - var(--sun-warmth)) * -25deg));
+  animation: ocean-sun-rays-rotate 90s linear infinite;
+}
+
+@keyframes ocean-sun-rays-rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateZ(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translateZ(0);
+  }
+}
+
+/* ── Sun inner glow (bright halo close to core) ── */
+.ocean-sun-inner-glow {
+  position: absolute;
+  left: var(--sun-x);
+  top: var(--sun-y);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) translateZ(0);
+  opacity: calc(var(--sun-vis) * 0.7);
+  transition: opacity 2s ease;
+  background: radial-gradient(
+    circle,
+    hsla(48, 100%, 95%, 0.5) 0%,
+    hsla(45, 100%, 85%, 0.3) 30%,
+    hsla(40, 95%, 70%, 0.1) 60%,
+    transparent 100%
+  );
+  filter: hue-rotate(calc((1 - var(--sun-warmth)) * -25deg));
+  animation: ocean-sun-inner-pulse 4s ease-in-out infinite;
+}
+
+@keyframes ocean-sun-inner-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1) translateZ(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.12) translateZ(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) translateZ(0);
+  }
+}
+
+/* ── Sun reflection on water (shimmering broken column of golden light) ── */
+.ocean-sun-reflect {
+  pointer-events: none;
+  opacity: clamp(
+    0,
+    calc(max(0, 1 - var(--sy) / 600) * var(--sun-vis) * 0.8),
+    1
+  );
+  background:
+    /* Core bright column — narrow, intense */
+    radial-gradient(
+      ellipse 4% 95% at var(--sun-x) 0%,
+      hsla(45, 95%, 90%, 0.32) 0%,
+      hsla(45, 90%, 80%, 0.14) 35%,
+      transparent 80%
+    ),
+    /* Wider atmospheric halo */
+    radial-gradient(
+        ellipse 12% 80% at var(--sun-x) 0%,
+        hsla(45, 85%, 78%, 0.12) 0%,
+        hsla(45, 75%, 65%, 0.04) 50%,
+        transparent 100%
+      ),
+    /* Left shimmer fragment — close */
+    radial-gradient(
+        ellipse 1.5% 55% at calc(var(--sun-x) - 4%) 12%,
+        hsla(45, 82%, 84%, 0.14) 0%,
+        transparent 100%
+      ),
+    /* Right shimmer fragment — close */
+    radial-gradient(
+        ellipse 1.2% 50% at calc(var(--sun-x) + 3.5%) 18%,
+        hsla(45, 82%, 84%, 0.12) 0%,
+        transparent 100%
+      ),
+    /* Left shimmer fragment — far */
+    radial-gradient(
+        ellipse 0.8% 40% at calc(var(--sun-x) - 7%) 28%,
+        hsla(45, 75%, 82%, 0.08) 0%,
+        transparent 100%
+      ),
+    /* Right shimmer fragment — far */
+    radial-gradient(
+        ellipse 1% 45% at calc(var(--sun-x) + 6.5%) 22%,
+        hsla(45, 75%, 82%, 0.1) 0%,
+        transparent 100%
+      ),
+    /* Center micro-sparkles */
+    radial-gradient(
+        ellipse 0.6% 30% at calc(var(--sun-x) - 1.5%) 38%,
+        hsla(45, 88%, 88%, 0.1) 0%,
+        transparent 100%
+      ),
+    radial-gradient(
+      ellipse 0.7% 25% at calc(var(--sun-x) + 2%) 45%,
+      hsla(45, 88%, 88%, 0.08) 0%,
+      transparent 100%
+    );
+  filter: hue-rotate(calc((1 - var(--sun-warmth)) * -25deg));
+  animation: ocean-reflect-sun-shimmer 5s ease-in-out infinite;
+}
+
+@keyframes ocean-reflect-sun-shimmer {
+  0% {
+    transform: scaleX(1) translateZ(0);
+  }
+  20% {
+    transform: scaleX(1.06) translateZ(0);
+  }
+  40% {
+    transform: scaleX(0.95) translateZ(0);
+  }
+  60% {
+    transform: scaleX(1.04) translateZ(0);
+  }
+  80% {
+    transform: scaleX(0.97) translateZ(0);
+  }
+  100% {
+    transform: scaleX(1) translateZ(0);
+  }
+}
+
+/* ── Sun ray reflections on water surface ── */
+.ocean-sun-water-rays {
+  pointer-events: none;
+  opacity: clamp(
+    0,
+    calc(max(0, 1 - var(--sy) / 500) * var(--sun-vis) * 0.35),
+    1
+  );
+  background:
+    radial-gradient(
+      ellipse 0.8% 50% at calc(var(--sun-x) - 6%) 10%,
+      hsla(45, 80%, 78%, 0.1) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 0.5% 45% at calc(var(--sun-x) - 3%) 20%,
+      hsla(45, 80%, 78%, 0.08) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 0.7% 55% at calc(var(--sun-x) + 1%) 8%,
+      hsla(45, 80%, 78%, 0.12) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 0.4% 35% at calc(var(--sun-x) + 4%) 25%,
+      hsla(45, 80%, 78%, 0.06) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 0.6% 40% at calc(var(--sun-x) + 8%) 15%,
+      hsla(45, 80%, 78%, 0.07) 0%,
+      transparent 100%
+    );
+  filter: hue-rotate(calc((1 - var(--sun-warmth)) * -25deg));
+  animation: ocean-sun-water-rays-shimmer 5s ease-in-out infinite;
+}
+
+@keyframes ocean-sun-water-rays-shimmer {
+  0% {
+    transform: scaleX(1) translateZ(0);
+    opacity: clamp(
+      0,
+      calc(max(0, 1 - var(--sy) / 500) * var(--sun-vis) * 0.35),
+      1
+    );
+  }
+  25% {
+    transform: scaleX(1.04) translateZ(0);
+  }
+  50% {
+    transform: scaleX(0.97) translateZ(0);
+    opacity: clamp(
+      0,
+      calc(max(0, 1 - var(--sy) / 500) * var(--sun-vis) * 0.25),
+      1
+    );
+  }
+  75% {
+    transform: scaleX(1.02) translateZ(0);
+  }
+  100% {
+    transform: scaleX(1) translateZ(0);
+    opacity: clamp(
+      0,
+      calc(max(0, 1 - var(--sy) / 500) * var(--sun-vis) * 0.35),
+      1
+    );
+  }
+}
+
+/* ── Underwater god rays (sun light shafts penetrating the water) ── */
+.ocean-sun-godrays {
+  opacity: clamp(
+    0,
+    calc(max(0, 1 - var(--sy) / 900) * var(--sun-vis) * 0.5),
+    1
+  );
+}
+
+.ocean-godray {
+  position: absolute;
+  top: 0;
+  left: var(--sun-x);
+  translate: -50% 0;
+  height: 100%;
+  transform-origin: top center;
+  will-change: transform;
+  filter: blur(2px) hue-rotate(calc((1 - var(--sun-warmth)) * -25deg));
+  background:
+    /* Bright core */
+    linear-gradient(
+      180deg,
+      hsla(45, 90%, 92%, var(--ray-o, 0.12)) 0%,
+      hsla(45, 85%, 85%, calc(var(--ray-o, 0.12) * 0.7)) 12%,
+      hsla(45, 75%, 78%, calc(var(--ray-o, 0.12) * 0.35)) 35%,
+      hsla(45, 60%, 70%, calc(var(--ray-o, 0.12) * 0.12)) 60%,
+      transparent 85%
+    ),
+    /* Soft glow around the core */
+    linear-gradient(
+        180deg,
+        hsla(45, 80%, 88%, calc(var(--ray-o, 0.12) * 0.5)) 0%,
+        hsla(45, 70%, 80%, calc(var(--ray-o, 0.12) * 0.2)) 25%,
+        transparent 55%
+      );
+  /* All rays start from the sun's x position on the waterline.
+     --ray-rot fans each ray at a unique angle. Keyframes add sway. */
+}
+
+/* Ray 1 — far left, narrow dim */
+.godray-1 {
+  width: 3.5%;
+  --ray-o: 0.09;
+  --ray-rot: -22deg;
+  animation: godray-sway-a 9s ease-in-out infinite;
+}
+
+/* Ray 2 — left, medium */
+.godray-2 {
+  width: 4.5%;
+  --ray-o: 0.14;
+  --ray-rot: -14deg;
+  animation: godray-sway-b 7s ease-in-out infinite 0.8s;
+}
+
+/* Ray 3 — slight left, narrow bright */
+.godray-3 {
+  width: 3%;
+  --ray-o: 0.2;
+  --ray-rot: -6deg;
+  animation: godray-sway-a 6s ease-in-out infinite 1.5s;
+}
+
+/* Ray 4 — center (brightest, widest) */
+.godray-4 {
+  width: 6%;
+  --ray-o: 0.28;
+  --ray-rot: 0deg;
+  animation: godray-sway-c 8s ease-in-out infinite 0.3s;
+}
+
+/* Ray 5 — slight right, medium */
+.godray-5 {
+  width: 3.5%;
+  --ray-o: 0.17;
+  --ray-rot: 7deg;
+  animation: godray-sway-b 6.5s ease-in-out infinite 2s;
+}
+
+/* Ray 6 — right, wider dim */
+.godray-6 {
+  width: 4%;
+  --ray-o: 0.11;
+  --ray-rot: 15deg;
+  animation: godray-sway-a 10s ease-in-out infinite 1s;
+}
+
+/* Ray 7 — far right, narrow */
+.godray-7 {
+  width: 3%;
+  --ray-o: 0.07;
+  --ray-rot: 22deg;
+  animation: godray-sway-c 8.5s ease-in-out infinite 3s;
+}
+
+/* Ray 8 — very far right, thin faint */
+.godray-8 {
+  width: 3.5%;
+  --ray-o: 0.05;
+  --ray-rot: 30deg;
+  animation: godray-sway-b 11s ease-in-out infinite 2.5s;
+}
+
+/* Sway animations — wavering from surface wave refraction */
+@keyframes godray-sway-a {
+  0% {
+    transform: rotate(var(--ray-rot)) scaleX(1) translateZ(0);
+    opacity: 1;
+  }
+  25% {
+    transform: rotate(calc(var(--ray-rot) + 1.5deg)) scaleX(1.15) translateZ(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: rotate(calc(var(--ray-rot) - 1deg)) scaleX(0.9) translateZ(0);
+    opacity: 1;
+  }
+  75% {
+    transform: rotate(calc(var(--ray-rot) + 0.5deg)) scaleX(1.05) translateZ(0);
+    opacity: 0.85;
+  }
+  100% {
+    transform: rotate(var(--ray-rot)) scaleX(1) translateZ(0);
+    opacity: 1;
+  }
+}
+
+@keyframes godray-sway-b {
+  0% {
+    transform: rotate(var(--ray-rot)) scaleX(1) translateZ(0);
+    opacity: 1;
+  }
+  30% {
+    transform: rotate(calc(var(--ray-rot) - 1.2deg)) scaleX(1.1) translateZ(0);
+    opacity: 0.75;
+  }
+  60% {
+    transform: rotate(calc(var(--ray-rot) + 1.8deg)) scaleX(0.85) translateZ(0);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--ray-rot)) scaleX(1) translateZ(0);
+    opacity: 1;
+  }
+}
+
+@keyframes godray-sway-c {
+  0% {
+    transform: rotate(var(--ray-rot)) scaleX(1) translateZ(0);
+    opacity: 0.9;
+  }
+  20% {
+    transform: rotate(calc(var(--ray-rot) + 0.8deg)) scaleX(1.2) translateZ(0);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(calc(var(--ray-rot) - 1.5deg)) scaleX(0.95) translateZ(0);
+    opacity: 0.7;
+  }
+  80% {
+    transform: rotate(calc(var(--ray-rot) + 1deg)) scaleX(1.08) translateZ(0);
+    opacity: 0.95;
+  }
+  100% {
+    transform: rotate(var(--ray-rot)) scaleX(1) translateZ(0);
+    opacity: 0.9;
+  }
+}
+
+/* ── Moon core ── */
+.ocean-moon-core {
+  position: absolute;
+  left: var(--moon-x);
+  top: var(--moon-y);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) translateZ(0);
+  opacity: var(--moon-vis);
+  transition: opacity 2s ease;
+  background: radial-gradient(
+    circle,
+    hsl(220, 20%, 92%) 0%,
+    hsl(225, 25%, 82%) 40%,
+    hsl(230, 30%, 70%) 70%,
+    transparent 100%
+  );
+}
+
+/* ── Moon glow ── */
+.ocean-moon-glow {
+  position: absolute;
+  left: var(--moon-x);
+  top: var(--moon-y);
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) translateZ(0);
+  opacity: calc(var(--moon-vis) * 0.4);
+  transition: opacity 2s ease;
+  background: radial-gradient(
+    circle,
+    hsla(220, 30%, 85%, 0.25) 0%,
+    hsla(230, 25%, 70%, 0.1) 40%,
+    transparent 70%
+  );
+  animation: ocean-moon-pulse 8s ease-in-out infinite;
+}
+
+@keyframes ocean-moon-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1) translateZ(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05) translateZ(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) translateZ(0);
+  }
+}
+
+/* ── Moon reflection on water (soft silver broken column) ── */
+.ocean-moon-reflect {
+  pointer-events: none;
+  opacity: clamp(
+    0,
+    calc(max(0, 1 - var(--sy) / 600) * var(--moon-vis) * 0.5),
+    1
+  );
+  background:
+    /* Core silver column */
+    radial-gradient(
+      ellipse 3% 90% at var(--moon-x) 0%,
+      hsla(220, 35%, 92%, 0.22) 0%,
+      hsla(225, 30%, 84%, 0.08) 40%,
+      transparent 85%
+    ),
+    /* Wider soft glow */
+    radial-gradient(
+        ellipse 9% 75% at var(--moon-x) 0%,
+        hsla(220, 30%, 88%, 0.08) 0%,
+        hsla(225, 25%, 78%, 0.03) 50%,
+        transparent 100%
+      ),
+    /* Left shimmer */
+    radial-gradient(
+        ellipse 1% 45% at calc(var(--moon-x) - 3%) 15%,
+        hsla(220, 32%, 88%, 0.08) 0%,
+        transparent 100%
+      ),
+    /* Right shimmer */
+    radial-gradient(
+        ellipse 0.8% 40% at calc(var(--moon-x) + 2.5%) 22%,
+        hsla(220, 32%, 88%, 0.06) 0%,
+        transparent 100%
+      ),
+    /* Center micro-sparkle */
+    radial-gradient(
+        ellipse 0.5% 30% at calc(var(--moon-x) - 1%) 32%,
+        hsla(220, 38%, 90%, 0.06) 0%,
+        transparent 100%
+      );
+  animation: ocean-reflect-moon-shimmer 7s ease-in-out infinite;
+}
+
+@keyframes ocean-reflect-moon-shimmer {
+  0% {
+    transform: scaleX(1) translateZ(0);
+  }
+  25% {
+    transform: scaleX(1.04) translateZ(0);
+  }
+  50% {
+    transform: scaleX(0.96) translateZ(0);
+  }
+  75% {
+    transform: scaleX(1.02) translateZ(0);
+  }
+  100% {
+    transform: scaleX(1) translateZ(0);
+  }
+}
+
+/* ── Scroll-driven translate — single composite layer ── */
+/* One transform instead of ~25 — the browser composites a single layer.
+   Child zones add a positive offset for depth parallax:
+   net = -sy + offset → deeper zones scroll slower. */
+.ocean-scroll-layer {
+  translate: 0 calc(var(--sy) * -1px);
+  will-change: translate;
+}
+
+/* ── Depth parallax — creates natural layered depth perception ── */
+/* Sky scrolls 18% faster (recedes as you dive) */
+.ocean-sky {
+  translate: 0 calc(var(--sy) * -0.18px);
+}
+
+.ocean-birds-wrap {
+  translate: 0 calc(var(--sy) * -0.14px);
+}
+
+/* Surface & mid: default (1:1 with scroll layer), no extra translate needed */
+
+/* Medium zone: 86% scroll speed */
+.ocean-fish-medium {
+  translate: 0 calc(var(--sy) * 0.14px);
+}
+
+/* Deep zone: 76% scroll speed */
+.ocean-fish-deep {
+  translate: 0 calc(var(--sy) * 0.24px);
+}
+
+/* Flora: 80% scroll speed */
+.ocean-flora-zone {
+  translate: 0 calc(var(--sy) * 0.20px);
+}
+
+/* Bioluminescent: 72% scroll speed (deepest organisms) */
+.ocean-fish-biolum,
+.ocean-biolum-wrap {
+  translate: 0 calc(var(--sy) * 0.28px);
+}
+
+/* ── Underwater caustic refraction (scroll-aware visibility) ── */
+.ocean-caustics-wrap {
+  will-change: opacity;
+  opacity: clamp(0, calc(0.45 * max(0, 1 - var(--sy) / 1200)), 0.45);
+  mix-blend-mode: screen;
+}
+
+/* ── Depth haze — blue fog thickening with scroll ── */
+.ocean-depth-haze {
+  will-change: opacity;
+  opacity: clamp(0, calc(var(--sy) * 0.00018), 0.55);
+  background: radial-gradient(
+    ellipse 120% 80% at 50% 60%,
+    hsla(215, 60%, 12%, 0.6) 0%,
+    hsla(225, 70%, 8%, 0.4) 40%,
+    transparent 80%
+  );
+  pointer-events: none;
+}
+
+/* ── Marine dust wrapper (scroll-aware) ── */
+.ocean-dust-wrap {
+  will-change: opacity;
+  opacity: clamp(0, calc(0.5 * max(0, 1 - var(--sy) / 2000)), 0.5);
+}
+
+
+/* ── Performance: CSS containment for rendering isolation ── */
+/* Depth zones — isolate layout/style recalculations.
+   No `paint` here: children overflow the viewport-sized container
+   and get scroll-translated into view via --sy. */
+.ocean-fish-surface,
+.ocean-fish-mid,
+.ocean-fish-medium,
+.ocean-fish-deep,
+.ocean-fish-biolum,
+.ocean-flora-zone,
+.ocean-biolum-wrap {
+  contain: layout style;
+}
+
+/* Sky/viewport-clipped zones can safely use paint containment */
+.ocean-stars-wrap,
+.ocean-birds-wrap,
+.ocean-leaping-wrap,
+.ocean-caustics-wrap,
+.ocean-bubbles-wrap,
+.ocean-particles-wrap,
+.ocean-rays-wrap,
+.ocean-water-movement,
+.ocean-dust-wrap,
+.ocean-depth-haze {
+  contain: layout style paint;
+}
+
+/* Fish banks — isolated rendering units (no paint: SVGs may overflow) */
+.ocean-fish-bank {
+  contain: layout style;
+}
+
+/* ── Performance: content-visibility for off-screen sections ── */
+/* NOTE: Fish zone containers are `absolute inset-0` so they are always
+   "in viewport" from the browser's perspective. content-visibility: auto
+   only helps on these if the browser tracks child bounds — keeping it on
+   the deepest zones as a progressive hint for future browsers.
+   Do NOT add it to surface/mid zones (always near viewport). */
+
+/* Medium zone: starts at 30vh+450px */
+.ocean-fish-medium {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1500px;
+}
+
+/* Deep ocean zones start ~1800px+ below waterline */
+.ocean-fish-deep {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+.ocean-biolum-wrap {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1500px;
+}
+
+.ocean-fish-biolum {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 2500px;
+}
+
+/* Flora zone: starts at 30vh+580px */
+.ocean-flora-zone {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1200px;
+}
+
+/* ── Wave animations ── */
+@keyframes ocean-wave-drift-1 {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  50% {
+    transform: translateX(-5%) translateZ(0);
+  }
+  100% {
+    transform: translateX(0) translateZ(0);
+  }
+}
+@keyframes ocean-wave-drift-2 {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  50% {
+    transform: translateX(4%) translateZ(0);
+  }
+  100% {
+    transform: translateX(0) translateZ(0);
+  }
+}
+@keyframes ocean-wave-drift-3 {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  50% {
+    transform: translateX(-3%) translateZ(0);
+  }
+  100% {
+    transform: translateX(0) translateZ(0);
+  }
+}
+
+.ocean-wave-1 {
+  animation: ocean-wave-drift-1 6s ease-in-out infinite;
+}
+.ocean-wave-2 {
+  animation: ocean-wave-drift-2 8s ease-in-out infinite;
+}
+.ocean-wave-3 {
+  animation: ocean-wave-drift-3 10s ease-in-out infinite;
+}
+
+/* ── Surface shimmer ── */
+@keyframes ocean-shimmer-move {
+  0% {
+    opacity: 0.2;
+    transform: scaleX(1) translateZ(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scaleX(1.02) translateZ(0);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scaleX(1) translateZ(0);
+  }
+}
+.ocean-shimmer {
+  animation: ocean-shimmer-move 4s ease-in-out infinite;
+}
+
+/* ── Light rays ── */
+.ocean-rays-wrap {
+  opacity: clamp(0, calc(0.15 * max(0, 1 - var(--sy) / 600)), 1);
+}
+.ocean-rays {
+  background:
+    radial-gradient(
+      ellipse 20% 100% at 15% 0%,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 25% 90% at 40% 0%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 18% 110% at 65% 0%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 22% 95% at 85% 0%,
+      rgba(255, 255, 255, 0.07) 0%,
+      transparent 50%
+    );
+  animation: ocean-rays-sway 8s ease-in-out infinite;
+}
+@keyframes ocean-rays-sway {
+  0% {
+    transform: translateX(0) skewX(0deg) translateZ(0);
+  }
+  25% {
+    transform: translateX(8px) skewX(0.5deg) translateZ(0);
+  }
+  50% {
+    transform: translateX(-5px) skewX(-0.3deg) translateZ(0);
+  }
+  75% {
+    transform: translateX(3px) skewX(0.2deg) translateZ(0);
+  }
+  100% {
+    transform: translateX(0) skewX(0deg) translateZ(0);
+  }
+}
+
+/* ── Water movement texture ── */
+.ocean-water-movement {
+  opacity: clamp(0, calc(0.08 * max(0, 1 - var(--sy) / 2000)), 1);
+  background:
+    radial-gradient(
+      ellipse 50% 30% at 30% 40%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 40% 50% at 70% 60%,
+      rgba(255, 255, 255, 0.06) 0%,
+      transparent 100%
+    );
+  animation: ocean-water-shift 15s ease-in-out infinite;
+}
+@keyframes ocean-water-shift {
+  0% {
+    transform: translate(0, 0) rotate(0deg) translateZ(0);
+  }
+  33% {
+    transform: translate(30px, 15px) rotate(0.5deg) translateZ(0);
+  }
+  66% {
+    transform: translate(-20px, -10px) rotate(-0.3deg) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg) translateZ(0);
+  }
+}
+
+/* ── Bubbles rising to the surface ── */
+.ocean-bubbles-wrap {
+  opacity: clamp(0, calc(0.5 * max(0, 1 - var(--sy) / 900)), 0.5);
+}
+
+.ocean-bubble {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(
+    circle at 35% 35%,
+    hsla(195, 80%, 90%, 0.5) 0%,
+    hsla(195, 60%, 70%, 0.2) 50%,
+    transparent 100%
+  );
+  border: 1px solid hsla(195, 80%, 85%, 0.25);
+}
+
+.ocean-bubble.bubble-lg {
+  width: 10px;
+  height: 10px;
+  border: 1px solid hsla(195, 80%, 85%, 0.2);
+}
+
+.bubble-rise-1 {
+  animation: bubble-rise-a 8s ease-in infinite;
+}
+.bubble-rise-2 {
+  animation: bubble-rise-b 10s ease-in infinite;
+}
+.bubble-rise-3 {
+  animation: bubble-rise-c 12s ease-in infinite;
+}
+
+@keyframes bubble-rise-a {
+  0% {
+    transform: translateY(0) translateX(0) translateZ(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-35vh) translateX(8px) translateZ(0);
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-75vh) translateX(-4px) translateZ(0);
+    opacity: 0;
+  }
+}
+
+@keyframes bubble-rise-b {
+  0% {
+    transform: translateY(0) translateX(0) translateZ(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-30vh) translateX(-10px) translateZ(0);
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: translateY(-70vh) translateX(6px) translateZ(0);
+    opacity: 0;
+  }
+}
+
+@keyframes bubble-rise-c {
+  0% {
+    transform: translateY(0) translateX(0) translateZ(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.55;
+  }
+  40% {
+    transform: translateY(-25vh) translateX(12px) translateZ(0);
+    opacity: 0.45;
+  }
+  70% {
+    transform: translateY(-50vh) translateX(-8px) translateZ(0);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-72vh) translateX(3px) translateZ(0);
+    opacity: 0;
+  }
+}
+
+/* ── Surface foam ── */
+.ocean-foam-1 {
+  will-change: transform;
+  animation: foam-drift-1 12s ease-in-out infinite;
+  opacity: 0.7;
+}
+.ocean-foam-2 {
+  will-change: transform;
+  animation: foam-drift-2 16s ease-in-out infinite;
+  opacity: 0.5;
+}
+
+@keyframes foam-drift-1 {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  50% {
+    transform: translateX(3%) translateZ(0);
+  }
+  100% {
+    transform: translateX(0) translateZ(0);
+  }
+}
+
+@keyframes foam-drift-2 {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  50% {
+    transform: translateX(-2.5%) translateZ(0);
+  }
+  100% {
+    transform: translateX(0) translateZ(0);
+  }
+}
+
+/* ── Suspended particles (underwater, always visible) ── */
+.ocean-particles-wrap {
+  opacity: clamp(0, calc(0.25 * max(0, 1 - var(--sy) / 2500)), 0.25);
+}
+
+.ocean-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: hsla(195, 30%, 80%, 0.4);
+}
+
+.particle-drift-1 {
+  animation: particle-float-a 14s ease-in-out infinite;
+}
+.particle-drift-2 {
+  animation: particle-float-b 18s ease-in-out infinite;
+  width: 3px;
+  height: 3px;
+  background: hsla(40, 25%, 75%, 0.35);
+}
+.particle-drift-3 {
+  animation: particle-float-c 16s ease-in-out infinite;
+}
+
+@keyframes particle-float-a {
+  0% {
+    transform: translate(0, 0) translateZ(0);
+  }
+  25% {
+    transform: translate(15px, -12px) translateZ(0);
+  }
+  50% {
+    transform: translate(-8px, 18px) translateZ(0);
+  }
+  75% {
+    transform: translate(12px, -6px) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) translateZ(0);
+  }
+}
+
+@keyframes particle-float-b {
+  0% {
+    transform: translate(0, 0) translateZ(0);
+  }
+  20% {
+    transform: translate(-12px, 10px) translateZ(0);
+  }
+  40% {
+    transform: translate(18px, -15px) translateZ(0);
+  }
+  60% {
+    transform: translate(-6px, 20px) translateZ(0);
+  }
+  80% {
+    transform: translate(10px, -8px) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) translateZ(0);
+  }
+}
+
+@keyframes particle-float-c {
+  0% {
+    transform: translate(0, 0) translateZ(0);
+  }
+  33% {
+    transform: translate(20px, 8px) translateZ(0);
+  }
+  66% {
+    transform: translate(-14px, -12px) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) translateZ(0);
+  }
+}
+
+/* ── Click halo / bubble ── */
+.ocean-halo {
+  position: absolute;
+  left: var(--halo-x);
+  top: var(--halo-y);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) translateZ(0);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(150, 220, 255, 0.2) 40%,
+    transparent 70%
+  );
+  animation: ocean-halo-expand 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes ocean-halo-expand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.7;
+  }
+  60% {
+    width: 180px;
+    height: 180px;
+    opacity: 0.3;
+  }
+  100% {
+    width: 280px;
+    height: 280px;
+    opacity: 0;
+  }
+}
+
+/* ── Fish: visibility by depth band (pixel-based) ── */
+/* Surface fish: visible when scroll < 600px */
+.ocean-fish-surface {
+  opacity: clamp(0, calc(0.7 * max(0, 1 - var(--sy) / 600)), 0.7);
+}
+
+/* Mid-depth fish: fade in 300-600px, fade out 1200-1600px */
+.ocean-fish-mid {
+  opacity: clamp(
+    0,
+    calc(min(var(--sy) / 400, max(0, (1600 - var(--sy)) / 500)) * 0.7),
+    0.7
+  );
+}
+
+/* Medium zone fish: fade in 400-800px, fade out 1400-2000px */
+.ocean-fish-medium {
+  opacity: clamp(
+    0,
+    calc(min(var(--sy) / 500, max(0, (2000 - var(--sy)) / 600)) * 0.7),
+    0.7
+  );
+}
+
+/* Deep fish: visible when scroll > 800px */
+.ocean-fish-deep {
+  opacity: clamp(0, calc((var(--sy) - 800) / 600 * 0.7), 0.7);
+}
+
+/* ── Fish: orientation — SVG is drawn facing LEFT (nose at x=2, tail at x=16+)
+   LTR fish must be flipped to face RIGHT (direction of travel)
+   RTL fish keep default LEFT orientation (direction of travel) ── */
+
+/* LTR banks: flip all child fish SVGs so they face right */
+.fish-swim-ltr > .ocean-fish-svg,
+.fish-swim-ltr > .ocean-fish-svg ~ .ocean-fish-svg,
+.fish-swim-ltr-wide > .ocean-fish-svg,
+.fish-swim-ltr-wide > .ocean-fish-svg ~ .ocean-fish-svg {
+  transform: scaleX(-1);
+}
+
+/* RTL banks: keep default orientation (facing left) */
+.fish-swim-rtl > .ocean-fish-svg,
+.fish-swim-rtl > .ocean-fish-svg ~ .ocean-fish-svg,
+.fish-swim-rtl-wide > .ocean-fish-svg,
+.fish-swim-rtl-wide > .ocean-fish-svg ~ .ocean-fish-svg {
+  transform: scaleX(1);
+}
+
+/* Queue qui bouge — pivot a la base de la queue */
+.ocean-fish-tail {
+  transform-origin: 0 0;
+  animation: fish-tail-wag 0.4s ease-in-out infinite;
+}
+
+@keyframes fish-tail-wag {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(6deg);
+  }
+  75% {
+    transform: rotate(-6deg);
+  }
+}
+
+.ocean-fish-bank {
+  animation-iteration-count: infinite;
+}
+
+.fish-swim-ltr {
+  animation-name: fish-swim-ltr;
+  animation-timing-function: linear;
+}
+
+.fish-swim-rtl {
+  animation-name: fish-swim-rtl;
+  animation-timing-function: linear;
+}
+
+/* translateX(-120%) a translateX(120vw) avec ondulation Y organique (sinusoidale elargie) */
+@keyframes fish-swim-ltr {
+  0% {
+    transform: translateX(-120%) translateY(0) translateZ(0);
+  }
+  12.5% {
+    transform: translateX(15vw) translateY(-6px) translateZ(0);
+  }
+  25% {
+    transform: translateX(30vw) translateY(0) translateZ(0);
+  }
+  37.5% {
+    transform: translateX(45vw) translateY(8px) translateZ(0);
+  }
+  50% {
+    transform: translateX(60vw) translateY(0) translateZ(0);
+  }
+  62.5% {
+    transform: translateX(75vw) translateY(-7px) translateZ(0);
+  }
+  75% {
+    transform: translateX(90vw) translateY(0) translateZ(0);
+  }
+  87.5% {
+    transform: translateX(105vw) translateY(5px) translateZ(0);
+  }
+  100% {
+    transform: translateX(120vw) translateY(0) translateZ(0);
+  }
+}
+
+@keyframes fish-swim-rtl {
+  0% {
+    transform: translateX(120%) translateY(0) translateZ(0);
+  }
+  12.5% {
+    transform: translateX(calc(-15vw - 15%)) translateY(6px) translateZ(0);
+  }
+  25% {
+    transform: translateX(calc(-30vw - 30%)) translateY(0) translateZ(0);
+  }
+  37.5% {
+    transform: translateX(calc(-45vw - 45%)) translateY(-8px) translateZ(0);
+  }
+  50% {
+    transform: translateX(calc(-60vw - 60%)) translateY(0) translateZ(0);
+  }
+  62.5% {
+    transform: translateX(calc(-75vw - 75%)) translateY(7px) translateZ(0);
+  }
+  75% {
+    transform: translateX(calc(-90vw - 90%)) translateY(0) translateZ(0);
+  }
+  87.5% {
+    transform: translateX(calc(-105vw - 105%)) translateY(-5px) translateZ(0);
+  }
+  100% {
+    transform: translateX(calc(-120vw - 120%)) translateY(0) translateZ(0);
+  }
+}
+
+/* Variante plus ample pour les gros animaux (baleine, raie) */
+@keyframes fish-swim-ltr-wide {
+  0% {
+    transform: translateX(-140%) translateY(0) translateZ(0);
+  }
+  16.7% {
+    transform: translateX(16vw) translateY(-12px) translateZ(0);
+  }
+  33.3% {
+    transform: translateX(40vw) translateY(8px) translateZ(0);
+  }
+  50% {
+    transform: translateX(60vw) translateY(-10px) translateZ(0);
+  }
+  66.7% {
+    transform: translateX(80vw) translateY(6px) translateZ(0);
+  }
+  83.3% {
+    transform: translateX(100vw) translateY(-8px) translateZ(0);
+  }
+  100% {
+    transform: translateX(130vw) translateY(0) translateZ(0);
+  }
+}
+
+@keyframes fish-swim-rtl-wide {
+  0% {
+    transform: translateX(140%) translateY(0) translateZ(0);
+  }
+  16.7% {
+    transform: translateX(calc(-16vw - 16%)) translateY(12px) translateZ(0);
+  }
+  33.3% {
+    transform: translateX(calc(-40vw - 40%)) translateY(-8px) translateZ(0);
+  }
+  50% {
+    transform: translateX(calc(-60vw - 60%)) translateY(10px) translateZ(0);
+  }
+  66.7% {
+    transform: translateX(calc(-80vw - 80%)) translateY(-6px) translateZ(0);
+  }
+  83.3% {
+    transform: translateX(calc(-100vw - 100%)) translateY(8px) translateZ(0);
+  }
+  100% {
+    transform: translateX(calc(-130vw - 130%)) translateY(0) translateZ(0);
+  }
+}
+
+.fish-swim-ltr-wide {
+  animation-name: fish-swim-ltr-wide;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.fish-swim-rtl-wide {
+  animation-name: fish-swim-rtl-wide;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes jellyfish-swim-ltr {
+  0% {
+    transform: translateX(-100%) translateY(0) translateZ(0);
+  }
+  25% {
+    transform: translateX(25vw) translateY(-6px) translateZ(0);
+  }
+  50% {
+    transform: translateX(50vw) translateY(0) translateZ(0);
+  }
+  75% {
+    transform: translateX(75vw) translateY(-6px) translateZ(0);
+  }
+  100% {
+    transform: translateX(100vw) translateY(0) translateZ(0);
+  }
+}
+
+@keyframes jellyfish-swim-rtl {
+  0% {
+    transform: translateX(100%) translateY(0) translateZ(0);
+  }
+  25% {
+    transform: translateX(calc(-25vw - 25%)) translateY(-6px) translateZ(0);
+  }
+  50% {
+    transform: translateX(calc(-50vw - 50%)) translateY(0) translateZ(0);
+  }
+  75% {
+    transform: translateX(calc(-75vw - 75%)) translateY(-6px) translateZ(0);
+  }
+  100% {
+    transform: translateX(calc(-100vw - 100%)) translateY(0) translateZ(0);
+  }
+}
+
+.jellyfish-float.fish-swim-ltr {
+  animation-name: jellyfish-swim-ltr;
+}
+
+.jellyfish-float.fish-swim-rtl {
+  animation-name: jellyfish-swim-rtl;
+}
+
+.angler-lure {
+  animation: angler-lure-pulse 2s ease-in-out infinite;
+}
+
+@keyframes angler-lure-pulse {
+  0%,
+  100% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 4px hsla(55, 95%, 75%, 0.8));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px hsla(55, 95%, 85%, 0.95));
+  }
+}
+
+/* =============================================
+   SEABIRDS — gulls flying across the sky
+   Visible primarily during day (--sun-vis)
+   ============================================= */
+
+.ocean-birds-wrap {
+  opacity: clamp(0.15, var(--sun-vis, 0), 0.75);
+  transition: opacity 3s ease;
+}
+
+.ocean-bird-flock {
+  position: relative;
+}
+
+.ocean-bird {
+  animation: bird-wingflap 0.6s ease-in-out infinite alternate;
+}
+
+/* Stagger wing flaps for realism */
+.ocean-bird[style*="animation-delay:0.3s"] {
+  animation-delay: 0.15s;
+}
+.ocean-bird[style*="animation-delay:0.6s"] {
+  animation-delay: 0.35s;
+}
+
+@keyframes bird-wingflap {
+  0% {
+    transform: scaleY(1) translateZ(0);
+  }
+  100% {
+    transform: scaleY(0.7) translateZ(0);
+  }
+}
+
+/* Bird flock — left to right */
+.bird-fly-ltr {
+  animation-name: bird-fly-ltr;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes bird-fly-ltr {
+  0% {
+    transform: translateX(-10vw) translateY(0) translateZ(0);
+  }
+  25% {
+    transform: translateX(25vw) translateY(-4px) translateZ(0);
+  }
+  50% {
+    transform: translateX(55vw) translateY(2px) translateZ(0);
+  }
+  75% {
+    transform: translateX(80vw) translateY(-3px) translateZ(0);
+  }
+  100% {
+    transform: translateX(110vw) translateY(0) translateZ(0);
+  }
+}
+
+/* Bird flock — right to left */
+.bird-fly-rtl {
+  animation-name: bird-fly-rtl;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes bird-fly-rtl {
+  0% {
+    transform: translateX(110vw) translateY(0) translateZ(0);
+  }
+  25% {
+    transform: translateX(75vw) translateY(-3px) translateZ(0);
+  }
+  50% {
+    transform: translateX(45vw) translateY(2px) translateZ(0);
+  }
+  75% {
+    transform: translateX(20vw) translateY(-4px) translateZ(0);
+  }
+  100% {
+    transform: translateX(-10vw) translateY(0) translateZ(0);
+  }
+}
+
+/* =============================================
+   LEAPING DOLPHIN — arc above water surface
+   ============================================= */
+
+.ocean-leaping-wrap {
+  z-index: 2;
+}
+
+.ocean-leaping-dolphin {
+  position: absolute;
+  opacity: 0;
+  animation-name: dolphin-leap;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes dolphin-leap {
+  0% {
+    transform: translateX(8vw) translateY(40px) rotate(0deg) translateZ(0);
+    opacity: 0;
+  }
+  4% {
+    transform: translateX(16vw) translateY(20px) rotate(18deg) translateZ(0);
+    opacity: 0.5;
+  }
+  8% {
+    transform: translateX(24vw) translateY(-10px) rotate(28deg) translateZ(0);
+    opacity: 0.9;
+  }
+  12% {
+    transform: translateX(34vw) translateY(-45px) rotate(12deg) translateZ(0);
+    opacity: 1;
+  }
+  16% {
+    transform: translateX(44vw) translateY(-15px) rotate(-12deg) translateZ(0);
+    opacity: 0.9;
+  }
+  20% {
+    transform: translateX(52vw) translateY(15px) rotate(-22deg) translateZ(0);
+    opacity: 0.5;
+  }
+  24% {
+    transform: translateX(58vw) translateY(40px) rotate(-5deg) translateZ(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(58vw) translateY(40px) rotate(-5deg) translateZ(0);
+    opacity: 0;
+  }
+}
+
+/* =============================================
+   NIGHT BIOLUMINESCENCE — visible only at night
+   Controlled by --moon-vis (0 = day, 1 = night)
+   ============================================= */
+
+/* ── Bioluminescent plankton (tiny underwater glowing dots) ── */
+.ocean-biolum-wrap {
+  /* Bioluminescence appears after 1800px scroll, only at night */
+  opacity: calc(var(--moon-vis) * clamp(0, (var(--sy) - 1500) / 500, 0.85));
+  transition: opacity 3s ease;
+  pointer-events: none;
+}
+
+.ocean-biolum-particle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* Cyan plankton */
+.biolum-cyan {
+  width: 3px;
+  height: 3px;
+  background: hsla(185, 100%, 72%, 0.9);
+  box-shadow:
+    0 0 6px 2px hsla(185, 100%, 72%, 0.6),
+    0 0 14px 4px hsla(185, 100%, 72%, 0.25);
+  animation:
+    biolum-drift-1 8s ease-in-out infinite,
+    biolum-pulse-fast 2.5s ease-in-out infinite;
+}
+
+/* Electric green plankton */
+.biolum-green {
+  width: 2px;
+  height: 2px;
+  background: hsla(145, 95%, 68%, 0.85);
+  box-shadow:
+    0 0 5px 2px hsla(145, 95%, 68%, 0.55),
+    0 0 12px 4px hsla(145, 95%, 68%, 0.2);
+  animation:
+    biolum-drift-2 10s ease-in-out infinite,
+    biolum-pulse-slow 3.5s ease-in-out infinite;
+}
+
+/* Magenta plankton */
+.biolum-magenta {
+  width: 3px;
+  height: 3px;
+  background: hsla(305, 85%, 72%, 0.85);
+  box-shadow:
+    0 0 6px 2px hsla(305, 85%, 72%, 0.5),
+    0 0 14px 4px hsla(305, 85%, 72%, 0.2);
+  animation:
+    biolum-drift-3 9s ease-in-out infinite,
+    biolum-pulse-fast 2.8s ease-in-out infinite;
+}
+
+/* Deep blue plankton */
+.biolum-blue {
+  width: 2px;
+  height: 2px;
+  background: hsla(220, 100%, 78%, 0.9);
+  box-shadow:
+    0 0 5px 2px hsla(220, 100%, 78%, 0.5),
+    0 0 10px 3px hsla(220, 100%, 78%, 0.2);
+  animation:
+    biolum-drift-1 12s ease-in-out infinite,
+    biolum-pulse-slow 4s ease-in-out infinite;
+}
+
+/* Warm amber plankton */
+.biolum-amber {
+  width: 2px;
+  height: 2px;
+  background: hsla(38, 100%, 70%, 0.85);
+  box-shadow:
+    0 0 5px 2px hsla(38, 100%, 70%, 0.5),
+    0 0 12px 3px hsla(38, 100%, 70%, 0.2);
+  animation:
+    biolum-drift-2 11s ease-in-out infinite,
+    biolum-pulse-fast 3s ease-in-out infinite;
+}
+
+/* Purple plankton */
+.biolum-purple {
+  width: 3px;
+  height: 3px;
+  background: hsla(270, 90%, 75%, 0.9);
+  box-shadow:
+    0 0 6px 2px hsla(270, 90%, 75%, 0.5),
+    0 0 14px 4px hsla(270, 90%, 75%, 0.2);
+  animation:
+    biolum-drift-3 7s ease-in-out infinite,
+    biolum-pulse-slow 3.2s ease-in-out infinite;
+}
+
+/* Teal plankton */
+.biolum-teal {
+  width: 2px;
+  height: 2px;
+  background: hsla(168, 90%, 62%, 0.85);
+  box-shadow:
+    0 0 5px 2px hsla(168, 90%, 62%, 0.5),
+    0 0 10px 3px hsla(168, 90%, 62%, 0.2);
+  animation:
+    biolum-drift-1 9s ease-in-out infinite,
+    biolum-pulse-fast 2.2s ease-in-out infinite;
+}
+
+@keyframes biolum-drift-1 {
+  0% {
+    transform: translate(0, 0) translateZ(0);
+  }
+  25% {
+    transform: translate(12px, -8px) translateZ(0);
+  }
+  50% {
+    transform: translate(-6px, 15px) translateZ(0);
+  }
+  75% {
+    transform: translate(8px, -12px) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) translateZ(0);
+  }
+}
+
+@keyframes biolum-drift-2 {
+  0% {
+    transform: translate(0, 0) translateZ(0);
+  }
+  25% {
+    transform: translate(-10px, 12px) translateZ(0);
+  }
+  50% {
+    transform: translate(14px, -5px) translateZ(0);
+  }
+  75% {
+    transform: translate(-8px, -10px) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) translateZ(0);
+  }
+}
+
+@keyframes biolum-drift-3 {
+  0% {
+    transform: translate(0, 0) translateZ(0);
+  }
+  25% {
+    transform: translate(6px, 14px) translateZ(0);
+  }
+  50% {
+    transform: translate(-12px, -3px) translateZ(0);
+  }
+  75% {
+    transform: translate(10px, 8px) translateZ(0);
+  }
+  100% {
+    transform: translate(0, 0) translateZ(0);
+  }
+}
+
+@keyframes biolum-pulse-fast {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes biolum-pulse-slow {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  35% {
+    opacity: 0.9;
+  }
+  65% {
+    opacity: 0.5;
+  }
+}
+
+/* ── Stars (above water, sky area — night only) ── */
+.ocean-stars-wrap {
+  opacity: calc(var(--moon-vis) * 0.95);
+  transition: opacity 3s ease;
+  pointer-events: none;
+}
+
+.ocean-star {
+  position: absolute;
+  width: 1.5px;
+  height: 1.5px;
+  border-radius: 50%;
+  background: hsla(220, 20%, 95%, 0.85);
+}
+
+.ocean-star.star-lg {
+  width: 2.5px;
+  height: 2.5px;
+  background: hsla(210, 30%, 98%, 0.95);
+  box-shadow: 0 0 3px 1px hsla(210, 30%, 90%, 0.3);
+}
+
+.ocean-star.star-twinkle {
+  animation: star-twinkle 8s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  25% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 1;
+  }
+}
+
+/* ── Shooting star (rare, ~20s cycle) ── */
+.ocean-shooting-star {
+  position: absolute;
+  top: 15%;
+  left: 70%;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0;
+  animation: shooting-star 22s linear infinite;
+  animation-delay: 8s;
+}
+
+.ocean-shooting-star::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsla(210, 50%, 95%, 0.8));
+  transform-origin: right center;
+}
+
+@keyframes shooting-star {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) translateZ(0);
+  }
+  4% {
+    opacity: 0;
+  }
+  4.5% {
+    opacity: 1;
+  }
+  6% {
+    opacity: 1;
+    transform: translate(-120px, 80px) translateZ(0);
+  }
+  6.5% {
+    opacity: 0;
+    transform: translate(-150px, 100px) translateZ(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-150px, 100px) translateZ(0);
+  }
+}
+
+/* ── Bioluminescent fish (night only, glowing with varied neon colors) ── */
+.ocean-fish-biolum {
+  /* Night-only, visible throughout depth zones */
+  opacity: calc(var(--moon-vis) * 0.8);
+  transition: opacity 3s ease;
+  pointer-events: none;
+}
+
+.biolum-fish-glow-cyan {
+  filter: drop-shadow(0 0 6px hsla(185, 100%, 70%, 0.8))
+    drop-shadow(0 0 14px hsla(185, 100%, 70%, 0.4));
+  animation: biolum-fish-glow-1 3s ease-in-out infinite;
+}
+
+.biolum-fish-glow-green {
+  filter: drop-shadow(0 0 6px hsla(140, 90%, 65%, 0.8))
+    drop-shadow(0 0 14px hsla(140, 90%, 65%, 0.4));
+  animation: biolum-fish-glow-2 3.5s ease-in-out infinite;
+}
+
+.biolum-fish-glow-magenta {
+  filter: drop-shadow(0 0 6px hsla(300, 85%, 70%, 0.8))
+    drop-shadow(0 0 14px hsla(300, 85%, 70%, 0.4));
+  animation: biolum-fish-glow-1 2.8s ease-in-out infinite;
+}
+
+.biolum-fish-glow-purple {
+  filter: drop-shadow(0 0 6px hsla(270, 90%, 72%, 0.8))
+    drop-shadow(0 0 14px hsla(270, 90%, 72%, 0.4));
+  animation: biolum-fish-glow-2 4s ease-in-out infinite;
+}
+
+.biolum-fish-glow-amber {
+  filter: drop-shadow(0 0 6px hsla(38, 100%, 68%, 0.8))
+    drop-shadow(0 0 14px hsla(38, 100%, 68%, 0.4));
+  animation: biolum-fish-glow-1 3.2s ease-in-out infinite;
+}
+
+.biolum-fish-glow-teal {
+  filter: drop-shadow(0 0 6px hsla(168, 90%, 60%, 0.8))
+    drop-shadow(0 0 14px hsla(168, 90%, 60%, 0.4));
+  animation: biolum-fish-glow-2 2.6s ease-in-out infinite;
+}
+
+@keyframes biolum-fish-glow-1 {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px currentColor) drop-shadow(0 0 10px currentColor);
+    opacity: 0.7;
+  }
+  50% {
+    filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 20px currentColor);
+    opacity: 1;
+  }
+}
+
+@keyframes biolum-fish-glow-2 {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px currentColor) drop-shadow(0 0 12px currentColor);
+    opacity: 0.6;
+  }
+  30% {
+    filter: drop-shadow(0 0 10px currentColor)
+      drop-shadow(0 0 22px currentColor);
+    opacity: 1;
+  }
+  60% {
+    filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 8px currentColor);
+    opacity: 0.5;
+  }
+}
+
+/* ── Marine flora animations ── */
+
+/* Kelp / seaweed sway — gentle back-and-forth at the base */
+@keyframes kelp-sway {
+  0%,
+  100% {
+    transform: rotate(0deg) translateZ(0);
+  }
+  25% {
+    transform: rotate(3deg) translateZ(0);
+  }
+  50% {
+    transform: rotate(-2deg) translateZ(0);
+  }
+  75% {
+    transform: rotate(4deg) translateZ(0);
+  }
+}
+
+@keyframes kelp-sway-alt {
+  0%,
+  100% {
+    transform: rotate(0deg) translateZ(0);
+  }
+  30% {
+    transform: rotate(-4deg) translateZ(0);
+  }
+  60% {
+    transform: rotate(2.5deg) translateZ(0);
+  }
+  85% {
+    transform: rotate(-1deg) translateZ(0);
+  }
+}
+
+.ocean-kelp {
+  transform-origin: bottom center;
+  animation: kelp-sway 6s ease-in-out infinite;
+}
+
+.ocean-kelp-alt {
+  transform-origin: bottom center;
+  animation: kelp-sway-alt 7.5s ease-in-out infinite;
+}
+
+/* Sea anemone gentle pulsing */
+@keyframes anemone-pulse {
+  0%,
+  100% {
+    transform: scaleX(1) scaleY(1) translateZ(0);
+  }
+  50% {
+    transform: scaleX(1.06) scaleY(0.96) translateZ(0);
+  }
+}
+
+.ocean-anemone {
+  transform-origin: bottom center;
+  animation: anemone-pulse 4s ease-in-out infinite;
+}
+
+/* Octopus tentacle undulation */
+@keyframes octopus-tentacle {
+  0%,
+  100% {
+    d: path("M0 0 Q4 6 2 14 Q0 20 3 26");
+  }
+  50% {
+    d: path("M0 0 Q-2 6 1 14 Q4 20 0 26");
+  }
+}
+
+/* Whale flipper slow oscillation */
+@keyframes whale-flipper {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+}
+
+.ocean-whale-flipper {
+  transform-origin: top left;
+  animation: whale-flipper 3s ease-in-out infinite;
+}
+
+/* Flora depth zone — fade in at 200-500px, persist until 2000px */
+/* Flora zone opacity — scroll driven */
+.ocean-flora-zone {
+  opacity: clamp(
+    0,
+    calc(min(var(--sy) / 300, max(0, (2200 - var(--sy)) / 600)) * 0.6),
+    0.6
+  );
+}
+
+/* Glass effect for chat / cards */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* =============================================
+   NAVBAR — Ocean glass design
+   ============================================= */
+
+/* ── Navbar glass container ── */
+.navbar-glass {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    hsla(210, 60%, 8%, 0.92) 0%,
+    hsla(200, 70%, 12%, 0.9) 40%,
+    hsla(195, 65%, 10%, 0.92) 100%
+  );
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  contain: layout style paint;
+}
+
+/* Animated gradient border via pseudo-element */
+.navbar-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    hsla(185, 80%, 60%, 0.35) 0%,
+    hsla(200, 70%, 50%, 0.15) 25%,
+    hsla(220, 60%, 40%, 0.1) 50%,
+    hsla(195, 80%, 55%, 0.2) 75%,
+    hsla(170, 70%, 55%, 0.3) 100%
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  animation: navbar-border-shift 8s ease-in-out infinite;
+  will-change: opacity;
+  contain: strict;
+}
+
+/* Subtle inner light shimmer — clipped to rounded shape */
+.navbar-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsla(185, 80%, 70%, 0.04) 25%,
+    hsla(195, 90%, 80%, 0.08) 50%,
+    hsla(185, 80%, 70%, 0.04) 75%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  pointer-events: none;
+  animation: navbar-shimmer 6s ease-in-out infinite;
+  will-change: background-position;
+  contain: strict;
+}
+
+@keyframes navbar-border-shift {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes navbar-shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ── Nav link hover pill ── */
+.nav-link-ocean {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-link-ocean::before {
+  content: "";
+  position: absolute;
+  inset: 2px -4px;
+  border-radius: 10px;
+  background: transparent;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+  z-index: -1;
+}
+
+.nav-link-ocean:hover::before {
+  background: hsla(195, 60%, 50%, 0.1);
+  box-shadow: 0 0 12px 2px hsla(195, 70%, 55%, 0.08);
+}
+
+/* Active link glow dot */
+.nav-link-active-dot {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: hsla(185, 100%, 65%, 1);
+  box-shadow:
+    0 0 6px 2px hsla(185, 100%, 65%, 0.6),
+    0 0 12px 4px hsla(185, 100%, 65%, 0.2);
+}
+
+/* Active link gradient underline */
+.nav-link-active-line {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsla(185, 100%, 65%, 0.8),
+    hsla(165, 90%, 55%, 0.8),
+    transparent
+  );
+  animation: nav-line-pulse 3s ease-in-out infinite;
+}
+
+@keyframes nav-line-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ── CTA button glow ── */
+.navbar-cta {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    hsl(185, 85%, 50%) 0%,
+    hsl(170, 80%, 45%) 100%
+  );
+  box-shadow:
+    0 2px 8px hsla(185, 90%, 50%, 0.3),
+    0 0 20px hsla(185, 90%, 50%, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar-cta:hover {
+  background: linear-gradient(
+    135deg,
+    hsl(185, 90%, 55%) 0%,
+    hsl(170, 85%, 50%) 100%
+  );
+  box-shadow:
+    0 4px 16px hsla(185, 90%, 55%, 0.4),
+    0 0 30px hsla(185, 90%, 55%, 0.15);
+  transform: translateY(-1px);
+}
+
+.navbar-cta:active {
+  transform: translateY(0);
+}
+
+/* ── Logo glow ── */
+.navbar-logo {
+  filter: drop-shadow(0 0 8px hsla(185, 80%, 65%, 0.2));
+  transition: filter 0.3s ease;
+}
+
+.navbar-logo:hover {
+  filter: drop-shadow(0 0 12px hsla(185, 80%, 65%, 0.4))
+    drop-shadow(0 0 24px hsla(185, 80%, 65%, 0.15));
+}
+
+/* ── Mobile menu glass ── */
+.navbar-mobile-glass {
+  background: linear-gradient(
+    180deg,
+    hsla(210, 55%, 8%, 0.96) 0%,
+    hsla(200, 65%, 10%, 0.95) 50%,
+    hsla(210, 60%, 7%, 0.96) 100%
+  );
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  border: 1px solid hsla(185, 60%, 50%, 0.15);
+  box-shadow:
+    0 8px 32px hsla(210, 80%, 10%, 0.5),
+    inset 0 1px 0 hsla(185, 60%, 60%, 0.08);
+  contain: layout style paint;
+}
+
+/* ── Mobile nav link ── */
+.nav-mobile-link {
+  position: relative;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.nav-mobile-link:hover {
+  background: hsla(195, 50%, 45%, 0.1);
+}
+
+.nav-mobile-link-active {
+  background: linear-gradient(
+    135deg,
+    hsla(185, 70%, 50%, 0.12) 0%,
+    hsla(200, 60%, 45%, 0.08) 100%
+  );
+  border-left: 2px solid hsla(185, 100%, 65%, 0.8);
+  box-shadow: inset 0 0 12px hsla(185, 80%, 60%, 0.06);
+}
+
+/* ── Locale dropdown glass ── */
+.navbar-locale-dropdown {
+  background: linear-gradient(
+    180deg,
+    hsla(210, 55%, 10%, 0.97) 0%,
+    hsla(200, 60%, 8%, 0.97) 100%
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid hsla(185, 50%, 50%, 0.15);
+  box-shadow: 0 12px 40px hsla(210, 80%, 5%, 0.6);
+}
+
+/* =============================================
+   GLOBAL OCEAN DESIGN SYSTEM
+   Reusable classes for the ocean theme.
+   ============================================= */
+
+/* ── Glass card (ocean theme) ── */
+.glass-ocean {
+  background: linear-gradient(
+    135deg,
+    hsla(210, 55%, 10%, 0.6) 0%,
+    hsla(200, 65%, 14%, 0.55) 40%,
+    hsla(195, 60%, 12%, 0.6) 100%
+  );
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  border: 1px solid hsla(185, 50%, 50%, 0.12);
+  box-shadow:
+    0 4px 24px hsla(210, 80%, 5%, 0.4),
+    inset 0 1px 0 hsla(185, 50%, 70%, 0.06);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.glass-ocean:hover {
+  border-color: hsla(185, 60%, 55%, 0.25);
+  box-shadow:
+    0 8px 32px hsla(210, 80%, 5%, 0.5),
+    0 0 20px hsla(185, 70%, 50%, 0.06),
+    inset 0 1px 0 hsla(185, 50%, 70%, 0.1);
+}
+
+/* ── Solid glass variant for dialogs & forms (high readability) ── */
+.glass-ocean-solid {
+  background: linear-gradient(
+    135deg,
+    hsla(210, 55%, 8%, 0.92) 0%,
+    hsla(200, 60%, 10%, 0.9) 40%,
+    hsla(195, 55%, 9%, 0.92) 100%
+  );
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid hsla(185, 50%, 50%, 0.15);
+  box-shadow:
+    0 8px 40px hsla(210, 80%, 3%, 0.7),
+    inset 0 1px 0 hsla(185, 50%, 70%, 0.08);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Inputs inside solid glass get more opaque backgrounds */
+.glass-ocean-solid .input-ocean {
+  background: hsla(210, 50%, 10%, 0.8);
+  border-color: hsla(200, 40%, 30%, 0.4);
+}
+
+.glass-ocean-solid .input-ocean:focus-visible {
+  background: hsla(210, 50%, 12%, 0.85);
+}
+
+.glass-ocean-solid .input-ocean:focus:not(:focus-visible) {
+  background: hsla(210, 50%, 12%, 0.85);
+}
+
+/* ── Section title with ocean accent ── */
+.section-title-ocean {
+  background: linear-gradient(
+    135deg,
+    hsl(0, 0%, 100%) 0%,
+    hsl(185, 60%, 80%) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Gradient divider ── */
+.divider-ocean {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsla(185, 60%, 55%, 0.25),
+    hsla(200, 50%, 50%, 0.15),
+    transparent
+  );
+}
+
+/* ── Social icon hover glow ── */
+.social-icon-ocean {
+  transition:
+    color 0.3s ease,
+    filter 0.3s ease,
+    transform 0.3s ease;
+}
+
+.social-icon-ocean:hover {
+  filter: drop-shadow(0 0 8px currentColor);
+  transform: translateY(-2px);
+}
+
+/* ── Scroll indicator bounce ── */
+@keyframes scroll-bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-8px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-4px) translateX(-50%);
+  }
+}
+
+.scroll-indicator {
+  animation: scroll-bounce 2.5s ease-in-out infinite;
+}
+
+/* ── Feature card colored border glow on hover ── */
+.feature-card-cyan {
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+.feature-card-cyan:hover {
+  border-color: hsla(185, 70%, 55%, 0.3);
+  box-shadow:
+    0 0 24px hsla(185, 70%, 55%, 0.08),
+    0 8px 32px hsla(210, 80%, 5%, 0.4);
+}
+
+.feature-card-teal {
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+.feature-card-teal:hover {
+  border-color: hsla(165, 70%, 50%, 0.3);
+  box-shadow:
+    0 0 24px hsla(165, 70%, 50%, 0.08),
+    0 8px 32px hsla(210, 80%, 5%, 0.4);
+}
+
+.feature-card-violet {
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+.feature-card-violet:hover {
+  border-color: hsla(270, 60%, 60%, 0.3);
+  box-shadow:
+    0 0 24px hsla(270, 60%, 60%, 0.08),
+    0 8px 32px hsla(210, 80%, 5%, 0.4);
+}
+
+/* ── Footer glass ── */
+.footer-ocean {
+  background: linear-gradient(
+    180deg,
+    hsla(210, 55%, 8%, 0.7) 0%,
+    hsla(210, 60%, 6%, 0.85) 100%
+  );
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border-top: 1px solid hsla(185, 50%, 50%, 0.15);
+}
+
+/* ── Form inputs ocean style ── */
+.input-ocean {
+  background: hsla(210, 50%, 10%, 0.5);
+  border: 1px solid hsla(200, 40%, 30%, 0.3);
+  border-radius: 12px;
+  color: white;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.input-ocean::placeholder {
+  color: hsla(210, 20%, 50%, 0.6);
+}
+
+.input-ocean:focus-visible {
+  outline: none;
+  border-color: hsla(185, 70%, 50%, 0.5);
+  box-shadow:
+    0 0 0 3px hsla(185, 70%, 50%, 0.2),
+    0 0 16px hsla(185, 70%, 50%, 0.08);
+  background: hsla(210, 50%, 12%, 0.6);
+}
+
+/* Mouse focus — subtle border change without ring */
+.input-ocean:focus:not(:focus-visible) {
+  outline: none;
+  border-color: hsla(185, 70%, 50%, 0.35);
+  background: hsla(210, 50%, 12%, 0.6);
+}
+
+.input-ocean:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Submit button ocean gradient ── */
+.btn-ocean {
+  background: linear-gradient(
+    135deg,
+    hsl(185, 85%, 45%) 0%,
+    hsl(170, 80%, 42%) 100%
+  );
+  color: hsl(210, 50%, 8%);
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  box-shadow:
+    0 2px 12px hsla(185, 90%, 45%, 0.3),
+    0 0 24px hsla(185, 90%, 45%, 0.08);
+  transition: all 0.3s ease;
+}
+
+.btn-ocean:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    hsl(185, 90%, 50%) 0%,
+    hsl(170, 85%, 47%) 100%
+  );
+  box-shadow:
+    0 4px 20px hsla(185, 90%, 50%, 0.4),
+    0 0 32px hsla(185, 90%, 50%, 0.12);
+  transform: translateY(-1px);
+}
+
+.btn-ocean:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-ocean:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Ghost/outline ocean button ── */
+.btn-ocean-outline {
+  background: transparent;
+  color: hsla(185, 70%, 65%, 0.9);
+  font-weight: 600;
+  border: 1px solid hsla(185, 60%, 50%, 0.25);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-ocean-outline:hover {
+  background: hsla(185, 60%, 50%, 0.1);
+  border-color: hsla(185, 60%, 50%, 0.4);
+  color: hsla(185, 70%, 75%, 1);
+  box-shadow: 0 0 16px hsla(185, 70%, 50%, 0.06);
+}
+
+/* ── Blog article prose styling ── */
+.prose-ocean h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: hsla(185, 70%, 75%, 1);
+  line-height: 1.3;
+}
+
+.prose-ocean h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: hsla(185, 60%, 65%, 1);
+  line-height: 1.4;
+}
+
+.prose-ocean p {
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: hsla(210, 20%, 78%, 0.9);
+}
+
+.prose-ocean strong {
+  color: hsla(185, 60%, 80%, 1);
+  font-weight: 600;
+}
+
+.prose-ocean a {
+  color: hsla(185, 70%, 65%, 1);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 200ms;
+}
+
+.prose-ocean a:hover {
+  color: hsla(185, 80%, 80%, 1);
+}
+
+.prose-ocean h2:first-child {
+  margin-top: 0;
+}
+
+/* Ocean gradient for hero sections */
+/* Container */
+.container-custom {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+/* ── Zen mode — calms the entire ocean ── */
+.zen-mode .ocean-fish-surface,
+.zen-mode .ocean-fish-mid,
+.zen-mode .ocean-fish-medium,
+.zen-mode .ocean-fish-deep,
+.zen-mode .ocean-fish-biolum,
+.zen-mode .ocean-flora-zone {
+  opacity: 0.15 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-wave-1,
+.zen-mode .ocean-wave-2,
+.zen-mode .ocean-wave-3 {
+  animation-duration: 20s !important;
+}
+
+.zen-mode .ocean-shimmer {
+  animation-duration: 10s !important;
+  opacity: 0.1;
+}
+
+.zen-mode .ocean-bubbles-wrap {
+  opacity: 0.1 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-particles-wrap {
+  opacity: 0.08 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-rays-wrap {
+  opacity: 0.05 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-sun-godrays {
+  opacity: 0.08 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-godray {
+  animation-duration: 20s !important;
+}
+
+.zen-mode .ocean-biolum-wrap {
+  opacity: 0.3 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-sun-rays {
+  animation-duration: 180s !important;
+}
+
+.zen-mode .ocean-caustics-wrap {
+  opacity: 0.08 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-dust-wrap {
+  opacity: 0.1 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-depth-haze {
+  opacity: 0.15 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-foam-1,
+.zen-mode .ocean-foam-2 {
+  animation-duration: 30s !important;
+  opacity: 0.3;
+}
+
+.zen-mode .ocean-birds-wrap {
+  opacity: 0.1 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .ocean-leaping-wrap {
+  opacity: 0 !important;
+  transition: opacity 1.5s ease;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Island Centers — decorative islands at the waterline
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Container — fixed at waterline, scroll-driven translate ── */
+.island-layer {
+  translate: 0 calc(var(--isy, 0) * -1px);
+  opacity: clamp(0, calc(1 - var(--isy, 0) / 400), 1);
+  will-change: transform, opacity;
+}
+
+/* ── Individual island card — positioned via CSS vars ── */
+.island-card {
+  left: var(--island-left, 50%);
+  translate: -50% var(--island-offset-y, 0px);
+  animation: island-bob 4s ease-in-out infinite;
+  animation-delay: var(--island-anim-delay, 0s);
+}
+
+/* ── Sign board — wooden panel look ── */
+.island-sign {
+  background: linear-gradient(
+    145deg,
+    hsl(30, 50%, 32%) 0%,
+    hsl(28, 45%, 28%) 100%
+  );
+  border: 1px solid hsl(30, 40%, 22%);
+  border-radius: 4px;
+  padding: 3px 8px 4px;
+  text-align: center;
+  box-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.3);
+  min-width: 76px;
+  max-width: 110px;
+  margin: 0 auto 2px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+:where(.dark, .dark *) .island-sign {
+  border-color: hsl(30, 30%, 18%);
+  box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.5);
+}
+
+.island-sign-link:hover .island-sign,
+.island-sign-link:focus-visible .island-sign {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px hsla(0, 0%, 0%, 0.4);
+}
+
+/* ── Sign text ── */
+.island-sign-name {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: hsl(40, 80%, 90%);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.island-sign-city {
+  display: block;
+  font-size: 0.5rem;
+  color: hsl(40, 50%, 72%);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Status badge ── */
+.island-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.45rem;
+  font-weight: 500;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+.island-badge::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.island-badge-featured {
+  color: hsl(45, 100%, 72%);
+}
+
+.island-badge-featured::before {
+  background: hsl(45, 100%, 60%);
+}
+
+.island-badge-verified {
+  color: hsl(195, 90%, 72%);
+}
+
+.island-badge-verified::before {
+  background: hsl(195, 90%, 60%);
+}
+
+/* ── SVG island shape ── */
+.island-shape {
+  display: block;
+  width: 100px;
+  height: 68px;
+  margin: 0 auto;
+}
+
+/* ── Palm tree sway animation ── */
+.island-palm {
+  transform-origin: 50% 100%;
+  animation: island-palm-sway 6s ease-in-out infinite;
+}
+
+/* ── Keyframes ── */
+@keyframes island-bob {
+  0%,
+  100% {
+    transform: translateY(0) translateZ(0);
+  }
+  50% {
+    transform: translateY(-3px) translateZ(0);
+  }
+}
+
+@keyframes island-palm-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1.5deg);
+  }
+  75% {
+    transform: rotate(-1.5deg);
+  }
+}
+
+/* ── Zen mode — calm the islands ── */
+.zen-mode .island-layer {
+  opacity: 0.25 !important;
+  transition: opacity 1.5s ease;
+}
+
+.zen-mode .island-card {
+  animation-duration: 12s !important;
+}
+
+.zen-mode .island-palm {
+  animation-duration: 16s !important;
+}
+
+/* ── Reduced effects (user toggle) ── */
+html[data-effects="reduced"] .island-layer {
+  display: none;
+}
+
+/* OS prefers-reduced-motion: islands are exempt (see global rule above).
+   Controlled by in-app toggle (data-effects="reduced") instead. */
+
+/* ═══════════════════════════════════════════════════════
+   Easter-Egg Creatures — interactive clickable creatures
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Container ── */
+.ee-creature-layer {
+  contain: layout style;
+}
+
+/* ── Base creature button ── */
+.ee-creature {
+  top: calc(30vh + var(--ee-y, 200px));
+  will-change: transform;
+  transition: filter 0.2s ease;
+}
+
+.ee-creature:hover {
+  filter: brightness(1.25) drop-shadow(0 0 6px hsla(45, 100%, 65%, 0.5));
+}
+
+/* LTR direction: flip the SVG to face right */
+.ee-flip > svg {
+  transform: scaleX(-1);
+}
+
+/* ── Entrance pop-in (scale only, no opacity — depth class handles that) ── */
+@keyframes ee-pop-in {
+  from {
+    scale: 0.4;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+/* ── Swimming fish (golden, whytcard) — traverse the screen ── */
+.ee-swim-ltr {
+  left: 0;
+  animation:
+    ee-pop-in 0.5s ease-out,
+    ee-swim-ltr var(--ee-dur, 25s) linear forwards;
+}
+
+.ee-swim-rtl {
+  left: 0;
+  animation:
+    ee-pop-in 0.5s ease-out,
+    ee-swim-rtl var(--ee-dur, 25s) linear forwards;
+}
+
+@keyframes ee-swim-ltr {
+  0% {
+    transform: translateX(-15vw) translateY(0) translateZ(0);
+  }
+  25% {
+    transform: translateX(25vw) translateY(5px) translateZ(0);
+  }
+  50% {
+    transform: translateX(50vw) translateY(-4px) translateZ(0);
+  }
+  75% {
+    transform: translateX(75vw) translateY(6px) translateZ(0);
+  }
+  100% {
+    transform: translateX(115vw) translateY(0) translateZ(0);
+  }
+}
+
+@keyframes ee-swim-rtl {
+  0% {
+    transform: translateX(115vw) translateY(0) translateZ(0);
+  }
+  25% {
+    transform: translateX(75vw) translateY(5px) translateZ(0);
+  }
+  50% {
+    transform: translateX(50vw) translateY(-4px) translateZ(0);
+  }
+  75% {
+    transform: translateX(25vw) translateY(6px) translateZ(0);
+  }
+  100% {
+    transform: translateX(-15vw) translateY(0) translateZ(0);
+  }
+}
+
+/* ── Bobbing creatures (oyster, chest) — gentle vertical sway in place ── */
+.ee-bob-anim {
+  left: var(--ee-x, 50%);
+  animation:
+    ee-pop-in 0.5s ease-out,
+    ee-bob 4s ease-in-out infinite;
+}
+
+@keyframes ee-bob {
+  0%,
+  100% {
+    transform: translateY(0) translateZ(0);
+  }
+  30% {
+    transform: translateY(-5px) translateZ(0);
+  }
+  70% {
+    transform: translateY(3px) translateZ(0);
+  }
+}
+
+/* ── Whale glide — slow majestic traverse ── */
+.ee-glide-ltr {
+  left: 0;
+  animation:
+    ee-pop-in 0.5s ease-out,
+    ee-glide-ltr var(--ee-dur, 45s) linear forwards;
+}
+
+.ee-glide-rtl {
+  left: 0;
+  animation:
+    ee-pop-in 0.5s ease-out,
+    ee-glide-rtl var(--ee-dur, 45s) linear forwards;
+}
+
+@keyframes ee-glide-ltr {
+  0% {
+    transform: translateX(-20vw) translateY(0) translateZ(0);
+  }
+  25% {
+    transform: translateX(15vw) translateY(-8px) translateZ(0);
+  }
+  50% {
+    transform: translateX(45vw) translateY(4px) translateZ(0);
+  }
+  75% {
+    transform: translateX(70vw) translateY(-6px) translateZ(0);
+  }
+  100% {
+    transform: translateX(115vw) translateY(0) translateZ(0);
+  }
+}
+
+@keyframes ee-glide-rtl {
+  0% {
+    transform: translateX(115vw) translateY(0) translateZ(0);
+  }
+  25% {
+    transform: translateX(70vw) translateY(-8px) translateZ(0);
+  }
+  50% {
+    transform: translateX(45vw) translateY(4px) translateZ(0);
+  }
+  75% {
+    transform: translateX(15vw) translateY(-6px) translateZ(0);
+  }
+  100% {
+    transform: translateX(-20vw) translateY(0) translateZ(0);
+  }
+}
+
+/* ── Scroll-depth integration (opacity driven by --sy CSS var) ── */
+
+/* Surface: visible at scroll 0-600px */
+.ee-depth-surface {
+  opacity: clamp(0, calc(0.8 * max(0, 1 - var(--sy, 0) / 600)), 0.8);
+}
+
+/* Mid: fade in 200-500px, fade out 1200-1600px */
+.ee-depth-mid {
+  opacity: clamp(
+    0,
+    calc(min(var(--sy, 0) / 400, max(0, (1600 - var(--sy, 0)) / 500)) * 0.8),
+    0.8
+  );
+}
+
+/* Deep: visible when scroll > 800px */
+.ee-depth-deep {
+  opacity: clamp(0, calc((var(--sy, 0) - 800) / 600 * 0.8), 0.8);
+}
+
+/* Wide: fade in 200-500px, fade out 1400-1800px */
+.ee-depth-wide {
+  opacity: clamp(
+    0,
+    calc(min(var(--sy, 0) / 300, max(0, (1800 - var(--sy, 0)) / 600)) * 0.8),
+    0.8
+  );
+}
+
+/* ── Discovery sparkle burst ── */
+.ee-sparkle {
+  left: var(--spark-x, 50%);
+  top: var(--spark-y, 50%);
+  width: 40px;
+  height: 40px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    hsla(45, 100%, 70%, 0.9),
+    transparent 70%
+  );
+  box-shadow: 0 0 20px hsla(45, 100%, 60%, 0.8);
+  animation: ee-sparkle-burst 0.5s ease-out forwards;
+}
+
+@keyframes ee-sparkle-burst {
+  0% {
+    scale: 0.5;
+    opacity: 1;
+  }
+  50% {
+    scale: 2.5;
+    opacity: 0.7;
+  }
+  100% {
+    scale: 4;
+    opacity: 0;
+  }
+}
+
+/* ── Creature-specific animations ── */
+
+/* Golden fish shimmer */
+.ee-golden-shimmer {
+  animation: ee-golden-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes ee-golden-shimmer {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px hsla(45, 100%, 60%, 0.6)) brightness(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 14px hsla(45, 100%, 65%, 0.9)) brightness(1.1);
+  }
+}
+
+/* Pearl oyster glow */
+.ee-pearl-glow {
+  animation: ee-pearl-glow 2s ease-in-out infinite;
+}
+
+@keyframes ee-pearl-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px hsla(0, 0%, 95%, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px hsla(0, 0%, 100%, 0.7));
+  }
+}
+
+/* Treasure chest golden light */
+.ee-chest-glow {
+  animation: ee-chest-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes ee-chest-glow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* WhytCard fish sparkle */
+.ee-whytcard-sparkle {
+  animation: ee-whytcard-sparkle 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes ee-whytcard-sparkle {
+  0%,
+  100% {
+    scale: 1;
+    opacity: 0.7;
+  }
+  50% {
+    scale: 1.5;
+    opacity: 1;
+  }
+}
+
+/* Whale bioluminescent spots */
+.ee-biolum {
+  animation: ee-biolum-twinkle 2.5s ease-in-out infinite;
+}
+
+@keyframes ee-biolum-twinkle {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ── Zen mode: dim creatures, disable interaction ── */
+.zen-mode .ee-creature-layer {
+  opacity: 0.1 !important;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+}
+
+/* ── Reduced effects toggle: hide all creatures ── */
+html[data-effects="reduced"] .ee-creature-layer {
+  display: none !important;
+}
+
+/* OS prefers-reduced-motion: creatures are exempt (see global rule above).
+   Controlled by in-app toggle (data-effects="reduced") instead. */
+
+/* ═══════════════════════════════════════════════════════
+   V1 UNIQUE EFFECTS — Caustics, Globe, Mapbox
+   Merged from frontend-v1 for backward compatibility
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Globe layout lock (for 3D globe view) ── */
+.globe-layout {
+  overflow: hidden;
+  height: 100dvh;
+}
+
+/* ── Underwater caustic light — 3 layers ── */
+@keyframes caustic-drift {
+  0% {
+    background-position: 0% 0%;
+  }
+  33% {
+    background-position: 60% 80%;
+  }
+  66% {
+    background-position: 100% 30%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes caustic-drift-alt {
+  0% {
+    background-position: 100% 100%;
+  }
+  33% {
+    background-position: 30% 20%;
+  }
+  66% {
+    background-position: 80% 60%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+@keyframes caustic-drift-deep {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
+.caustic-overlay {
+  background:
+    radial-gradient(
+      ellipse 900px 600px at 25% 15%,
+      rgba(80, 210, 255, 0.14),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 700px 500px at 75% 55%,
+      rgba(50, 180, 230, 0.1),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 600px 450px at 45% 85%,
+      rgba(100, 220, 250, 0.08),
+      transparent 70%
+    );
+  background-size: 200% 200%;
+  animation: caustic-drift 14s ease-in-out infinite;
+}
+
+.caustic-overlay-alt {
+  background:
+    radial-gradient(
+      ellipse 800px 550px at 65% 25%,
+      rgba(60, 200, 245, 0.12),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 650px 400px at 15% 75%,
+      rgba(80, 215, 255, 0.08),
+      transparent 70%
+    );
+  background-size: 200% 200%;
+  animation: caustic-drift-alt 19s ease-in-out infinite;
+}
+
+.caustic-overlay-deep {
+  background: radial-gradient(
+    ellipse 1000px 700px at 50% 40%,
+    rgba(30, 120, 200, 0.06),
+    transparent 70%
+  );
+  background-size: 200% 200%;
+  animation: caustic-drift-deep 25s ease-in-out infinite;
+}
+
+/* ── Marine dust particles ── */
+@keyframes dust-float {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(20px, -30px);
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-10px, -60px);
+    opacity: 0;
+  }
+}
+
+@keyframes dust-float-alt {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-15px, 25px);
+    opacity: 0.5;
+  }
+  85% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(10px, 50px);
+    opacity: 0;
+  }
+}
+
+.dust-particle {
+  position: absolute;
+  left: var(--d-left);
+  top: var(--d-top);
+  width: var(--d-size);
+  height: var(--d-size);
+  animation-name: var(--d-anim);
+  animation-duration: var(--d-dur);
+  animation-delay: var(--d-delay);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  border-radius: 50%;
+  background: rgba(180, 220, 255, 0.5);
+  pointer-events: none;
+  filter: blur(0.5px);
+}
+
+/* ── V1 ocean glass panels ── */
+.ocean-glass {
+  background: linear-gradient(
+    165deg,
+    rgba(5, 22, 55, 0.93),
+    rgba(2, 12, 38, 0.97)
+  );
+  border: 1px solid rgba(80, 190, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(100, 210, 255, 0.08),
+    inset 0 0 40px rgba(20, 80, 150, 0.05),
+    0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.ocean-glass-nav {
+  background: linear-gradient(
+    180deg,
+    rgba(3, 18, 50, 0.75),
+    rgba(2, 12, 38, 0.55)
+  );
+  border-bottom: 1px solid rgba(80, 190, 255, 0.08);
+  box-shadow:
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 4px 24px rgba(0, 8, 30, 0.4);
+}
+
+.ocean-glass-light {
+  background: linear-gradient(
+    165deg,
+    rgba(8, 35, 75, 0.82),
+    rgba(4, 20, 55, 0.88)
+  );
+  border: 1px solid rgba(80, 190, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(100, 210, 255, 0.06),
+    inset 0 0 30px rgba(20, 80, 150, 0.04),
+    0 12px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Depth gradient ── */
+.depth-gradient {
+  background: linear-gradient(
+    180deg,
+    rgb(2, 25, 55) 0%,
+    rgb(1, 15, 38) 30%,
+    rgb(0, 8, 24) 60%,
+    rgb(0, 4, 14) 100%
+  );
+}
+
+/* ── Sonar pulse ── */
+@keyframes sonar-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.sonar-ring {
+  animation: sonar-pulse 2.5s ease-out infinite;
+}
+
+/* ── Depth gauge ── */
+@keyframes depth-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.depth-gauge-tick {
+  animation: depth-pulse 3s ease-in-out infinite;
+}
+
+/* ── Mapbox overrides ── */
+.mapboxgl-map {
+  background: rgb(0, 6, 18);
+}
+
+.mapboxgl-canvas {
+  outline: none;
+  image-rendering: auto;
+}
+
+.mapboxgl-ctrl-top-left,
+.mapboxgl-ctrl-top-right,
+.mapboxgl-ctrl-bottom-left {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+.mapboxgl-ctrl-compass,
+.mapboxgl-ctrl-group,
+.mapboxgl-ctrl-nav {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  opacity: 0.12;
+  transition: opacity 0.3s ease;
+}
+
+.mapboxgl-ctrl-bottom-right:hover {
+  opacity: 0.6;
+}
+
+.mapboxgl-ctrl-logo {
+  opacity: 0.2;
+  transition: opacity 0.3s ease;
+}
+
+.mapboxgl-ctrl-logo:hover {
+  opacity: 0.8;
+}
+
+/* ── Text gradient ── */
+.text-gradient {
+  background: linear-gradient(135deg, #22d3ee, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Ocean gradient hero overlay ── */
+.ocean-gradient-hero {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 6, 18, 0) 0%,
+    rgba(0, 6, 18, 0.4) 50%,
+    rgba(0, 6, 18, 0.8) 100%
+  );
+}
+
+/* ── Card + button effects ── */
+.card-hover {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.btn-glow {
+  box-shadow:
+    0 0 15px rgba(34, 211, 238, 0.3),
+    0 0 30px rgba(34, 211, 238, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.btn-glow:hover {
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.5),
+    0 0 40px rgba(34, 211, 238, 0.2);
+}
+
+/* ── Additional animations ── */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px rgba(34, 211, 238, 0.4));
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ── V1 bubble system (distinct from ocean-bubble) ── */
+@keyframes bubble-rise-v1 {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-25vh) translateX(12px) scale(0.95);
+  }
+  50% {
+    transform: translateY(-50vh) translateX(-8px) scale(0.9);
+  }
+  75% {
+    transform: translateY(-75vh) translateX(6px) scale(0.8);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-105vh) translateX(-4px) scale(0.65);
+    opacity: 0;
+  }
+}
+
+@keyframes bubble-rise-slow-v1 {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-30vh) translateX(-15px) scale(0.92);
+  }
+  60% {
+    transform: translateY(-60vh) translateX(10px) scale(0.82);
+  }
+  100% {
+    transform: translateY(-110vh) translateX(-5px) scale(0.55);
+    opacity: 0;
+  }
+}
+
+.bubble-v1 {
+  position: absolute;
+  left: var(--b-left);
+  bottom: var(--b-bottom, -20px);
+  width: var(--b-size);
+  height: var(--b-size);
+  animation-name: var(--b-anim);
+  animation-duration: var(--b-dur);
+  animation-delay: var(--b-delay);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 35% 25%,
+    rgba(200, 240, 255, 0.5),
+    rgba(120, 210, 255, 0.15) 40%,
+    rgba(60, 180, 255, 0.05) 70%,
+    transparent
+  );
+  border: 1px solid rgba(180, 230, 255, 0.25);
+  box-shadow:
+    inset -2px -2px 4px rgba(0, 100, 200, 0.1),
+    0 0 6px rgba(100, 200, 255, 0.15);
+}
+
+.bubble-v1::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 30%;
+  height: 25%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  filter: blur(1px);
+}
+
+/* ── Depth meter tabular numbers ── */
+.depth-meter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MapLibre GL / react-map-gl — Centers map
+   Dark-themed popup overrides
+   ═══════════════════════════════════════════════════════ */
+
+.centers-map-popup .maplibregl-popup-content {
+  background: transparent;
+  padding: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.centers-map-popup .maplibregl-popup-tip {
+  border-top-color: rgb(15 23 42);
+}
+
+.centers-map-popup .maplibregl-popup-close-button {
+  color: rgb(148 163 184);
+  font-size: 1.125rem;
+  padding: 0.25rem 0.5rem;
+  right: 0.25rem;
+  top: 0.25rem;
+  z-index: 10;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.centers-map-popup .maplibregl-popup-close-button:hover {
+  color: rgb(226 232 240);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.maplibregl-ctrl-attrib {
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
+}
+
+.maplibregl-ctrl-attrib:hover {
+  opacity: 0.6;
+}
+
+/* ── Mapbox 3D globe markers ── */
+
+.globe-3d-marker {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+
+.globe-3d-marker:hover {
+  transform: scale(1.25) translateY(-2px);
+  filter: drop-shadow(0 4px 12px rgba(8, 145, 178, 0.4));
+}
+
+.globe-3d-marker:focus-visible {
+  outline: 2px solid rgb(34, 211, 238);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* Globe feathered edge — smooth fade into the page background */
+.globe-3d-wrapper {
+  /* Soft mask: the globe fades to transparent at the edges */
+  mask-image: radial-gradient(circle at center, black 55%, transparent 80%);
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    black 55%,
+    transparent 80%
+  );
+}
+
+.globe-3d-feather {
+  background: radial-gradient(
+    circle at center,
+    transparent 48%,
+    hsla(222, 35%, 6%, 0.35) 62%,
+    hsla(222, 35%, 6%, 0.7) 74%,
+    hsl(222, 35%, 6%) 88%
+  );
+}
+
+/* Hide Mapbox logo on globe */
+.mapboxgl-ctrl-logo {
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
+}
+
+.mapboxgl-ctrl-logo:hover {
+  opacity: 0.6;
+}
+
+.mapboxgl-ctrl-attrib {
+  opacity: 0.12;
+  transition: opacity 0.3s ease;
+}
+
+.mapboxgl-ctrl-attrib:hover {
+  opacity: 0.5;
+}
