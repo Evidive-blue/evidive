@@ -15,11 +15,14 @@ function buildCsp(): string {
 
   return [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob: https://images.unsplash.com https://*.amazonaws.com https://*.cloudfront.net https://files.stripe.com",
+    // 'unsafe-inline'/'unsafe-eval' needed by Next.js; vercel.live is the Vercel
+    // deployment toolbar injected at the edge (team previews + production toolbar)
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.live",
+    "style-src 'self' 'unsafe-inline' https://vercel.live https://*.vercel.live",
+    "img-src 'self' data: blob: https://images.unsplash.com https://*.amazonaws.com https://*.cloudfront.net https://files.stripe.com https://vercel.live",
     "font-src 'self' data:",
-    `connect-src ${connectSrc}`,
+    `connect-src ${connectSrc} https://vercel.live wss://ws-us3.pusher.com`,
+    "frame-src 'self' https://vercel.live",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",
