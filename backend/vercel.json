@@ -12,10 +12,10 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/api/handler"
+      "source": "/(.*)",
+      "destination": "/api/handler"
     }
   ]
 }
