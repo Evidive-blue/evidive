@@ -70,11 +70,13 @@ pub enum ConfigError {
 }
 
 fn require_env(key: &str) -> Result<String, ConfigError> {
-    env::var(key).map_err(|_| ConfigError::MissingVar(key.to_owned()))
+    env::var(key)
+        .map(|v| v.trim().to_string())
+        .map_err(|_| ConfigError::MissingVar(key.to_owned()))
 }
 
 fn optional_env(key: &str) -> Option<String> {
-    env::var(key).ok().filter(|v| !v.is_empty())
+    env::var(key).ok().map(|v| v.trim().to_string()).filter(|v| !v.is_empty())
 }
 
 fn parse_env<T>(key: &str, default: &str) -> Result<T, ConfigError>
@@ -83,7 +85,7 @@ where
     T::Err: std::error::Error + Send + Sync + 'static,
 {
     let raw = env::var(key).unwrap_or_else(|_| default.to_owned());
-    raw.parse().map_err(|e: T::Err| ConfigError::InvalidValue {
+    raw.trim().parse().map_err(|e: T::Err| ConfigError::InvalidValue {
         var: key.to_owned(),
         source: Box::new(e),
     })

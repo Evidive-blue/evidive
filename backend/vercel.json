@@ -1,21 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
-  "headers": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "https://evidive.vercel.app" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,PATCH,DELETE,OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Authorization,Content-Type,Accept,Accept-Language" },
-        { "key": "Access-Control-Max-Age", "value": "3600" }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api/handler"
+      "src": "/(.*)",
+      "dest": "/api/handler",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://evidive.vercel.app",
+        "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+        "Access-Control-Allow-Headers": "Authorization,Content-Type,Accept,Accept-Language",
+        "Access-Control-Max-Age": "3600"
+      }
     }
   ]
 }
