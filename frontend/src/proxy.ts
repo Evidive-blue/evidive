@@ -8,7 +8,7 @@ const intlMiddleware = createMiddleware({
 });
 
 function buildCsp(): string {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
+  const apiUrl = (process.env.NEXT_PUBLIC_API_URL ?? "").trim();
   const connectSrc = ["'self'", apiUrl, "https://*.supabase.co", "wss://*.supabase.co"]
     .filter(Boolean)
     .join(" ");
